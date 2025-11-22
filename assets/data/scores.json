@@ -1,0 +1,36 @@
+[
+  {
+    "id": "1",
+    "type": "activity",
+    "timestamp": "2025-11-21T08:15:00Z",
+    "score": 72,
+    "metrics": {
+      "activePoints": 560,
+      "steps": 8000,
+      "activeCalories": 450,
+      "moveHours": 1.5
+    }
+  },
+  {
+    "id": "2",
+    "type": "readiness",
+    "timestamp": "2025-11-21T08:15:00Z",
+    "score": 65,
+    "metrics": {
+      "sleep": 6.8,
+      "restingHr": 62,
+      "hrv": 45
+    }
+  },
+  {
+    "id": "3",
+    "type": "health",
+    "timestamp": "2025-11-20T08:15:00Z",
+    "score": 78,
+    "metrics": {
+      "summary": "Good progress",
+      "activityScore": 72,
+      "readinessScore": 65
+    }
+  }
+]
