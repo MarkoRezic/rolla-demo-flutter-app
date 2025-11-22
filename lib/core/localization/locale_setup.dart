@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import '../../generated/l10n.dart'; // if intl_utils was configured -> adjust path
 
 class LocaleSetup {
+  static const AppLocalizationDelegate delegate = S.delegate;
+
   static const supportedLocales = [
     Locale('en'),
     Locale('hr'),

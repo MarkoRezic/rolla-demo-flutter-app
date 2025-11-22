@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:rolla_demo_app/core/theme/app_colors.dart';
 
 class AppTheme {
   static final light = ThemeData(
     brightness: Brightness.light,
     fontFamily: 'Outfit',
-    colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+    colorScheme: ColorScheme.fromSeed(seedColor: AppColors.green),
     useMaterial3: true,
   );
 
   static final dark = ThemeData(
     brightness: Brightness.dark,
     fontFamily: 'Outfit',
-    colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColors.green,
+      brightness: Brightness.dark,
+    ),
     scaffoldBackgroundColor: Colors.black,
     useMaterial3: true,
   );
@@ -19,13 +23,14 @@ class AppTheme {
   // Accent colors per score type
   static Color accentFor(String type) {
     switch (type.toLowerCase()) {
-      case 'health':
-        return Colors.green.shade600;
-      case 'readiness':
-        return Colors.blue.shade600;
       case 'activity':
+        return AppColors.green;
+      case 'readiness':
+        return AppColors.purple;
+      case 'health':
+        return AppColors.blue;
       default:
-        return Colors.orange.shade600;
+        return AppColors.black;
     }
   }
 }

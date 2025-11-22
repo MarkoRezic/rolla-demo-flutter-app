@@ -3,7 +3,7 @@ description: Rolla Demo Flutter App Task
 publish_to: 'none'
 version: 0.1.0+1
 environment:
-  sdk: ">=2.18.0 <4.0.0"
+  sdk: ">=3.8.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -38,6 +38,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  # Enable generation of localized Strings from arb files.
+  generate: true
+
   assets:
     - assets/data/scores.json
     - assets/icons/
@@ -49,3 +52,8 @@ flutter:
         - asset: assets/fonts/Outfit-Regular.ttf
         - asset: assets/fonts/Outfit-Bold.ttf
           weight: 700
+
+
+linter:
+  rules:
+    - avoid_relative_lib_imports

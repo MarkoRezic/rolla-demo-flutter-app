@@ -1,0 +1,18 @@
+{
+  "@@locale": "hr",
+  "appTitle": "Rolla Demo",
+  "homeTitle": "Ocjene",
+  "health": "Zdravlje",
+  "readiness": "Spremnost",
+  "activity": "Aktivnost",
+  "noData": "Nema podataka",
+  "pullToRefresh": "Povuci za osvježenje",
+  "lastUpdated": "Zadnje ažuriranje: {date}",
+  "exportPdf": "Izvezi u PDF",
+  "timeframe1D": "1D",
+  "timeframe7D": "7D",
+  "timeframe30D": "30D",
+  "timeframe1Y": "1G",
+  "insightsTitle": "Uvidi",
+  "metricAvg": "Prosjek"
+}

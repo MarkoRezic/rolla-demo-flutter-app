@@ -1,0 +1,18 @@
+{
+  "@@locale": "en",
+  "appTitle": "Rolla Demo",
+  "homeTitle": "Scores",
+  "health": "Health",
+  "readiness": "Readiness",
+  "activity": "Activity",
+  "noData": "No data",
+  "pullToRefresh": "Pull to refresh",
+  "lastUpdated": "Last updated: {date}",
+  "exportPdf": "Export PDF",
+  "timeframe1D": "1D",
+  "timeframe7D": "7D",
+  "timeframe30D": "30D",
+  "timeframe1Y": "1Y",
+  "insightsTitle": "Insights",
+  "metricAvg": "Avg"
+}
