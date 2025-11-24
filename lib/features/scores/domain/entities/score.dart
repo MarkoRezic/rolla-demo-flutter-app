@@ -53,43 +53,90 @@ class Score extends Equatable {
 
   int get healthScore => [readinessScore, activityScore].average.round();
 
-  int get sleepScore =>
-      _scoreFor(sleepMinutes, sleepMinutesTarget, sleepMinutesRange);
+  int get sleepScore => _scoreFor(
+    sleepMinutes,
+    targetRange: sleepMinutesTargetRange,
+    range: sleepMinutesRange,
+  );
 
   // Resting heart rate (bpm)
   // Uses restingHeartRateBpmTarget and restingHeartRateBpmRange
   int get restingHeartRateScore => _scoreFor(
     restingHeartRateBpm,
-    restingHeartRateBpmTarget,
-    restingHeartRateBpmRange,
+    targetRange: restingHeartRateBpmTargetRange,
+    range: restingHeartRateBpmRange,
   );
 
   // Overnight heart-rate variance (ms)
   // Uses overnightHeartRateVarianceMsTarget and overnightHeartRateVarianceMsRange
   int get overnightHeartRateVarianceScore => _scoreFor(
     overnightHeartRateVarianceMs,
-    overnightHeartRateVarianceMsTarget,
-    overnightHeartRateVarianceMsRange,
+    target: overnightHeartRateVarianceMsTarget,
+    range: overnightHeartRateVarianceMsRange,
   );
 
   // Active points (app-specific)
   // Uses activePointsTarget and activePointsRange
   int get activePointsScore =>
-      _scoreFor(activePoints, activePointsTarget, null);
+      _scoreFor(activePoints, target: activePointsTarget);
 
   // Steps (int)
   // Uses stepsTarget and stepsRange
-  int get stepsScore => _scoreFor(steps, stepsTarget.toDouble(), null);
+  int get stepsScore => _scoreFor(steps, target: stepsTarget.toDouble());
 
   // Move hours (hours)
   // Uses moveHoursTarget and moveHoursRange
-  int get moveHoursScore => _scoreFor(moveHours, moveHoursTarget, null);
+  int get moveHoursScore => _scoreFor(moveHours, target: moveHoursTarget);
 
-  /// Returns a 0..100 score for [value] when a range is provided.
-  /// If [range] is null, assumes min=0 and max=target and returns (value/target)*100.
-  int _scoreFor(num? value, double target, RangeValues? range) {
+  /// Returns a 0..100 score for [value].
+  /// Provide either [target] or [targetRange], not both.
+  /// If [targetRange] is provided:
+  ///   - value inside the target range => 100
+  ///   - value outside => score falls off linearly with distance to the nearest edge;
+  ///     at a distance equal to the range width the score is 0.
+  /// If [targetRange] is not provided, the previous behavior using [target] and
+  /// optional [range] is used.
+  int _scoreFor(
+    num? value, {
+    double? target,
+    RangeValues? range,
+    RangeValues? targetRange,
+  }) {
+    // Only one of target or targetRange must be provided.
+    assert(
+      !(target != null && targetRange != null),
+      'Provide either target or targetRange, not both.',
+    );
+
     if (value == null) return 0;
     final double v = value.toDouble();
+
+    // If targetRange is provided -> new behavior
+    if (targetRange != null) {
+      final double start = targetRange.start;
+      final double end = targetRange.end;
+
+      // Degenerate targetRange (a single point or reversed)
+      if (end <= start) {
+        // Exact match gives perfect score, otherwise 0
+        return ((v - start).abs() < 1e-9) ? 100 : 0;
+      }
+
+      // Inside targetRange -> perfect score
+      if (v >= start && v <= end) return 100;
+
+      final double width = end - start;
+      // distance to nearest edge
+      final double dist = v < start ? (start - v) : (v - end);
+
+      // Linear falloff over one range width: frac = 1 - dist/width
+      final double frac = 1.0 - (dist / width);
+      final double raw = (frac * 100.0).clamp(0.0, 100.0);
+      return raw.round();
+    }
+
+    // --- Fall back to original logic which requires `target` ---
+    if (target == null) return 0;
 
     // No explicit range: assume [0, target] and linear mapping
     if (range == null) {
@@ -130,14 +177,20 @@ class Score extends Equatable {
   }
 
   // Sleep (minutes)
-  // Target: 8 hours (480 min). Healthy adult range: 7–9 hours.
-  static const double sleepMinutesTarget = 480.0;
-  static const RangeValues sleepMinutesRange = RangeValues(420.0, 540.0);
+  // Healthy adult target range: 7–9 hours.
+  static const RangeValues sleepMinutesTargetRange = RangeValues(
+    7 * 60,
+    9 * 60,
+  );
+  static const RangeValues sleepMinutesRange = RangeValues(0 * 60, 14 * 60);
 
   // Resting heart rate (bpm)
-  // Target: ~60 bpm (fits many adults). range for non-athletes: 50–100 bpm.
-  static const double restingHeartRateBpmTarget = 60.0;
-  static const RangeValues restingHeartRateBpmRange = RangeValues(50.0, 100.0);
+  // Target range for non-athletes: 60–100 bpm.
+  static const RangeValues restingHeartRateBpmTargetRange = RangeValues(
+    60,
+    100,
+  );
+  static const RangeValues restingHeartRateBpmRange = RangeValues(35, 150.0);
 
   // Overnight heart-rate variability (ms)
   // Target: ~50 ms (higher is generally better; large individual variation).

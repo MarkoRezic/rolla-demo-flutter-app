@@ -15,7 +15,7 @@ class AppIcon extends StatelessWidget {
       width: size,
       height: size,
       colorFilter: ColorFilter.mode(
-        color ?? Theme.of(context).colorScheme.onSurface,
+        color ?? Theme.of(context).colorScheme.onSurfaceVariant,
         BlendMode.srcIn,
       ),
     );

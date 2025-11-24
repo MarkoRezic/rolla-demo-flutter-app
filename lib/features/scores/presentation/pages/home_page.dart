@@ -7,7 +7,9 @@ import 'package:rolla_demo_app/core/localization/tr.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/app_icon.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/app_icon_button.dart';
 import 'package:rolla_demo_app/core/theme/app_colors.dart';
+import 'package:rolla_demo_app/core/utils/date_time_utils.dart';
 import 'package:rolla_demo_app/features/scores/domain/entities/score.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/demo_concentric_dots.dart';
 import 'package:rolla_demo_app/features/settings/presentation/pages/settings_page.dart';
 
 import '../bloc/score_bloc.dart';
@@ -28,11 +30,11 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     bloc = di.sl<ScoreBloc>();
-    _loadLatestScore();
+    _loadCurrentDateScore();
   }
 
-  void _loadLatestScore() async {
-    bloc.add(LoadScoresEvent());
+  void _loadCurrentDateScore() async {
+    bloc.add(LoadScoresEvent(from: startOfCurrentDay(), to: endOfCurrentDay()));
   }
 
   @override
@@ -56,7 +58,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          _loadLatestScore();
+          _loadCurrentDateScore();
         },
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
@@ -80,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   } else if (state is ScoreLoaded) {
-                    Score? latestScore = state.scores.firstOrNull;
+                    Score? todayScore = state.scores.firstOrNull;
 
                     return Column(
                       children: [
@@ -90,8 +92,8 @@ class _HomePageState extends State<HomePage> {
                             color: AppColors.green,
                           ),
                           title: tr.activity,
-                          value: latestScore?.activityScore.toDouble(),
-                          scoreValue: latestScore?.activityScore.toDouble(),
+                          value: todayScore?.activityScore.toDouble(),
+                          scoreValue: todayScore?.activityScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) => ScoreDetailPage(type: 'activity'),
@@ -105,8 +107,8 @@ class _HomePageState extends State<HomePage> {
                             color: AppColors.purple,
                           ),
                           title: tr.readiness,
-                          value: latestScore?.readinessScore.toDouble(),
-                          scoreValue: latestScore?.readinessScore.toDouble(),
+                          value: todayScore?.readinessScore.toDouble(),
+                          scoreValue: todayScore?.readinessScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) =>
@@ -121,8 +123,8 @@ class _HomePageState extends State<HomePage> {
                             color: AppColors.lightBlue,
                           ),
                           title: tr.health,
-                          value: latestScore?.healthScore.toDouble(),
-                          scoreValue: latestScore?.healthScore.toDouble(),
+                          value: todayScore?.healthScore.toDouble(),
+                          scoreValue: todayScore?.healthScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) => ScoreDetailPage(type: 'health'),
@@ -142,6 +144,11 @@ class _HomePageState extends State<HomePage> {
               Text(
                 'Updated: $nowStr',
                 style: Theme.of(context).textTheme.bodySmall,
+              ),
+
+              Container(
+                height: 200,
+                child: Row(children: [Expanded(child: DemoConcentricDots())]),
               ),
             ],
           ),

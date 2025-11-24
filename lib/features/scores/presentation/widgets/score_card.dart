@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:rolla_demo_app/core/theme/app_colors.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/score_linear_progress_indicator.dart';
 
 class ScoreCard extends StatelessWidget {
   final Widget? icon;
@@ -58,93 +59,77 @@ class ScoreCard extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         onTap: onTap,
         child: Container(
+          clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.03),
-                blurRadius: 6,
-                offset: Offset(0, 2),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.fromBorderSide(
+              BorderSide(
+                width: 1,
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface.withValues(alpha: 0.1),
               ),
-            ],
+            ),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              Row(
-                children: [
-                  if (icon != null)
-                    Container(
-                      height: 36,
-                      width: 36,
-                      decoration: BoxDecoration(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.secondary.withOpacity(0.12),
-                        borderRadius: BorderRadius.circular(10),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 16,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if (icon != null) icon!,
+                    if (icon != null) const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(fontWeight: FontWeight.w400),
+                          ),
+                        ],
                       ),
-                      child: Center(child: icon),
                     ),
-                  if (icon != null) SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(fontWeight: FontWeight.w600),
-                        ),
-                      ],
+                    const SizedBox(width: 12),
+                    Text(
+                      display,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  Text(
-                    display,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              if (hasProgress) SizedBox(height: 12),
+
+              // optional progress bar anchored to bottom, full width
               if (hasProgress)
-                // progress bar
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    final barHeight = 6.0;
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                // give horizontal constraints so Expanded inside the child Row works
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: -ScoreCardLinearProgressIndicator.height / 2,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(barHeight / 2),
-                          child: Container(
-                            height: barHeight,
-                            width: double.infinity,
-                            color: Theme.of(
-                              context,
-                            ).dividerColor.withOpacity(0.45),
-                            child: Stack(
-                              children: [
-                                FractionallySizedBox(
-                                  widthFactor: percent,
-                                  child: Container(
-                                    height: barHeight,
-                                    color: progressColor,
-                                  ),
-                                ),
-                              ],
-                            ),
+                        Expanded(
+                          child: ScoreCardLinearProgressIndicator(
+                            value: percent!,
                           ),
                         ),
                       ],
-                    );
-                  },
+                    ),
+                  ),
                 ),
             ],
           ),
