@@ -1,36 +1,4948 @@
 [
   {
-    "id": "1",
-    "type": "activity",
-    "timestamp": "2025-11-21T08:15:00Z",
-    "score": 72,
-    "metrics": {
-      "activePoints": 560,
-      "steps": 8000,
-      "activeCalories": 450,
-      "moveHours": 1.5
-    }
+    "id": 1,
+    "date": "2025-11-23T20:16:51.792Z",
+    "sleepMinutes": 348,
+    "restingHeartRateBpm": 68,
+    "overnightHeartRateVarianceMs": 15,
+    "activePoints": 285,
+    "steps": 824,
+    "moveHours": 0.5,
+    "activeCalories": 394,
+    "activities": []
   },
   {
-    "id": "2",
-    "type": "readiness",
-    "timestamp": "2025-11-21T08:15:00Z",
-    "score": 65,
-    "metrics": {
-      "sleep": 6.8,
-      "restingHr": 62,
-      "hrv": 45
-    }
+    "id": 2,
+    "date": "2025-11-22T05:21:42.350Z",
+    "sleepMinutes": 318,
+    "restingHeartRateBpm": 74,
+    "overnightHeartRateVarianceMs": 64,
+    "activePoints": 171,
+    "steps": 12856,
+    "moveHours": 0.8,
+    "activeCalories": 709,
+    "activities": [
+      {
+        "id": 1000,
+        "category": "cycling",
+        "durationSeconds": 3203,
+        "calories": 331
+      },
+      {
+        "id": 1001,
+        "category": "hiit",
+        "durationSeconds": 2253,
+        "calories": 165
+      }
+    ]
   },
   {
-    "id": "3",
-    "type": "health",
-    "timestamp": "2025-11-20T08:15:00Z",
-    "score": 78,
-    "metrics": {
-      "summary": "Good progress",
-      "activityScore": 72,
-      "readinessScore": 65
-    }
+    "id": 3,
+    "date": "2025-11-21T22:22:15.755Z",
+    "sleepMinutes": 556,
+    "restingHeartRateBpm": 59,
+    "overnightHeartRateVarianceMs": 142,
+    "activePoints": 138,
+    "steps": 10009,
+    "moveHours": 11.8,
+    "activeCalories": 2103,
+    "activities": []
+  },
+  {
+    "id": 4,
+    "date": "2025-11-20T01:03:20.963Z",
+    "sleepMinutes": 492,
+    "restingHeartRateBpm": 61,
+    "overnightHeartRateVarianceMs": 66,
+    "activePoints": 165,
+    "steps": 2681,
+    "moveHours": 1.3,
+    "activeCalories": 1266,
+    "activities": [
+      {
+        "id": 1002,
+        "category": "dance",
+        "durationSeconds": 7151,
+        "calories": 1430
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "date": "2025-11-19T18:10:20.797Z",
+    "sleepMinutes": 595,
+    "restingHeartRateBpm": 73,
+    "overnightHeartRateVarianceMs": 142,
+    "activePoints": 280,
+    "steps": 6004,
+    "moveHours": 1.9,
+    "activeCalories": 1213,
+    "activities": [
+      {
+        "id": 1003,
+        "category": "yoga",
+        "durationSeconds": 2447,
+        "calories": 318
+      },
+      {
+        "id": 1004,
+        "category": "walking",
+        "durationSeconds": 1021,
+        "calories": 189
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "date": "2025-11-18T10:41:47.736Z",
+    "sleepMinutes": 522,
+    "restingHeartRateBpm": 57,
+    "overnightHeartRateVarianceMs": 24,
+    "activePoints": 72,
+    "steps": 6440,
+    "moveHours": 6.4,
+    "activeCalories": 2093,
+    "activities": [
+      {
+        "id": 1005,
+        "category": "walking",
+        "durationSeconds": 5794,
+        "calories": 1004
+      },
+      {
+        "id": 1006,
+        "category": "hiit",
+        "durationSeconds": 5159,
+        "calories": 507
+      },
+      {
+        "id": 1007,
+        "category": "running",
+        "durationSeconds": 2314,
+        "calories": 382
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "date": "2025-11-17T09:11:05.633Z",
+    "sleepMinutes": 326,
+    "restingHeartRateBpm": 53,
+    "overnightHeartRateVarianceMs": 140,
+    "activePoints": 274,
+    "steps": 3012,
+    "moveHours": 1.8,
+    "activeCalories": 566,
+    "activities": [
+      {
+        "id": 1008,
+        "category": "running",
+        "durationSeconds": 4590,
+        "calories": 436
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "date": "2025-11-16T18:01:26.515Z",
+    "sleepMinutes": 432,
+    "restingHeartRateBpm": 54,
+    "overnightHeartRateVarianceMs": 124,
+    "activePoints": 276,
+    "steps": 6536,
+    "moveHours": 7.3,
+    "activeCalories": 1221,
+    "activities": []
+  },
+  {
+    "id": 9,
+    "date": "2025-11-15T12:42:26.296Z",
+    "sleepMinutes": 329,
+    "restingHeartRateBpm": 43,
+    "overnightHeartRateVarianceMs": 141,
+    "activePoints": 11,
+    "steps": 11184,
+    "moveHours": 8.7,
+    "activeCalories": 114,
+    "activities": [
+      {
+        "id": 1009,
+        "category": "cycling",
+        "durationSeconds": 1410,
+        "calories": 150
+      },
+      {
+        "id": 1010,
+        "category": "pilates",
+        "durationSeconds": 4597,
+        "calories": 858
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "date": "2025-11-14T13:08:16.530Z",
+    "sleepMinutes": 505,
+    "restingHeartRateBpm": 67,
+    "overnightHeartRateVarianceMs": 127,
+    "activePoints": 56,
+    "steps": 2723,
+    "moveHours": 4.1,
+    "activeCalories": 2985,
+    "activities": [
+      {
+        "id": 1011,
+        "category": "swimming",
+        "durationSeconds": 966,
+        "calories": 85
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "date": "2025-11-13T00:32:51.718Z",
+    "sleepMinutes": 289,
+    "restingHeartRateBpm": 44,
+    "overnightHeartRateVarianceMs": 60,
+    "activePoints": 166,
+    "steps": 5760,
+    "moveHours": 1.7,
+    "activeCalories": 2923,
+    "activities": [
+      {
+        "id": 1012,
+        "category": "running",
+        "durationSeconds": 997,
+        "calories": 83
+      },
+      {
+        "id": 1013,
+        "category": "dance",
+        "durationSeconds": 3261,
+        "calories": 451
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "date": "2025-11-12T03:46:38.078Z",
+    "sleepMinutes": 367,
+    "restingHeartRateBpm": 56,
+    "overnightHeartRateVarianceMs": 147,
+    "activePoints": 225,
+    "steps": 14137,
+    "moveHours": 5.1,
+    "activeCalories": 2422,
+    "activities": [
+      {
+        "id": 1014,
+        "category": "intervals",
+        "durationSeconds": 2843,
+        "calories": 251
+      },
+      {
+        "id": 1015,
+        "category": "strength training",
+        "durationSeconds": 4238,
+        "calories": 841
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "date": "2025-11-11T17:54:34.179Z",
+    "sleepMinutes": 492,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 78,
+    "activePoints": 37,
+    "steps": 14612,
+    "moveHours": 2,
+    "activeCalories": 1867,
+    "activities": []
+  },
+  {
+    "id": 14,
+    "date": "2025-11-10T12:14:52.264Z",
+    "sleepMinutes": 243,
+    "restingHeartRateBpm": 50,
+    "overnightHeartRateVarianceMs": 31,
+    "activePoints": 250,
+    "steps": 13022,
+    "moveHours": 5.1,
+    "activeCalories": 1804,
+    "activities": [
+      {
+        "id": 1016,
+        "category": "running",
+        "durationSeconds": 4729,
+        "calories": 623
+      },
+      {
+        "id": 1017,
+        "category": "hiking",
+        "durationSeconds": 4674,
+        "calories": 662
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "date": "2025-11-09T09:09:13.770Z",
+    "sleepMinutes": 291,
+    "restingHeartRateBpm": 63,
+    "overnightHeartRateVarianceMs": 26,
+    "activePoints": 136,
+    "steps": 13863,
+    "moveHours": 5.2,
+    "activeCalories": 1588,
+    "activities": [
+      {
+        "id": 1018,
+        "category": "swimming",
+        "durationSeconds": 2551,
+        "calories": 442
+      },
+      {
+        "id": 1019,
+        "category": "hiking",
+        "durationSeconds": 1303,
+        "calories": 139
+      },
+      {
+        "id": 1020,
+        "category": "swimming",
+        "durationSeconds": 2393,
+        "calories": 331
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "date": "2025-11-08T09:41:06.283Z",
+    "sleepMinutes": 414,
+    "restingHeartRateBpm": 79,
+    "overnightHeartRateVarianceMs": 107,
+    "activePoints": 31,
+    "steps": 6562,
+    "moveHours": 7.1,
+    "activeCalories": 1145,
+    "activities": [
+      {
+        "id": 1021,
+        "category": "cycling",
+        "durationSeconds": 6910,
+        "calories": 806
+      },
+      {
+        "id": 1022,
+        "category": "running",
+        "durationSeconds": 2226,
+        "calories": 271
+      },
+      {
+        "id": 1023,
+        "category": "cardio",
+        "durationSeconds": 4152,
+        "calories": 768
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "date": "2025-11-07T02:35:38.591Z",
+    "sleepMinutes": 275,
+    "restingHeartRateBpm": 55,
+    "overnightHeartRateVarianceMs": 27,
+    "activePoints": 49,
+    "steps": 4172,
+    "moveHours": 1.1,
+    "activeCalories": 1690,
+    "activities": [
+      {
+        "id": 1024,
+        "category": "walking",
+        "durationSeconds": 5844,
+        "calories": 1130
+      },
+      {
+        "id": 1025,
+        "category": "pilates",
+        "durationSeconds": 3631,
+        "calories": 508
+      },
+      {
+        "id": 1026,
+        "category": "hiit",
+        "durationSeconds": 5308,
+        "calories": 504
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "date": "2025-11-06T20:56:18.821Z",
+    "sleepMinutes": 353,
+    "restingHeartRateBpm": 53,
+    "overnightHeartRateVarianceMs": 43,
+    "activePoints": 32,
+    "steps": 4492,
+    "moveHours": 3.3,
+    "activeCalories": 2144,
+    "activities": [
+      {
+        "id": 1027,
+        "category": "yoga",
+        "durationSeconds": 4633,
+        "calories": 842
+      },
+      {
+        "id": 1028,
+        "category": "cardio",
+        "durationSeconds": 2803,
+        "calories": 383
+      },
+      {
+        "id": 1029,
+        "category": "intervals",
+        "durationSeconds": 6893,
+        "calories": 1137
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "date": "2025-11-05T15:31:26.973Z",
+    "sleepMinutes": 282,
+    "restingHeartRateBpm": 72,
+    "overnightHeartRateVarianceMs": 111,
+    "activePoints": 255,
+    "steps": 11120,
+    "moveHours": 2.8,
+    "activeCalories": 786,
+    "activities": [
+      {
+        "id": 1030,
+        "category": "dance",
+        "durationSeconds": 6767,
+        "calories": 970
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "date": "2025-11-04T01:13:51.741Z",
+    "sleepMinutes": 433,
+    "restingHeartRateBpm": 70,
+    "overnightHeartRateVarianceMs": 142,
+    "activePoints": 217,
+    "steps": 12072,
+    "moveHours": 2.6,
+    "activeCalories": 1188,
+    "activities": [
+      {
+        "id": 1031,
+        "category": "hiking",
+        "durationSeconds": 4784,
+        "calories": 773
+      },
+      {
+        "id": 1032,
+        "category": "intervals",
+        "durationSeconds": 2538,
+        "calories": 212
+      },
+      {
+        "id": 1033,
+        "category": "intervals",
+        "durationSeconds": 4424,
+        "calories": 406
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "date": "2025-11-03T18:23:55.552Z",
+    "sleepMinutes": 404,
+    "restingHeartRateBpm": 46,
+    "overnightHeartRateVarianceMs": 117,
+    "activePoints": 88,
+    "steps": 2546,
+    "moveHours": 0.9,
+    "activeCalories": 2811,
+    "activities": [
+      {
+        "id": 1034,
+        "category": "strength training",
+        "durationSeconds": 2223,
+        "calories": 378
+      },
+      {
+        "id": 1035,
+        "category": "running",
+        "durationSeconds": 6827,
+        "calories": 637
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "date": "2025-11-02T13:32:25.285Z",
+    "sleepMinutes": 356,
+    "restingHeartRateBpm": 79,
+    "overnightHeartRateVarianceMs": 52,
+    "activePoints": 278,
+    "steps": 12124,
+    "moveHours": 7.8,
+    "activeCalories": 2309,
+    "activities": []
+  },
+  {
+    "id": 23,
+    "date": "2025-11-01T05:14:53.739Z",
+    "sleepMinutes": 284,
+    "restingHeartRateBpm": 53,
+    "overnightHeartRateVarianceMs": 63,
+    "activePoints": 241,
+    "steps": 311,
+    "moveHours": 7.9,
+    "activeCalories": 2933,
+    "activities": [
+      {
+        "id": 1036,
+        "category": "walking",
+        "durationSeconds": 4107,
+        "calories": 650
+      },
+      {
+        "id": 1037,
+        "category": "strength training",
+        "durationSeconds": 1841,
+        "calories": 295
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "date": "2025-10-31T10:23:09.629Z",
+    "sleepMinutes": 417,
+    "restingHeartRateBpm": 51,
+    "overnightHeartRateVarianceMs": 150,
+    "activePoints": 48,
+    "steps": 3773,
+    "moveHours": 4.8,
+    "activeCalories": 2175,
+    "activities": [
+      {
+        "id": 1038,
+        "category": "pilates",
+        "durationSeconds": 661,
+        "calories": 71
+      },
+      {
+        "id": 1039,
+        "category": "intervals",
+        "durationSeconds": 2648,
+        "calories": 494
+      },
+      {
+        "id": 1040,
+        "category": "hiit",
+        "durationSeconds": 6174,
+        "calories": 936
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "date": "2025-10-30T11:42:03.916Z",
+    "sleepMinutes": 499,
+    "restingHeartRateBpm": 61,
+    "overnightHeartRateVarianceMs": 106,
+    "activePoints": 164,
+    "steps": 14967,
+    "moveHours": 6,
+    "activeCalories": 127,
+    "activities": [
+      {
+        "id": 1041,
+        "category": "cycling",
+        "durationSeconds": 676,
+        "calories": 97
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "date": "2025-10-29T11:09:14.751Z",
+    "sleepMinutes": 549,
+    "restingHeartRateBpm": 59,
+    "overnightHeartRateVarianceMs": 148,
+    "activePoints": 251,
+    "steps": 6359,
+    "moveHours": 1.6,
+    "activeCalories": 2247,
+    "activities": [
+      {
+        "id": 1042,
+        "category": "cycling",
+        "durationSeconds": 852,
+        "calories": 68
+      },
+      {
+        "id": 1043,
+        "category": "hiit",
+        "durationSeconds": 2405,
+        "calories": 321
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "date": "2025-10-28T01:17:51.654Z",
+    "sleepMinutes": 316,
+    "restingHeartRateBpm": 72,
+    "overnightHeartRateVarianceMs": 139,
+    "activePoints": 83,
+    "steps": 14579,
+    "moveHours": 8.7,
+    "activeCalories": 1332,
+    "activities": [
+      {
+        "id": 1044,
+        "category": "yoga",
+        "durationSeconds": 2642,
+        "calories": 352
+      },
+      {
+        "id": 1045,
+        "category": "cycling",
+        "durationSeconds": 4074,
+        "calories": 509
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "date": "2025-10-27T09:28:25.969Z",
+    "sleepMinutes": 274,
+    "restingHeartRateBpm": 61,
+    "overnightHeartRateVarianceMs": 78,
+    "activePoints": 70,
+    "steps": 12131,
+    "moveHours": 10.6,
+    "activeCalories": 2920,
+    "activities": [
+      {
+        "id": 1046,
+        "category": "intervals",
+        "durationSeconds": 6819,
+        "calories": 659
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "date": "2025-10-26T01:21:13.237Z",
+    "sleepMinutes": 552,
+    "restingHeartRateBpm": 79,
+    "overnightHeartRateVarianceMs": 75,
+    "activePoints": 24,
+    "steps": 5565,
+    "moveHours": 0.3,
+    "activeCalories": 2067,
+    "activities": [
+      {
+        "id": 1047,
+        "category": "walking",
+        "durationSeconds": 2971,
+        "calories": 342
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "date": "2025-10-25T16:52:23.963Z",
+    "sleepMinutes": 487,
+    "restingHeartRateBpm": 55,
+    "overnightHeartRateVarianceMs": 82,
+    "activePoints": 241,
+    "steps": 5869,
+    "moveHours": 10.5,
+    "activeCalories": 2965,
+    "activities": []
+  },
+  {
+    "id": 31,
+    "date": "2025-10-24T02:58:31.026Z",
+    "sleepMinutes": 564,
+    "restingHeartRateBpm": 67,
+    "overnightHeartRateVarianceMs": 66,
+    "activePoints": 295,
+    "steps": 10685,
+    "moveHours": 2,
+    "activeCalories": 582,
+    "activities": [
+      {
+        "id": 1048,
+        "category": "cardio",
+        "durationSeconds": 3921,
+        "calories": 412
+      },
+      {
+        "id": 1049,
+        "category": "hiking",
+        "durationSeconds": 458,
+        "calories": 75
+      },
+      {
+        "id": 1050,
+        "category": "hiit",
+        "durationSeconds": 5863,
+        "calories": 489
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "date": "2025-10-23T03:42:47.562Z",
+    "sleepMinutes": 267,
+    "restingHeartRateBpm": 77,
+    "overnightHeartRateVarianceMs": 91,
+    "activePoints": 230,
+    "steps": 1960,
+    "moveHours": 4.5,
+    "activeCalories": 2235,
+    "activities": [
+      {
+        "id": 1051,
+        "category": "dance",
+        "durationSeconds": 4107,
+        "calories": 753
+      },
+      {
+        "id": 1052,
+        "category": "pilates",
+        "durationSeconds": 4353,
+        "calories": 696
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "date": "2025-10-22T19:42:14.669Z",
+    "sleepMinutes": 471,
+    "restingHeartRateBpm": 71,
+    "overnightHeartRateVarianceMs": 67,
+    "activePoints": 196,
+    "steps": 10239,
+    "moveHours": 11.2,
+    "activeCalories": 1029,
+    "activities": [
+      {
+        "id": 1053,
+        "category": "strength training",
+        "durationSeconds": 2045,
+        "calories": 150
+      },
+      {
+        "id": 1054,
+        "category": "strength training",
+        "durationSeconds": 968,
+        "calories": 176
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "date": "2025-10-21T00:14:53.637Z",
+    "sleepMinutes": 541,
+    "restingHeartRateBpm": 52,
+    "overnightHeartRateVarianceMs": 121,
+    "activePoints": 248,
+    "steps": 3281,
+    "moveHours": 7.4,
+    "activeCalories": 540,
+    "activities": [
+      {
+        "id": 1055,
+        "category": "strength training",
+        "durationSeconds": 6390,
+        "calories": 1161
+      },
+      {
+        "id": 1056,
+        "category": "walking",
+        "durationSeconds": 2584,
+        "calories": 198
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "date": "2025-10-20T18:37:17.918Z",
+    "sleepMinutes": 565,
+    "restingHeartRateBpm": 44,
+    "overnightHeartRateVarianceMs": 79,
+    "activePoints": 77,
+    "steps": 12180,
+    "moveHours": 0.6,
+    "activeCalories": 975,
+    "activities": []
+  },
+  {
+    "id": 36,
+    "date": "2025-10-19T11:06:42.955Z",
+    "sleepMinutes": 404,
+    "restingHeartRateBpm": 40,
+    "overnightHeartRateVarianceMs": 121,
+    "activePoints": 238,
+    "steps": 10144,
+    "moveHours": 4.9,
+    "activeCalories": 384,
+    "activities": [
+      {
+        "id": 1057,
+        "category": "intervals",
+        "durationSeconds": 1893,
+        "calories": 252
+      },
+      {
+        "id": 1058,
+        "category": "dance",
+        "durationSeconds": 3942,
+        "calories": 723
+      },
+      {
+        "id": 1059,
+        "category": "walking",
+        "durationSeconds": 428,
+        "calories": 80
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "date": "2025-10-18T23:29:34.878Z",
+    "sleepMinutes": 273,
+    "restingHeartRateBpm": 64,
+    "overnightHeartRateVarianceMs": 131,
+    "activePoints": 188,
+    "steps": 7554,
+    "moveHours": 5.7,
+    "activeCalories": 1634,
+    "activities": [
+      {
+        "id": 1060,
+        "category": "strength training",
+        "durationSeconds": 867,
+        "calories": 163
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "date": "2025-10-17T18:22:03.605Z",
+    "sleepMinutes": 372,
+    "restingHeartRateBpm": 47,
+    "overnightHeartRateVarianceMs": 14,
+    "activePoints": 188,
+    "steps": 10002,
+    "moveHours": 8.6,
+    "activeCalories": 142,
+    "activities": []
+  },
+  {
+    "id": 39,
+    "date": "2025-10-16T10:38:03.902Z",
+    "sleepMinutes": 420,
+    "restingHeartRateBpm": 78,
+    "overnightHeartRateVarianceMs": 129,
+    "activePoints": 96,
+    "steps": 5191,
+    "moveHours": 3.7,
+    "activeCalories": 2475,
+    "activities": [
+      {
+        "id": 1061,
+        "category": "running",
+        "durationSeconds": 2538,
+        "calories": 474
+      },
+      {
+        "id": 1062,
+        "category": "pilates",
+        "durationSeconds": 6498,
+        "calories": 704
+      },
+      {
+        "id": 1063,
+        "category": "pilates",
+        "durationSeconds": 5545,
+        "calories": 712
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "date": "2025-10-15T09:36:06.071Z",
+    "sleepMinutes": 298,
+    "restingHeartRateBpm": 65,
+    "overnightHeartRateVarianceMs": 109,
+    "activePoints": 233,
+    "steps": 4744,
+    "moveHours": 8.3,
+    "activeCalories": 431,
+    "activities": [
+      {
+        "id": 1064,
+        "category": "strength training",
+        "durationSeconds": 3457,
+        "calories": 294
+      },
+      {
+        "id": 1065,
+        "category": "hiking",
+        "durationSeconds": 5817,
+        "calories": 873
+      },
+      {
+        "id": 1066,
+        "category": "hiking",
+        "durationSeconds": 658,
+        "calories": 120
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "date": "2025-10-14T14:31:54.288Z",
+    "sleepMinutes": 309,
+    "restingHeartRateBpm": 56,
+    "overnightHeartRateVarianceMs": 29,
+    "activePoints": 240,
+    "steps": 3478,
+    "moveHours": 11.2,
+    "activeCalories": 912,
+    "activities": [
+      {
+        "id": 1067,
+        "category": "pilates",
+        "durationSeconds": 516,
+        "calories": 46
+      },
+      {
+        "id": 1068,
+        "category": "hiit",
+        "durationSeconds": 4693,
+        "calories": 774
+      },
+      {
+        "id": 1069,
+        "category": "strength training",
+        "durationSeconds": 3787,
+        "calories": 549
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "date": "2025-10-13T11:46:48.624Z",
+    "sleepMinutes": 542,
+    "restingHeartRateBpm": 46,
+    "overnightHeartRateVarianceMs": 74,
+    "activePoints": 142,
+    "steps": 10537,
+    "moveHours": 11.4,
+    "activeCalories": 1120,
+    "activities": []
+  },
+  {
+    "id": 43,
+    "date": "2025-10-12T15:52:12.076Z",
+    "sleepMinutes": 277,
+    "restingHeartRateBpm": 58,
+    "overnightHeartRateVarianceMs": 22,
+    "activePoints": 93,
+    "steps": 1444,
+    "moveHours": 4.9,
+    "activeCalories": 265,
+    "activities": [
+      {
+        "id": 1070,
+        "category": "dance",
+        "durationSeconds": 6160,
+        "calories": 780
+      },
+      {
+        "id": 1071,
+        "category": "hiking",
+        "durationSeconds": 5725,
+        "calories": 429
+      },
+      {
+        "id": 1072,
+        "category": "hiking",
+        "durationSeconds": 5179,
+        "calories": 406
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "date": "2025-10-11T05:44:13.838Z",
+    "sleepMinutes": 433,
+    "restingHeartRateBpm": 54,
+    "overnightHeartRateVarianceMs": 139,
+    "activePoints": 116,
+    "steps": 6202,
+    "moveHours": 6.8,
+    "activeCalories": 2960,
+    "activities": []
+  },
+  {
+    "id": 45,
+    "date": "2025-10-10T18:01:54.198Z",
+    "sleepMinutes": 432,
+    "restingHeartRateBpm": 42,
+    "overnightHeartRateVarianceMs": 102,
+    "activePoints": 156,
+    "steps": 5670,
+    "moveHours": 3.7,
+    "activeCalories": 420,
+    "activities": [
+      {
+        "id": 1073,
+        "category": "strength training",
+        "durationSeconds": 6954,
+        "calories": 834
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "date": "2025-10-09T13:17:23.663Z",
+    "sleepMinutes": 390,
+    "restingHeartRateBpm": 61,
+    "overnightHeartRateVarianceMs": 133,
+    "activePoints": 126,
+    "steps": 1009,
+    "moveHours": 11.5,
+    "activeCalories": 1836,
+    "activities": [
+      {
+        "id": 1074,
+        "category": "yoga",
+        "durationSeconds": 4995,
+        "calories": 383
+      },
+      {
+        "id": 1075,
+        "category": "hiking",
+        "durationSeconds": 3820,
+        "calories": 261
+      },
+      {
+        "id": 1076,
+        "category": "yoga",
+        "durationSeconds": 1454,
+        "calories": 274
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "date": "2025-10-08T17:35:19.683Z",
+    "sleepMinutes": 532,
+    "restingHeartRateBpm": 45,
+    "overnightHeartRateVarianceMs": 55,
+    "activePoints": 121,
+    "steps": 9582,
+    "moveHours": 8.6,
+    "activeCalories": 328,
+    "activities": []
+  },
+  {
+    "id": 48,
+    "date": "2025-10-07T13:43:38.888Z",
+    "sleepMinutes": 522,
+    "restingHeartRateBpm": 68,
+    "overnightHeartRateVarianceMs": 87,
+    "activePoints": 213,
+    "steps": 8307,
+    "moveHours": 8.4,
+    "activeCalories": 2178,
+    "activities": [
+      {
+        "id": 1077,
+        "category": "cardio",
+        "durationSeconds": 5762,
+        "calories": 672
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "date": "2025-10-06T08:20:24.238Z",
+    "sleepMinutes": 427,
+    "restingHeartRateBpm": 64,
+    "overnightHeartRateVarianceMs": 85,
+    "activePoints": 290,
+    "steps": 13275,
+    "moveHours": 4.5,
+    "activeCalories": 1315,
+    "activities": [
+      {
+        "id": 1078,
+        "category": "walking",
+        "durationSeconds": 6697,
+        "calories": 815
+      },
+      {
+        "id": 1079,
+        "category": "walking",
+        "durationSeconds": 2278,
+        "calories": 209
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "date": "2025-10-05T13:59:03.630Z",
+    "sleepMinutes": 285,
+    "restingHeartRateBpm": 53,
+    "overnightHeartRateVarianceMs": 111,
+    "activePoints": 15,
+    "steps": 11115,
+    "moveHours": 3.9,
+    "activeCalories": 752,
+    "activities": [
+      {
+        "id": 1080,
+        "category": "hiking",
+        "durationSeconds": 1888,
+        "calories": 205
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "date": "2025-10-04T00:01:18.676Z",
+    "sleepMinutes": 288,
+    "restingHeartRateBpm": 45,
+    "overnightHeartRateVarianceMs": 112,
+    "activePoints": 246,
+    "steps": 222,
+    "moveHours": 8.1,
+    "activeCalories": 2105,
+    "activities": [
+      {
+        "id": 1081,
+        "category": "yoga",
+        "durationSeconds": 1558,
+        "calories": 158
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "date": "2025-10-03T17:28:40.246Z",
+    "sleepMinutes": 599,
+    "restingHeartRateBpm": 54,
+    "overnightHeartRateVarianceMs": 31,
+    "activePoints": 247,
+    "steps": 1975,
+    "moveHours": 9,
+    "activeCalories": 571,
+    "activities": [
+      {
+        "id": 1082,
+        "category": "swimming",
+        "durationSeconds": 6485,
+        "calories": 1016
+      },
+      {
+        "id": 1083,
+        "category": "swimming",
+        "durationSeconds": 6643,
+        "calories": 797
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "date": "2025-10-02T22:58:37.716Z",
+    "sleepMinutes": 503,
+    "restingHeartRateBpm": 55,
+    "overnightHeartRateVarianceMs": 63,
+    "activePoints": 257,
+    "steps": 7626,
+    "moveHours": 10.7,
+    "activeCalories": 102,
+    "activities": []
+  },
+  {
+    "id": 54,
+    "date": "2025-10-01T09:02:03.452Z",
+    "sleepMinutes": 459,
+    "restingHeartRateBpm": 53,
+    "overnightHeartRateVarianceMs": 107,
+    "activePoints": 195,
+    "steps": 5090,
+    "moveHours": 8.5,
+    "activeCalories": 1037,
+    "activities": [
+      {
+        "id": 1084,
+        "category": "strength training",
+        "durationSeconds": 6550,
+        "calories": 808
+      },
+      {
+        "id": 1085,
+        "category": "dance",
+        "durationSeconds": 1855,
+        "calories": 337
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "date": "2025-09-30T11:04:49.753Z",
+    "sleepMinutes": 459,
+    "restingHeartRateBpm": 41,
+    "overnightHeartRateVarianceMs": 54,
+    "activePoints": 228,
+    "steps": 9214,
+    "moveHours": 2.8,
+    "activeCalories": 2632,
+    "activities": [
+      {
+        "id": 1086,
+        "category": "cycling",
+        "durationSeconds": 1351,
+        "calories": 196
+      },
+      {
+        "id": 1087,
+        "category": "cardio",
+        "durationSeconds": 4017,
+        "calories": 696
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "date": "2025-09-29T05:30:50.721Z",
+    "sleepMinutes": 378,
+    "restingHeartRateBpm": 41,
+    "overnightHeartRateVarianceMs": 47,
+    "activePoints": 12,
+    "steps": 789,
+    "moveHours": 4.5,
+    "activeCalories": 172,
+    "activities": [
+      {
+        "id": 1088,
+        "category": "hiking",
+        "durationSeconds": 482,
+        "calories": 40
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "date": "2025-09-28T12:16:14.917Z",
+    "sleepMinutes": 451,
+    "restingHeartRateBpm": 71,
+    "overnightHeartRateVarianceMs": 45,
+    "activePoints": 203,
+    "steps": 11524,
+    "moveHours": 4.9,
+    "activeCalories": 480,
+    "activities": []
+  },
+  {
+    "id": 58,
+    "date": "2025-09-27T02:56:18.449Z",
+    "sleepMinutes": 401,
+    "restingHeartRateBpm": 52,
+    "overnightHeartRateVarianceMs": 60,
+    "activePoints": 201,
+    "steps": 10541,
+    "moveHours": 10.4,
+    "activeCalories": 351,
+    "activities": [
+      {
+        "id": 1089,
+        "category": "cardio",
+        "durationSeconds": 1233,
+        "calories": 222
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "date": "2025-09-26T00:29:39.309Z",
+    "sleepMinutes": 565,
+    "restingHeartRateBpm": 71,
+    "overnightHeartRateVarianceMs": 17,
+    "activePoints": 254,
+    "steps": 9414,
+    "moveHours": 10,
+    "activeCalories": 2431,
+    "activities": [
+      {
+        "id": 1090,
+        "category": "pilates",
+        "durationSeconds": 2973,
+        "calories": 491
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "date": "2025-09-25T23:51:08.146Z",
+    "sleepMinutes": 390,
+    "restingHeartRateBpm": 78,
+    "overnightHeartRateVarianceMs": 52,
+    "activePoints": 40,
+    "steps": 6671,
+    "moveHours": 8.5,
+    "activeCalories": 324,
+    "activities": [
+      {
+        "id": 1091,
+        "category": "walking",
+        "durationSeconds": 3761,
+        "calories": 251
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "date": "2025-09-24T18:26:30.301Z",
+    "sleepMinutes": 415,
+    "restingHeartRateBpm": 42,
+    "overnightHeartRateVarianceMs": 16,
+    "activePoints": 71,
+    "steps": 1278,
+    "moveHours": 7.6,
+    "activeCalories": 515,
+    "activities": [
+      {
+        "id": 1092,
+        "category": "strength training",
+        "durationSeconds": 2461,
+        "calories": 398
+      },
+      {
+        "id": 1093,
+        "category": "dance",
+        "durationSeconds": 2780,
+        "calories": 431
+      },
+      {
+        "id": 1094,
+        "category": "running",
+        "durationSeconds": 6684,
+        "calories": 501
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "date": "2025-09-23T20:55:40.938Z",
+    "sleepMinutes": 500,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 74,
+    "activePoints": 28,
+    "steps": 10701,
+    "moveHours": 10.5,
+    "activeCalories": 1794,
+    "activities": []
+  },
+  {
+    "id": 63,
+    "date": "2025-09-22T04:10:36.154Z",
+    "sleepMinutes": 397,
+    "restingHeartRateBpm": 65,
+    "overnightHeartRateVarianceMs": 95,
+    "activePoints": 218,
+    "steps": 9909,
+    "moveHours": 4.4,
+    "activeCalories": 2656,
+    "activities": []
+  },
+  {
+    "id": 64,
+    "date": "2025-09-21T19:59:26.853Z",
+    "sleepMinutes": 399,
+    "restingHeartRateBpm": 74,
+    "overnightHeartRateVarianceMs": 127,
+    "activePoints": 55,
+    "steps": 13145,
+    "moveHours": 4,
+    "activeCalories": 1661,
+    "activities": []
+  },
+  {
+    "id": 65,
+    "date": "2025-09-20T23:38:47.860Z",
+    "sleepMinutes": 558,
+    "restingHeartRateBpm": 80,
+    "overnightHeartRateVarianceMs": 42,
+    "activePoints": 298,
+    "steps": 2283,
+    "moveHours": 0.3,
+    "activeCalories": 2709,
+    "activities": [
+      {
+        "id": 1095,
+        "category": "strength training",
+        "durationSeconds": 5933,
+        "calories": 989
+      },
+      {
+        "id": 1096,
+        "category": "hiit",
+        "durationSeconds": 3989,
+        "calories": 771
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "date": "2025-09-19T08:16:01.902Z",
+    "sleepMinutes": 588,
+    "restingHeartRateBpm": 57,
+    "overnightHeartRateVarianceMs": 20,
+    "activePoints": 261,
+    "steps": 2619,
+    "moveHours": 9.2,
+    "activeCalories": 1851,
+    "activities": []
+  },
+  {
+    "id": 67,
+    "date": "2025-09-18T21:27:28.965Z",
+    "sleepMinutes": 414,
+    "restingHeartRateBpm": 66,
+    "overnightHeartRateVarianceMs": 96,
+    "activePoints": 231,
+    "steps": 5416,
+    "moveHours": 2.5,
+    "activeCalories": 2465,
+    "activities": [
+      {
+        "id": 1097,
+        "category": "running",
+        "durationSeconds": 5431,
+        "calories": 453
+      },
+      {
+        "id": 1098,
+        "category": "pilates",
+        "durationSeconds": 2624,
+        "calories": 516
+      },
+      {
+        "id": 1099,
+        "category": "hiit",
+        "durationSeconds": 1441,
+        "calories": 127
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "date": "2025-09-17T07:06:19.641Z",
+    "sleepMinutes": 256,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 77,
+    "activePoints": 101,
+    "steps": 2058,
+    "moveHours": 3.9,
+    "activeCalories": 150,
+    "activities": [
+      {
+        "id": 1100,
+        "category": "pilates",
+        "durationSeconds": 3180,
+        "calories": 281
+      },
+      {
+        "id": 1101,
+        "category": "swimming",
+        "durationSeconds": 4309,
+        "calories": 338
+      },
+      {
+        "id": 1102,
+        "category": "running",
+        "durationSeconds": 5826,
+        "calories": 806
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "date": "2025-09-16T01:33:55.835Z",
+    "sleepMinutes": 390,
+    "restingHeartRateBpm": 61,
+    "overnightHeartRateVarianceMs": 145,
+    "activePoints": 144,
+    "steps": 6641,
+    "moveHours": 7.2,
+    "activeCalories": 1707,
+    "activities": [
+      {
+        "id": 1103,
+        "category": "running",
+        "durationSeconds": 1608,
+        "calories": 161
+      },
+      {
+        "id": 1104,
+        "category": "pilates",
+        "durationSeconds": 3159,
+        "calories": 226
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "date": "2025-09-15T05:07:28.361Z",
+    "sleepMinutes": 491,
+    "restingHeartRateBpm": 56,
+    "overnightHeartRateVarianceMs": 148,
+    "activePoints": 242,
+    "steps": 694,
+    "moveHours": 2.9,
+    "activeCalories": 1798,
+    "activities": [
+      {
+        "id": 1105,
+        "category": "swimming",
+        "durationSeconds": 5309,
+        "calories": 1026
+      },
+      {
+        "id": 1106,
+        "category": "cycling",
+        "durationSeconds": 5941,
+        "calories": 1079
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "date": "2025-09-14T18:13:48.591Z",
+    "sleepMinutes": 359,
+    "restingHeartRateBpm": 79,
+    "overnightHeartRateVarianceMs": 109,
+    "activePoints": 179,
+    "steps": 7041,
+    "moveHours": 2.5,
+    "activeCalories": 1257,
+    "activities": [
+      {
+        "id": 1107,
+        "category": "cycling",
+        "durationSeconds": 596,
+        "calories": 95
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "date": "2025-09-13T05:30:31.607Z",
+    "sleepMinutes": 588,
+    "restingHeartRateBpm": 72,
+    "overnightHeartRateVarianceMs": 116,
+    "activePoints": 179,
+    "steps": 10173,
+    "moveHours": 2.6,
+    "activeCalories": 2268,
+    "activities": [
+      {
+        "id": 1108,
+        "category": "hiking",
+        "durationSeconds": 951,
+        "calories": 101
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "date": "2025-09-12T02:37:59.793Z",
+    "sleepMinutes": 497,
+    "restingHeartRateBpm": 40,
+    "overnightHeartRateVarianceMs": 75,
+    "activePoints": 286,
+    "steps": 7900,
+    "moveHours": 2.3,
+    "activeCalories": 380,
+    "activities": [
+      {
+        "id": 1109,
+        "category": "dance",
+        "durationSeconds": 455,
+        "calories": 41
+      },
+      {
+        "id": 1110,
+        "category": "hiit",
+        "durationSeconds": 6355,
+        "calories": 1165
+      },
+      {
+        "id": 1111,
+        "category": "walking",
+        "durationSeconds": 4254,
+        "calories": 525
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "date": "2025-09-11T09:27:39.700Z",
+    "sleepMinutes": 589,
+    "restingHeartRateBpm": 51,
+    "overnightHeartRateVarianceMs": 110,
+    "activePoints": 268,
+    "steps": 9179,
+    "moveHours": 0.6,
+    "activeCalories": 2156,
+    "activities": [
+      {
+        "id": 1112,
+        "category": "dance",
+        "durationSeconds": 1767,
+        "calories": 265
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "date": "2025-09-10T16:32:53.389Z",
+    "sleepMinutes": 342,
+    "restingHeartRateBpm": 66,
+    "overnightHeartRateVarianceMs": 123,
+    "activePoints": 191,
+    "steps": 359,
+    "moveHours": 11.9,
+    "activeCalories": 634,
+    "activities": [
+      {
+        "id": 1113,
+        "category": "intervals",
+        "durationSeconds": 3526,
+        "calories": 247
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "date": "2025-09-09T03:23:51.488Z",
+    "sleepMinutes": 449,
+    "restingHeartRateBpm": 68,
+    "overnightHeartRateVarianceMs": 34,
+    "activePoints": 185,
+    "steps": 6845,
+    "moveHours": 5.1,
+    "activeCalories": 2759,
+    "activities": []
+  },
+  {
+    "id": 77,
+    "date": "2025-09-08T17:23:29.183Z",
+    "sleepMinutes": 404,
+    "restingHeartRateBpm": 68,
+    "overnightHeartRateVarianceMs": 113,
+    "activePoints": 29,
+    "steps": 2841,
+    "moveHours": 2,
+    "activeCalories": 1652,
+    "activities": [
+      {
+        "id": 1114,
+        "category": "intervals",
+        "durationSeconds": 6379,
+        "calories": 649
+      },
+      {
+        "id": 1115,
+        "category": "walking",
+        "durationSeconds": 2165,
+        "calories": 253
+      },
+      {
+        "id": 1116,
+        "category": "cardio",
+        "durationSeconds": 2574,
+        "calories": 476
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "date": "2025-09-07T05:31:06.088Z",
+    "sleepMinutes": 271,
+    "restingHeartRateBpm": 47,
+    "overnightHeartRateVarianceMs": 52,
+    "activePoints": 11,
+    "steps": 1038,
+    "moveHours": 4,
+    "activeCalories": 1044,
+    "activities": [
+      {
+        "id": 1117,
+        "category": "hiit",
+        "durationSeconds": 6239,
+        "calories": 1029
+      },
+      {
+        "id": 1118,
+        "category": "dance",
+        "durationSeconds": 976,
+        "calories": 155
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "date": "2025-09-06T02:02:42.646Z",
+    "sleepMinutes": 405,
+    "restingHeartRateBpm": 46,
+    "overnightHeartRateVarianceMs": 73,
+    "activePoints": 141,
+    "steps": 12668,
+    "moveHours": 0.1,
+    "activeCalories": 1470,
+    "activities": []
+  },
+  {
+    "id": 80,
+    "date": "2025-09-05T23:24:51.861Z",
+    "sleepMinutes": 287,
+    "restingHeartRateBpm": 61,
+    "overnightHeartRateVarianceMs": 16,
+    "activePoints": 63,
+    "steps": 5734,
+    "moveHours": 2.3,
+    "activeCalories": 162,
+    "activities": [
+      {
+        "id": 1119,
+        "category": "cardio",
+        "durationSeconds": 3906,
+        "calories": 703
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "date": "2025-09-04T10:43:25.483Z",
+    "sleepMinutes": 490,
+    "restingHeartRateBpm": 71,
+    "overnightHeartRateVarianceMs": 60,
+    "activePoints": 133,
+    "steps": 2377,
+    "moveHours": 7.5,
+    "activeCalories": 2770,
+    "activities": [
+      {
+        "id": 1120,
+        "category": "swimming",
+        "durationSeconds": 3632,
+        "calories": 460
+      },
+      {
+        "id": 1121,
+        "category": "hiking",
+        "durationSeconds": 1670,
+        "calories": 114
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "date": "2025-09-03T05:44:13.041Z",
+    "sleepMinutes": 594,
+    "restingHeartRateBpm": 66,
+    "overnightHeartRateVarianceMs": 78,
+    "activePoints": 96,
+    "steps": 1199,
+    "moveHours": 0.7,
+    "activeCalories": 844,
+    "activities": [
+      {
+        "id": 1122,
+        "category": "yoga",
+        "durationSeconds": 2587,
+        "calories": 466
+      },
+      {
+        "id": 1123,
+        "category": "swimming",
+        "durationSeconds": 3351,
+        "calories": 262
+      },
+      {
+        "id": 1124,
+        "category": "swimming",
+        "durationSeconds": 2042,
+        "calories": 184
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "date": "2025-09-02T23:15:13.152Z",
+    "sleepMinutes": 584,
+    "restingHeartRateBpm": 43,
+    "overnightHeartRateVarianceMs": 86,
+    "activePoints": 53,
+    "steps": 8902,
+    "moveHours": 7.6,
+    "activeCalories": 300,
+    "activities": [
+      {
+        "id": 1125,
+        "category": "intervals",
+        "durationSeconds": 5663,
+        "calories": 491
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "date": "2025-09-01T22:36:44.199Z",
+    "sleepMinutes": 487,
+    "restingHeartRateBpm": 51,
+    "overnightHeartRateVarianceMs": 36,
+    "activePoints": 163,
+    "steps": 5235,
+    "moveHours": 3.1,
+    "activeCalories": 1567,
+    "activities": []
+  },
+  {
+    "id": 85,
+    "date": "2025-08-31T13:34:53.278Z",
+    "sleepMinutes": 300,
+    "restingHeartRateBpm": 56,
+    "overnightHeartRateVarianceMs": 55,
+    "activePoints": 181,
+    "steps": 13353,
+    "moveHours": 3,
+    "activeCalories": 2411,
+    "activities": [
+      {
+        "id": 1126,
+        "category": "running",
+        "durationSeconds": 1945,
+        "calories": 207
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "date": "2025-08-30T21:08:45.583Z",
+    "sleepMinutes": 392,
+    "restingHeartRateBpm": 40,
+    "overnightHeartRateVarianceMs": 117,
+    "activePoints": 264,
+    "steps": 10113,
+    "moveHours": 8.9,
+    "activeCalories": 2281,
+    "activities": [
+      {
+        "id": 1127,
+        "category": "cardio",
+        "durationSeconds": 1183,
+        "calories": 136
+      },
+      {
+        "id": 1128,
+        "category": "swimming",
+        "durationSeconds": 2899,
+        "calories": 295
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "date": "2025-08-29T05:31:29.302Z",
+    "sleepMinutes": 370,
+    "restingHeartRateBpm": 79,
+    "overnightHeartRateVarianceMs": 99,
+    "activePoints": 73,
+    "steps": 6154,
+    "moveHours": 11.8,
+    "activeCalories": 2665,
+    "activities": [
+      {
+        "id": 1129,
+        "category": "yoga",
+        "durationSeconds": 4433,
+        "calories": 539
+      },
+      {
+        "id": 1130,
+        "category": "hiking",
+        "durationSeconds": 675,
+        "calories": 116
+      },
+      {
+        "id": 1131,
+        "category": "yoga",
+        "durationSeconds": 5939,
+        "calories": 752
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "date": "2025-08-28T17:53:37.677Z",
+    "sleepMinutes": 362,
+    "restingHeartRateBpm": 65,
+    "overnightHeartRateVarianceMs": 72,
+    "activePoints": 62,
+    "steps": 14103,
+    "moveHours": 7.4,
+    "activeCalories": 742,
+    "activities": []
+  },
+  {
+    "id": 89,
+    "date": "2025-08-27T11:10:45.356Z",
+    "sleepMinutes": 397,
+    "restingHeartRateBpm": 78,
+    "overnightHeartRateVarianceMs": 134,
+    "activePoints": 186,
+    "steps": 4307,
+    "moveHours": 9.8,
+    "activeCalories": 2463,
+    "activities": [
+      {
+        "id": 1132,
+        "category": "yoga",
+        "durationSeconds": 1955,
+        "calories": 244
+      },
+      {
+        "id": 1133,
+        "category": "cardio",
+        "durationSeconds": 5124,
+        "calories": 529
+      },
+      {
+        "id": 1134,
+        "category": "strength training",
+        "durationSeconds": 5275,
+        "calories": 809
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "date": "2025-08-26T02:01:04.070Z",
+    "sleepMinutes": 481,
+    "restingHeartRateBpm": 45,
+    "overnightHeartRateVarianceMs": 100,
+    "activePoints": 90,
+    "steps": 10676,
+    "moveHours": 5.8,
+    "activeCalories": 2670,
+    "activities": [
+      {
+        "id": 1135,
+        "category": "running",
+        "durationSeconds": 637,
+        "calories": 82
+      },
+      {
+        "id": 1136,
+        "category": "cardio",
+        "durationSeconds": 2418,
+        "calories": 443
+      },
+      {
+        "id": 1137,
+        "category": "hiit",
+        "durationSeconds": 2629,
+        "calories": 311
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "date": "2025-08-25T15:16:29.696Z",
+    "sleepMinutes": 451,
+    "restingHeartRateBpm": 62,
+    "overnightHeartRateVarianceMs": 21,
+    "activePoints": 114,
+    "steps": 2224,
+    "moveHours": 8.9,
+    "activeCalories": 2372,
+    "activities": [
+      {
+        "id": 1138,
+        "category": "pilates",
+        "durationSeconds": 4324,
+        "calories": 418
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "date": "2025-08-24T08:35:36.256Z",
+    "sleepMinutes": 473,
+    "restingHeartRateBpm": 50,
+    "overnightHeartRateVarianceMs": 25,
+    "activePoints": 97,
+    "steps": 1666,
+    "moveHours": 4.2,
+    "activeCalories": 2318,
+    "activities": [
+      {
+        "id": 1139,
+        "category": "running",
+        "durationSeconds": 6856,
+        "calories": 1074
+      },
+      {
+        "id": 1140,
+        "category": "yoga",
+        "durationSeconds": 3315,
+        "calories": 602
+      },
+      {
+        "id": 1141,
+        "category": "cardio",
+        "durationSeconds": 1714,
+        "calories": 114
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "date": "2025-08-23T16:50:48.278Z",
+    "sleepMinutes": 463,
+    "restingHeartRateBpm": 69,
+    "overnightHeartRateVarianceMs": 31,
+    "activePoints": 138,
+    "steps": 4342,
+    "moveHours": 0.7,
+    "activeCalories": 2696,
+    "activities": [
+      {
+        "id": 1142,
+        "category": "dance",
+        "durationSeconds": 6199,
+        "calories": 455
+      },
+      {
+        "id": 1143,
+        "category": "swimming",
+        "durationSeconds": 2159,
+        "calories": 219
+      },
+      {
+        "id": 1144,
+        "category": "dance",
+        "durationSeconds": 6990,
+        "calories": 1375
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "date": "2025-08-22T16:37:57.262Z",
+    "sleepMinutes": 414,
+    "restingHeartRateBpm": 69,
+    "overnightHeartRateVarianceMs": 26,
+    "activePoints": 88,
+    "steps": 10552,
+    "moveHours": 1.2,
+    "activeCalories": 2270,
+    "activities": [
+      {
+        "id": 1145,
+        "category": "running",
+        "durationSeconds": 6456,
+        "calories": 807
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "date": "2025-08-21T08:55:04.796Z",
+    "sleepMinutes": 398,
+    "restingHeartRateBpm": 64,
+    "overnightHeartRateVarianceMs": 74,
+    "activePoints": 142,
+    "steps": 13257,
+    "moveHours": 3.9,
+    "activeCalories": 348,
+    "activities": [
+      {
+        "id": 1146,
+        "category": "cardio",
+        "durationSeconds": 6979,
+        "calories": 1024
+      },
+      {
+        "id": 1147,
+        "category": "dance",
+        "durationSeconds": 731,
+        "calories": 50
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "date": "2025-08-20T04:47:50.498Z",
+    "sleepMinutes": 498,
+    "restingHeartRateBpm": 79,
+    "overnightHeartRateVarianceMs": 47,
+    "activePoints": 59,
+    "steps": 12645,
+    "moveHours": 5.3,
+    "activeCalories": 1995,
+    "activities": [
+      {
+        "id": 1148,
+        "category": "pilates",
+        "durationSeconds": 3486,
+        "calories": 430
+      },
+      {
+        "id": 1149,
+        "category": "running",
+        "durationSeconds": 1176,
+        "calories": 155
+      },
+      {
+        "id": 1150,
+        "category": "swimming",
+        "durationSeconds": 1553,
+        "calories": 189
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "date": "2025-08-19T22:41:54.505Z",
+    "sleepMinutes": 511,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 51,
+    "activePoints": 281,
+    "steps": 14090,
+    "moveHours": 1.6,
+    "activeCalories": 2512,
+    "activities": [
+      {
+        "id": 1151,
+        "category": "intervals",
+        "durationSeconds": 2652,
+        "calories": 243
+      },
+      {
+        "id": 1152,
+        "category": "hiking",
+        "durationSeconds": 6357,
+        "calories": 1165
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "date": "2025-08-18T22:56:25.358Z",
+    "sleepMinutes": 521,
+    "restingHeartRateBpm": 67,
+    "overnightHeartRateVarianceMs": 81,
+    "activePoints": 65,
+    "steps": 2149,
+    "moveHours": 3.3,
+    "activeCalories": 1278,
+    "activities": [
+      {
+        "id": 1153,
+        "category": "cardio",
+        "durationSeconds": 5277,
+        "calories": 660
+      },
+      {
+        "id": 1154,
+        "category": "cycling",
+        "durationSeconds": 3943,
+        "calories": 473
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "date": "2025-08-17T04:33:13.808Z",
+    "sleepMinutes": 600,
+    "restingHeartRateBpm": 68,
+    "overnightHeartRateVarianceMs": 32,
+    "activePoints": 288,
+    "steps": 13236,
+    "moveHours": 11.3,
+    "activeCalories": 1178,
+    "activities": [
+      {
+        "id": 1155,
+        "category": "cardio",
+        "durationSeconds": 4986,
+        "calories": 490
+      },
+      {
+        "id": 1156,
+        "category": "intervals",
+        "durationSeconds": 2792,
+        "calories": 312
+      },
+      {
+        "id": 1157,
+        "category": "hiit",
+        "durationSeconds": 6879,
+        "calories": 860
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "date": "2025-08-16T02:25:38.911Z",
+    "sleepMinutes": 539,
+    "restingHeartRateBpm": 69,
+    "overnightHeartRateVarianceMs": 82,
+    "activePoints": 180,
+    "steps": 1134,
+    "moveHours": 7.9,
+    "activeCalories": 2619,
+    "activities": []
+  },
+  {
+    "id": 101,
+    "date": "2025-08-15T03:37:47.318Z",
+    "sleepMinutes": 590,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 119,
+    "activePoints": 264,
+    "steps": 5942,
+    "moveHours": 9.7,
+    "activeCalories": 227,
+    "activities": [
+      {
+        "id": 1158,
+        "category": "swimming",
+        "durationSeconds": 1458,
+        "calories": 231
+      },
+      {
+        "id": 1159,
+        "category": "intervals",
+        "durationSeconds": 5295,
+        "calories": 688
+      },
+      {
+        "id": 1160,
+        "category": "intervals",
+        "durationSeconds": 6126,
+        "calories": 1092
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "date": "2025-08-14T17:42:53.161Z",
+    "sleepMinutes": 523,
+    "restingHeartRateBpm": 44,
+    "overnightHeartRateVarianceMs": 59,
+    "activePoints": 167,
+    "steps": 6370,
+    "moveHours": 11.7,
+    "activeCalories": 270,
+    "activities": [
+      {
+        "id": 1161,
+        "category": "swimming",
+        "durationSeconds": 2844,
+        "calories": 265
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "date": "2025-08-13T08:55:37.317Z",
+    "sleepMinutes": 488,
+    "restingHeartRateBpm": 79,
+    "overnightHeartRateVarianceMs": 51,
+    "activePoints": 232,
+    "steps": 14018,
+    "moveHours": 1,
+    "activeCalories": 2711,
+    "activities": [
+      {
+        "id": 1162,
+        "category": "yoga",
+        "durationSeconds": 4848,
+        "calories": 396
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "date": "2025-08-12T06:53:49.976Z",
+    "sleepMinutes": 585,
+    "restingHeartRateBpm": 80,
+    "overnightHeartRateVarianceMs": 122,
+    "activePoints": 41,
+    "steps": 2225,
+    "moveHours": 8.5,
+    "activeCalories": 2934,
+    "activities": [
+      {
+        "id": 1163,
+        "category": "hiit",
+        "durationSeconds": 7031,
+        "calories": 1254
+      },
+      {
+        "id": 1164,
+        "category": "pilates",
+        "durationSeconds": 4639,
+        "calories": 866
+      },
+      {
+        "id": 1165,
+        "category": "intervals",
+        "durationSeconds": 6122,
+        "calories": 1010
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "date": "2025-08-11T20:17:43.465Z",
+    "sleepMinutes": 536,
+    "restingHeartRateBpm": 75,
+    "overnightHeartRateVarianceMs": 100,
+    "activePoints": 84,
+    "steps": 11975,
+    "moveHours": 4.8,
+    "activeCalories": 750,
+    "activities": []
+  },
+  {
+    "id": 106,
+    "date": "2025-08-10T01:13:08.426Z",
+    "sleepMinutes": 501,
+    "restingHeartRateBpm": 67,
+    "overnightHeartRateVarianceMs": 127,
+    "activePoints": 65,
+    "steps": 2785,
+    "moveHours": 7.9,
+    "activeCalories": 1643,
+    "activities": [
+      {
+        "id": 1166,
+        "category": "hiking",
+        "durationSeconds": 6621,
+        "calories": 739
+      },
+      {
+        "id": 1167,
+        "category": "hiit",
+        "durationSeconds": 5105,
+        "calories": 442
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "date": "2025-08-09T05:45:31.601Z",
+    "sleepMinutes": 398,
+    "restingHeartRateBpm": 44,
+    "overnightHeartRateVarianceMs": 63,
+    "activePoints": 241,
+    "steps": 7730,
+    "moveHours": 1.7,
+    "activeCalories": 485,
+    "activities": [
+      {
+        "id": 1168,
+        "category": "hiking",
+        "durationSeconds": 1942,
+        "calories": 324
+      },
+      {
+        "id": 1169,
+        "category": "running",
+        "durationSeconds": 1057,
+        "calories": 155
+      },
+      {
+        "id": 1170,
+        "category": "swimming",
+        "durationSeconds": 3431,
+        "calories": 606
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "date": "2025-08-08T00:40:41.344Z",
+    "sleepMinutes": 424,
+    "restingHeartRateBpm": 53,
+    "overnightHeartRateVarianceMs": 124,
+    "activePoints": 63,
+    "steps": 11725,
+    "moveHours": 10.4,
+    "activeCalories": 2415,
+    "activities": [
+      {
+        "id": 1171,
+        "category": "swimming",
+        "durationSeconds": 2406,
+        "calories": 473
+      },
+      {
+        "id": 1172,
+        "category": "swimming",
+        "durationSeconds": 1656,
+        "calories": 218
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "date": "2025-08-07T00:15:52.889Z",
+    "sleepMinutes": 383,
+    "restingHeartRateBpm": 49,
+    "overnightHeartRateVarianceMs": 69,
+    "activePoints": 254,
+    "steps": 4676,
+    "moveHours": 7.1,
+    "activeCalories": 226,
+    "activities": []
+  },
+  {
+    "id": 110,
+    "date": "2025-08-06T19:09:52.206Z",
+    "sleepMinutes": 325,
+    "restingHeartRateBpm": 69,
+    "overnightHeartRateVarianceMs": 71,
+    "activePoints": 119,
+    "steps": 10930,
+    "moveHours": 9.2,
+    "activeCalories": 2587,
+    "activities": [
+      {
+        "id": 1173,
+        "category": "running",
+        "durationSeconds": 1818,
+        "calories": 173
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "date": "2025-08-05T12:03:14.752Z",
+    "sleepMinutes": 475,
+    "restingHeartRateBpm": 47,
+    "overnightHeartRateVarianceMs": 104,
+    "activePoints": 35,
+    "steps": 11266,
+    "moveHours": 0.5,
+    "activeCalories": 885,
+    "activities": []
+  },
+  {
+    "id": 112,
+    "date": "2025-08-04T09:02:22.355Z",
+    "sleepMinutes": 464,
+    "restingHeartRateBpm": 79,
+    "overnightHeartRateVarianceMs": 63,
+    "activePoints": 162,
+    "steps": 13868,
+    "moveHours": 1.4,
+    "activeCalories": 754,
+    "activities": [
+      {
+        "id": 1174,
+        "category": "pilates",
+        "durationSeconds": 4622,
+        "calories": 377
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "date": "2025-08-03T17:42:03.704Z",
+    "sleepMinutes": 265,
+    "restingHeartRateBpm": 40,
+    "overnightHeartRateVarianceMs": 72,
+    "activePoints": 223,
+    "steps": 5137,
+    "moveHours": 9.1,
+    "activeCalories": 1350,
+    "activities": []
+  },
+  {
+    "id": 114,
+    "date": "2025-08-02T12:25:28.140Z",
+    "sleepMinutes": 460,
+    "restingHeartRateBpm": 52,
+    "overnightHeartRateVarianceMs": 74,
+    "activePoints": 144,
+    "steps": 9714,
+    "moveHours": 0.4,
+    "activeCalories": 468,
+    "activities": [
+      {
+        "id": 1175,
+        "category": "pilates",
+        "durationSeconds": 990,
+        "calories": 112
+      },
+      {
+        "id": 1176,
+        "category": "walking",
+        "durationSeconds": 5134,
+        "calories": 736
+      },
+      {
+        "id": 1177,
+        "category": "swimming",
+        "durationSeconds": 4453,
+        "calories": 408
+      }
+    ]
+  },
+  {
+    "id": 115,
+    "date": "2025-08-01T16:17:08.786Z",
+    "sleepMinutes": 341,
+    "restingHeartRateBpm": 41,
+    "overnightHeartRateVarianceMs": 132,
+    "activePoints": 21,
+    "steps": 6153,
+    "moveHours": 4.3,
+    "activeCalories": 2203,
+    "activities": [
+      {
+        "id": 1178,
+        "category": "yoga",
+        "durationSeconds": 6947,
+        "calories": 1274
+      }
+    ]
+  },
+  {
+    "id": 116,
+    "date": "2025-07-31T18:26:37.938Z",
+    "sleepMinutes": 279,
+    "restingHeartRateBpm": 77,
+    "overnightHeartRateVarianceMs": 143,
+    "activePoints": 143,
+    "steps": 1150,
+    "moveHours": 2.5,
+    "activeCalories": 2154,
+    "activities": [
+      {
+        "id": 1179,
+        "category": "hiking",
+        "durationSeconds": 3250,
+        "calories": 309
+      },
+      {
+        "id": 1180,
+        "category": "intervals",
+        "durationSeconds": 1160,
+        "calories": 222
+      }
+    ]
+  },
+  {
+    "id": 117,
+    "date": "2025-07-30T17:17:33.390Z",
+    "sleepMinutes": 405,
+    "restingHeartRateBpm": 51,
+    "overnightHeartRateVarianceMs": 17,
+    "activePoints": 12,
+    "steps": 6778,
+    "moveHours": 1.1,
+    "activeCalories": 1424,
+    "activities": []
+  },
+  {
+    "id": 118,
+    "date": "2025-07-29T02:37:46.939Z",
+    "sleepMinutes": 600,
+    "restingHeartRateBpm": 45,
+    "overnightHeartRateVarianceMs": 19,
+    "activePoints": 262,
+    "steps": 14208,
+    "moveHours": 4.9,
+    "activeCalories": 767,
+    "activities": []
+  },
+  {
+    "id": 119,
+    "date": "2025-07-28T07:17:36.879Z",
+    "sleepMinutes": 450,
+    "restingHeartRateBpm": 68,
+    "overnightHeartRateVarianceMs": 91,
+    "activePoints": 177,
+    "steps": 12574,
+    "moveHours": 4.9,
+    "activeCalories": 708,
+    "activities": [
+      {
+        "id": 1181,
+        "category": "swimming",
+        "durationSeconds": 4296,
+        "calories": 322
+      },
+      {
+        "id": 1182,
+        "category": "cardio",
+        "durationSeconds": 5021,
+        "calories": 703
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "date": "2025-07-27T18:01:03.548Z",
+    "sleepMinutes": 580,
+    "restingHeartRateBpm": 50,
+    "overnightHeartRateVarianceMs": 55,
+    "activePoints": 25,
+    "steps": 5455,
+    "moveHours": 10.6,
+    "activeCalories": 782,
+    "activities": [
+      {
+        "id": 1183,
+        "category": "hiking",
+        "durationSeconds": 1848,
+        "calories": 336
+      }
+    ]
+  },
+  {
+    "id": 121,
+    "date": "2025-07-26T09:29:48.254Z",
+    "sleepMinutes": 570,
+    "restingHeartRateBpm": 43,
+    "overnightHeartRateVarianceMs": 14,
+    "activePoints": 267,
+    "steps": 13303,
+    "moveHours": 11.8,
+    "activeCalories": 2803,
+    "activities": [
+      {
+        "id": 1184,
+        "category": "hiking",
+        "durationSeconds": 5696,
+        "calories": 522
+      },
+      {
+        "id": 1185,
+        "category": "yoga",
+        "durationSeconds": 3334,
+        "calories": 483
+      },
+      {
+        "id": 1186,
+        "category": "yoga",
+        "durationSeconds": 3094,
+        "calories": 511
+      }
+    ]
+  },
+  {
+    "id": 122,
+    "date": "2025-07-25T11:36:07.798Z",
+    "sleepMinutes": 468,
+    "restingHeartRateBpm": 52,
+    "overnightHeartRateVarianceMs": 11,
+    "activePoints": 105,
+    "steps": 9071,
+    "moveHours": 0.4,
+    "activeCalories": 1702,
+    "activities": [
+      {
+        "id": 1187,
+        "category": "cardio",
+        "durationSeconds": 6578,
+        "calories": 1283
+      },
+      {
+        "id": 1188,
+        "category": "intervals",
+        "durationSeconds": 4147,
+        "calories": 553
+      }
+    ]
+  },
+  {
+    "id": 123,
+    "date": "2025-07-24T20:23:40.794Z",
+    "sleepMinutes": 532,
+    "restingHeartRateBpm": 67,
+    "overnightHeartRateVarianceMs": 87,
+    "activePoints": 164,
+    "steps": 4766,
+    "moveHours": 4.2,
+    "activeCalories": 1017,
+    "activities": [
+      {
+        "id": 1189,
+        "category": "cycling",
+        "durationSeconds": 2530,
+        "calories": 451
+      }
+    ]
+  },
+  {
+    "id": 124,
+    "date": "2025-07-23T19:22:49.953Z",
+    "sleepMinutes": 594,
+    "restingHeartRateBpm": 75,
+    "overnightHeartRateVarianceMs": 17,
+    "activePoints": 151,
+    "steps": 6094,
+    "moveHours": 5.8,
+    "activeCalories": 2983,
+    "activities": [
+      {
+        "id": 1190,
+        "category": "walking",
+        "durationSeconds": 2659,
+        "calories": 261
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "date": "2025-07-22T00:26:56.588Z",
+    "sleepMinutes": 422,
+    "restingHeartRateBpm": 71,
+    "overnightHeartRateVarianceMs": 133,
+    "activePoints": 178,
+    "steps": 14859,
+    "moveHours": 3.5,
+    "activeCalories": 838,
+    "activities": [
+      {
+        "id": 1191,
+        "category": "walking",
+        "durationSeconds": 6716,
+        "calories": 985
+      },
+      {
+        "id": 1192,
+        "category": "running",
+        "durationSeconds": 513,
+        "calories": 35
+      },
+      {
+        "id": 1193,
+        "category": "cycling",
+        "durationSeconds": 5884,
+        "calories": 647
+      }
+    ]
+  },
+  {
+    "id": 126,
+    "date": "2025-07-21T10:54:47.936Z",
+    "sleepMinutes": 488,
+    "restingHeartRateBpm": 48,
+    "overnightHeartRateVarianceMs": 37,
+    "activePoints": 175,
+    "steps": 5226,
+    "moveHours": 11.5,
+    "activeCalories": 2628,
+    "activities": [
+      {
+        "id": 1194,
+        "category": "cycling",
+        "durationSeconds": 3864,
+        "calories": 734
+      },
+      {
+        "id": 1195,
+        "category": "strength training",
+        "durationSeconds": 2526,
+        "calories": 387
+      }
+    ]
+  },
+  {
+    "id": 127,
+    "date": "2025-07-20T21:46:16.289Z",
+    "sleepMinutes": 373,
+    "restingHeartRateBpm": 50,
+    "overnightHeartRateVarianceMs": 78,
+    "activePoints": 47,
+    "steps": 1677,
+    "moveHours": 5.8,
+    "activeCalories": 1073,
+    "activities": []
+  },
+  {
+    "id": 128,
+    "date": "2025-07-19T01:48:20.590Z",
+    "sleepMinutes": 501,
+    "restingHeartRateBpm": 56,
+    "overnightHeartRateVarianceMs": 55,
+    "activePoints": 58,
+    "steps": 13232,
+    "moveHours": 7.8,
+    "activeCalories": 2890,
+    "activities": [
+      {
+        "id": 1196,
+        "category": "hiking",
+        "durationSeconds": 305,
+        "calories": 56
+      },
+      {
+        "id": 1197,
+        "category": "dance",
+        "durationSeconds": 6983,
+        "calories": 838
+      }
+    ]
+  },
+  {
+    "id": 129,
+    "date": "2025-07-18T23:59:15.255Z",
+    "sleepMinutes": 497,
+    "restingHeartRateBpm": 67,
+    "overnightHeartRateVarianceMs": 36,
+    "activePoints": 259,
+    "steps": 3106,
+    "moveHours": 9,
+    "activeCalories": 583,
+    "activities": [
+      {
+        "id": 1198,
+        "category": "pilates",
+        "durationSeconds": 3406,
+        "calories": 590
+      },
+      {
+        "id": 1199,
+        "category": "pilates",
+        "durationSeconds": 4294,
+        "calories": 479
+      },
+      {
+        "id": 1200,
+        "category": "strength training",
+        "durationSeconds": 1401,
+        "calories": 238
+      }
+    ]
+  },
+  {
+    "id": 130,
+    "date": "2025-07-17T10:22:03.561Z",
+    "sleepMinutes": 530,
+    "restingHeartRateBpm": 45,
+    "overnightHeartRateVarianceMs": 79,
+    "activePoints": 205,
+    "steps": 14938,
+    "moveHours": 5.5,
+    "activeCalories": 772,
+    "activities": [
+      {
+        "id": 1201,
+        "category": "swimming",
+        "durationSeconds": 973,
+        "calories": 118
+      },
+      {
+        "id": 1202,
+        "category": "yoga",
+        "durationSeconds": 4075,
+        "calories": 645
+      }
+    ]
+  },
+  {
+    "id": 131,
+    "date": "2025-07-16T21:19:42.884Z",
+    "sleepMinutes": 468,
+    "restingHeartRateBpm": 40,
+    "overnightHeartRateVarianceMs": 35,
+    "activePoints": 9,
+    "steps": 9522,
+    "moveHours": 7.2,
+    "activeCalories": 2901,
+    "activities": [
+      {
+        "id": 1203,
+        "category": "intervals",
+        "durationSeconds": 2369,
+        "calories": 280
+      },
+      {
+        "id": 1204,
+        "category": "cardio",
+        "durationSeconds": 3701,
+        "calories": 444
+      },
+      {
+        "id": 1205,
+        "category": "cardio",
+        "durationSeconds": 4984,
+        "calories": 598
+      }
+    ]
+  },
+  {
+    "id": 132,
+    "date": "2025-07-15T16:15:25.405Z",
+    "sleepMinutes": 488,
+    "restingHeartRateBpm": 58,
+    "overnightHeartRateVarianceMs": 97,
+    "activePoints": 283,
+    "steps": 5614,
+    "moveHours": 4.8,
+    "activeCalories": 2095,
+    "activities": [
+      {
+        "id": 1206,
+        "category": "hiit",
+        "durationSeconds": 7170,
+        "calories": 741
+      }
+    ]
+  },
+  {
+    "id": 133,
+    "date": "2025-07-14T12:15:44.094Z",
+    "sleepMinutes": 433,
+    "restingHeartRateBpm": 73,
+    "overnightHeartRateVarianceMs": 15,
+    "activePoints": 155,
+    "steps": 8979,
+    "moveHours": 7.4,
+    "activeCalories": 1765,
+    "activities": [
+      {
+        "id": 1207,
+        "category": "strength training",
+        "durationSeconds": 3522,
+        "calories": 634
+      },
+      {
+        "id": 1208,
+        "category": "hiking",
+        "durationSeconds": 749,
+        "calories": 84
+      }
+    ]
+  },
+  {
+    "id": 134,
+    "date": "2025-07-13T13:30:12.993Z",
+    "sleepMinutes": 322,
+    "restingHeartRateBpm": 73,
+    "overnightHeartRateVarianceMs": 110,
+    "activePoints": 252,
+    "steps": 3426,
+    "moveHours": 1.6,
+    "activeCalories": 1449,
+    "activities": [
+      {
+        "id": 1209,
+        "category": "pilates",
+        "durationSeconds": 5759,
+        "calories": 691
+      },
+      {
+        "id": 1210,
+        "category": "dance",
+        "durationSeconds": 7081,
+        "calories": 1251
+      },
+      {
+        "id": 1211,
+        "category": "walking",
+        "durationSeconds": 1053,
+        "calories": 168
+      }
+    ]
+  },
+  {
+    "id": 135,
+    "date": "2025-07-12T17:16:56.431Z",
+    "sleepMinutes": 323,
+    "restingHeartRateBpm": 53,
+    "overnightHeartRateVarianceMs": 82,
+    "activePoints": 123,
+    "steps": 1563,
+    "moveHours": 6.7,
+    "activeCalories": 832,
+    "activities": [
+      {
+        "id": 1212,
+        "category": "dance",
+        "durationSeconds": 3909,
+        "calories": 326
+      }
+    ]
+  },
+  {
+    "id": 136,
+    "date": "2025-07-11T08:40:16.118Z",
+    "sleepMinutes": 358,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 138,
+    "activePoints": 146,
+    "steps": 10249,
+    "moveHours": 6,
+    "activeCalories": 1570,
+    "activities": []
+  },
+  {
+    "id": 137,
+    "date": "2025-07-10T19:09:33.743Z",
+    "sleepMinutes": 363,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 84,
+    "activePoints": 117,
+    "steps": 13217,
+    "moveHours": 7.6,
+    "activeCalories": 1339,
+    "activities": [
+      {
+        "id": 1213,
+        "category": "swimming",
+        "durationSeconds": 5982,
+        "calories": 558
+      }
+    ]
+  },
+  {
+    "id": 138,
+    "date": "2025-07-09T09:12:50.718Z",
+    "sleepMinutes": 350,
+    "restingHeartRateBpm": 58,
+    "overnightHeartRateVarianceMs": 147,
+    "activePoints": 252,
+    "steps": 14335,
+    "moveHours": 6.8,
+    "activeCalories": 464,
+    "activities": [
+      {
+        "id": 1214,
+        "category": "strength training",
+        "durationSeconds": 6409,
+        "calories": 694
+      },
+      {
+        "id": 1215,
+        "category": "dance",
+        "durationSeconds": 6752,
+        "calories": 867
+      }
+    ]
+  },
+  {
+    "id": 139,
+    "date": "2025-07-08T11:40:40.289Z",
+    "sleepMinutes": 581,
+    "restingHeartRateBpm": 46,
+    "overnightHeartRateVarianceMs": 132,
+    "activePoints": 199,
+    "steps": 13578,
+    "moveHours": 8.2,
+    "activeCalories": 2768,
+    "activities": []
+  },
+  {
+    "id": 140,
+    "date": "2025-07-07T11:57:14.100Z",
+    "sleepMinutes": 534,
+    "restingHeartRateBpm": 77,
+    "overnightHeartRateVarianceMs": 103,
+    "activePoints": 132,
+    "steps": 6167,
+    "moveHours": 8.4,
+    "activeCalories": 1865,
+    "activities": []
+  },
+  {
+    "id": 141,
+    "date": "2025-07-06T11:38:34.370Z",
+    "sleepMinutes": 561,
+    "restingHeartRateBpm": 43,
+    "overnightHeartRateVarianceMs": 132,
+    "activePoints": 288,
+    "steps": 10190,
+    "moveHours": 11.3,
+    "activeCalories": 171,
+    "activities": []
+  },
+  {
+    "id": 142,
+    "date": "2025-07-05T11:39:49.977Z",
+    "sleepMinutes": 366,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 102,
+    "activePoints": 277,
+    "steps": 2873,
+    "moveHours": 1,
+    "activeCalories": 1848,
+    "activities": [
+      {
+        "id": 1216,
+        "category": "cycling",
+        "durationSeconds": 1848,
+        "calories": 191
+      },
+      {
+        "id": 1217,
+        "category": "pilates",
+        "durationSeconds": 4799,
+        "calories": 512
+      },
+      {
+        "id": 1218,
+        "category": "hiking",
+        "durationSeconds": 6428,
+        "calories": 739
+      }
+    ]
+  },
+  {
+    "id": 143,
+    "date": "2025-07-04T21:27:07.838Z",
+    "sleepMinutes": 552,
+    "restingHeartRateBpm": 70,
+    "overnightHeartRateVarianceMs": 133,
+    "activePoints": 295,
+    "steps": 2695,
+    "moveHours": 8.6,
+    "activeCalories": 641,
+    "activities": [
+      {
+        "id": 1219,
+        "category": "intervals",
+        "durationSeconds": 5773,
+        "calories": 520
+      },
+      {
+        "id": 1220,
+        "category": "swimming",
+        "durationSeconds": 5306,
+        "calories": 902
+      },
+      {
+        "id": 1221,
+        "category": "hiit",
+        "durationSeconds": 3418,
+        "calories": 592
+      }
+    ]
+  },
+  {
+    "id": 144,
+    "date": "2025-07-03T04:42:25.504Z",
+    "sleepMinutes": 411,
+    "restingHeartRateBpm": 49,
+    "overnightHeartRateVarianceMs": 11,
+    "activePoints": 260,
+    "steps": 13829,
+    "moveHours": 11.1,
+    "activeCalories": 2660,
+    "activities": []
+  },
+  {
+    "id": 145,
+    "date": "2025-07-02T00:21:14.037Z",
+    "sleepMinutes": 392,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 57,
+    "activePoints": 277,
+    "steps": 5628,
+    "moveHours": 8.9,
+    "activeCalories": 2672,
+    "activities": [
+      {
+        "id": 1222,
+        "category": "strength training",
+        "durationSeconds": 5633,
+        "calories": 845
+      },
+      {
+        "id": 1223,
+        "category": "cardio",
+        "durationSeconds": 5137,
+        "calories": 933
+      }
+    ]
+  },
+  {
+    "id": 146,
+    "date": "2025-07-01T01:15:00.647Z",
+    "sleepMinutes": 594,
+    "restingHeartRateBpm": 56,
+    "overnightHeartRateVarianceMs": 113,
+    "activePoints": 190,
+    "steps": 9923,
+    "moveHours": 5.4,
+    "activeCalories": 2889,
+    "activities": [
+      {
+        "id": 1224,
+        "category": "hiit",
+        "durationSeconds": 1483,
+        "calories": 168
+      },
+      {
+        "id": 1225,
+        "category": "cycling",
+        "durationSeconds": 6562,
+        "calories": 678
+      }
+    ]
+  },
+  {
+    "id": 147,
+    "date": "2025-06-30T18:18:23.346Z",
+    "sleepMinutes": 413,
+    "restingHeartRateBpm": 55,
+    "overnightHeartRateVarianceMs": 74,
+    "activePoints": 168,
+    "steps": 13256,
+    "moveHours": 3.5,
+    "activeCalories": 490,
+    "activities": [
+      {
+        "id": 1226,
+        "category": "swimming",
+        "durationSeconds": 4845,
+        "calories": 549
+      }
+    ]
+  },
+  {
+    "id": 148,
+    "date": "2025-06-29T07:34:31.090Z",
+    "sleepMinutes": 331,
+    "restingHeartRateBpm": 70,
+    "overnightHeartRateVarianceMs": 115,
+    "activePoints": 211,
+    "steps": 2180,
+    "moveHours": 5.9,
+    "activeCalories": 366,
+    "activities": [
+      {
+        "id": 1227,
+        "category": "cycling",
+        "durationSeconds": 2550,
+        "calories": 310
+      }
+    ]
+  },
+  {
+    "id": 149,
+    "date": "2025-06-28T02:59:02.250Z",
+    "sleepMinutes": 240,
+    "restingHeartRateBpm": 73,
+    "overnightHeartRateVarianceMs": 13,
+    "activePoints": 228,
+    "steps": 1475,
+    "moveHours": 3.1,
+    "activeCalories": 2795,
+    "activities": [
+      {
+        "id": 1228,
+        "category": "strength training",
+        "durationSeconds": 620,
+        "calories": 64
+      }
+    ]
+  },
+  {
+    "id": 150,
+    "date": "2025-06-27T01:13:42.493Z",
+    "sleepMinutes": 593,
+    "restingHeartRateBpm": 79,
+    "overnightHeartRateVarianceMs": 37,
+    "activePoints": 217,
+    "steps": 2597,
+    "moveHours": 1,
+    "activeCalories": 256,
+    "activities": []
+  },
+  {
+    "id": 151,
+    "date": "2025-06-26T01:38:16.944Z",
+    "sleepMinutes": 300,
+    "restingHeartRateBpm": 69,
+    "overnightHeartRateVarianceMs": 61,
+    "activePoints": 235,
+    "steps": 2146,
+    "moveHours": 0.5,
+    "activeCalories": 2777,
+    "activities": []
+  },
+  {
+    "id": 152,
+    "date": "2025-06-25T09:31:55.671Z",
+    "sleepMinutes": 294,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 58,
+    "activePoints": 109,
+    "steps": 6000,
+    "moveHours": 2.4,
+    "activeCalories": 1101,
+    "activities": [
+      {
+        "id": 1229,
+        "category": "hiking",
+        "durationSeconds": 1376,
+        "calories": 170
+      },
+      {
+        "id": 1230,
+        "category": "pilates",
+        "durationSeconds": 1687,
+        "calories": 261
+      }
+    ]
+  },
+  {
+    "id": 153,
+    "date": "2025-06-24T21:45:26.759Z",
+    "sleepMinutes": 455,
+    "restingHeartRateBpm": 68,
+    "overnightHeartRateVarianceMs": 35,
+    "activePoints": 229,
+    "steps": 6676,
+    "moveHours": 0.5,
+    "activeCalories": 2546,
+    "activities": [
+      {
+        "id": 1231,
+        "category": "hiit",
+        "durationSeconds": 5098,
+        "calories": 518
+      },
+      {
+        "id": 1232,
+        "category": "yoga",
+        "durationSeconds": 633,
+        "calories": 118
+      },
+      {
+        "id": 1233,
+        "category": "swimming",
+        "durationSeconds": 3908,
+        "calories": 404
+      }
+    ]
+  },
+  {
+    "id": 154,
+    "date": "2025-06-23T09:16:36.248Z",
+    "sleepMinutes": 422,
+    "restingHeartRateBpm": 74,
+    "overnightHeartRateVarianceMs": 52,
+    "activePoints": 287,
+    "steps": 4427,
+    "moveHours": 10.6,
+    "activeCalories": 1113,
+    "activities": []
+  },
+  {
+    "id": 155,
+    "date": "2025-06-22T04:15:10.144Z",
+    "sleepMinutes": 542,
+    "restingHeartRateBpm": 76,
+    "overnightHeartRateVarianceMs": 23,
+    "activePoints": 83,
+    "steps": 7643,
+    "moveHours": 2.4,
+    "activeCalories": 2950,
+    "activities": [
+      {
+        "id": 1234,
+        "category": "dance",
+        "durationSeconds": 2316,
+        "calories": 413
+      },
+      {
+        "id": 1235,
+        "category": "hiit",
+        "durationSeconds": 4676,
+        "calories": 382
+      },
+      {
+        "id": 1236,
+        "category": "swimming",
+        "durationSeconds": 2546,
+        "calories": 471
+      }
+    ]
+  },
+  {
+    "id": 156,
+    "date": "2025-06-21T22:46:03.279Z",
+    "sleepMinutes": 262,
+    "restingHeartRateBpm": 59,
+    "overnightHeartRateVarianceMs": 114,
+    "activePoints": 161,
+    "steps": 14931,
+    "moveHours": 11.3,
+    "activeCalories": 2581,
+    "activities": []
+  },
+  {
+    "id": 157,
+    "date": "2025-06-20T00:48:24.554Z",
+    "sleepMinutes": 571,
+    "restingHeartRateBpm": 40,
+    "overnightHeartRateVarianceMs": 33,
+    "activePoints": 171,
+    "steps": 2067,
+    "moveHours": 3.2,
+    "activeCalories": 1464,
+    "activities": []
+  },
+  {
+    "id": 158,
+    "date": "2025-06-19T20:48:14.230Z",
+    "sleepMinutes": 526,
+    "restingHeartRateBpm": 61,
+    "overnightHeartRateVarianceMs": 112,
+    "activePoints": 220,
+    "steps": 6468,
+    "moveHours": 3.4,
+    "activeCalories": 1464,
+    "activities": [
+      {
+        "id": 1237,
+        "category": "hiit",
+        "durationSeconds": 6386,
+        "calories": 926
+      }
+    ]
+  },
+  {
+    "id": 159,
+    "date": "2025-06-18T15:03:02.216Z",
+    "sleepMinutes": 591,
+    "restingHeartRateBpm": 75,
+    "overnightHeartRateVarianceMs": 104,
+    "activePoints": 258,
+    "steps": 8401,
+    "moveHours": 8,
+    "activeCalories": 2570,
+    "activities": [
+      {
+        "id": 1238,
+        "category": "pilates",
+        "durationSeconds": 6505,
+        "calories": 661
+      },
+      {
+        "id": 1239,
+        "category": "hiit",
+        "durationSeconds": 3056,
+        "calories": 606
+      }
+    ]
+  },
+  {
+    "id": 160,
+    "date": "2025-06-17T22:59:53.176Z",
+    "sleepMinutes": 355,
+    "restingHeartRateBpm": 44,
+    "overnightHeartRateVarianceMs": 105,
+    "activePoints": 51,
+    "steps": 2118,
+    "moveHours": 5.6,
+    "activeCalories": 1453,
+    "activities": []
+  },
+  {
+    "id": 161,
+    "date": "2025-06-16T13:57:17.131Z",
+    "sleepMinutes": 577,
+    "restingHeartRateBpm": 79,
+    "overnightHeartRateVarianceMs": 37,
+    "activePoints": 296,
+    "steps": 10168,
+    "moveHours": 4.4,
+    "activeCalories": 1816,
+    "activities": [
+      {
+        "id": 1240,
+        "category": "pilates",
+        "durationSeconds": 4347,
+        "calories": 811
+      }
+    ]
+  },
+  {
+    "id": 162,
+    "date": "2025-06-15T20:32:11.913Z",
+    "sleepMinutes": 401,
+    "restingHeartRateBpm": 79,
+    "overnightHeartRateVarianceMs": 139,
+    "activePoints": 151,
+    "steps": 3484,
+    "moveHours": 2.1,
+    "activeCalories": 862,
+    "activities": [
+      {
+        "id": 1241,
+        "category": "pilates",
+        "durationSeconds": 4234,
+        "calories": 508
+      },
+      {
+        "id": 1242,
+        "category": "strength training",
+        "durationSeconds": 3808,
+        "calories": 736
+      },
+      {
+        "id": 1243,
+        "category": "intervals",
+        "durationSeconds": 6305,
+        "calories": 1177
+      }
+    ]
+  },
+  {
+    "id": 163,
+    "date": "2025-06-14T09:21:36.236Z",
+    "sleepMinutes": 361,
+    "restingHeartRateBpm": 63,
+    "overnightHeartRateVarianceMs": 95,
+    "activePoints": 111,
+    "steps": 13334,
+    "moveHours": 5.1,
+    "activeCalories": 1731,
+    "activities": []
+  },
+  {
+    "id": 164,
+    "date": "2025-06-13T02:27:58.825Z",
+    "sleepMinutes": 516,
+    "restingHeartRateBpm": 77,
+    "overnightHeartRateVarianceMs": 14,
+    "activePoints": 135,
+    "steps": 6213,
+    "moveHours": 11.3,
+    "activeCalories": 1142,
+    "activities": []
+  },
+  {
+    "id": 165,
+    "date": "2025-06-12T22:24:30.548Z",
+    "sleepMinutes": 399,
+    "restingHeartRateBpm": 73,
+    "overnightHeartRateVarianceMs": 139,
+    "activePoints": 240,
+    "steps": 1131,
+    "moveHours": 10.4,
+    "activeCalories": 1322,
+    "activities": [
+      {
+        "id": 1244,
+        "category": "cardio",
+        "durationSeconds": 6370,
+        "calories": 956
+      }
+    ]
+  },
+  {
+    "id": 166,
+    "date": "2025-06-11T13:31:51.100Z",
+    "sleepMinutes": 315,
+    "restingHeartRateBpm": 54,
+    "overnightHeartRateVarianceMs": 94,
+    "activePoints": 32,
+    "steps": 2729,
+    "moveHours": 5.1,
+    "activeCalories": 567,
+    "activities": [
+      {
+        "id": 1245,
+        "category": "cycling",
+        "durationSeconds": 5636,
+        "calories": 817
+      },
+      {
+        "id": 1246,
+        "category": "swimming",
+        "durationSeconds": 4651,
+        "calories": 481
+      }
+    ]
+  },
+  {
+    "id": 167,
+    "date": "2025-06-10T14:40:29.391Z",
+    "sleepMinutes": 431,
+    "restingHeartRateBpm": 41,
+    "overnightHeartRateVarianceMs": 44,
+    "activePoints": 255,
+    "steps": 11756,
+    "moveHours": 4.3,
+    "activeCalories": 1654,
+    "activities": [
+      {
+        "id": 1247,
+        "category": "yoga",
+        "durationSeconds": 2187,
+        "calories": 270
+      },
+      {
+        "id": 1248,
+        "category": "running",
+        "durationSeconds": 7069,
+        "calories": 1261
+      }
+    ]
+  },
+  {
+    "id": 168,
+    "date": "2025-06-09T23:23:47.165Z",
+    "sleepMinutes": 397,
+    "restingHeartRateBpm": 62,
+    "overnightHeartRateVarianceMs": 66,
+    "activePoints": 105,
+    "steps": 9793,
+    "moveHours": 7.5,
+    "activeCalories": 1214,
+    "activities": [
+      {
+        "id": 1249,
+        "category": "pilates",
+        "durationSeconds": 2086,
+        "calories": 209
+      },
+      {
+        "id": 1250,
+        "category": "strength training",
+        "durationSeconds": 1016,
+        "calories": 195
+      },
+      {
+        "id": 1251,
+        "category": "yoga",
+        "durationSeconds": 1108,
+        "calories": 144
+      }
+    ]
+  },
+  {
+    "id": 169,
+    "date": "2025-06-08T22:28:10.037Z",
+    "sleepMinutes": 319,
+    "restingHeartRateBpm": 41,
+    "overnightHeartRateVarianceMs": 68,
+    "activePoints": 258,
+    "steps": 6629,
+    "moveHours": 2.2,
+    "activeCalories": 2320,
+    "activities": [
+      {
+        "id": 1252,
+        "category": "running",
+        "durationSeconds": 594,
+        "calories": 47
+      },
+      {
+        "id": 1253,
+        "category": "cardio",
+        "durationSeconds": 1009,
+        "calories": 160
+      }
+    ]
+  },
+  {
+    "id": 170,
+    "date": "2025-06-07T09:20:10.064Z",
+    "sleepMinutes": 569,
+    "restingHeartRateBpm": 41,
+    "overnightHeartRateVarianceMs": 147,
+    "activePoints": 253,
+    "steps": 14181,
+    "moveHours": 6.5,
+    "activeCalories": 2419,
+    "activities": []
+  },
+  {
+    "id": 171,
+    "date": "2025-06-06T05:21:28.452Z",
+    "sleepMinutes": 284,
+    "restingHeartRateBpm": 58,
+    "overnightHeartRateVarianceMs": 52,
+    "activePoints": 142,
+    "steps": 4436,
+    "moveHours": 10.3,
+    "activeCalories": 786,
+    "activities": [
+      {
+        "id": 1254,
+        "category": "cardio",
+        "durationSeconds": 2853,
+        "calories": 556
+      },
+      {
+        "id": 1255,
+        "category": "swimming",
+        "durationSeconds": 4918,
+        "calories": 770
+      }
+    ]
+  },
+  {
+    "id": 172,
+    "date": "2025-06-05T23:02:15.341Z",
+    "sleepMinutes": 535,
+    "restingHeartRateBpm": 50,
+    "overnightHeartRateVarianceMs": 17,
+    "activePoints": 260,
+    "steps": 2409,
+    "moveHours": 6.7,
+    "activeCalories": 1024,
+    "activities": []
+  },
+  {
+    "id": 173,
+    "date": "2025-06-04T00:38:50.626Z",
+    "sleepMinutes": 368,
+    "restingHeartRateBpm": 50,
+    "overnightHeartRateVarianceMs": 61,
+    "activePoints": 5,
+    "steps": 4631,
+    "moveHours": 7.2,
+    "activeCalories": 437,
+    "activities": [
+      {
+        "id": 1256,
+        "category": "yoga",
+        "durationSeconds": 4131,
+        "calories": 799
+      }
+    ]
+  },
+  {
+    "id": 174,
+    "date": "2025-06-03T14:40:02.358Z",
+    "sleepMinutes": 404,
+    "restingHeartRateBpm": 59,
+    "overnightHeartRateVarianceMs": 104,
+    "activePoints": 112,
+    "steps": 14837,
+    "moveHours": 4.8,
+    "activeCalories": 1115,
+    "activities": [
+      {
+        "id": 1257,
+        "category": "hiit",
+        "durationSeconds": 6423,
+        "calories": 696
+      },
+      {
+        "id": 1258,
+        "category": "strength training",
+        "durationSeconds": 5801,
+        "calories": 609
+      },
+      {
+        "id": 1259,
+        "category": "pilates",
+        "durationSeconds": 5101,
+        "calories": 485
+      }
+    ]
+  },
+  {
+    "id": 175,
+    "date": "2025-06-02T18:22:55.990Z",
+    "sleepMinutes": 495,
+    "restingHeartRateBpm": 69,
+    "overnightHeartRateVarianceMs": 41,
+    "activePoints": 188,
+    "steps": 4964,
+    "moveHours": 3,
+    "activeCalories": 155,
+    "activities": [
+      {
+        "id": 1260,
+        "category": "cardio",
+        "durationSeconds": 1140,
+        "calories": 156
+      },
+      {
+        "id": 1261,
+        "category": "walking",
+        "durationSeconds": 690,
+        "calories": 60
+      },
+      {
+        "id": 1262,
+        "category": "strength training",
+        "durationSeconds": 6243,
+        "calories": 988
+      }
+    ]
+  },
+  {
+    "id": 176,
+    "date": "2025-06-01T14:13:51.705Z",
+    "sleepMinutes": 370,
+    "restingHeartRateBpm": 44,
+    "overnightHeartRateVarianceMs": 82,
+    "activePoints": 48,
+    "steps": 3087,
+    "moveHours": 5.9,
+    "activeCalories": 2605,
+    "activities": []
+  },
+  {
+    "id": 177,
+    "date": "2025-05-31T20:21:24.455Z",
+    "sleepMinutes": 453,
+    "restingHeartRateBpm": 48,
+    "overnightHeartRateVarianceMs": 79,
+    "activePoints": 147,
+    "steps": 13550,
+    "moveHours": 6.7,
+    "activeCalories": 2595,
+    "activities": [
+      {
+        "id": 1263,
+        "category": "intervals",
+        "durationSeconds": 2943,
+        "calories": 407
+      },
+      {
+        "id": 1264,
+        "category": "swimming",
+        "durationSeconds": 2364,
+        "calories": 319
+      }
+    ]
+  },
+  {
+    "id": 178,
+    "date": "2025-05-30T17:12:17.235Z",
+    "sleepMinutes": 348,
+    "restingHeartRateBpm": 49,
+    "overnightHeartRateVarianceMs": 33,
+    "activePoints": 150,
+    "steps": 13173,
+    "moveHours": 8.1,
+    "activeCalories": 562,
+    "activities": [
+      {
+        "id": 1265,
+        "category": "running",
+        "durationSeconds": 3428,
+        "calories": 309
+      },
+      {
+        "id": 1266,
+        "category": "walking",
+        "durationSeconds": 5304,
+        "calories": 380
+      },
+      {
+        "id": 1267,
+        "category": "swimming",
+        "durationSeconds": 5040,
+        "calories": 966
+      }
+    ]
+  },
+  {
+    "id": 179,
+    "date": "2025-05-29T15:50:31.098Z",
+    "sleepMinutes": 554,
+    "restingHeartRateBpm": 40,
+    "overnightHeartRateVarianceMs": 147,
+    "activePoints": 57,
+    "steps": 6379,
+    "moveHours": 5.2,
+    "activeCalories": 2454,
+    "activities": [
+      {
+        "id": 1268,
+        "category": "cardio",
+        "durationSeconds": 4638,
+        "calories": 580
+      },
+      {
+        "id": 1269,
+        "category": "strength training",
+        "durationSeconds": 7127,
+        "calories": 891
+      },
+      {
+        "id": 1270,
+        "category": "yoga",
+        "durationSeconds": 4016,
+        "calories": 582
+      }
+    ]
+  },
+  {
+    "id": 180,
+    "date": "2025-05-28T22:37:53.460Z",
+    "sleepMinutes": 476,
+    "restingHeartRateBpm": 69,
+    "overnightHeartRateVarianceMs": 105,
+    "activePoints": 43,
+    "steps": 8165,
+    "moveHours": 9.6,
+    "activeCalories": 877,
+    "activities": [
+      {
+        "id": 1271,
+        "category": "running",
+        "durationSeconds": 3397,
+        "calories": 515
+      },
+      {
+        "id": 1272,
+        "category": "strength training",
+        "durationSeconds": 5625,
+        "calories": 553
+      }
+    ]
+  },
+  {
+    "id": 181,
+    "date": "2025-05-27T14:34:56.852Z",
+    "sleepMinutes": 480,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 145,
+    "activePoints": 75,
+    "steps": 9686,
+    "moveHours": 11.8,
+    "activeCalories": 1669,
+    "activities": [
+      {
+        "id": 1273,
+        "category": "swimming",
+        "durationSeconds": 3801,
+        "calories": 304
+      },
+      {
+        "id": 1274,
+        "category": "walking",
+        "durationSeconds": 1432,
+        "calories": 146
+      },
+      {
+        "id": 1275,
+        "category": "intervals",
+        "durationSeconds": 3621,
+        "calories": 555
+      }
+    ]
+  },
+  {
+    "id": 182,
+    "date": "2025-05-26T18:56:29.527Z",
+    "sleepMinutes": 433,
+    "restingHeartRateBpm": 44,
+    "overnightHeartRateVarianceMs": 19,
+    "activePoints": 20,
+    "steps": 2870,
+    "moveHours": 0.1,
+    "activeCalories": 1039,
+    "activities": []
+  },
+  {
+    "id": 183,
+    "date": "2025-05-25T17:59:11.954Z",
+    "sleepMinutes": 292,
+    "restingHeartRateBpm": 40,
+    "overnightHeartRateVarianceMs": 20,
+    "activePoints": 36,
+    "steps": 13574,
+    "moveHours": 6.5,
+    "activeCalories": 2544,
+    "activities": [
+      {
+        "id": 1276,
+        "category": "walking",
+        "durationSeconds": 3791,
+        "calories": 657
+      }
+    ]
+  },
+  {
+    "id": 184,
+    "date": "2025-05-24T11:49:30.845Z",
+    "sleepMinutes": 488,
+    "restingHeartRateBpm": 49,
+    "overnightHeartRateVarianceMs": 143,
+    "activePoints": 109,
+    "steps": 8515,
+    "moveHours": 4.8,
+    "activeCalories": 662,
+    "activities": [
+      {
+        "id": 1277,
+        "category": "yoga",
+        "durationSeconds": 1050,
+        "calories": 138
+      }
+    ]
+  },
+  {
+    "id": 185,
+    "date": "2025-05-23T23:58:16.556Z",
+    "sleepMinutes": 243,
+    "restingHeartRateBpm": 44,
+    "overnightHeartRateVarianceMs": 97,
+    "activePoints": 115,
+    "steps": 11231,
+    "moveHours": 10.3,
+    "activeCalories": 232,
+    "activities": [
+      {
+        "id": 1278,
+        "category": "swimming",
+        "durationSeconds": 3126,
+        "calories": 568
+      },
+      {
+        "id": 1279,
+        "category": "yoga",
+        "durationSeconds": 4180,
+        "calories": 536
+      },
+      {
+        "id": 1280,
+        "category": "hiking",
+        "durationSeconds": 5752,
+        "calories": 575
+      }
+    ]
+  },
+  {
+    "id": 186,
+    "date": "2025-05-22T14:28:01.929Z",
+    "sleepMinutes": 548,
+    "restingHeartRateBpm": 64,
+    "overnightHeartRateVarianceMs": 112,
+    "activePoints": 270,
+    "steps": 7527,
+    "moveHours": 1.2,
+    "activeCalories": 1922,
+    "activities": [
+      {
+        "id": 1281,
+        "category": "yoga",
+        "durationSeconds": 1768,
+        "calories": 224
+      }
+    ]
+  },
+  {
+    "id": 187,
+    "date": "2025-05-21T06:15:28.125Z",
+    "sleepMinutes": 277,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 150,
+    "activePoints": 59,
+    "steps": 11928,
+    "moveHours": 4.5,
+    "activeCalories": 122,
+    "activities": [
+      {
+        "id": 1282,
+        "category": "walking",
+        "durationSeconds": 1121,
+        "calories": 161
+      },
+      {
+        "id": 1283,
+        "category": "swimming",
+        "durationSeconds": 6835,
+        "calories": 570
+      },
+      {
+        "id": 1284,
+        "category": "running",
+        "durationSeconds": 1882,
+        "calories": 342
+      }
+    ]
+  },
+  {
+    "id": 188,
+    "date": "2025-05-20T18:37:05.025Z",
+    "sleepMinutes": 382,
+    "restingHeartRateBpm": 76,
+    "overnightHeartRateVarianceMs": 29,
+    "activePoints": 66,
+    "steps": 829,
+    "moveHours": 9.8,
+    "activeCalories": 2239,
+    "activities": [
+      {
+        "id": 1285,
+        "category": "walking",
+        "durationSeconds": 2780,
+        "calories": 209
+      }
+    ]
+  },
+  {
+    "id": 189,
+    "date": "2025-05-19T10:40:50.305Z",
+    "sleepMinutes": 401,
+    "restingHeartRateBpm": 66,
+    "overnightHeartRateVarianceMs": 83,
+    "activePoints": 292,
+    "steps": 14551,
+    "moveHours": 3.4,
+    "activeCalories": 1643,
+    "activities": [
+      {
+        "id": 1286,
+        "category": "intervals",
+        "durationSeconds": 5553,
+        "calories": 870
+      }
+    ]
+  },
+  {
+    "id": 190,
+    "date": "2025-05-18T05:18:56.216Z",
+    "sleepMinutes": 428,
+    "restingHeartRateBpm": 76,
+    "overnightHeartRateVarianceMs": 142,
+    "activePoints": 265,
+    "steps": 5371,
+    "moveHours": 1.5,
+    "activeCalories": 2491,
+    "activities": [
+      {
+        "id": 1287,
+        "category": "strength training",
+        "durationSeconds": 3004,
+        "calories": 235
+      },
+      {
+        "id": 1288,
+        "category": "running",
+        "durationSeconds": 3715,
+        "calories": 378
+      },
+      {
+        "id": 1289,
+        "category": "strength training",
+        "durationSeconds": 655,
+        "calories": 94
+      }
+    ]
+  },
+  {
+    "id": 191,
+    "date": "2025-05-17T15:44:14.379Z",
+    "sleepMinutes": 519,
+    "restingHeartRateBpm": 70,
+    "overnightHeartRateVarianceMs": 110,
+    "activePoints": 0,
+    "steps": 14892,
+    "moveHours": 9.2,
+    "activeCalories": 447,
+    "activities": [
+      {
+        "id": 1290,
+        "category": "strength training",
+        "durationSeconds": 1057,
+        "calories": 160
+      }
+    ]
+  },
+  {
+    "id": 192,
+    "date": "2025-05-16T06:35:33.368Z",
+    "sleepMinutes": 293,
+    "restingHeartRateBpm": 70,
+    "overnightHeartRateVarianceMs": 123,
+    "activePoints": 75,
+    "steps": 12959,
+    "moveHours": 3.1,
+    "activeCalories": 2547,
+    "activities": [
+      {
+        "id": 1291,
+        "category": "cardio",
+        "durationSeconds": 5324,
+        "calories": 399
+      },
+      {
+        "id": 1292,
+        "category": "cycling",
+        "durationSeconds": 1655,
+        "calories": 196
+      }
+    ]
+  },
+  {
+    "id": 193,
+    "date": "2025-05-15T00:38:54.853Z",
+    "sleepMinutes": 288,
+    "restingHeartRateBpm": 51,
+    "overnightHeartRateVarianceMs": 37,
+    "activePoints": 91,
+    "steps": 10069,
+    "moveHours": 11.5,
+    "activeCalories": 1295,
+    "activities": []
+  },
+  {
+    "id": 194,
+    "date": "2025-05-14T01:11:12.897Z",
+    "sleepMinutes": 570,
+    "restingHeartRateBpm": 58,
+    "overnightHeartRateVarianceMs": 81,
+    "activePoints": 168,
+    "steps": 14329,
+    "moveHours": 0.3,
+    "activeCalories": 578,
+    "activities": []
+  },
+  {
+    "id": 195,
+    "date": "2025-05-13T00:17:58.682Z",
+    "sleepMinutes": 412,
+    "restingHeartRateBpm": 43,
+    "overnightHeartRateVarianceMs": 149,
+    "activePoints": 176,
+    "steps": 12298,
+    "moveHours": 10.1,
+    "activeCalories": 685,
+    "activities": [
+      {
+        "id": 1293,
+        "category": "swimming",
+        "durationSeconds": 4725,
+        "calories": 465
+      },
+      {
+        "id": 1294,
+        "category": "intervals",
+        "durationSeconds": 5015,
+        "calories": 610
+      }
+    ]
+  },
+  {
+    "id": 196,
+    "date": "2025-05-12T23:31:38.280Z",
+    "sleepMinutes": 461,
+    "restingHeartRateBpm": 67,
+    "overnightHeartRateVarianceMs": 143,
+    "activePoints": 32,
+    "steps": 7552,
+    "moveHours": 6.6,
+    "activeCalories": 902,
+    "activities": [
+      {
+        "id": 1295,
+        "category": "swimming",
+        "durationSeconds": 1513,
+        "calories": 161
+      }
+    ]
+  },
+  {
+    "id": 197,
+    "date": "2025-05-11T11:10:07.526Z",
+    "sleepMinutes": 367,
+    "restingHeartRateBpm": 47,
+    "overnightHeartRateVarianceMs": 24,
+    "activePoints": 85,
+    "steps": 1884,
+    "moveHours": 0.2,
+    "activeCalories": 1543,
+    "activities": [
+      {
+        "id": 1296,
+        "category": "hiit",
+        "durationSeconds": 2643,
+        "calories": 379
+      },
+      {
+        "id": 1297,
+        "category": "strength training",
+        "durationSeconds": 4574,
+        "calories": 900
+      }
+    ]
+  },
+  {
+    "id": 198,
+    "date": "2025-05-10T12:31:23.026Z",
+    "sleepMinutes": 304,
+    "restingHeartRateBpm": 64,
+    "overnightHeartRateVarianceMs": 145,
+    "activePoints": 102,
+    "steps": 7416,
+    "moveHours": 9.5,
+    "activeCalories": 1260,
+    "activities": [
+      {
+        "id": 1298,
+        "category": "swimming",
+        "durationSeconds": 5078,
+        "calories": 355
+      },
+      {
+        "id": 1299,
+        "category": "pilates",
+        "durationSeconds": 1194,
+        "calories": 163
+      }
+    ]
+  },
+  {
+    "id": 199,
+    "date": "2025-05-09T11:17:59.055Z",
+    "sleepMinutes": 500,
+    "restingHeartRateBpm": 48,
+    "overnightHeartRateVarianceMs": 101,
+    "activePoints": 101,
+    "steps": 2118,
+    "moveHours": 5.7,
+    "activeCalories": 2071,
+    "activities": []
+  },
+  {
+    "id": 200,
+    "date": "2025-05-08T17:41:08.716Z",
+    "sleepMinutes": 535,
+    "restingHeartRateBpm": 64,
+    "overnightHeartRateVarianceMs": 41,
+    "activePoints": 224,
+    "steps": 6218,
+    "moveHours": 11.8,
+    "activeCalories": 2233,
+    "activities": [
+      {
+        "id": 1300,
+        "category": "hiit",
+        "durationSeconds": 7041,
+        "calories": 1361
+      }
+    ]
+  },
+  {
+    "id": 201,
+    "date": "2025-05-07T12:55:01.110Z",
+    "sleepMinutes": 328,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 148,
+    "activePoints": 152,
+    "steps": 5739,
+    "moveHours": 11.6,
+    "activeCalories": 2373,
+    "activities": [
+      {
+        "id": 1301,
+        "category": "pilates",
+        "durationSeconds": 5077,
+        "calories": 897
+      },
+      {
+        "id": 1302,
+        "category": "hiit",
+        "durationSeconds": 5027,
+        "calories": 729
+      }
+    ]
+  },
+  {
+    "id": 202,
+    "date": "2025-05-06T18:37:35.262Z",
+    "sleepMinutes": 523,
+    "restingHeartRateBpm": 77,
+    "overnightHeartRateVarianceMs": 129,
+    "activePoints": 1,
+    "steps": 3851,
+    "moveHours": 11.9,
+    "activeCalories": 815,
+    "activities": [
+      {
+        "id": 1303,
+        "category": "hiking",
+        "durationSeconds": 2514,
+        "calories": 398
+      },
+      {
+        "id": 1304,
+        "category": "cycling",
+        "durationSeconds": 4255,
+        "calories": 312
+      },
+      {
+        "id": 1305,
+        "category": "pilates",
+        "durationSeconds": 4380,
+        "calories": 402
+      }
+    ]
+  },
+  {
+    "id": 203,
+    "date": "2025-05-05T05:13:56.601Z",
+    "sleepMinutes": 330,
+    "restingHeartRateBpm": 43,
+    "overnightHeartRateVarianceMs": 66,
+    "activePoints": 220,
+    "steps": 3977,
+    "moveHours": 3.3,
+    "activeCalories": 1499,
+    "activities": [
+      {
+        "id": 1306,
+        "category": "walking",
+        "durationSeconds": 2224,
+        "calories": 367
+      },
+      {
+        "id": 1307,
+        "category": "swimming",
+        "durationSeconds": 6930,
+        "calories": 993
+      },
+      {
+        "id": 1308,
+        "category": "swimming",
+        "durationSeconds": 6114,
+        "calories": 999
+      }
+    ]
+  },
+  {
+    "id": 204,
+    "date": "2025-05-04T14:32:31.854Z",
+    "sleepMinutes": 308,
+    "restingHeartRateBpm": 60,
+    "overnightHeartRateVarianceMs": 37,
+    "activePoints": 132,
+    "steps": 6522,
+    "moveHours": 0.9,
+    "activeCalories": 1198,
+    "activities": [
+      {
+        "id": 1309,
+        "category": "yoga",
+        "durationSeconds": 3850,
+        "calories": 270
+      },
+      {
+        "id": 1310,
+        "category": "walking",
+        "durationSeconds": 470,
+        "calories": 56
+      }
+    ]
+  },
+  {
+    "id": 205,
+    "date": "2025-05-03T04:57:46.398Z",
+    "sleepMinutes": 432,
+    "restingHeartRateBpm": 75,
+    "overnightHeartRateVarianceMs": 139,
+    "activePoints": 252,
+    "steps": 10046,
+    "moveHours": 3.8,
+    "activeCalories": 1932,
+    "activities": [
+      {
+        "id": 1311,
+        "category": "dance",
+        "durationSeconds": 511,
+        "calories": 54
+      }
+    ]
+  },
+  {
+    "id": 206,
+    "date": "2025-05-02T19:39:45.902Z",
+    "sleepMinutes": 364,
+    "restingHeartRateBpm": 71,
+    "overnightHeartRateVarianceMs": 91,
+    "activePoints": 244,
+    "steps": 1261,
+    "moveHours": 9.8,
+    "activeCalories": 692,
+    "activities": [
+      {
+        "id": 1312,
+        "category": "pilates",
+        "durationSeconds": 5882,
+        "calories": 1118
+      }
+    ]
+  },
+  {
+    "id": 207,
+    "date": "2025-05-01T05:18:28.421Z",
+    "sleepMinutes": 315,
+    "restingHeartRateBpm": 64,
+    "overnightHeartRateVarianceMs": 42,
+    "activePoints": 275,
+    "steps": 5279,
+    "moveHours": 2.9,
+    "activeCalories": 818,
+    "activities": []
+  },
+  {
+    "id": 208,
+    "date": "2025-04-30T17:32:11.444Z",
+    "sleepMinutes": 343,
+    "restingHeartRateBpm": 75,
+    "overnightHeartRateVarianceMs": 71,
+    "activePoints": 24,
+    "steps": 2003,
+    "moveHours": 10.7,
+    "activeCalories": 1357,
+    "activities": [
+      {
+        "id": 1313,
+        "category": "hiit",
+        "durationSeconds": 4985,
+        "calories": 631
+      },
+      {
+        "id": 1314,
+        "category": "intervals",
+        "durationSeconds": 3412,
+        "calories": 671
+      },
+      {
+        "id": 1315,
+        "category": "pilates",
+        "durationSeconds": 1615,
+        "calories": 323
+      }
+    ]
+  },
+  {
+    "id": 209,
+    "date": "2025-04-29T12:12:30.882Z",
+    "sleepMinutes": 494,
+    "restingHeartRateBpm": 63,
+    "overnightHeartRateVarianceMs": 18,
+    "activePoints": 208,
+    "steps": 1494,
+    "moveHours": 2.3,
+    "activeCalories": 267,
+    "activities": [
+      {
+        "id": 1316,
+        "category": "cardio",
+        "durationSeconds": 6865,
+        "calories": 1178
+      },
+      {
+        "id": 1317,
+        "category": "dance",
+        "durationSeconds": 6822,
+        "calories": 1069
+      },
+      {
+        "id": 1318,
+        "category": "yoga",
+        "durationSeconds": 6332,
+        "calories": 908
+      }
+    ]
+  },
+  {
+    "id": 210,
+    "date": "2025-04-28T12:51:04.355Z",
+    "sleepMinutes": 290,
+    "restingHeartRateBpm": 64,
+    "overnightHeartRateVarianceMs": 55,
+    "activePoints": 65,
+    "steps": 9951,
+    "moveHours": 1.8,
+    "activeCalories": 170,
+    "activities": []
+  },
+  {
+    "id": 211,
+    "date": "2025-04-27T21:11:05.715Z",
+    "sleepMinutes": 290,
+    "restingHeartRateBpm": 62,
+    "overnightHeartRateVarianceMs": 55,
+    "activePoints": 198,
+    "steps": 3118,
+    "moveHours": 9.2,
+    "activeCalories": 1561,
+    "activities": [
+      {
+        "id": 1319,
+        "category": "intervals",
+        "durationSeconds": 4681,
+        "calories": 601
+      },
+      {
+        "id": 1320,
+        "category": "running",
+        "durationSeconds": 5874,
+        "calories": 910
+      },
+      {
+        "id": 1321,
+        "category": "swimming",
+        "durationSeconds": 2206,
+        "calories": 390
+      }
+    ]
+  },
+  {
+    "id": 212,
+    "date": "2025-04-26T13:53:13.682Z",
+    "sleepMinutes": 541,
+    "restingHeartRateBpm": 51,
+    "overnightHeartRateVarianceMs": 131,
+    "activePoints": 64,
+    "steps": 1193,
+    "moveHours": 0.6,
+    "activeCalories": 2476,
+    "activities": [
+      {
+        "id": 1322,
+        "category": "cardio",
+        "durationSeconds": 4131,
+        "calories": 509
+      },
+      {
+        "id": 1323,
+        "category": "cycling",
+        "durationSeconds": 6146,
+        "calories": 686
+      },
+      {
+        "id": 1324,
+        "category": "cardio",
+        "durationSeconds": 1865,
+        "calories": 283
+      }
+    ]
+  },
+  {
+    "id": 213,
+    "date": "2025-04-25T05:01:24.093Z",
+    "sleepMinutes": 575,
+    "restingHeartRateBpm": 62,
+    "overnightHeartRateVarianceMs": 136,
+    "activePoints": 37,
+    "steps": 458,
+    "moveHours": 3.7,
+    "activeCalories": 2458,
+    "activities": [
+      {
+        "id": 1325,
+        "category": "swimming",
+        "durationSeconds": 7129,
+        "calories": 558
+      },
+      {
+        "id": 1326,
+        "category": "dance",
+        "durationSeconds": 5100,
+        "calories": 782
+      },
+      {
+        "id": 1327,
+        "category": "pilates",
+        "durationSeconds": 2897,
+        "calories": 232
+      }
+    ]
+  },
+  {
+    "id": 214,
+    "date": "2025-04-24T18:21:02.967Z",
+    "sleepMinutes": 536,
+    "restingHeartRateBpm": 58,
+    "overnightHeartRateVarianceMs": 53,
+    "activePoints": 245,
+    "steps": 5944,
+    "moveHours": 3,
+    "activeCalories": 1545,
+    "activities": [
+      {
+        "id": 1328,
+        "category": "dance",
+        "durationSeconds": 3817,
+        "calories": 534
+      }
+    ]
+  },
+  {
+    "id": 215,
+    "date": "2025-04-23T01:26:44.482Z",
+    "sleepMinutes": 330,
+    "restingHeartRateBpm": 71,
+    "overnightHeartRateVarianceMs": 130,
+    "activePoints": 229,
+    "steps": 10388,
+    "moveHours": 7.8,
+    "activeCalories": 1161,
+    "activities": [
+      {
+        "id": 1329,
+        "category": "hiking",
+        "durationSeconds": 1664,
+        "calories": 133
+      },
+      {
+        "id": 1330,
+        "category": "strength training",
+        "durationSeconds": 4636,
+        "calories": 626
+      }
+    ]
+  },
+  {
+    "id": 216,
+    "date": "2025-04-22T08:26:22.175Z",
+    "sleepMinutes": 497,
+    "restingHeartRateBpm": 42,
+    "overnightHeartRateVarianceMs": 27,
+    "activePoints": 127,
+    "steps": 13335,
+    "moveHours": 11.5,
+    "activeCalories": 2396,
+    "activities": [
+      {
+        "id": 1331,
+        "category": "yoga",
+        "durationSeconds": 2094,
+        "calories": 346
+      },
+      {
+        "id": 1332,
+        "category": "strength training",
+        "durationSeconds": 5230,
+        "calories": 741
+      },
+      {
+        "id": 1333,
+        "category": "strength training",
+        "durationSeconds": 3953,
+        "calories": 764
+      }
+    ]
+  },
+  {
+    "id": 217,
+    "date": "2025-04-21T23:23:58.659Z",
+    "sleepMinutes": 570,
+    "restingHeartRateBpm": 46,
+    "overnightHeartRateVarianceMs": 124,
+    "activePoints": 216,
+    "steps": 966,
+    "moveHours": 3.1,
+    "activeCalories": 1392,
+    "activities": [
+      {
+        "id": 1334,
+        "category": "hiit",
+        "durationSeconds": 5826,
+        "calories": 398
+      },
+      {
+        "id": 1335,
+        "category": "dance",
+        "durationSeconds": 6155,
+        "calories": 626
+      }
+    ]
+  },
+  {
+    "id": 218,
+    "date": "2025-04-20T16:52:02.213Z",
+    "sleepMinutes": 303,
+    "restingHeartRateBpm": 76,
+    "overnightHeartRateVarianceMs": 53,
+    "activePoints": 9,
+    "steps": 5907,
+    "moveHours": 7.9,
+    "activeCalories": 1107,
+    "activities": []
+  },
+  {
+    "id": 219,
+    "date": "2025-04-19T02:05:52.103Z",
+    "sleepMinutes": 275,
+    "restingHeartRateBpm": 61,
+    "overnightHeartRateVarianceMs": 39,
+    "activePoints": 71,
+    "steps": 9408,
+    "moveHours": 4,
+    "activeCalories": 2128,
+    "activities": []
+  },
+  {
+    "id": 220,
+    "date": "2025-04-18T06:45:40.779Z",
+    "sleepMinutes": 265,
+    "restingHeartRateBpm": 68,
+    "overnightHeartRateVarianceMs": 16,
+    "activePoints": 243,
+    "steps": 13371,
+    "moveHours": 0.4,
+    "activeCalories": 2664,
+    "activities": []
+  },
+  {
+    "id": 221,
+    "date": "2025-04-17T02:37:08.133Z",
+    "sleepMinutes": 498,
+    "restingHeartRateBpm": 64,
+    "overnightHeartRateVarianceMs": 100,
+    "activePoints": 290,
+    "steps": 2591,
+    "moveHours": 0.1,
+    "activeCalories": 1942,
+    "activities": []
+  },
+  {
+    "id": 222,
+    "date": "2025-04-16T16:52:23.132Z",
+    "sleepMinutes": 598,
+    "restingHeartRateBpm": 56,
+    "overnightHeartRateVarianceMs": 61,
+    "activePoints": 88,
+    "steps": 10757,
+    "moveHours": 10.1,
+    "activeCalories": 248,
+    "activities": [
+      {
+        "id": 1336,
+        "category": "running",
+        "durationSeconds": 1169,
+        "calories": 199
+      }
+    ]
+  },
+  {
+    "id": 223,
+    "date": "2025-04-15T00:51:13.332Z",
+    "sleepMinutes": 379,
+    "restingHeartRateBpm": 74,
+    "overnightHeartRateVarianceMs": 56,
+    "activePoints": 211,
+    "steps": 989,
+    "moveHours": 7.5,
+    "activeCalories": 375,
+    "activities": []
+  },
+  {
+    "id": 224,
+    "date": "2025-04-14T00:05:24.849Z",
+    "sleepMinutes": 305,
+    "restingHeartRateBpm": 50,
+    "overnightHeartRateVarianceMs": 67,
+    "activePoints": 286,
+    "steps": 13461,
+    "moveHours": 6.4,
+    "activeCalories": 2311,
+    "activities": [
+      {
+        "id": 1337,
+        "category": "intervals",
+        "durationSeconds": 4155,
+        "calories": 547
+      },
+      {
+        "id": 1338,
+        "category": "walking",
+        "durationSeconds": 4588,
+        "calories": 642
+      },
+      {
+        "id": 1339,
+        "category": "swimming",
+        "durationSeconds": 4800,
+        "calories": 640
+      }
+    ]
+  },
+  {
+    "id": 225,
+    "date": "2025-04-13T21:10:14.611Z",
+    "sleepMinutes": 367,
+    "restingHeartRateBpm": 40,
+    "overnightHeartRateVarianceMs": 18,
+    "activePoints": 188,
+    "steps": 6208,
+    "moveHours": 6.7,
+    "activeCalories": 2838,
+    "activities": [
+      {
+        "id": 1340,
+        "category": "walking",
+        "durationSeconds": 5931,
+        "calories": 840
+      },
+      {
+        "id": 1341,
+        "category": "hiking",
+        "durationSeconds": 4649,
+        "calories": 341
+      }
+    ]
+  },
+  {
+    "id": 226,
+    "date": "2025-04-12T03:23:34.487Z",
+    "sleepMinutes": 526,
+    "restingHeartRateBpm": 63,
+    "overnightHeartRateVarianceMs": 88,
+    "activePoints": 89,
+    "steps": 13927,
+    "moveHours": 4.6,
+    "activeCalories": 371,
+    "activities": [
+      {
+        "id": 1342,
+        "category": "running",
+        "durationSeconds": 914,
+        "calories": 154
+      },
+      {
+        "id": 1343,
+        "category": "dance",
+        "durationSeconds": 1646,
+        "calories": 156
+      }
+    ]
   }
 ]

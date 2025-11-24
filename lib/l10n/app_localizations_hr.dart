@@ -12,7 +12,34 @@ class AppLocalizationsHr extends AppLocalizations {
   String get appTitle => 'Rolla Demo';
 
   @override
-  String get homeTitle => 'Ocjene';
+  String get settings => 'Postavke';
+
+  @override
+  String get language => 'Jezik';
+
+  @override
+  String get selectLanguage => 'Odaberi jezik';
+
+  @override
+  String get theme => 'Tema';
+
+  @override
+  String get selectTheme => 'Odaberi temu';
+
+  @override
+  String get themeModeSystem => 'Automatski (Sistem)';
+
+  @override
+  String get themeModeLight => 'Svijetla';
+
+  @override
+  String get themeModeDark => 'Tamna';
+
+  @override
+  String get logout => 'Odjava';
+
+  @override
+  String get homeTitle => 'Rezultati';
 
   @override
   String get health => 'Zdravlje';

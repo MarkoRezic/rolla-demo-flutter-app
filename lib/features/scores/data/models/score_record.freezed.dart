@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ScoreRecord {
 
- String get id; String get type; DateTime get timestamp; int get score; Map<String, dynamic> get metrics;
+ int get id; DateTime get date; double get sleepMinutes; double get restingHeartRateBpm; double get overnightHeartRateVarianceMs; double get activePoints; double get steps; double get moveHours; double get activeCalories; List<ScoreActivityRecord> get activities;
 /// Create a copy of ScoreRecord
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ScoreRecordCopyWith<ScoreRecord> get copyWith => _$ScoreRecordCopyWithImpl<Scor
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScoreRecord&&(identical(other.id, id) || other.id == id)&&(identical(other.type, type) || other.type == type)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.score, score) || other.score == score)&&const DeepCollectionEquality().equals(other.metrics, metrics));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScoreRecord&&(identical(other.id, id) || other.id == id)&&(identical(other.date, date) || other.date == date)&&(identical(other.sleepMinutes, sleepMinutes) || other.sleepMinutes == sleepMinutes)&&(identical(other.restingHeartRateBpm, restingHeartRateBpm) || other.restingHeartRateBpm == restingHeartRateBpm)&&(identical(other.overnightHeartRateVarianceMs, overnightHeartRateVarianceMs) || other.overnightHeartRateVarianceMs == overnightHeartRateVarianceMs)&&(identical(other.activePoints, activePoints) || other.activePoints == activePoints)&&(identical(other.steps, steps) || other.steps == steps)&&(identical(other.moveHours, moveHours) || other.moveHours == moveHours)&&(identical(other.activeCalories, activeCalories) || other.activeCalories == activeCalories)&&const DeepCollectionEquality().equals(other.activities, activities));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,type,timestamp,score,const DeepCollectionEquality().hash(metrics));
+int get hashCode => Object.hash(runtimeType,id,date,sleepMinutes,restingHeartRateBpm,overnightHeartRateVarianceMs,activePoints,steps,moveHours,activeCalories,const DeepCollectionEquality().hash(activities));
 
 @override
 String toString() {
-  return 'ScoreRecord(id: $id, type: $type, timestamp: $timestamp, score: $score, metrics: $metrics)';
+  return 'ScoreRecord(id: $id, date: $date, sleepMinutes: $sleepMinutes, restingHeartRateBpm: $restingHeartRateBpm, overnightHeartRateVarianceMs: $overnightHeartRateVarianceMs, activePoints: $activePoints, steps: $steps, moveHours: $moveHours, activeCalories: $activeCalories, activities: $activities)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ScoreRecordCopyWith<$Res>  {
   factory $ScoreRecordCopyWith(ScoreRecord value, $Res Function(ScoreRecord) _then) = _$ScoreRecordCopyWithImpl;
 @useResult
 $Res call({
- String id, String type, DateTime timestamp, int score, Map<String, dynamic> metrics
+ int id, DateTime date, double sleepMinutes, double restingHeartRateBpm, double overnightHeartRateVarianceMs, double activePoints, double steps, double moveHours, double activeCalories, List<ScoreActivityRecord> activities
 });
 
 
@@ -65,14 +65,19 @@ class _$ScoreRecordCopyWithImpl<$Res>
 
 /// Create a copy of ScoreRecord
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? type = null,Object? timestamp = null,Object? score = null,Object? metrics = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? date = null,Object? sleepMinutes = null,Object? restingHeartRateBpm = null,Object? overnightHeartRateVarianceMs = null,Object? activePoints = null,Object? steps = null,Object? moveHours = null,Object? activeCalories = null,Object? activities = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
-as DateTime,score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
-as int,metrics: null == metrics ? _self.metrics : metrics // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,
+as int,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as DateTime,sleepMinutes: null == sleepMinutes ? _self.sleepMinutes : sleepMinutes // ignore: cast_nullable_to_non_nullable
+as double,restingHeartRateBpm: null == restingHeartRateBpm ? _self.restingHeartRateBpm : restingHeartRateBpm // ignore: cast_nullable_to_non_nullable
+as double,overnightHeartRateVarianceMs: null == overnightHeartRateVarianceMs ? _self.overnightHeartRateVarianceMs : overnightHeartRateVarianceMs // ignore: cast_nullable_to_non_nullable
+as double,activePoints: null == activePoints ? _self.activePoints : activePoints // ignore: cast_nullable_to_non_nullable
+as double,steps: null == steps ? _self.steps : steps // ignore: cast_nullable_to_non_nullable
+as double,moveHours: null == moveHours ? _self.moveHours : moveHours // ignore: cast_nullable_to_non_nullable
+as double,activeCalories: null == activeCalories ? _self.activeCalories : activeCalories // ignore: cast_nullable_to_non_nullable
+as double,activities: null == activities ? _self.activities : activities // ignore: cast_nullable_to_non_nullable
+as List<ScoreActivityRecord>,
   ));
 }
 
@@ -157,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String type,  DateTime timestamp,  int score,  Map<String, dynamic> metrics)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  DateTime date,  double sleepMinutes,  double restingHeartRateBpm,  double overnightHeartRateVarianceMs,  double activePoints,  double steps,  double moveHours,  double activeCalories,  List<ScoreActivityRecord> activities)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ScoreRecord() when $default != null:
-return $default(_that.id,_that.type,_that.timestamp,_that.score,_that.metrics);case _:
+return $default(_that.id,_that.date,_that.sleepMinutes,_that.restingHeartRateBpm,_that.overnightHeartRateVarianceMs,_that.activePoints,_that.steps,_that.moveHours,_that.activeCalories,_that.activities);case _:
   return orElse();
 
 }
@@ -178,10 +183,10 @@ return $default(_that.id,_that.type,_that.timestamp,_that.score,_that.metrics);c
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String type,  DateTime timestamp,  int score,  Map<String, dynamic> metrics)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  DateTime date,  double sleepMinutes,  double restingHeartRateBpm,  double overnightHeartRateVarianceMs,  double activePoints,  double steps,  double moveHours,  double activeCalories,  List<ScoreActivityRecord> activities)  $default,) {final _that = this;
 switch (_that) {
 case _ScoreRecord():
-return $default(_that.id,_that.type,_that.timestamp,_that.score,_that.metrics);case _:
+return $default(_that.id,_that.date,_that.sleepMinutes,_that.restingHeartRateBpm,_that.overnightHeartRateVarianceMs,_that.activePoints,_that.steps,_that.moveHours,_that.activeCalories,_that.activities);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +203,10 @@ return $default(_that.id,_that.type,_that.timestamp,_that.score,_that.metrics);c
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String type,  DateTime timestamp,  int score,  Map<String, dynamic> metrics)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  DateTime date,  double sleepMinutes,  double restingHeartRateBpm,  double overnightHeartRateVarianceMs,  double activePoints,  double steps,  double moveHours,  double activeCalories,  List<ScoreActivityRecord> activities)?  $default,) {final _that = this;
 switch (_that) {
 case _ScoreRecord() when $default != null:
-return $default(_that.id,_that.type,_that.timestamp,_that.score,_that.metrics);case _:
+return $default(_that.id,_that.date,_that.sleepMinutes,_that.restingHeartRateBpm,_that.overnightHeartRateVarianceMs,_that.activePoints,_that.steps,_that.moveHours,_that.activeCalories,_that.activities);case _:
   return null;
 
 }
@@ -213,18 +218,23 @@ return $default(_that.id,_that.type,_that.timestamp,_that.score,_that.metrics);c
 @JsonSerializable()
 
 class _ScoreRecord implements ScoreRecord {
-  const _ScoreRecord({required this.id, required this.type, required this.timestamp, required this.score, required final  Map<String, dynamic> metrics}): _metrics = metrics;
+  const _ScoreRecord({required this.id, required this.date, required this.sleepMinutes, required this.restingHeartRateBpm, required this.overnightHeartRateVarianceMs, required this.activePoints, required this.steps, required this.moveHours, required this.activeCalories, required final  List<ScoreActivityRecord> activities}): _activities = activities;
   factory _ScoreRecord.fromJson(Map<String, dynamic> json) => _$ScoreRecordFromJson(json);
 
-@override final  String id;
-@override final  String type;
-@override final  DateTime timestamp;
-@override final  int score;
- final  Map<String, dynamic> _metrics;
-@override Map<String, dynamic> get metrics {
-  if (_metrics is EqualUnmodifiableMapView) return _metrics;
+@override final  int id;
+@override final  DateTime date;
+@override final  double sleepMinutes;
+@override final  double restingHeartRateBpm;
+@override final  double overnightHeartRateVarianceMs;
+@override final  double activePoints;
+@override final  double steps;
+@override final  double moveHours;
+@override final  double activeCalories;
+ final  List<ScoreActivityRecord> _activities;
+@override List<ScoreActivityRecord> get activities {
+  if (_activities is EqualUnmodifiableListView) return _activities;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_metrics);
+  return EqualUnmodifiableListView(_activities);
 }
 
 
@@ -241,16 +251,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScoreRecord&&(identical(other.id, id) || other.id == id)&&(identical(other.type, type) || other.type == type)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.score, score) || other.score == score)&&const DeepCollectionEquality().equals(other._metrics, _metrics));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScoreRecord&&(identical(other.id, id) || other.id == id)&&(identical(other.date, date) || other.date == date)&&(identical(other.sleepMinutes, sleepMinutes) || other.sleepMinutes == sleepMinutes)&&(identical(other.restingHeartRateBpm, restingHeartRateBpm) || other.restingHeartRateBpm == restingHeartRateBpm)&&(identical(other.overnightHeartRateVarianceMs, overnightHeartRateVarianceMs) || other.overnightHeartRateVarianceMs == overnightHeartRateVarianceMs)&&(identical(other.activePoints, activePoints) || other.activePoints == activePoints)&&(identical(other.steps, steps) || other.steps == steps)&&(identical(other.moveHours, moveHours) || other.moveHours == moveHours)&&(identical(other.activeCalories, activeCalories) || other.activeCalories == activeCalories)&&const DeepCollectionEquality().equals(other._activities, _activities));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,type,timestamp,score,const DeepCollectionEquality().hash(_metrics));
+int get hashCode => Object.hash(runtimeType,id,date,sleepMinutes,restingHeartRateBpm,overnightHeartRateVarianceMs,activePoints,steps,moveHours,activeCalories,const DeepCollectionEquality().hash(_activities));
 
 @override
 String toString() {
-  return 'ScoreRecord(id: $id, type: $type, timestamp: $timestamp, score: $score, metrics: $metrics)';
+  return 'ScoreRecord(id: $id, date: $date, sleepMinutes: $sleepMinutes, restingHeartRateBpm: $restingHeartRateBpm, overnightHeartRateVarianceMs: $overnightHeartRateVarianceMs, activePoints: $activePoints, steps: $steps, moveHours: $moveHours, activeCalories: $activeCalories, activities: $activities)';
 }
 
 
@@ -261,7 +271,7 @@ abstract mixin class _$ScoreRecordCopyWith<$Res> implements $ScoreRecordCopyWith
   factory _$ScoreRecordCopyWith(_ScoreRecord value, $Res Function(_ScoreRecord) _then) = __$ScoreRecordCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String type, DateTime timestamp, int score, Map<String, dynamic> metrics
+ int id, DateTime date, double sleepMinutes, double restingHeartRateBpm, double overnightHeartRateVarianceMs, double activePoints, double steps, double moveHours, double activeCalories, List<ScoreActivityRecord> activities
 });
 
 
@@ -278,14 +288,19 @@ class __$ScoreRecordCopyWithImpl<$Res>
 
 /// Create a copy of ScoreRecord
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? type = null,Object? timestamp = null,Object? score = null,Object? metrics = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? date = null,Object? sleepMinutes = null,Object? restingHeartRateBpm = null,Object? overnightHeartRateVarianceMs = null,Object? activePoints = null,Object? steps = null,Object? moveHours = null,Object? activeCalories = null,Object? activities = null,}) {
   return _then(_ScoreRecord(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
-as DateTime,score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
-as int,metrics: null == metrics ? _self._metrics : metrics // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,
+as int,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as DateTime,sleepMinutes: null == sleepMinutes ? _self.sleepMinutes : sleepMinutes // ignore: cast_nullable_to_non_nullable
+as double,restingHeartRateBpm: null == restingHeartRateBpm ? _self.restingHeartRateBpm : restingHeartRateBpm // ignore: cast_nullable_to_non_nullable
+as double,overnightHeartRateVarianceMs: null == overnightHeartRateVarianceMs ? _self.overnightHeartRateVarianceMs : overnightHeartRateVarianceMs // ignore: cast_nullable_to_non_nullable
+as double,activePoints: null == activePoints ? _self.activePoints : activePoints // ignore: cast_nullable_to_non_nullable
+as double,steps: null == steps ? _self.steps : steps // ignore: cast_nullable_to_non_nullable
+as double,moveHours: null == moveHours ? _self.moveHours : moveHours // ignore: cast_nullable_to_non_nullable
+as double,activeCalories: null == activeCalories ? _self.activeCalories : activeCalories // ignore: cast_nullable_to_non_nullable
+as double,activities: null == activities ? _self._activities : activities // ignore: cast_nullable_to_non_nullable
+as List<ScoreActivityRecord>,
   ));
 }
 

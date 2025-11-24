@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:rolla_demo_app/core/assets/app_icon_paths.dart';
 import 'package:rolla_demo_app/core/di/scores_injection.dart' as di;
+import 'package:rolla_demo_app/core/localization/tr.dart';
+import 'package:rolla_demo_app/core/presentation/widgets/app_icon.dart';
+import 'package:rolla_demo_app/core/presentation/widgets/app_icon_button.dart';
+import 'package:rolla_demo_app/core/theme/app_colors.dart';
+import 'package:rolla_demo_app/features/scores/domain/entities/score.dart';
+import 'package:rolla_demo_app/features/settings/presentation/pages/settings_page.dart';
 
 import '../bloc/score_bloc.dart';
 import '../widgets/score_card.dart';
 import 'score_detail_page.dart';
 
 class HomePage extends StatefulWidget {
-  final void Function(ThemeMode) onChangeTheme;
-  final void Function(Locale) onChangeLocale;
-  const HomePage(
-      {Key? key, required this.onChangeTheme, required this.onChangeLocale})
-      : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,38 +28,35 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     bloc = di.sl<ScoreBloc>();
-    // Preload all
+    _loadLatestScore();
+  }
+
+  void _loadLatestScore() async {
     bloc.add(LoadScoresEvent());
   }
 
   @override
   Widget build(BuildContext context) {
-    final nowStr =
-        DateFormat.yMd(Localizations.localeOf(context).toLanguageTag())
-            .format(DateTime.now());
+    final nowStr = DateFormat.yMd(
+      Localizations.localeOf(context).toLanguageTag(),
+    ).format(DateTime.now());
     return Scaffold(
       appBar: AppBar(
         title: Text('Scores'),
         actions: [
-          PopupMenuButton<String>(
-            onSelected: (v) {
-              if (v == 'en') widget.onChangeLocale(const Locale('en'));
-              if (v == 'hr') widget.onChangeLocale(const Locale('hr'));
-              if (v == 'light') widget.onChangeTheme(ThemeMode.light);
-              if (v == 'dark') widget.onChangeTheme(ThemeMode.dark);
+          AppIconButton.asset(
+            AppIconPaths.settings,
+            onPressed: () {
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const SettingsPage()));
             },
-            itemBuilder: (_) => [
-              const PopupMenuItem(value: 'en', child: Text('English')),
-              const PopupMenuItem(value: 'hr', child: Text('Croatian')),
-              const PopupMenuItem(value: 'light', child: Text('Light')),
-              const PopupMenuItem(value: 'dark', child: Text('Dark')),
-            ],
-          )
+          ),
         ],
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          bloc.add(LoadScoresEvent()); // reload
+          _loadLatestScore();
         },
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
@@ -69,58 +69,65 @@ class _HomePageState extends State<HomePage> {
                   if (state is ScoreLoading || state is ScoreInitial) {
                     return Column(
                       children: List.generate(
-                          3,
-                          (i) => const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: SizedBox(
-                                    height: 72,
-                                    child: Center(
-                                        child: CircularProgressIndicator())),
-                              )),
+                        3,
+                        (i) => const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8),
+                          child: SizedBox(
+                            height: 72,
+                            child: Center(child: CircularProgressIndicator()),
+                          ),
+                        ),
+                      ),
                     );
                   } else if (state is ScoreLoaded) {
-                    // for demo create three cards with latest values per type
-                    final list = state.records;
-                    // get latest by type
-                    int getLatestScore(String type) {
-                      final found = list
-                          .where((r) =>
-                              r.type?.toLowerCase() == type.toLowerCase())
-                          .toList();
-                      if (found.isEmpty) return 0;
-                      return found.first.score ?? 0;
-                    }
+                    Score? latestScore = state.scores.firstOrNull;
 
                     return Column(
                       children: [
                         ScoreCard(
-                          title: 'Activity',
-                          value: getLatestScore('activity'),
-                          type: 'activity',
+                          icon: AppIcon(
+                            AppIconPaths.fire,
+                            color: AppColors.green,
+                          ),
+                          title: tr.activity,
+                          value: latestScore?.activityScore.toDouble(),
+                          scoreValue: latestScore?.activityScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (_) =>
-                                      ScoreDetailPage(type: 'activity'))),
+                            MaterialPageRoute(
+                              builder: (_) => ScoreDetailPage(type: 'activity'),
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 12),
                         ScoreCard(
-                          title: 'Readiness',
-                          value: getLatestScore('readiness'),
-                          type: 'readiness',
+                          icon: AppIcon(
+                            AppIconPaths.moon,
+                            color: AppColors.purple,
+                          ),
+                          title: tr.readiness,
+                          value: latestScore?.readinessScore.toDouble(),
+                          scoreValue: latestScore?.readinessScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (_) =>
-                                      ScoreDetailPage(type: 'readiness'))),
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  ScoreDetailPage(type: 'readiness'),
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 12),
                         ScoreCard(
-                          title: 'Health',
-                          value: getLatestScore('health'),
-                          type: 'health',
+                          icon: AppIcon(
+                            AppIconPaths.heartRate,
+                            color: AppColors.lightBlue,
+                          ),
+                          title: tr.health,
+                          value: latestScore?.healthScore.toDouble(),
+                          scoreValue: latestScore?.healthScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (_) =>
-                                      ScoreDetailPage(type: 'health'))),
+                            MaterialPageRoute(
+                              builder: (_) => ScoreDetailPage(type: 'health'),
+                            ),
+                          ),
                         ),
                       ],
                     );
@@ -132,8 +139,10 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               const SizedBox(height: 24),
-              Text('Updated: $nowStr',
-                  style: Theme.of(context).textTheme.bodySmall),
+              Text(
+                'Updated: $nowStr',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
             ],
           ),
         ),

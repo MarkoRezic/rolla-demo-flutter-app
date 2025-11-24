@@ -59,6 +59,66 @@ class S {
     return Intl.message('Rolla Demo', name: 'appTitle', desc: '', args: []);
   }
 
+  /// `Settings`
+  String get settings {
+    return Intl.message('Settings', name: 'settings', desc: '', args: []);
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message('Language', name: 'language', desc: '', args: []);
+  }
+
+  /// `Select language`
+  String get selectLanguage {
+    return Intl.message(
+      'Select language',
+      name: 'selectLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message('Theme', name: 'theme', desc: '', args: []);
+  }
+
+  /// `Select theme`
+  String get selectTheme {
+    return Intl.message(
+      'Select theme',
+      name: 'selectTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Auto (System)`
+  String get themeModeSystem {
+    return Intl.message(
+      'Auto (System)',
+      name: 'themeModeSystem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light`
+  String get themeModeLight {
+    return Intl.message('Light', name: 'themeModeLight', desc: '', args: []);
+  }
+
+  /// `Dark`
+  String get themeModeDark {
+    return Intl.message('Dark', name: 'themeModeDark', desc: '', args: []);
+  }
+
+  /// `Log Out`
+  String get logout {
+    return Intl.message('Log Out', name: 'logout', desc: '', args: []);
+  }
+
   /// `Scores`
   String get homeTitle {
     return Intl.message('Scores', name: 'homeTitle', desc: '', args: []);

@@ -12,6 +12,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Rolla Demo';
 
   @override
+  String get settings => 'Settings';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get selectLanguage => 'Select language';
+
+  @override
+  String get theme => 'Theme';
+
+  @override
+  String get selectTheme => 'Select theme';
+
+  @override
+  String get themeModeSystem => 'Auto (System)';
+
+  @override
+  String get themeModeLight => 'Light';
+
+  @override
+  String get themeModeDark => 'Dark';
+
+  @override
+  String get logout => 'Log Out';
+
+  @override
   String get homeTitle => 'Scores';
 
   @override

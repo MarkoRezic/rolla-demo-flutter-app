@@ -5,7 +5,13 @@ class AppTheme {
   static final light = ThemeData(
     brightness: Brightness.light,
     fontFamily: 'Outfit',
-    colorScheme: ColorScheme.fromSeed(seedColor: AppColors.green),
+    colorScheme: ColorScheme.fromSeed(
+      dynamicSchemeVariant: DynamicSchemeVariant.monochrome,
+      seedColor: AppColors.green,
+      brightness: Brightness.light,
+      surfaceTint: Colors.transparent,
+    ),
+    scaffoldBackgroundColor: AppColors.surfaceLight,
     useMaterial3: true,
   );
 
@@ -13,10 +19,11 @@ class AppTheme {
     brightness: Brightness.dark,
     fontFamily: 'Outfit',
     colorScheme: ColorScheme.fromSeed(
+      dynamicSchemeVariant: DynamicSchemeVariant.monochrome,
       seedColor: AppColors.green,
       brightness: Brightness.dark,
+      surfaceTint: Colors.transparent,
     ),
-    scaffoldBackgroundColor: Colors.black,
     useMaterial3: true,
   );
 
