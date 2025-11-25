@@ -3,8 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rolla_demo_app/core/di/scores_injection.dart' as di;
 import 'package:rolla_demo_app/core/localization/tr.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/score_type.dart';
+import 'package:rolla_demo_app/features/scores/presentation/enums/timeframe.dart';
+import 'package:rolla_demo_app/features/scores/presentation/extensions/date_time/date_time_timeframe_date_range.dart';
+import 'package:rolla_demo_app/features/scores/presentation/extensions/score/score_to_data_point_by_type.dart';
+import 'package:rolla_demo_app/features/scores/presentation/models/data_point.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/radial_gauge.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/timeframe_data_view.dart';
 
 import '../bloc/score_bloc.dart';
+import '../widgets/concentric_dots_stack_container.dart';
 
 class ScoreDetailPage extends StatefulWidget {
   final ScoreType scoreType;
@@ -16,28 +23,35 @@ class ScoreDetailPage extends StatefulWidget {
 
 class _ScoreDetailPageState extends State<ScoreDetailPage> {
   late ScoreBloc bloc;
-  String timeframe = '1D';
+  DateTime selectedDate = DateTime.now();
+  Timeframe selectedTimeframe = Timeframe.day;
 
   @override
   void initState() {
     super.initState();
     bloc = di.sl<ScoreBloc>();
-    _load();
+    _loadScoresForCurrentTimeframe();
   }
 
-  void _load() {
-    final now = DateTime.now().toUtc();
-    DateTime from;
-    if (timeframe == '1D') {
-      from = now.subtract(const Duration(days: 1));
-    } else if (timeframe == '7D') {
-      from = now.subtract(const Duration(days: 7));
-    } else if (timeframe == '30D') {
-      from = now.subtract(const Duration(days: 30));
-    } else {
-      from = now.subtract(const Duration(days: 365));
-    }
-    bloc.add(LoadScoresEvent(from: from, to: now));
+  void _loadScoresForCurrentTimeframe() {
+    DateTimeRange dateTimeRange = selectedDate.getDateRangeByTimeframe(
+      selectedTimeframe,
+    );
+    bloc.add(LoadScoresEvent(from: dateTimeRange.start, to: dateTimeRange.end));
+  }
+
+  void _onSelectedDateChange(DateTime date, Timeframe timeframe) {
+    setState(() {
+      selectedDate = date;
+    });
+    _loadScoresForCurrentTimeframe();
+  }
+
+  void _onSelectedTimeframeChange(Timeframe timeframe) {
+    setState(() {
+      selectedTimeframe = timeframe;
+    });
+    _loadScoresForCurrentTimeframe();
   }
 
   @override
@@ -45,46 +59,81 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.scoreType.scoreTitle)),
       body: RefreshIndicator(
-        onRefresh: () async => _load(),
+        onRefresh: () async => _loadScoresForCurrentTimeframe(),
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              // timeframe selector
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: ['1D', '7D', '30D', '1Y'].map((tf) {
-                  final selected = tf == timeframe;
-                  return ChoiceChip(
-                    label: Text(tf),
-                    selected: selected,
-                    onSelected: (_) {
-                      setState(() => timeframe = tf);
-                      _load();
-                    },
-                  );
-                }).toList(),
-              ),
               const SizedBox(height: 12),
               BlocBuilder<ScoreBloc, ScoreState>(
                 bloc: bloc,
                 builder: (context, state) {
-                  if (state is ScoreLoading || state is ScoreInitial) {
+                  if (state is ScoreInitial) {
                     return const SizedBox(
                       height: 200,
                       child: Center(child: CircularProgressIndicator()),
                     );
-                  } else if (state is ScoreLoaded) {
+                  } else if (state is ScoreLoading || state is ScoreLoaded) {
+                    List<DataPoint>? dataPoints;
+                    bool isLoading = state is ScoreLoading;
+
+                    if (state is ScoreLoaded) {
+                      dataPoints = state.scores
+                          .map(
+                            (score) =>
+                                score.toDataPointByType(widget.scoreType),
+                          )
+                          .toList();
+                    }
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
+                        Container(
+                          height: 360,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TimeframeDataView(
+                                  selectedDate: selectedDate,
+                                  selectedTimeFrame: selectedTimeframe,
+                                  onSelectedDateChange: _onSelectedDateChange,
+                                  onSelectedTimeframeChange:
+                                      _onSelectedTimeframeChange,
+                                  dataPoints: dataPoints,
+                                  isLoading: isLoading,
+                                  gaugeBuilder: (context, value) => Container(
+                                    height: 200,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: ConcentricDotsStackContainer(
+                                            children: [
+                                              RadialGauge(
+                                                value: value.round(),
+                                                valueColor: widget
+                                                    .scoreType
+                                                    .accentColor,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 10),
                         Text(
                           tr.about,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text(
                           widget.scoreType.scoreDescription,
                           style: Theme.of(context).textTheme.bodyMedium,

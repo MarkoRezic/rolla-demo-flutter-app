@@ -10,7 +10,6 @@ import 'package:rolla_demo_app/core/theme/app_colors.dart';
 import 'package:rolla_demo_app/core/utils/date_time_utils.dart';
 import 'package:rolla_demo_app/features/scores/domain/entities/score.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/score_type.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/demo_concentric_dots.dart';
 import 'package:rolla_demo_app/features/settings/presentation/pages/settings_page.dart';
 
 import '../bloc/score_bloc.dart';
@@ -149,11 +148,6 @@ class _HomePageState extends State<HomePage> {
               Text(
                 'Updated: $nowStr',
                 style: Theme.of(context).textTheme.bodySmall,
-              ),
-
-              Container(
-                height: 200,
-                child: Row(children: [Expanded(child: DemoConcentricDots())]),
               ),
             ],
           ),

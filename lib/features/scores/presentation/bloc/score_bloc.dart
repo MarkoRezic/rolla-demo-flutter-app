@@ -18,6 +18,8 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
   ) async {
     emit(ScoreLoading());
     final res = await getScores.call(from: event.from, to: event.to);
+    // Simulate loading time
+    await Future.delayed(Duration(seconds: 3));
     res.fold(
       (failure) => emit(ScoreError(failure.message)),
       (records) => emit(ScoreLoaded(records)),
