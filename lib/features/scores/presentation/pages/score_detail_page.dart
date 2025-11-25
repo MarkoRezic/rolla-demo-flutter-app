@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rolla_demo_app/core/di/scores_injection.dart' as di;
-import 'package:rolla_demo_app/core/utils/pdf_exporter.dart';
+import 'package:rolla_demo_app/core/localization/tr.dart';
+import 'package:rolla_demo_app/features/scores/presentation/enums/score_type.dart';
 
 import '../bloc/score_bloc.dart';
 
 class ScoreDetailPage extends StatefulWidget {
-  final String type;
-  const ScoreDetailPage({Key? key, required this.type}) : super(key: key);
+  final ScoreType scoreType;
+  const ScoreDetailPage({Key? key, required this.scoreType}) : super(key: key);
 
   @override
   State<ScoreDetailPage> createState() => _ScoreDetailPageState();
@@ -42,17 +43,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.type),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.picture_as_pdf),
-            onPressed: () async {
-              await PdfExporter.exportScoreDetailPdf(context, widget.type);
-            },
-          ),
-        ],
-      ),
+      appBar: AppBar(title: Text(widget.scoreType.scoreTitle)),
       body: RefreshIndicator(
         onRefresh: () async => _load(),
         child: SingleChildScrollView(
@@ -86,7 +77,19 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                     );
                   } else if (state is ScoreLoaded) {
                     return Column(
-                      children: [const Text('Not implemented yet')],
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          tr.about,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          widget.scoreType.scoreDescription,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ],
                     );
                   } else if (state is ScoreError) {
                     return Center(child: Text('Error: ${state.message}'));

@@ -5,13 +5,19 @@ class AppTheme {
   static final light = ThemeData(
     brightness: Brightness.light,
     fontFamily: 'Outfit',
+    scaffoldBackgroundColor: AppColors.surfaceLight,
     colorScheme: ColorScheme.fromSeed(
       dynamicSchemeVariant: DynamicSchemeVariant.monochrome,
       seedColor: AppColors.green,
       brightness: Brightness.light,
       surfaceTint: Colors.transparent,
     ),
-    scaffoldBackgroundColor: AppColors.surfaceLight,
+    textTheme: TextTheme(
+      bodyMedium: TextStyle(
+        fontSize: 16,
+        color: Colors.black.withValues(alpha: 0.6),
+      ),
+    ),
     useMaterial3: true,
   );
 
@@ -24,8 +30,18 @@ class AppTheme {
       brightness: Brightness.dark,
       surfaceTint: Colors.transparent,
     ),
+    textTheme: TextTheme(
+      bodyMedium: TextStyle(
+        fontSize: 16,
+        color: Colors.white.withValues(alpha: 0.6),
+      ),
+    ),
     useMaterial3: true,
   );
+
+  // Color that is commonly used for dividers, grid lines, borders - adapts to theme
+  static Color lightGrey(BuildContext context) =>
+      Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1);
 
   // Accent colors per score type
   static Color accentFor(String type) {

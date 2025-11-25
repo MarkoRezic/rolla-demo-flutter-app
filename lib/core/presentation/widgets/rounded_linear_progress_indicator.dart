@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rolla_demo_app/core/theme/app_theme.dart';
 
 class RoundedLinearProgressIndicator extends StatelessWidget {
   final double value;
@@ -19,9 +20,7 @@ class RoundedLinearProgressIndicator extends StatelessWidget {
     return Container(
       height: height,
       decoration: BoxDecoration(
-        color:
-            backgroundColor ??
-            Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
+        color: backgroundColor ?? AppTheme.lightGrey(context),
         borderRadius: BorderRadius.circular(height),
       ),
       child: FractionallySizedBox(

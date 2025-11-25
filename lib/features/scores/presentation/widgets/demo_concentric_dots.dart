@@ -1,7 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:rolla_demo_app/core/theme/app_colors.dart';
+import 'package:rolla_demo_app/core/theme/app_theme.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/concentric_dots_background.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/radial_gauge.dart';
 
 class DemoConcentricDots extends StatefulWidget {
   @override
@@ -34,15 +37,15 @@ class _DemoConcentricDotsState extends State<DemoConcentricDots>
       builder: (context, child) {
         // rotation value in radians (full spin = 2π)
         final rotation = _ctrl.value * 2 * pi;
-        return ConcentricDotsBackground(
-          dotRadius: 3,
-          ringSpacing: 40,
-          dotSpacing: 28,
-          baseColor: Theme.of(
-            context,
-          ).colorScheme.onSurface.withValues(alpha: 0.1),
-          rotation: rotation,
-          padding: const EdgeInsets.all(0),
+        return Stack(
+          alignment: AlignmentGeometry.center,
+          children: [
+            ConcentricDotsBackground(
+              baseColor: AppTheme.lightGrey(context),
+              rotation: rotation,
+            ),
+            RadialGauge(value: 82, valueColor: AppColors.purple),
+          ],
         );
       },
     );

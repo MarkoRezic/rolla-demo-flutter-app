@@ -170,6 +170,12 @@ abstract class AppLocalizations {
   /// **'Health'**
   String get health;
 
+  /// No description provided for @healthScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Score'**
+  String get healthScore;
+
   /// No description provided for @readiness.
   ///
   /// In en, this message translates to:
@@ -241,6 +247,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Avg'**
   String get metricAvg;
+
+  /// No description provided for @about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// No description provided for @howItWorks.
+  ///
+  /// In en, this message translates to:
+  /// **'How It Works?'**
+  String get howItWorks;
+
+  /// No description provided for @scoreDescriptionActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Activity Score measures how much you’ve moved throughout the day and how consistent your activity has been. It looks at your steps, active points, and move hours to capture both effort and frequency.\n\nA score of 80 represents your personal baseline, your typical daily activity over the past 30 days. Higher scores mean you’ve gone above your usual pace or intensity. Lower scores show lighter movement or more rest than normal.\n\nUse this score as your motivation to stay active in a balanced way.'**
+  String get scoreDescriptionActivity;
+
+  /// No description provided for @scoreDescriptionReadiness.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Readiness Score shows how well your body has recovered and how prepared you are to perform today. It’s based on your sleep, resting heart rate, and heart rate variability.\n\nA score of 80 is your personal baseline. The point where your body feels balanced and ready for a normal day. Higher scores mean you’re recharged and primed for activity. Lower scores suggest your body needs more rest, better sleep, or lighter movement.\n\nThink of this score as your daily check-in. When your score is high, you should feel more energetic and motivated to be productive that day.'**
+  String get scoreDescriptionReadiness;
+
+  /// No description provided for @scoreDescriptionHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Health Score brings rest and activity together into one number, showing how balanced your day is. It\'s the average of your Readiness and Activity scores.\n\nA score of 80 represents your personal baseline. This is the point where your daily metrics align with your 30-day averages. Get above 80 and you\'re performing beyond your usual. Fall below 80 and see which areas of your health need more attention.'**
+  String get scoreDescriptionHealth;
+
+  /// No description provided for @scoreMetricsDescriptionActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Activity Score measures how much you’ve moved throughout the day and how consistent your activity has been. It looks at your steps, active points, and move hours to capture both effort and frequency.\n\nA score of 80 represents your personal baseline, your typical daily activity over the past 30 days. Higher scores mean you’ve gone above your usual pace or intensity. Lower scores show lighter movement or more rest than normal.\n\nUse this score as your motivation to stay active in a balanced way.'**
+  String get scoreMetricsDescriptionActivity;
+
+  /// No description provided for @scoreMetricsDescriptionReadiness.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Readiness Score shows how well your body has recovered and how prepared you are to perform today. It’s based on your sleep, resting heart rate, and heart rate variability.\n\nA score of 80 is your personal baseline. The point where your body feels balanced and ready for a normal day. Higher scores mean you’re recharged and primed for activity. Lower scores suggest your body needs more rest, better sleep, or lighter movement.\n\nThink of this score as your daily check-in. When your score is high, you should feel more energetic and motivated to be productive that day.'**
+  String get scoreMetricsDescriptionReadiness;
+
+  /// No description provided for @scoreMetricsDescriptionHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Health Score brings rest and activity together into one number, showing how balanced your day is. It\'s the average of your Readiness and Activity scores.\n\nA score of 80 represents your personal baseline. This is the point where your daily metrics align with your 30-day averages. Get above 80 and you\'re performing beyond your usual. Fall below 80 and see which areas of your health need more attention.'**
+  String get scoreMetricsDescriptionHealth;
 }
 
 class _AppLocalizationsDelegate

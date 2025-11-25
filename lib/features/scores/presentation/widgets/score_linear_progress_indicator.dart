@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/rounded_linear_progress_indicator.dart';
 import 'package:rolla_demo_app/core/theme/app_colors.dart';
+import 'package:rolla_demo_app/core/theme/app_theme.dart';
 
 class ScoreCardLinearProgressIndicator extends StatelessWidget {
   final double value;
@@ -30,9 +31,7 @@ class ScoreCardLinearProgressIndicator extends StatelessWidget {
       value: value,
       height: height,
       color: _colorForPercent,
-      backgroundColor: Theme.of(
-        context,
-      ).colorScheme.onSurface.withValues(alpha: 0.1),
+      backgroundColor: AppTheme.lightGrey(context),
     );
   }
 }

@@ -14,8 +14,8 @@ class ConcentricDotsBackground extends StatelessWidget {
   const ConcentricDotsBackground({
     Key? key,
     this.dotRadius = 3,
-    this.ringSpacing = 40,
-    this.dotSpacing = 28,
+    this.ringSpacing = 32,
+    this.dotSpacing = 24,
     this.baseColor = AppColors.surfaceLight,
     this.rotation = 0.0,
     this.padding = EdgeInsets.zero,

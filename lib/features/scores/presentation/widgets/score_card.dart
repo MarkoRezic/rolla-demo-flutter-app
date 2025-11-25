@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:rolla_demo_app/core/theme/app_colors.dart';
+import 'package:rolla_demo_app/core/theme/app_theme.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/score_linear_progress_indicator.dart';
 
 class ScoreCard extends StatelessWidget {
@@ -67,12 +68,7 @@ class ScoreCard extends StatelessWidget {
             color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(16),
             border: Border.fromBorderSide(
-              BorderSide(
-                width: 1,
-                color: Theme.of(
-                  context,
-                ).colorScheme.onSurface.withValues(alpha: 0.1),
-              ),
+              BorderSide(width: 1, color: AppTheme.lightGrey(context)),
             ),
           ),
           child: Stack(

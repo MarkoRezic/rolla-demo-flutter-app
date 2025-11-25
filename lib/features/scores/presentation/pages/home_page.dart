@@ -9,6 +9,7 @@ import 'package:rolla_demo_app/core/presentation/widgets/app_icon_button.dart';
 import 'package:rolla_demo_app/core/theme/app_colors.dart';
 import 'package:rolla_demo_app/core/utils/date_time_utils.dart';
 import 'package:rolla_demo_app/features/scores/domain/entities/score.dart';
+import 'package:rolla_demo_app/features/scores/presentation/enums/score_type.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/demo_concentric_dots.dart';
 import 'package:rolla_demo_app/features/settings/presentation/pages/settings_page.dart';
 
@@ -96,7 +97,9 @@ class _HomePageState extends State<HomePage> {
                           scoreValue: todayScore?.activityScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (_) => ScoreDetailPage(type: 'activity'),
+                              builder: (_) => ScoreDetailPage(
+                                scoreType: ScoreType.activity,
+                              ),
                             ),
                           ),
                         ),
@@ -111,8 +114,9 @@ class _HomePageState extends State<HomePage> {
                           scoreValue: todayScore?.readinessScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (_) =>
-                                  ScoreDetailPage(type: 'readiness'),
+                              builder: (_) => ScoreDetailPage(
+                                scoreType: ScoreType.readiness,
+                              ),
                             ),
                           ),
                         ),
@@ -127,7 +131,8 @@ class _HomePageState extends State<HomePage> {
                           scoreValue: todayScore?.healthScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (_) => ScoreDetailPage(type: 'health'),
+                              builder: (_) =>
+                                  ScoreDetailPage(scoreType: ScoreType.health),
                             ),
                           ),
                         ),
