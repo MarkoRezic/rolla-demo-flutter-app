@@ -37,7 +37,26 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     DateTimeRange dateTimeRange = selectedDate.getDateRangeByTimeframe(
       selectedTimeframe,
     );
-    bloc.add(LoadScoresEvent(from: dateTimeRange.start, to: dateTimeRange.end));
+    Duration? mockLoadingTime;
+    switch (selectedTimeframe) {
+      case Timeframe.day:
+        break;
+      case Timeframe.week:
+        break;
+      case Timeframe.month:
+        mockLoadingTime = Duration(milliseconds: 500);
+        break;
+      case Timeframe.year:
+        mockLoadingTime = Duration(milliseconds: 1500);
+        break;
+    }
+    bloc.add(
+      LoadScoresEvent(
+        from: dateTimeRange.start,
+        to: dateTimeRange.end,
+        mockLoadingTime: mockLoadingTime,
+      ),
+    );
   }
 
   void _onSelectedDateChange(DateTime date, Timeframe timeframe) {
@@ -104,6 +123,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                                       _onSelectedTimeframeChange,
                                   dataPoints: dataPoints,
                                   isLoading: isLoading,
+                                  color: widget.scoreType.accentColor,
                                   gaugeBuilder: (context, value) => Container(
                                     height: 200,
                                     child: Row(

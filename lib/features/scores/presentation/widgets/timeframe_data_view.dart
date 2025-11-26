@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_shadow/flutter_inset_shadow.dart';
-import 'package:intl/intl.dart';
+import 'package:rolla_demo_app/core/localization/tr.dart';
+import 'package:rolla_demo_app/features/scores/presentation/enums/bar_chart_timeframe.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/timeframe.dart';
 import 'package:rolla_demo_app/features/scores/presentation/models/data_point.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/timeframe_bar_chart_view.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/timeframe_date_selector.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/timeframe_line_chart_view.dart';
 import 'package:shimmer/shimmer.dart';
 
 // --- Main Widget ---
@@ -12,20 +16,17 @@ typedef OnTimeframeChange = void Function(Timeframe timeframe);
 typedef GaugeBuilder = Widget Function(BuildContext context, double value);
 
 class TimeframeDataView extends StatefulWidget {
-  // required
   final DateTime selectedDate;
   final Timeframe selectedTimeFrame;
   final OnDateChange onSelectedDateChange;
   final OnTimeframeChange onSelectedTimeframeChange;
-
-  // data
   final List<DataPoint>? dataPoints;
   final bool isLoading;
-
-  // optional
   final double minY;
   final double maxY;
   final List<double> tickMarks;
+  final Color? color;
+  final double height;
   final GaugeBuilder? gaugeBuilder;
 
   const TimeframeDataView({
@@ -39,6 +40,8 @@ class TimeframeDataView extends StatefulWidget {
     this.minY = 0,
     this.maxY = 100,
     this.tickMarks = const [0, 25, 50, 75, 100],
+    this.color,
+    this.height = 200,
     this.gaugeBuilder,
   }) : super(key: key);
 
@@ -94,7 +97,6 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
     widget.onSelectedDateChange(newDate, _selectedTimeframe);
   }
 
-  // move left/right depending on current timeframe
   void _shiftLeft() {
     switch (_selectedTimeframe) {
       case Timeframe.day:
@@ -104,7 +106,6 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
         _onDateChange(_selectedDate.subtract(const Duration(days: 7)));
         break;
       case Timeframe.month:
-        // ASSUMPTION: shift by one month (user text ambiguous)
         _onDateChange(
           DateTime(
             _selectedDate.year,
@@ -154,87 +155,10 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final locale = Localizations.localeOf(context).toString();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        // Tab bar
-        TabBar(
-          controller: _tabController,
-          indicatorSize: TabBarIndicatorSize.tab,
-          tabs: Timeframe.values
-              .map((t) => Tab(text: t.shortLabel(context)))
-              .toList(),
-        ),
-        const SizedBox(height: 8),
-        // Content
-        Expanded(
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              _build1DView(context, locale),
-              _build7DView(context, locale),
-              _build30DView(context, locale),
-              _build1YView(context, locale),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // --- 1D View: single value radial gauge + date selector with chevrons ---
-  Widget _build1DView(BuildContext context, String locale) {
-    return _buildContentWrapper(
-      child: Column(
-        children: [
-          DateSelector1D(
-            selectedDate: _selectedDate,
-            onLeft: _shiftLeft,
-            onRight: _shiftRight,
-            onDateTap: () async {
-              final picked = await showDatePicker(
-                context: context,
-                initialDate: _selectedDate,
-                firstDate: DateTime(2000),
-                lastDate: DateTime(2100),
-              );
-              if (picked != null) _onDateChange(picked);
-            },
-            locale: locale,
-          ),
-          const SizedBox(height: 16),
-          _bodyForData(
-            tabIndex: Timeframe.day.index,
-            child: _oneValueGauge(context),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _oneValueGauge(BuildContext context) {
-    // pick the first available value in dataPoints (as requested)
-    double gaugeValue = 0;
-    if (widget.dataPoints != null && widget.dataPoints!.isNotEmpty) {
-      final first = widget.dataPoints!.firstWhere(
-        (dp) => dp.value != null,
-        orElse: () => widget.dataPoints!.first,
-      );
-      gaugeValue = (first.value) ?? 0;
-    }
-
-    if (widget.gaugeBuilder != null) {
-      return widget.gaugeBuilder!(context, gaugeValue);
-    }
-
-    // Default simple placeholder gauge
+  Widget _defaultGaugeBuilder(double gaugeValue) {
     return SizedBox(
-      width: 200,
-      height: 200,
+      width: widget.height,
+      height: widget.height,
       child: Center(
         child: Stack(
           alignment: Alignment.center,
@@ -250,7 +174,6 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
                   gaugeValue.toStringAsFixed(0),
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
-                Text('value', style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ],
@@ -259,119 +182,21 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
     );
   }
 
-  // --- 7D view: bar chart with Monday-Sunday week range ---
-  Widget _build7DView(BuildContext context, String locale) {
-    return _buildContentWrapper(
-      child: Column(
-        children: [
-          DateSelectorRangeWeek(
-            selectedDate: _selectedDate,
-            onLeft: _shiftLeft,
-            onRight: _shiftRight,
-            locale: locale,
-          ),
-          const SizedBox(height: 12),
-          _bodyForData(
-            tabIndex: Timeframe.week.index,
-            child: Expanded(
-              child: BarChart7D(
-                selectedDate: _selectedDate,
-                dataPoints: widget.dataPoints ?? [],
-                minY: widget.minY,
-                maxY: widget.maxY,
-                tickMarks: widget.tickMarks,
-                locale: locale,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  Widget _buildValueGauge(BuildContext context) {
+    double gaugeValue = 0;
+    if (widget.dataPoints != null && widget.dataPoints!.isNotEmpty) {
+      final first = widget.dataPoints!.firstWhere(
+        (dp) => dp.value != null,
+        orElse: () => widget.dataPoints!.first,
+      );
+      gaugeValue = (first.value) ?? 0;
+    }
 
-  // --- 30D view: month view, bar chart, hide some x labels to avoid clutter ---
-  Widget _build30DView(BuildContext context, String locale) {
-    return _buildContentWrapper(
-      child: Column(
-        children: [
-          DateSelectorRangeMonth(
-            selectedDate: _selectedDate,
-            onLeft: _shiftLeft,
-            onRight: _shiftRight,
-            locale: locale,
-          ),
-          const SizedBox(height: 12),
-          _bodyForData(
-            tabIndex: Timeframe.month.index,
-            child: Expanded(
-              child: BarChart30D(
-                selectedDate: _selectedDate,
-                dataPoints: widget.dataPoints ?? [],
-                minY: widget.minY,
-                maxY: widget.maxY,
-                tickMarks: widget.tickMarks,
-                locale: locale,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+    if (widget.gaugeBuilder != null) {
+      return widget.gaugeBuilder!(context, gaugeValue);
+    }
 
-  // --- 1Y view: line chart, toggle monthly averages (bar chart) ---
-  Widget _build1YView(BuildContext context, String locale) {
-    return _buildContentWrapper(
-      child: Column(
-        children: [
-          DateSelectorRangeYear(
-            selectedDate: _selectedDate,
-            onLeft: _shiftLeft,
-            onRight: _shiftRight,
-            locale: locale,
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const Text('Show monthly averages'),
-              Switch(
-                value: _showMonthlyAverages,
-                onChanged: (v) => setState(() => _showMonthlyAverages = v),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          _bodyForData(
-            tabIndex: Timeframe.year.index,
-            child: Expanded(
-              child: _showMonthlyAverages
-                  ? BarChartYearlyAverages(
-                      selectedDate: _selectedDate,
-                      dataPoints: widget.dataPoints ?? [],
-                      minY: widget.minY,
-                      maxY: widget.maxY,
-                      tickMarks: widget.tickMarks,
-                      locale: locale,
-                    )
-                  : LineChartYear(
-                      selectedDate: _selectedDate,
-                      dataPoints: widget.dataPoints ?? [],
-                      minY: widget.minY,
-                      maxY: widget.maxY,
-                      tickMarks: widget.tickMarks,
-                      locale: locale,
-                    ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // --- Helpers & wrappers for loading/no data ---
-  Widget _buildContentWrapper({required Widget child}) {
-    return Padding(padding: const EdgeInsets.all(12.0), child: child);
+    return _defaultGaugeBuilder(gaugeValue);
   }
 
   Widget _bodyForData({required int tabIndex, required Widget child}) {
@@ -381,15 +206,12 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
     if (widget.dataPoints == null) {
       return Expanded(
         child: Center(
-          child: Text(
-            'No data available',
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
+          child: Text(tr.noData, style: Theme.of(context).textTheme.bodyMedium),
         ),
       );
     }
     // non-null data
-    return child;
+    return Container(height: widget.height, child: child);
   }
 
   Widget _buildShimmerSkeleton() {
@@ -426,160 +248,76 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
       ],
     );
   }
-}
-
-// ----------------------------
-// --- Date selector widgets - small and reusable
-// ----------------------------
-class DateSelector1D extends StatelessWidget {
-  final DateTime selectedDate;
-  final VoidCallback onLeft;
-  final VoidCallback onRight;
-  final VoidCallback onDateTap;
-  final String locale;
-
-  const DateSelector1D({
-    Key? key,
-    required this.selectedDate,
-    required this.onLeft,
-    required this.onRight,
-    required this.onDateTap,
-    required this.locale,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final label = DateFormat.yMMMMd(locale).format(selectedDate);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        IconButton(onPressed: onLeft, icon: const Icon(Icons.chevron_left)),
-        GestureDetector(
-          onTap: onDateTap,
-          child: Row(
-            children: [
-              Text(label, style: Theme.of(context).textTheme.bodySmall),
-              const SizedBox(width: 6),
-              const Icon(Icons.calendar_today, size: 18),
-            ],
+        // Tab bar
+        TabBar(
+          controller: _tabController,
+          indicatorSize: TabBarIndicatorSize.tab,
+          tabs: Timeframe.values
+              .map((t) => Tab(text: t.shortLabel(context)))
+              .toList(),
+        ),
+        const SizedBox(height: 8),
+        // Content
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: Timeframe.values.map((timeframe) {
+              late Widget child;
+              switch (_selectedTimeframe) {
+                case Timeframe.day:
+                  child = _buildValueGauge(context);
+                  break;
+                case Timeframe.week:
+                case Timeframe.month:
+                case Timeframe.year:
+                  child = (timeframe == Timeframe.year && _showMonthlyAverages)
+                      ? TimeframeLineChartView(
+                          selectedDate: _selectedDate,
+                          timeframe: timeframe,
+                          dataPoints: widget.dataPoints ?? [],
+                          color: widget.color,
+                        )
+                      : TimeframeBarChartView(
+                          selectedDate: _selectedDate,
+                          barChartTimeframe: BarChartTimeframe.fromTimeframe(
+                            timeframe,
+                          ),
+                          dataPoints: widget.dataPoints ?? [],
+                          color: widget.color,
+                        );
+                  break;
+              }
+
+              return Column(
+                children: [
+                  TimeframeDateSelector(
+                    selectedDate: _selectedDate,
+                    selectedTimeframe: _selectedTimeframe,
+                    onLeftPressed: _shiftLeft,
+                    onRightPressed: _shiftRight,
+                    onDateTap: () async {
+                      final picked = await showDatePicker(
+                        context: context,
+                        initialDate: _selectedDate,
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime.now(),
+                      );
+                      if (picked != null) _onDateChange(picked);
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  _bodyForData(tabIndex: timeframe.index, child: child),
+                ],
+              );
+            }).toList(),
           ),
         ),
-        IconButton(onPressed: onRight, icon: const Icon(Icons.chevron_right)),
-      ],
-    );
-  }
-}
-
-class DateSelectorRangeWeek extends StatelessWidget {
-  final DateTime selectedDate;
-  final VoidCallback onLeft;
-  final VoidCallback onRight;
-  final String locale;
-
-  const DateSelectorRangeWeek({
-    Key? key,
-    required this.selectedDate,
-    required this.onLeft,
-    required this.onRight,
-    required this.locale,
-  }) : super(key: key);
-
-  DateTime _mondayOfWeek(DateTime date) {
-    final dow = date.weekday; // Monday is 1
-    return date.subtract(Duration(days: dow - 1));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final monday = _mondayOfWeek(selectedDate);
-    final sunday = monday.add(const Duration(days: 6));
-    final fmt = DateFormat.yMMMd(locale);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(onPressed: onLeft, icon: const Icon(Icons.chevron_left)),
-        Text(
-          '${fmt.format(monday)} — ${fmt.format(sunday)}',
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        IconButton(onPressed: onRight, icon: const Icon(Icons.chevron_right)),
-      ],
-    );
-  }
-}
-
-class DateSelectorRangeMonth extends StatelessWidget {
-  final DateTime selectedDate;
-  final VoidCallback onLeft;
-  final VoidCallback onRight;
-  final String locale;
-
-  const DateSelectorRangeMonth({
-    Key? key,
-    required this.selectedDate,
-    required this.onLeft,
-    required this.onRight,
-    required this.locale,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final start = DateTime(selectedDate.year, selectedDate.month, 1);
-    final end = DateTime(
-      selectedDate.year,
-      selectedDate.month + 1,
-      1,
-    ).subtract(const Duration(days: 1));
-    final fmt = DateFormat.yMMMd(locale);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(onPressed: onLeft, icon: const Icon(Icons.chevron_left)),
-        Text(
-          '${fmt.format(start)} — ${fmt.format(end)}',
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        IconButton(onPressed: onRight, icon: const Icon(Icons.chevron_right)),
-      ],
-    );
-  }
-}
-
-class DateSelectorRangeYear extends StatelessWidget {
-  final DateTime selectedDate;
-  final VoidCallback onLeft;
-  final VoidCallback onRight;
-  final String locale;
-
-  const DateSelectorRangeYear({
-    Key? key,
-    required this.selectedDate,
-    required this.onLeft,
-    required this.onRight,
-    required this.locale,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final start = DateTime(selectedDate.year, 1, 1);
-    final end = DateTime(selectedDate.year, 12, 31);
-    final fmt = DateFormat.y(locale);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(onPressed: onLeft, icon: const Icon(Icons.chevron_left)),
-        Text(
-          '${fmt.format(start)}',
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        const SizedBox(width: 8),
-        Text('-', style: Theme.of(context).textTheme.bodySmall),
-        const SizedBox(width: 8),
-        Text(
-          '${fmt.format(end)}',
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        IconButton(onPressed: onRight, icon: const Icon(Icons.chevron_right)),
       ],
     );
   }

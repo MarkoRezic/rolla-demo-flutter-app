@@ -12,7 +12,6 @@ class TimeframeLineChartView extends StatelessWidget {
   final double minY;
   final double maxY;
   final List<double> tickMarks;
-  final String locale;
   final Color? color;
   final Color? gridColor;
 
@@ -21,10 +20,9 @@ class TimeframeLineChartView extends StatelessWidget {
     required this.selectedDate,
     required this.timeframe,
     required this.dataPoints,
-    required this.minY,
-    required this.maxY,
-    required this.tickMarks,
-    required this.locale,
+    this.minY = 0,
+    this.maxY = 100,
+    this.tickMarks = const [0, 25, 50, 75, 100],
     this.color,
     this.gridColor,
   }) : super(key: key);
@@ -126,6 +124,7 @@ class TimeframeLineChartView extends StatelessWidget {
           showTitles: true,
           getTitlesWidget: (value, meta) {
             late String label;
+            final locale = Localizations.localeOf(context).toString();
 
             switch (timeframe) {
               case Timeframe.day:
