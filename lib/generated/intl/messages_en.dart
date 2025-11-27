@@ -20,10 +20,53 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(date) => "Last updated: ${date}";
+  static String m0(metric, period, value, change) =>
+      "${metric} is higher than ${period}: ${value} (${change}% ↑).";
 
-  static String m1(timeframe) =>
-      "${Intl.select(timeframe, {'day': '', 'week': 'Daily Avg.', 'month': 'Daily Avg.', 'year': 'Monthly Avg.', 'other': ''})}";
+  static String m1(metric, period, value, change) =>
+      "${metric} dropped notably vs ${period}: ${value} (${change}%).";
+
+  static String m2(metric, period, value, change) =>
+      "${metric} shows a big improvement vs ${period}: ${value} (+${change}%).";
+
+  static String m3(metric) =>
+      "${metric} shows a downward trend over the selected period.";
+
+  static String m4(metric, sd) => "${metric} has high variability (SD ${sd}).";
+
+  static String m5(metric) => "${metric} shows low variability.";
+
+  static String m6(metric, period, value) =>
+      "${metric} is about the same as ${period}: ${value}.";
+
+  static String m7(value) =>
+      "Sleep duration is within the healthy target range: ${value}.";
+
+  static String m8(value) =>
+      "Sleep duration is above the healthy range: ${value}.";
+
+  static String m9(value) =>
+      "Sleep duration is below the healthy range: ${value}.";
+
+  static String m10(metric) =>
+      "${metric} has been stable over the selected period.";
+
+  static String m11(metric, value) =>
+      "${metric} is meeting the target: ${value}.";
+
+  static String m12(metric, value) =>
+      "${metric} is below the target: ${value}.";
+
+  static String m13(metric) =>
+      "${metric} shows an upward trend over the selected period.";
+
+  static String m14(metric, period, value, change) =>
+      "${metric} is lower than ${period}: ${value} (${change}% ↓).";
+
+  static String m15(date) => "Last updated: ${date}";
+
+  static String m16(timeframe) =>
+      "${Intl.select(timeframe, {'day': '', 'week': 'Daily Avg.', 'month': 'Daily Avg.', 'year': 'Daily Avg.', 'yearMonthly': 'Monthly Avg.', 'other': ''})}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -40,15 +83,38 @@ class MessageLookup extends MessageLookupByLibrary {
     "history": MessageLookupByLibrary.simpleMessage("History"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Scores"),
     "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works?"),
+    "insightBetterThanPreviousPeriod": m0,
+    "insightBigDrop": m1,
+    "insightBigImprovement": m2,
+    "insightDownwardTrend": m3,
+    "insightHighVariability": m4,
+    "insightInsufficientData": MessageLookupByLibrary.simpleMessage(
+      "Not enough data to provide insights.",
+    ),
+    "insightLowVariability": m5,
+    "insightNoChangeSincePreviousPeriod": m6,
+    "insightSleepInTarget": m7,
+    "insightSleepTooLong": m8,
+    "insightSleepTooShort": m9,
+    "insightStableTrend": m10,
+    "insightTargetMet": m11,
+    "insightTargetNotMet": m12,
+    "insightUpwardTrend": m13,
+    "insightWorseThanPreviousPeriod": m14,
     "insightsTitle": MessageLookupByLibrary.simpleMessage("Insights"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
-    "lastUpdated": m0,
-    "line": MessageLookupByLibrary.simpleMessage("Line"),
+    "lastUpdated": m15,
     "logout": MessageLookupByLibrary.simpleMessage("Log Out"),
     "metrics": MessageLookupByLibrary.simpleMessage("Metrics"),
+    "monthly": MessageLookupByLibrary.simpleMessage("Monthly"),
     "moveHours": MessageLookupByLibrary.simpleMessage("Move hours"),
     "noData": MessageLookupByLibrary.simpleMessage("No data"),
     "overnightHRV": MessageLookupByLibrary.simpleMessage("Overnight HRV"),
+    "periodLastMonth": MessageLookupByLibrary.simpleMessage("last month"),
+    "periodLastWeek": MessageLookupByLibrary.simpleMessage("last week"),
+    "periodLastYear": MessageLookupByLibrary.simpleMessage("last year"),
+    "periodYesterday": MessageLookupByLibrary.simpleMessage("yesterday"),
+    "plusInfinity": MessageLookupByLibrary.simpleMessage("—"),
     "pullToRefresh": MessageLookupByLibrary.simpleMessage("Pull to refresh"),
     "readiness": MessageLookupByLibrary.simpleMessage("Readiness"),
     "readinessScore": MessageLookupByLibrary.simpleMessage("Readiness Score"),
@@ -84,6 +150,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "timeframe1Y": MessageLookupByLibrary.simpleMessage("1Y"),
     "timeframe30D": MessageLookupByLibrary.simpleMessage("30D"),
     "timeframe7D": MessageLookupByLibrary.simpleMessage("7D"),
-    "timeframeAvg": m1,
+    "timeframeAvg": m16,
+    "valueUnitBpm": MessageLookupByLibrary.simpleMessage("bpm"),
+    "valueUnitH": MessageLookupByLibrary.simpleMessage("h"),
+    "valueUnitKcal": MessageLookupByLibrary.simpleMessage("kcal"),
+    "valueUnitMs": MessageLookupByLibrary.simpleMessage("ms"),
+    "valueUnitPts": MessageLookupByLibrary.simpleMessage("pts"),
+    "valueUnitSteps": MessageLookupByLibrary.simpleMessage("steps"),
   };
 }

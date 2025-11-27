@@ -78,7 +78,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get activeCalories => 'Aktivne kalorije';
 
   @override
-  String get sleep => 'San';
+  String get sleep => 'Spavanje';
 
   @override
   String get restingHR => 'Otkucaji u mirovanju';
@@ -113,7 +113,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get timeframe1Y => '1G';
 
   @override
-  String get line => 'Linija';
+  String get monthly => 'Mjesečni';
 
   @override
   String get insightsTitle => 'Uvidi';
@@ -127,7 +127,8 @@ class AppLocalizationsHr extends AppLocalizations {
       'day': '',
       'week': 'Dnevni Prosjek',
       'month': 'Dnevni Prosjek',
-      'year': 'Mjesečni Prosjek',
+      'year': 'Dnevni Prosjek',
+      'yearMonthly': 'Mjesečni Prosjek',
       'other': '',
     });
     return '$_temp0';
@@ -162,4 +163,140 @@ class AppLocalizationsHr extends AppLocalizations {
   @override
   String get scoreMetricsDescriptionHealth =>
       'Vaš rezultat zdravlja spaja odmor i aktivnost u jedan broj, pokazujući koliko je vaš dan uravnotežen. To je prosjek vaših rezultata spremnosti i aktivnosti.\n\nRezultat 80 predstavlja vašu osobnu osnovicu. To je točka u kojoj se vaši dnevni pokazatelji slažu s vašim 30-dnevnim prosjecima. Pređete li 80, radite iznad uobičajenog. Ako padnete ispod 80, provjerite koja područja vašeg zdravlja trebaju više pažnje.';
+
+  @override
+  String get insightInsufficientData =>
+      'Nema dovoljno podataka za davanje uvida.';
+
+  @override
+  String insightBetterThanPreviousPeriod(
+    Object change,
+    Object metric,
+    Object period,
+    Object value,
+  ) {
+    return '$metric je veći nego $period: $value ($change% ↑).';
+  }
+
+  @override
+  String insightWorseThanPreviousPeriod(
+    Object change,
+    Object metric,
+    Object period,
+    Object value,
+  ) {
+    return '$metric je manji nego $period: $value ($change% ↓).';
+  }
+
+  @override
+  String insightNoChangeSincePreviousPeriod(
+    Object metric,
+    Object period,
+    Object value,
+  ) {
+    return '$metric je otprilike isti kao $period: $value.';
+  }
+
+  @override
+  String insightBigImprovement(
+    Object change,
+    Object metric,
+    Object period,
+    Object value,
+  ) {
+    return '$metric pokazuje značajno poboljšanje u odnosu na $period: $value (+$change%).';
+  }
+
+  @override
+  String insightBigDrop(
+    Object change,
+    Object metric,
+    Object period,
+    Object value,
+  ) {
+    return '$metric je značajno pao u odnosu na $period: $value ($change%).';
+  }
+
+  @override
+  String insightUpwardTrend(Object metric) {
+    return '$metric pokazuje uzlazni trend u odabranom razdoblju.';
+  }
+
+  @override
+  String insightDownwardTrend(Object metric) {
+    return '$metric pokazuje silazni trend u odabranom razdoblju.';
+  }
+
+  @override
+  String insightStableTrend(Object metric) {
+    return '$metric je konzistentan u odabranom razdoblju.';
+  }
+
+  @override
+  String insightHighVariability(Object metric, Object sd) {
+    return '$metric mnogo varira.';
+  }
+
+  @override
+  String insightLowVariability(Object metric) {
+    return '$metric je jako konzistentan.';
+  }
+
+  @override
+  String insightTargetMet(Object metric, Object value) {
+    return '$metric dostiže cilj: $value.';
+  }
+
+  @override
+  String insightTargetNotMet(Object metric, Object value) {
+    return '$metric ne dostiže cilj: $value.';
+  }
+
+  @override
+  String insightSleepInTarget(Object value) {
+    return 'Trajanje sna je u zdravom rasponu: $value.';
+  }
+
+  @override
+  String insightSleepTooShort(Object value) {
+    return 'Trajanje sna je ispod zdravog raspona: $value.';
+  }
+
+  @override
+  String insightSleepTooLong(Object value) {
+    return 'Trajanje sna je iznad zdravog raspona: $value.';
+  }
+
+  @override
+  String get periodYesterday => 'jučer';
+
+  @override
+  String get periodLastWeek => 'prošli tjedan';
+
+  @override
+  String get periodLastMonth => 'prošli mjesec';
+
+  @override
+  String get periodLastYear => 'prošle godine';
+
+  @override
+  String get plusInfinity => '—';
+
+  @override
+  String get valueUnitPts => 'bod';
+
+  @override
+  String get valueUnitH => 'h';
+
+  @override
+  String get valueUnitBpm => 'bpm';
+
+  @override
+  String get valueUnitMs => 'ms';
+
+  @override
+  String get valueUnitSteps => 'koraka';
+
+  @override
+  String get valueUnitKcal => 'kcal';
 }

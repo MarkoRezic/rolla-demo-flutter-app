@@ -28,6 +28,18 @@ class Score extends Equatable {
     required this.activities,
   });
 
+  Score.zero()
+    : id = 0,
+      date = DateTime.now(),
+      sleepMinutes = 0,
+      restingHeartRateBpm = 0,
+      overnightHeartRateVarianceMs = 0,
+      activePoints = 0,
+      steps = 0,
+      moveHours = 0,
+      activeCalories = 0,
+      activities = const [];
+
   @override
   List<Object?> get props => [
     id,

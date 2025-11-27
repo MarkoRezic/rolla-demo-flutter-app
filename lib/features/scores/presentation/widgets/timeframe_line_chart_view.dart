@@ -114,7 +114,8 @@ class TimeframeLineChartView extends StatelessWidget {
               padding: const EdgeInsets.only(left: 6),
               child: Text(
                 value.toInt().toString(),
-                style: const TextStyle(
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontSize: 10,
                   fontWeight: FontWeight.w500,
                 ),
@@ -166,7 +167,13 @@ class TimeframeLineChartView extends StatelessWidget {
 
             return SideTitleWidget(
               meta: meta,
-              child: Text(label, style: const TextStyle(fontSize: 10)),
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
             );
           },
         ),

@@ -20,10 +20,48 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'hr';
 
-  static String m0(date) => "Zadnje ažuriranje: ${date}";
+  static String m0(metric, period, value, change) =>
+      "${metric} je veći nego ${period}: ${value} (${change}% ↑).";
 
-  static String m1(timeframe) =>
-      "${Intl.select(timeframe, {'day': '', 'week': 'Dnevni Prosjek', 'month': 'Dnevni Prosjek', 'year': 'Mjesečni Prosjek', 'other': ''})}";
+  static String m1(metric, period, value, change) =>
+      "${metric} je značajno pao u odnosu na ${period}: ${value} (${change}%).";
+
+  static String m2(metric, period, value, change) =>
+      "${metric} pokazuje značajno poboljšanje u odnosu na ${period}: ${value} (+${change}%).";
+
+  static String m3(metric) =>
+      "${metric} pokazuje silazni trend u odabranom razdoblju.";
+
+  static String m4(metric, sd) => "${metric} mnogo varira.";
+
+  static String m5(metric) => "${metric} je jako konzistentan.";
+
+  static String m6(metric, period, value) =>
+      "${metric} je otprilike isti kao ${period}: ${value}.";
+
+  static String m7(value) => "Trajanje sna je u zdravom rasponu: ${value}.";
+
+  static String m8(value) => "Trajanje sna je iznad zdravog raspona: ${value}.";
+
+  static String m9(value) => "Trajanje sna je ispod zdravog raspona: ${value}.";
+
+  static String m10(metric) =>
+      "${metric} je konzistentan u odabranom razdoblju.";
+
+  static String m11(metric, value) => "${metric} dostiže cilj: ${value}.";
+
+  static String m12(metric, value) => "${metric} ne dostiže cilj: ${value}.";
+
+  static String m13(metric) =>
+      "${metric} pokazuje uzlazni trend u odabranom razdoblju.";
+
+  static String m14(metric, period, value, change) =>
+      "${metric} je manji nego ${period}: ${value} (${change}% ↓).";
+
+  static String m15(date) => "Zadnje ažuriranje: ${date}";
+
+  static String m16(timeframe) =>
+      "${Intl.select(timeframe, {'day': '', 'week': 'Dnevni Prosjek', 'month': 'Dnevni Prosjek', 'year': 'Dnevni Prosjek', 'yearMonthly': 'Mjesečni Prosjek', 'other': ''})}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -42,15 +80,38 @@ class MessageLookup extends MessageLookupByLibrary {
     "history": MessageLookupByLibrary.simpleMessage("Povijest"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Rezultati"),
     "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works?"),
+    "insightBetterThanPreviousPeriod": m0,
+    "insightBigDrop": m1,
+    "insightBigImprovement": m2,
+    "insightDownwardTrend": m3,
+    "insightHighVariability": m4,
+    "insightInsufficientData": MessageLookupByLibrary.simpleMessage(
+      "Nema dovoljno podataka za davanje uvida.",
+    ),
+    "insightLowVariability": m5,
+    "insightNoChangeSincePreviousPeriod": m6,
+    "insightSleepInTarget": m7,
+    "insightSleepTooLong": m8,
+    "insightSleepTooShort": m9,
+    "insightStableTrend": m10,
+    "insightTargetMet": m11,
+    "insightTargetNotMet": m12,
+    "insightUpwardTrend": m13,
+    "insightWorseThanPreviousPeriod": m14,
     "insightsTitle": MessageLookupByLibrary.simpleMessage("Uvidi"),
     "language": MessageLookupByLibrary.simpleMessage("Jezik"),
-    "lastUpdated": m0,
-    "line": MessageLookupByLibrary.simpleMessage("Linija"),
+    "lastUpdated": m15,
     "logout": MessageLookupByLibrary.simpleMessage("Odjava"),
     "metrics": MessageLookupByLibrary.simpleMessage("Metrike"),
+    "monthly": MessageLookupByLibrary.simpleMessage("Mjesečni"),
     "moveHours": MessageLookupByLibrary.simpleMessage("Sati kretanja"),
     "noData": MessageLookupByLibrary.simpleMessage("Nema podataka"),
     "overnightHRV": MessageLookupByLibrary.simpleMessage("Noćni HRV"),
+    "periodLastMonth": MessageLookupByLibrary.simpleMessage("prošli mjesec"),
+    "periodLastWeek": MessageLookupByLibrary.simpleMessage("prošli tjedan"),
+    "periodLastYear": MessageLookupByLibrary.simpleMessage("prošle godine"),
+    "periodYesterday": MessageLookupByLibrary.simpleMessage("jučer"),
+    "plusInfinity": MessageLookupByLibrary.simpleMessage("—"),
     "pullToRefresh": MessageLookupByLibrary.simpleMessage(
       "Povuci za osvježenje",
     ),
@@ -80,7 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectLanguage": MessageLookupByLibrary.simpleMessage("Odaberi jezik"),
     "selectTheme": MessageLookupByLibrary.simpleMessage("Odaberi temu"),
     "settings": MessageLookupByLibrary.simpleMessage("Postavke"),
-    "sleep": MessageLookupByLibrary.simpleMessage("San"),
+    "sleep": MessageLookupByLibrary.simpleMessage("Spavanje"),
     "steps": MessageLookupByLibrary.simpleMessage("Koraci"),
     "theme": MessageLookupByLibrary.simpleMessage("Tema"),
     "themeModeDark": MessageLookupByLibrary.simpleMessage("Tamna"),
@@ -92,6 +153,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "timeframe1Y": MessageLookupByLibrary.simpleMessage("1G"),
     "timeframe30D": MessageLookupByLibrary.simpleMessage("30D"),
     "timeframe7D": MessageLookupByLibrary.simpleMessage("7D"),
-    "timeframeAvg": m1,
+    "timeframeAvg": m16,
+    "valueUnitBpm": MessageLookupByLibrary.simpleMessage("bpm"),
+    "valueUnitH": MessageLookupByLibrary.simpleMessage("h"),
+    "valueUnitKcal": MessageLookupByLibrary.simpleMessage("kcal"),
+    "valueUnitMs": MessageLookupByLibrary.simpleMessage("ms"),
+    "valueUnitPts": MessageLookupByLibrary.simpleMessage("bod"),
+    "valueUnitSteps": MessageLookupByLibrary.simpleMessage("koraka"),
   };
 }

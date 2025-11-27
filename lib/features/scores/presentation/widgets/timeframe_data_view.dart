@@ -11,21 +11,18 @@ import 'package:rolla_demo_app/features/scores/presentation/widgets/timeframe_da
 import 'package:rolla_demo_app/features/scores/presentation/widgets/timeframe_line_chart_view.dart';
 import 'package:shimmer/shimmer.dart';
 
-// --- Main Widget ---
-typedef OnDateChange =
-    void Function(DateTime selectedDate, Timeframe timeframe);
-typedef OnTimeframeChange = void Function(Timeframe timeframe);
-typedef GaugeBuilder = Widget Function(BuildContext context, double value);
-
 class TimeframeDataView extends StatefulWidget {
   final DateTime selectedDate;
   final Timeframe selectedTimeFrame;
-  final OnDateChange onSelectedDateChange;
-  final OnTimeframeChange onSelectedTimeframeChange;
+  final void Function(DateTime selectedDate, Timeframe timeframe)
+  onSelectedDateChange;
+  final void Function(Timeframe timeframe) onSelectedTimeframeChange;
   final DateTime? minDate;
   final DateTime? maxDate;
   final List<DataPoint>? dataPoints;
   final bool isLoading;
+  final void Function(bool show)? onShowMonthlyAveragesToggle;
+  final bool showMonthlyAverages; // only relevant for 1Y
   final double minY;
   final double maxY;
   final List<double> tickMarks;
@@ -33,7 +30,7 @@ class TimeframeDataView extends StatefulWidget {
   final Color? tabBarColor;
   final Color? gridColor;
   final double height;
-  final GaugeBuilder? gaugeBuilder;
+  final Widget Function(BuildContext context, double value)? gaugeBuilder;
   final Widget Function(Timeframe timeframe)? headerWidgetBuilder;
 
   const TimeframeDataView({
@@ -46,6 +43,8 @@ class TimeframeDataView extends StatefulWidget {
     this.maxDate,
     this.dataPoints,
     this.isLoading = false,
+    this.onShowMonthlyAveragesToggle,
+    this.showMonthlyAverages = false,
     this.minY = 0,
     this.maxY = 100,
     this.tickMarks = const [0, 25, 50, 75, 100],
@@ -66,7 +65,6 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
   late TabController _tabController;
   late DateTime _selectedDate;
   late Timeframe _selectedTimeframe;
-  bool _showMonthlyAverages = false; // only relevant for 1Y
 
   @override
   void initState() {
@@ -185,12 +183,6 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
       ? null
       : _shiftRight;
 
-  void _toggleShowMonthlyAverages(bool show) {
-    setState(() {
-      _showMonthlyAverages = show;
-    });
-  }
-
   Widget _defaultGaugeBuilder(double gaugeValue) {
     return SizedBox(
       width: widget.height,
@@ -237,9 +229,9 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
 
   Widget _defaultHeaderWidget(Timeframe timeframe) => const SizedBox.shrink();
 
-  Widget _buildHeaderWidget() {
-    return widget.headerWidgetBuilder?.call(_selectedTimeframe) ??
-        _defaultHeaderWidget(_selectedTimeframe);
+  Widget _buildHeaderWidget(Timeframe timeframe) {
+    return widget.headerWidgetBuilder?.call(timeframe) ??
+        _defaultHeaderWidget(timeframe);
   }
 
   Widget _bodyForData({required int tabIndex, required Widget child}) {
@@ -317,7 +309,9 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
                 case Timeframe.week:
                 case Timeframe.month:
                 case Timeframe.year:
-                  child = (timeframe == Timeframe.year && _showMonthlyAverages)
+                  child =
+                      (timeframe == Timeframe.year &&
+                          !widget.showMonthlyAverages)
                       ? TimeframeLineChartView(
                           selectedDate: _selectedDate,
                           timeframe: timeframe,
@@ -348,23 +342,24 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      _buildHeaderWidget(),
+                      _buildHeaderWidget(timeframe),
                       Spacer(),
-                      if (timeframe == Timeframe.year)
+                      if (timeframe == Timeframe.year &&
+                          widget.onShowMonthlyAveragesToggle != null)
                         Row(
                           children: [
-                            Text(tr.line),
+                            Text(tr.monthly),
                             SizedBox(width: 10),
                             Switch(
-                              value: _showMonthlyAverages,
-                              onChanged: _toggleShowMonthlyAverages,
+                              value: widget.showMonthlyAverages,
+                              onChanged: widget.onShowMonthlyAveragesToggle,
                               activeTrackColor: widget.color,
                             ),
                           ],
                         ),
                       TimeframeDateSelector(
                         selectedDate: _selectedDate,
-                        selectedTimeframe: _selectedTimeframe,
+                        selectedTimeframe: timeframe,
                         onLeftPressed: _onLeftPressed,
                         onRightPressed: _onRightPressed,
                         onDateTap: () async {

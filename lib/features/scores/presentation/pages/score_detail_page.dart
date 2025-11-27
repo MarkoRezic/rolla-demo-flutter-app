@@ -9,12 +9,16 @@ import 'package:rolla_demo_app/features/scores/domain/entities/score.dart';
 import 'package:rolla_demo_app/features/scores/domain/extensions/list/list_of_scores_average_metrics.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/score_type.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/timeframe.dart';
+import 'package:rolla_demo_app/features/scores/presentation/extensions/date_time/date_time_same_date_as.dart';
 import 'package:rolla_demo_app/features/scores/presentation/extensions/date_time/date_time_timeframe_date_range.dart';
 import 'package:rolla_demo_app/features/scores/presentation/extensions/score/score_to_data_point_by_type.dart';
 import 'package:rolla_demo_app/features/scores/presentation/models/data_point.dart';
+import 'package:rolla_demo_app/features/scores/presentation/utils/generate_contextual_insights.dart';
 import 'package:rolla_demo_app/features/scores/presentation/utils/time_utils.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/radial_gauge.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/score_card.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/score_info_card.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/score_insights_view.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/timeframe_data_view.dart';
 
 import '../bloc/score_bloc.dart';
@@ -29,23 +33,24 @@ class ScoreDetailPage extends StatefulWidget {
 }
 
 class _ScoreDetailPageState extends State<ScoreDetailPage> {
-  late ScoreBloc bloc;
-  DateTime selectedDate = DateTime.now();
-  Timeframe selectedTimeframe = Timeframe.day;
+  late ScoreBloc _bloc;
+  DateTime _selectedDate = DateTime.now();
+  Timeframe _selectedTimeframe = Timeframe.day;
+  bool _showMonthlyAverages = false;
 
   @override
   void initState() {
     super.initState();
-    bloc = di.sl<ScoreBloc>();
+    _bloc = di.sl<ScoreBloc>();
     _loadScoresForCurrentTimeframe();
   }
 
   void _loadScoresForCurrentTimeframe() {
-    DateTimeRange dateTimeRange = selectedDate.getDateRangeByTimeframe(
-      selectedTimeframe,
+    DateTimeRange dateTimeRange = _selectedDate.getDateRangeByTimeframe(
+      _selectedTimeframe,
     );
     Duration? mockLoadingTime;
-    switch (selectedTimeframe) {
+    switch (_selectedTimeframe) {
       case Timeframe.day:
         break;
       case Timeframe.week:
@@ -57,7 +62,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
         mockLoadingTime = Duration(milliseconds: 2500);
         break;
     }
-    bloc.add(
+    _bloc.add(
       LoadScoresEvent(
         from: dateTimeRange.start,
         to: dateTimeRange.end,
@@ -66,16 +71,22 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     );
   }
 
+  Color _scaffoldFadeColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.light
+        ? AppColors.surfaceLight
+        : Colors.black;
+  }
+
   void _onSelectedDateChange(DateTime date, Timeframe timeframe) {
     setState(() {
-      selectedDate = date;
+      _selectedDate = date;
     });
     _loadScoresForCurrentTimeframe();
   }
 
   void _onSelectedTimeframeChange(Timeframe timeframe) {
     setState(() {
-      selectedTimeframe = timeframe;
+      _selectedTimeframe = timeframe;
     });
     _loadScoresForCurrentTimeframe();
   }
@@ -85,38 +96,6 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     List<DataPoint> sortedDataPoints = [...dataPoints];
     sortedDataPoints.sort((a, b) => a.date.isBefore(b.date) ? -1 : 1);
     return sortedDataPoints.first.date;
-  }
-
-  void _showScoreInfo(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      barrierColor: Colors.black.withValues(alpha: 0.5),
-      isScrollControlled: true, // allows full height if needed
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (_) {
-        return DraggableScrollableSheet(
-          expand: false,
-          builder: (_, controller) {
-            return Container(
-              padding: const EdgeInsets.all(16),
-              child: ListView(
-                controller: controller,
-                children: const [
-                  Text(
-                    "Your Bottom Drawer",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 20),
-                  Text("Place your content here..."),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
   }
 
   List<Widget> _separatedWidgets({
@@ -135,6 +114,233 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     }
 
     return result;
+  }
+
+  void _onShowMonthlyAveragesToggle(bool show) {
+    setState(() {
+      _showMonthlyAverages = show;
+    });
+  }
+
+  Widget _buildRadialGauge(BuildContext context, double value) {
+    return Container(
+      height: 200,
+      child: Row(
+        children: [
+          Expanded(
+            child: ConcentricDotsStackContainer(
+              children: [
+                RadialGauge(
+                  value: value.round(),
+                  valueColor: widget.scoreType.accentColor,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _buildInfoMetricWidgets(Score? score) {
+    late List<Widget> widgets;
+
+    if (score == null) {
+      int cardCount = 0;
+      switch (widget.scoreType) {
+        case ScoreType.activity:
+        case ScoreType.readiness:
+          cardCount = 3;
+          break;
+        case ScoreType.health:
+          cardCount = 6;
+          break;
+      }
+      widgets = List.generate(cardCount, (index) => ScoreInfoCard.loading());
+    } else {
+      double _toDouble(num? number) => number?.toDouble() ?? 0;
+      int _round(num? number) => number?.round() ?? 0;
+
+      final activityCards = [
+        ScoreInfoCard(
+          icon: AppIcon(AppIconPaths.star, color: AppColors.green),
+          title: tr.activePoints,
+          value: _toDouble(score.activePoints),
+          scoreValue: _toDouble(score.activePointsScore),
+          displayValue: (value) => '${_round(value)} pts',
+        ),
+        ScoreInfoCard(
+          icon: AppIcon(AppIconPaths.steps, color: AppColors.green),
+          title: tr.steps,
+          value: _toDouble(score.steps),
+          scoreValue: _toDouble(score.stepsScore),
+        ),
+        ScoreInfoCard(
+          icon: AppIcon(AppIconPaths.timer, color: AppColors.lightBlue),
+          title: tr.moveHours,
+          value: _toDouble(score.moveHours),
+          scoreValue: _toDouble(score.moveHoursScore),
+          displayValue: (value) => '${_round(value)} h',
+        ),
+      ];
+
+      final readinessCards = [
+        ScoreInfoCard(
+          icon: AppIcon(AppIconPaths.moon, color: AppColors.purple),
+          title: tr.sleep,
+          value: _toDouble(score.sleepMinutes),
+          scoreValue: _toDouble(score.sleepScore),
+          displayValue: (value) =>
+              formatMinutesHMin(_round(score.sleepMinutes)),
+        ),
+        ScoreInfoCard(
+          icon: AppIcon(AppIconPaths.heartRate, color: AppColors.lightBlue),
+          title: tr.restingHR,
+          value: _toDouble(score.restingHeartRateBpm),
+          scoreValue: _toDouble(score.restingHeartRateScore),
+          displayValue: (value) => '${_round(value)} bpm',
+        ),
+        ScoreInfoCard(
+          icon: AppIcon(AppIconPaths.heartMonitor, color: AppColors.red),
+          title: tr.overnightHRV,
+          value: _toDouble(score.overnightHeartRateVarianceMs),
+          scoreValue: _toDouble(score.overnightHeartRateVarianceScore),
+          displayValue: (value) => '${_round(value)} ms',
+        ),
+      ];
+
+      switch (widget.scoreType) {
+        case ScoreType.activity:
+          widgets = activityCards;
+          break;
+
+        case ScoreType.readiness:
+          widgets = readinessCards;
+          break;
+
+        case ScoreType.health:
+          widgets = [...readinessCards, ...activityCards];
+          break;
+      }
+    }
+
+    return _separatedWidgets(
+      widgets: widgets,
+      separator: Divider(
+        height: 1,
+        thickness: 1,
+        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.11),
+      ),
+    );
+  }
+
+  Widget _headerWidgetBuilder(Timeframe timeframe, Score? score) {
+    if (timeframe != Timeframe.day) {
+      return Text(tr.history, style: Theme.of(context).textTheme.titleLarge);
+    }
+    return GestureDetector(
+      onTap: () => _showScoreInfoBottomSheet(context, score),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            widget.scoreType.scoreInfoTitle,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          const SizedBox(width: 10),
+          Icon(
+            Icons.help,
+            size: 20,
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.6),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showScoreInfoBottomSheet(BuildContext context, Score? score) {
+    final double sheetHeight = 0.9;
+    double gaugeValue = 0;
+    Score nonNullScore = score ?? Score.zero();
+
+    switch (widget.scoreType) {
+      case ScoreType.activity:
+        gaugeValue = nonNullScore.activityScore.toDouble();
+        break;
+      case ScoreType.readiness:
+        gaugeValue = nonNullScore.readinessScore.toDouble();
+        break;
+      case ScoreType.health:
+        gaugeValue = nonNullScore.healthScore.toDouble();
+        break;
+    }
+
+    showModalBottomSheet(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.5),
+      isScrollControlled: true, // allows full height if needed
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (_) {
+        return DraggableScrollableSheet(
+          expand: false,
+          minChildSize: sheetHeight,
+          maxChildSize: sheetHeight,
+          initialChildSize: sheetHeight,
+          builder: (_, controller) {
+            return Container(
+              padding: const EdgeInsets.all(16),
+              child: ListView(
+                controller: controller,
+                padding: EdgeInsets.only(bottom: 100),
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.scoreType.scoreInfoTitle,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: Navigator.of(context).pop,
+                        icon: Icon(Icons.close),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: 0.6),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  _buildRadialGauge(context, gaugeValue),
+                  const SizedBox(height: 20),
+                  Text(
+                    tr.metrics,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 12),
+                  ..._buildInfoMetricWidgets(score),
+                  const SizedBox(height: 20),
+                  Text(
+                    tr.howItWorks,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    widget.scoreType.scoreDescription,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   List<Widget> _buildMetricWidgets(ScoreState scoreState) {
@@ -252,9 +458,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
             end: Alignment.bottomCenter,
             colors: [
               Theme.of(context).scaffoldBackgroundColor,
-              Theme.of(context).brightness == Brightness.light
-                  ? AppColors.surfaceLight
-                  : Colors.black,
+              _scaffoldFadeColor(context),
             ],
             stops: [0.5, 0.7],
           ),
@@ -268,7 +472,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
               children: [
                 const SizedBox(height: 12),
                 BlocBuilder<ScoreBloc, ScoreState>(
-                  bloc: bloc,
+                  bloc: _bloc,
                   builder: (context, state) {
                     if (state is ScoreInitial) {
                       return const SizedBox(
@@ -276,16 +480,22 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                         child: Center(child: CircularProgressIndicator()),
                       );
                     } else if (state is ScoreLoading || state is ScoreLoaded) {
+                      List<Score>? scores;
                       List<DataPoint>? dataPoints;
+                      Score? selectedDateScore;
                       bool isLoading = state is ScoreLoading;
 
                       if (state is ScoreLoaded) {
-                        dataPoints = state.scores
+                        scores = state.scores;
+                        dataPoints = scores
                             .map(
                               (score) =>
                                   score.toDataPointByType(widget.scoreType),
                             )
                             .toList();
+                        selectedDateScore = scores.firstWhere(
+                          (score) => score.date.isSameDateAs(_selectedDate),
+                        );
                       }
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -298,8 +508,8 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                               children: [
                                 Expanded(
                                   child: TimeframeDataView(
-                                    selectedDate: selectedDate,
-                                    selectedTimeFrame: selectedTimeframe,
+                                    selectedDate: _selectedDate,
+                                    selectedTimeFrame: _selectedTimeframe,
                                     onSelectedDateChange: _onSelectedDateChange,
                                     onSelectedTimeframeChange:
                                         _onSelectedTimeframeChange,
@@ -307,63 +517,31 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                                     dataPoints: dataPoints,
                                     isLoading: isLoading,
                                     color: widget.scoreType.accentColor,
-                                    gaugeBuilder: (context, value) => Container(
-                                      height: 200,
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: ConcentricDotsStackContainer(
-                                              children: [
-                                                RadialGauge(
-                                                  value: value.round(),
-                                                  valueColor: widget
-                                                      .scoreType
-                                                      .accentColor,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    headerWidgetBuilder:
-                                        (
-                                          Timeframe timeframe,
-                                        ) => timeframe != Timeframe.day
-                                        ? Text(
-                                            tr.history,
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.titleLarge,
-                                          )
-                                        : Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text(
-                                                widget.scoreType.scoreInfoTitle,
-                                                style: Theme.of(
-                                                  context,
-                                                ).textTheme.titleLarge,
-                                              ),
-                                              IconButton(
-                                                onPressed: () =>
-                                                    _showScoreInfo(context),
-                                                iconSize: 20,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onSurface
-                                                    .withValues(alpha: 0.6),
-                                                icon: Icon(Icons.help),
-                                              ),
-                                            ],
-                                          ),
+                                    showMonthlyAverages: _showMonthlyAverages,
+                                    onShowMonthlyAveragesToggle:
+                                        _onShowMonthlyAveragesToggle,
+                                    gaugeBuilder: _buildRadialGauge,
+                                    headerWidgetBuilder: (timeframe) =>
+                                        _headerWidgetBuilder(
+                                          timeframe,
+                                          selectedDateScore,
+                                        ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
+                          if (state is ScoreLoaded)
+                            ScoreInsightsView(
+                              items: generateContextualInsights(
+                                _selectedTimeframe,
+                                scores!,
+                                widget.scoreType,
+                                selectedDateScore,
+                              ),
+                              color: _scaffoldFadeColor(context),
+                              constraints: BoxConstraints(minHeight: 90),
+                            ),
                           const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -372,9 +550,11 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                                 tr.metrics,
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
-                              if (selectedTimeframe != Timeframe.day)
+                              if (_selectedTimeframe != Timeframe.day)
                                 Text(
-                                  tr.timeframeAvg(selectedTimeframe.name),
+                                  tr.timeframeAvg(
+                                    '${_selectedTimeframe.name}${(_selectedTimeframe == Timeframe.year && _showMonthlyAverages) ? 'Monthly' : ''}',
+                                  ),
                                   style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                             ],

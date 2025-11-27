@@ -1,7 +1,21 @@
-String formatMinutesHM(num minutes) {
-  final totalMinutes = minutes.round(); // or .floor() depending on your needs
-  final h = totalMinutes ~/ 60;
-  final m = totalMinutes % 60;
+import 'package:flutter/material.dart';
 
-  return '${h}h ${m}m';
+TimeOfDay timeOfDatFromMinutes(num minutes) {
+  final totalMinutes = minutes.round();
+  final hour = totalMinutes ~/ 60;
+  final minute = totalMinutes % 60;
+
+  return TimeOfDay(hour: hour, minute: minute);
+}
+
+String formatMinutesHM(num minutes) {
+  final TimeOfDay timeOfDay = timeOfDatFromMinutes(minutes);
+
+  return '${timeOfDay.hour}h ${timeOfDay.minute}m';
+}
+
+String formatMinutesHMin(num minutes) {
+  final TimeOfDay timeOfDay = timeOfDatFromMinutes(minutes);
+
+  return '${timeOfDay.hour} h ${timeOfDay.minute} min';
 }

@@ -302,11 +302,11 @@ abstract class AppLocalizations {
   /// **'1Y'**
   String get timeframe1Y;
 
-  /// No description provided for @line.
+  /// No description provided for @monthly.
   ///
   /// In en, this message translates to:
-  /// **'Line'**
-  String get line;
+  /// **'Monthly'**
+  String get monthly;
 
   /// No description provided for @insightsTitle.
   ///
@@ -323,7 +323,7 @@ abstract class AppLocalizations {
   /// No description provided for @timeframeAvg.
   ///
   /// In en, this message translates to:
-  /// **'{timeframe, select, day{} week {Daily Avg.} month {Daily Avg.} year {Monthly Avg.} other{}}'**
+  /// **'{timeframe, select, day{} week {Daily Avg.} month {Daily Avg.} year {Daily Avg.} yearMonthly {Monthly Avg.} other{}}'**
   String timeframeAvg(String timeframe);
 
   /// No description provided for @about.
@@ -373,6 +373,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your Health Score brings rest and activity together into one number, showing how balanced your day is. It\'s the average of your Readiness and Activity scores.\n\nA score of 80 represents your personal baseline. This is the point where your daily metrics align with your 30-day averages. Get above 80 and you\'re performing beyond your usual. Fall below 80 and see which areas of your health need more attention.'**
   String get scoreMetricsDescriptionHealth;
+
+  /// No description provided for @insightInsufficientData.
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough data to provide insights.'**
+  String get insightInsufficientData;
+
+  /// No description provided for @insightBetterThanPreviousPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'{metric} is higher than {period}: {value} ({change}% ↑).'**
+  String insightBetterThanPreviousPeriod(
+    Object change,
+    Object metric,
+    Object period,
+    Object value,
+  );
+
+  /// No description provided for @insightWorseThanPreviousPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'{metric} is lower than {period}: {value} ({change}% ↓).'**
+  String insightWorseThanPreviousPeriod(
+    Object change,
+    Object metric,
+    Object period,
+    Object value,
+  );
+
+  /// No description provided for @insightNoChangeSincePreviousPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'{metric} is about the same as {period}: {value}.'**
+  String insightNoChangeSincePreviousPeriod(
+    Object metric,
+    Object period,
+    Object value,
+  );
+
+  /// No description provided for @insightBigImprovement.
+  ///
+  /// In en, this message translates to:
+  /// **'{metric} shows a big improvement vs {period}: {value} (+{change}%).'**
+  String insightBigImprovement(
+    Object change,
+    Object metric,
+    Object period,
+    Object value,
+  );
+
+  /// No description provided for @insightBigDrop.
+  ///
+  /// In en, this message translates to:
+  /// **'{metric} dropped notably vs {period}: {value} ({change}%).'**
+  String insightBigDrop(
+    Object change,
+    Object metric,
+    Object period,
+    Object value,
+  );
+
+  /// No description provided for @insightUpwardTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'{metric} shows an upward trend over the selected period.'**
+  String insightUpwardTrend(Object metric);
+
+  /// No description provided for @insightDownwardTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'{metric} shows a downward trend over the selected period.'**
+  String insightDownwardTrend(Object metric);
+
+  /// No description provided for @insightStableTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'{metric} has been stable over the selected period.'**
+  String insightStableTrend(Object metric);
+
+  /// No description provided for @insightHighVariability.
+  ///
+  /// In en, this message translates to:
+  /// **'{metric} has high variability (SD {sd}).'**
+  String insightHighVariability(Object metric, Object sd);
+
+  /// No description provided for @insightLowVariability.
+  ///
+  /// In en, this message translates to:
+  /// **'{metric} shows low variability.'**
+  String insightLowVariability(Object metric);
+
+  /// No description provided for @insightTargetMet.
+  ///
+  /// In en, this message translates to:
+  /// **'{metric} is meeting the target: {value}.'**
+  String insightTargetMet(Object metric, Object value);
+
+  /// No description provided for @insightTargetNotMet.
+  ///
+  /// In en, this message translates to:
+  /// **'{metric} is below the target: {value}.'**
+  String insightTargetNotMet(Object metric, Object value);
+
+  /// No description provided for @insightSleepInTarget.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep duration is within the healthy target range: {value}.'**
+  String insightSleepInTarget(Object value);
+
+  /// No description provided for @insightSleepTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep duration is below the healthy range: {value}.'**
+  String insightSleepTooShort(Object value);
+
+  /// No description provided for @insightSleepTooLong.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep duration is above the healthy range: {value}.'**
+  String insightSleepTooLong(Object value);
+
+  /// No description provided for @periodYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'yesterday'**
+  String get periodYesterday;
+
+  /// No description provided for @periodLastWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'last week'**
+  String get periodLastWeek;
+
+  /// No description provided for @periodLastMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'last month'**
+  String get periodLastMonth;
+
+  /// No description provided for @periodLastYear.
+  ///
+  /// In en, this message translates to:
+  /// **'last year'**
+  String get periodLastYear;
+
+  /// No description provided for @plusInfinity.
+  ///
+  /// In en, this message translates to:
+  /// **'—'**
+  String get plusInfinity;
+
+  /// No description provided for @valueUnitPts.
+  ///
+  /// In en, this message translates to:
+  /// **'pts'**
+  String get valueUnitPts;
+
+  /// No description provided for @valueUnitH.
+  ///
+  /// In en, this message translates to:
+  /// **'h'**
+  String get valueUnitH;
+
+  /// No description provided for @valueUnitBpm.
+  ///
+  /// In en, this message translates to:
+  /// **'bpm'**
+  String get valueUnitBpm;
+
+  /// No description provided for @valueUnitMs.
+  ///
+  /// In en, this message translates to:
+  /// **'ms'**
+  String get valueUnitMs;
+
+  /// No description provided for @valueUnitSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'steps'**
+  String get valueUnitSteps;
+
+  /// No description provided for @valueUnitKcal.
+  ///
+  /// In en, this message translates to:
+  /// **'kcal'**
+  String get valueUnitKcal;
 }
 
 class _AppLocalizationsDelegate

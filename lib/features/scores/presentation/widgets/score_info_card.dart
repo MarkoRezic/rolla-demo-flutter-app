@@ -2,40 +2,39 @@
 // ScoreCard widget implementation
 
 import 'package:flutter/material.dart';
+import 'package:rolla_demo_app/core/assets/app_icon_paths.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/app_icon.dart';
-import 'package:rolla_demo_app/core/theme/app_colors.dart';
 import 'package:rolla_demo_app/core/theme/app_theme.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/score_linear_progress_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ScoreCard extends StatelessWidget {
+class ScoreInfoCard extends StatelessWidget {
   final Widget? icon;
   final String title;
   final double? value;
   final double? scoreValue;
   final String Function(double? value)? displayValue;
-  final VoidCallback? onTap;
+  final Color? backgroundColor;
   final bool isLoading;
 
-  const ScoreCard({
+  const ScoreInfoCard({
     Key? key,
     this.icon,
     required this.title,
     required this.value,
     this.scoreValue,
     this.displayValue,
-    this.onTap,
+    this.backgroundColor,
     this.isLoading = false,
   }) : super(key: key);
 
   // Named constructor for shimmer state
-  ScoreCard.loading({Key? key})
+  ScoreInfoCard.loading({Key? key})
     : icon = null,
       title = '',
       value = null,
       scoreValue = null,
       displayValue = null,
-      onTap = null,
+      backgroundColor = null,
       isLoading = true,
       super(key: key);
 
@@ -44,28 +43,12 @@ class ScoreCard extends StatelessWidget {
     return v.toStringAsFixed(0);
   }
 
-  Color _colorForPercent(BuildContext context, double percent) {
-    // thresholds: 0-50% neutral, 51-79% blue, 80+% green
-    if (percent <= 0.5) {
-      return AppColors.grey; // neutral
-    } else if (percent <= 0.79) {
-      return AppColors.blue; // blue
-    } else {
-      return AppColors.green; // green
-    }
-  }
-
   String _maybeFormatValue(double? v) =>
       displayValue != null ? displayValue!(v) : _defaultDisplayValue(v);
 
   @override
   Widget build(BuildContext context) {
     final display = _maybeFormatValue(value);
-    final hasProgress = scoreValue != null;
-    final percent = hasProgress ? scoreValue!.clamp(0, 100) / 100 : null;
-    final progressColor = hasProgress
-        ? _colorForPercent(context, percent!)
-        : Colors.transparent;
 
     final shimmerBaseColor = AppTheme.shimmerBase(context);
     final shimmerHighlightColor = AppTheme.shimmerHighlight(context);
@@ -103,11 +86,32 @@ class ScoreCard extends StatelessWidget {
               ),
             ),
           )
-        : Text(
-            display,
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w500),
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                display,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
+                ),
+              ),
+              const SizedBox(width: 10),
+              AppIcon(AppIconPaths.star),
+              Container(
+                alignment: Alignment.centerRight,
+                width: 32,
+                child: Text(
+                  (scoreValue?.round() ?? 0).toString(),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+              ),
+            ],
           );
 
     final iconWidget = isLoading
@@ -127,56 +131,25 @@ class ScoreCard extends StatelessWidget {
 
     return Material(
       color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: onTap,
-        child: Container(
-          clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.fromBorderSide(
-              BorderSide(width: 1, color: AppTheme.lightGrey(context)),
-            ),
-          ),
-          child: Stack(
-            alignment: Alignment.center,
+      child: Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          color:
+              backgroundColor ??
+              Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.02),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 16,
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    if (iconWidget != null) iconWidget,
-                    if (iconWidget != null) const SizedBox(width: 12),
-                    Expanded(child: titleWidget),
-                    const SizedBox(width: 12),
-                    valueWidget,
-                  ],
-                ),
-              ),
-
-              if (hasProgress)
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: -ScoreCardLinearProgressIndicator.height / 2,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ScoreCardLinearProgressIndicator(
-                            value: percent!,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              titleWidget,
+              const SizedBox(width: 12),
+              if (iconWidget != null) iconWidget,
+              if (iconWidget != null) const SizedBox(width: 12),
+              const Spacer(),
+              valueWidget,
             ],
           ),
         ),

@@ -279,9 +279,9 @@ class S {
     return Intl.message('1Y', name: 'timeframe1Y', desc: '', args: []);
   }
 
-  /// `Line`
-  String get line {
-    return Intl.message('Line', name: 'line', desc: '', args: []);
+  /// `Monthly`
+  String get monthly {
+    return Intl.message('Monthly', name: 'monthly', desc: '', args: []);
   }
 
   /// `Insights`
@@ -294,7 +294,7 @@ class S {
     return Intl.message('Metrics', name: 'metrics', desc: '', args: []);
   }
 
-  /// `{timeframe, select, day{} week {Daily Avg.} month {Daily Avg.} year {Monthly Avg.} other{}}`
+  /// `{timeframe, select, day{} week {Daily Avg.} month {Daily Avg.} year {Daily Avg.} yearMonthly {Monthly Avg.} other{}}`
   String timeframeAvg(Object timeframe) {
     return Intl.select(
       timeframe,
@@ -302,7 +302,8 @@ class S {
         'day': '',
         'week': 'Daily Avg.',
         'month': 'Daily Avg.',
-        'year': 'Monthly Avg.',
+        'year': 'Daily Avg.',
+        'yearMonthly': 'Monthly Avg.',
         'other': '',
       },
       name: 'timeframeAvg',
@@ -384,6 +385,265 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Not enough data to provide insights.`
+  String get insightInsufficientData {
+    return Intl.message(
+      'Not enough data to provide insights.',
+      name: 'insightInsufficientData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{metric} is higher than {period}: {value} ({change}% ↑).`
+  String insightBetterThanPreviousPeriod(
+    Object metric,
+    Object period,
+    Object value,
+    Object change,
+  ) {
+    return Intl.message(
+      '$metric is higher than $period: $value ($change% ↑).',
+      name: 'insightBetterThanPreviousPeriod',
+      desc: '',
+      args: [metric, period, value, change],
+    );
+  }
+
+  /// `{metric} is lower than {period}: {value} ({change}% ↓).`
+  String insightWorseThanPreviousPeriod(
+    Object metric,
+    Object period,
+    Object value,
+    Object change,
+  ) {
+    return Intl.message(
+      '$metric is lower than $period: $value ($change% ↓).',
+      name: 'insightWorseThanPreviousPeriod',
+      desc: '',
+      args: [metric, period, value, change],
+    );
+  }
+
+  /// `{metric} is about the same as {period}: {value}.`
+  String insightNoChangeSincePreviousPeriod(
+    Object metric,
+    Object period,
+    Object value,
+  ) {
+    return Intl.message(
+      '$metric is about the same as $period: $value.',
+      name: 'insightNoChangeSincePreviousPeriod',
+      desc: '',
+      args: [metric, period, value],
+    );
+  }
+
+  /// `{metric} shows a big improvement vs {period}: {value} (+{change}%).`
+  String insightBigImprovement(
+    Object metric,
+    Object period,
+    Object value,
+    Object change,
+  ) {
+    return Intl.message(
+      '$metric shows a big improvement vs $period: $value (+$change%).',
+      name: 'insightBigImprovement',
+      desc: '',
+      args: [metric, period, value, change],
+    );
+  }
+
+  /// `{metric} dropped notably vs {period}: {value} ({change}%).`
+  String insightBigDrop(
+    Object metric,
+    Object period,
+    Object value,
+    Object change,
+  ) {
+    return Intl.message(
+      '$metric dropped notably vs $period: $value ($change%).',
+      name: 'insightBigDrop',
+      desc: '',
+      args: [metric, period, value, change],
+    );
+  }
+
+  /// `{metric} shows an upward trend over the selected period.`
+  String insightUpwardTrend(Object metric) {
+    return Intl.message(
+      '$metric shows an upward trend over the selected period.',
+      name: 'insightUpwardTrend',
+      desc: '',
+      args: [metric],
+    );
+  }
+
+  /// `{metric} shows a downward trend over the selected period.`
+  String insightDownwardTrend(Object metric) {
+    return Intl.message(
+      '$metric shows a downward trend over the selected period.',
+      name: 'insightDownwardTrend',
+      desc: '',
+      args: [metric],
+    );
+  }
+
+  /// `{metric} has been stable over the selected period.`
+  String insightStableTrend(Object metric) {
+    return Intl.message(
+      '$metric has been stable over the selected period.',
+      name: 'insightStableTrend',
+      desc: '',
+      args: [metric],
+    );
+  }
+
+  /// `{metric} has high variability (SD {sd}).`
+  String insightHighVariability(Object metric, Object sd) {
+    return Intl.message(
+      '$metric has high variability (SD $sd).',
+      name: 'insightHighVariability',
+      desc: '',
+      args: [metric, sd],
+    );
+  }
+
+  /// `{metric} shows low variability.`
+  String insightLowVariability(Object metric) {
+    return Intl.message(
+      '$metric shows low variability.',
+      name: 'insightLowVariability',
+      desc: '',
+      args: [metric],
+    );
+  }
+
+  /// `{metric} is meeting the target: {value}.`
+  String insightTargetMet(Object metric, Object value) {
+    return Intl.message(
+      '$metric is meeting the target: $value.',
+      name: 'insightTargetMet',
+      desc: '',
+      args: [metric, value],
+    );
+  }
+
+  /// `{metric} is below the target: {value}.`
+  String insightTargetNotMet(Object metric, Object value) {
+    return Intl.message(
+      '$metric is below the target: $value.',
+      name: 'insightTargetNotMet',
+      desc: '',
+      args: [metric, value],
+    );
+  }
+
+  /// `Sleep duration is within the healthy target range: {value}.`
+  String insightSleepInTarget(Object value) {
+    return Intl.message(
+      'Sleep duration is within the healthy target range: $value.',
+      name: 'insightSleepInTarget',
+      desc: '',
+      args: [value],
+    );
+  }
+
+  /// `Sleep duration is below the healthy range: {value}.`
+  String insightSleepTooShort(Object value) {
+    return Intl.message(
+      'Sleep duration is below the healthy range: $value.',
+      name: 'insightSleepTooShort',
+      desc: '',
+      args: [value],
+    );
+  }
+
+  /// `Sleep duration is above the healthy range: {value}.`
+  String insightSleepTooLong(Object value) {
+    return Intl.message(
+      'Sleep duration is above the healthy range: $value.',
+      name: 'insightSleepTooLong',
+      desc: '',
+      args: [value],
+    );
+  }
+
+  /// `yesterday`
+  String get periodYesterday {
+    return Intl.message(
+      'yesterday',
+      name: 'periodYesterday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `last week`
+  String get periodLastWeek {
+    return Intl.message(
+      'last week',
+      name: 'periodLastWeek',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `last month`
+  String get periodLastMonth {
+    return Intl.message(
+      'last month',
+      name: 'periodLastMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `last year`
+  String get periodLastYear {
+    return Intl.message(
+      'last year',
+      name: 'periodLastYear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `—`
+  String get plusInfinity {
+    return Intl.message('—', name: 'plusInfinity', desc: '', args: []);
+  }
+
+  /// `pts`
+  String get valueUnitPts {
+    return Intl.message('pts', name: 'valueUnitPts', desc: '', args: []);
+  }
+
+  /// `h`
+  String get valueUnitH {
+    return Intl.message('h', name: 'valueUnitH', desc: '', args: []);
+  }
+
+  /// `bpm`
+  String get valueUnitBpm {
+    return Intl.message('bpm', name: 'valueUnitBpm', desc: '', args: []);
+  }
+
+  /// `ms`
+  String get valueUnitMs {
+    return Intl.message('ms', name: 'valueUnitMs', desc: '', args: []);
+  }
+
+  /// `steps`
+  String get valueUnitSteps {
+    return Intl.message('steps', name: 'valueUnitSteps', desc: '', args: []);
+  }
+
+  /// `kcal`
+  String get valueUnitKcal {
+    return Intl.message('kcal', name: 'valueUnitKcal', desc: '', args: []);
   }
 }
 
