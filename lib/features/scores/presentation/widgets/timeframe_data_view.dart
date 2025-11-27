@@ -26,6 +26,8 @@ class TimeframeDataView extends StatefulWidget {
   final double maxY;
   final List<double> tickMarks;
   final Color? color;
+  final Color? tabBarColor;
+  final Color? gridColor;
   final double height;
   final GaugeBuilder? gaugeBuilder;
 
@@ -41,6 +43,8 @@ class TimeframeDataView extends StatefulWidget {
     this.maxY = 100,
     this.tickMarks = const [0, 25, 50, 75, 100],
     this.color,
+    this.tabBarColor,
+    this.gridColor,
     this.height = 200,
     this.gaugeBuilder,
   }) : super(key: key);
@@ -155,6 +159,12 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
     }
   }
 
+  void _toggleShowMonthlyAverages(bool show) {
+    setState(() {
+      _showMonthlyAverages = show;
+    });
+  }
+
   Widget _defaultGaugeBuilder(double gaugeValue) {
     return SizedBox(
       width: widget.height,
@@ -220,7 +230,7 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
         Shimmer.fromColors(
           baseColor: Theme.of(context).scaffoldBackgroundColor,
           highlightColor: Theme.of(context).brightness == Brightness.light
-              ? Theme.of(context).colorScheme.surface
+              ? Theme.of(context).colorScheme.surfaceContainer
               : Theme.of(context).colorScheme.surfaceContainer,
           child: Column(
             children: [
@@ -255,12 +265,16 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Tab bar
-        TabBar(
-          controller: _tabController,
-          indicatorSize: TabBarIndicatorSize.tab,
-          tabs: Timeframe.values
-              .map((t) => Tab(text: t.shortLabel(context)))
-              .toList(),
+        Container(
+          color: widget.tabBarColor ?? Theme.of(context).colorScheme.surface,
+          child: TabBar(
+            controller: _tabController,
+            indicatorSize: TabBarIndicatorSize.tab,
+            overlayColor: WidgetStatePropertyAll(Colors.transparent),
+            tabs: Timeframe.values
+                .map((t) => Tab(text: t.shortLabel(context)))
+                .toList(),
+          ),
         ),
         const SizedBox(height: 8),
         // Content
@@ -281,7 +295,11 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
                           selectedDate: _selectedDate,
                           timeframe: timeframe,
                           dataPoints: widget.dataPoints ?? [],
+                          minY: widget.minY,
+                          maxY: widget.maxY,
+                          tickMarks: widget.tickMarks,
                           color: widget.color,
+                          gridColor: widget.gridColor,
                         )
                       : TimeframeBarChartView(
                           selectedDate: _selectedDate,
@@ -289,27 +307,48 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
                             timeframe,
                           ),
                           dataPoints: widget.dataPoints ?? [],
+                          minY: widget.minY,
+                          maxY: widget.maxY,
+                          tickMarks: widget.tickMarks,
                           color: widget.color,
+                          gridColor: widget.gridColor,
                         );
                   break;
               }
 
               return Column(
                 children: [
-                  TimeframeDateSelector(
-                    selectedDate: _selectedDate,
-                    selectedTimeframe: _selectedTimeframe,
-                    onLeftPressed: _shiftLeft,
-                    onRightPressed: _shiftRight,
-                    onDateTap: () async {
-                      final picked = await showDatePicker(
-                        context: context,
-                        initialDate: _selectedDate,
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime.now(),
-                      );
-                      if (picked != null) _onDateChange(picked);
-                    },
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      if (timeframe == Timeframe.year)
+                        Row(
+                          children: [
+                            Text('Line'),
+                            SizedBox(width: 10),
+                            Switch(
+                              value: _showMonthlyAverages,
+                              onChanged: _toggleShowMonthlyAverages,
+                              activeTrackColor: widget.color,
+                            ),
+                          ],
+                        ),
+                      TimeframeDateSelector(
+                        selectedDate: _selectedDate,
+                        selectedTimeframe: _selectedTimeframe,
+                        onLeftPressed: _shiftLeft,
+                        onRightPressed: _shiftRight,
+                        onDateTap: () async {
+                          final picked = await showDatePicker(
+                            context: context,
+                            initialDate: _selectedDate,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime.now(),
+                          );
+                          if (picked != null) _onDateChange(picked);
+                        },
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 16),
                   _bodyForData(tabIndex: timeframe.index, child: child),

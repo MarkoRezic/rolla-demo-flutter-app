@@ -27,11 +27,11 @@ class TimeframeDateSelector extends StatelessWidget {
     final locale = Localizations.localeOf(context).toString();
     switch (selectedTimeframe) {
       case Timeframe.day:
-        return DateFormat.yMMMMd(locale);
+        return DateFormat.MMMd(locale);
       case Timeframe.week:
-        return DateFormat.yMMMd(locale);
+        return DateFormat.MMMd(locale);
       case Timeframe.month:
-        return DateFormat.yMMM(locale);
+        return DateFormat.MMMM(locale);
       case Timeframe.year:
         return DateFormat.y(locale);
     }

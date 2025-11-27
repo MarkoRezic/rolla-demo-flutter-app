@@ -1,6 +1,7 @@
 {
   "@@locale": "en",
   "appTitle": "Rolla Demo",
+  "error": "Error",
   "settings": "Settings",
   "language": "Language",
   "selectLanguage": "Select language",

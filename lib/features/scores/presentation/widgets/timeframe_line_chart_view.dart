@@ -88,9 +88,13 @@ class TimeframeLineChartView extends StatelessWidget {
           (seg) => LineChartBarData(
             spots: seg,
             isCurved: true,
+            curveSmoothness: 0,
+            isStrokeCapRound: true,
+            isStrokeJoinRound: true,
+            preventCurveOverShooting: true,
             dotData: FlDotData(show: false),
-            color: Theme.of(context).colorScheme.primary,
-            barWidth: 2,
+            color: color,
+            barWidth: 1,
           ),
         )
         .toList();
@@ -122,6 +126,7 @@ class TimeframeLineChartView extends StatelessWidget {
       bottomTitles: AxisTitles(
         sideTitles: SideTitles(
           showTitles: true,
+          interval: timeframe == Timeframe.year ? 1 : null,
           getTitlesWidget: (value, meta) {
             late String label;
             final locale = Localizations.localeOf(context).toString();
@@ -153,8 +158,8 @@ class TimeframeLineChartView extends StatelessWidget {
                 final idx = value.toInt();
                 if (idx < 0 || idx >= days.length) return const SizedBox();
                 final d = days[idx];
-                // show only first day of each month
-                if (d.day != 1) return const SizedBox();
+                // show only mid day of each month
+                if (d.day != 15) return const SizedBox.shrink();
                 label = DateFormat.MMM(locale).format(d);
                 break;
             }
@@ -172,8 +177,10 @@ class TimeframeLineChartView extends StatelessWidget {
 
     return LineChart(
       LineChartData(
-        maxY: maxY,
+        minX: 0,
+        maxX: (days.length - 1).toDouble(),
         minY: minY,
+        maxY: maxY,
         lineBarsData: lineBars,
         gridData: FlGridData(
           show: true,

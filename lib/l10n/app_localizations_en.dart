@@ -12,6 +12,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Rolla Demo';
 
   @override
+  String get error => 'Error';
+
+  @override
   String get settings => 'Settings';
 
   @override

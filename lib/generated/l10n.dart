@@ -59,6 +59,11 @@ class S {
     return Intl.message('Rolla Demo', name: 'appTitle', desc: '', args: []);
   }
 
+  /// `Error`
+  String get error {
+    return Intl.message('Error', name: 'error', desc: '', args: []);
+  }
+
   /// `Settings`
   String get settings {
     return Intl.message('Settings', name: 'settings', desc: '', args: []);

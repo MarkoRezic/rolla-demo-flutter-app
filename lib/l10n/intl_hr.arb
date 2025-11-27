@@ -1,6 +1,7 @@
 {
   "@@locale": "hr",
   "appTitle": "Rolla Demo",
+  "error": "Greška",
   "settings": "Postavke",
   "language": "Jezik",
   "selectLanguage": "Odaberi jezik",

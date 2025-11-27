@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "about": MessageLookupByLibrary.simpleMessage("About"),
     "activity": MessageLookupByLibrary.simpleMessage("Activity"),
     "appTitle": MessageLookupByLibrary.simpleMessage("Rolla Demo"),
+    "error": MessageLookupByLibrary.simpleMessage("Error"),
     "exportPdf": MessageLookupByLibrary.simpleMessage("Export PDF"),
     "health": MessageLookupByLibrary.simpleMessage("Health"),
     "healthScore": MessageLookupByLibrary.simpleMessage("Health Score"),

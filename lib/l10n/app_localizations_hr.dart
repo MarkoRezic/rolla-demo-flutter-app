@@ -12,6 +12,9 @@ class AppLocalizationsHr extends AppLocalizations {
   String get appTitle => 'Rolla Demo';
 
   @override
+  String get error => 'Greška';
+
+  @override
   String get settings => 'Postavke';
 
   @override
