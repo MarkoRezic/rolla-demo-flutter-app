@@ -129,6 +129,11 @@ class S {
     return Intl.message('Scores', name: 'homeTitle', desc: '', args: []);
   }
 
+  /// `History`
+  String get history {
+    return Intl.message('History', name: 'history', desc: '', args: []);
+  }
+
   /// `Health`
   String get health {
     return Intl.message('Health', name: 'health', desc: '', args: []);
@@ -149,9 +154,79 @@ class S {
     return Intl.message('Readiness', name: 'readiness', desc: '', args: []);
   }
 
+  /// `Readiness Score`
+  String get readinessScore {
+    return Intl.message(
+      'Readiness Score',
+      name: 'readinessScore',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Activity`
   String get activity {
     return Intl.message('Activity', name: 'activity', desc: '', args: []);
+  }
+
+  /// `Activity Score`
+  String get activityScore {
+    return Intl.message(
+      'Activity Score',
+      name: 'activityScore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active points`
+  String get activePoints {
+    return Intl.message(
+      'Active points',
+      name: 'activePoints',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Steps`
+  String get steps {
+    return Intl.message('Steps', name: 'steps', desc: '', args: []);
+  }
+
+  /// `Move hours`
+  String get moveHours {
+    return Intl.message('Move hours', name: 'moveHours', desc: '', args: []);
+  }
+
+  /// `Active calories`
+  String get activeCalories {
+    return Intl.message(
+      'Active calories',
+      name: 'activeCalories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sleep`
+  String get sleep {
+    return Intl.message('Sleep', name: 'sleep', desc: '', args: []);
+  }
+
+  /// `Resting HR`
+  String get restingHR {
+    return Intl.message('Resting HR', name: 'restingHR', desc: '', args: []);
+  }
+
+  /// `Overnight HRV`
+  String get overnightHRV {
+    return Intl.message(
+      'Overnight HRV',
+      name: 'overnightHRV',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `No data`
@@ -204,14 +279,36 @@ class S {
     return Intl.message('1Y', name: 'timeframe1Y', desc: '', args: []);
   }
 
+  /// `Line`
+  String get line {
+    return Intl.message('Line', name: 'line', desc: '', args: []);
+  }
+
   /// `Insights`
   String get insightsTitle {
     return Intl.message('Insights', name: 'insightsTitle', desc: '', args: []);
   }
 
-  /// `Avg`
-  String get metricAvg {
-    return Intl.message('Avg', name: 'metricAvg', desc: '', args: []);
+  /// `Metrics`
+  String get metrics {
+    return Intl.message('Metrics', name: 'metrics', desc: '', args: []);
+  }
+
+  /// `{timeframe, select, day{} week {Daily Avg.} month {Daily Avg.} year {Monthly Avg.} other{}}`
+  String timeframeAvg(Object timeframe) {
+    return Intl.select(
+      timeframe,
+      {
+        'day': '',
+        'week': 'Daily Avg.',
+        'month': 'Daily Avg.',
+        'year': 'Monthly Avg.',
+        'other': '',
+      },
+      name: 'timeframeAvg',
+      desc: '',
+      args: [timeframe],
+    );
   }
 
   /// `About`

@@ -22,27 +22,43 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(date) => "Zadnje ažuriranje: ${date}";
 
+  static String m1(timeframe) =>
+      "${Intl.select(timeframe, {'day': '', 'week': 'Dnevni Prosjek', 'month': 'Dnevni Prosjek', 'year': 'Mjesečni Prosjek', 'other': ''})}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("About"),
+    "activeCalories": MessageLookupByLibrary.simpleMessage("Aktivne kalorije"),
+    "activePoints": MessageLookupByLibrary.simpleMessage("Aktivni bodovi"),
     "activity": MessageLookupByLibrary.simpleMessage("Aktivnost"),
+    "activityScore": MessageLookupByLibrary.simpleMessage(
+      "Rezultat Aktivnosti",
+    ),
     "appTitle": MessageLookupByLibrary.simpleMessage("Rolla Demo"),
     "error": MessageLookupByLibrary.simpleMessage("Greška"),
     "exportPdf": MessageLookupByLibrary.simpleMessage("Izvezi u PDF"),
     "health": MessageLookupByLibrary.simpleMessage("Zdravlje"),
     "healthScore": MessageLookupByLibrary.simpleMessage("Rezultat Zdravlja"),
+    "history": MessageLookupByLibrary.simpleMessage("Povijest"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Rezultati"),
     "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works?"),
     "insightsTitle": MessageLookupByLibrary.simpleMessage("Uvidi"),
     "language": MessageLookupByLibrary.simpleMessage("Jezik"),
     "lastUpdated": m0,
+    "line": MessageLookupByLibrary.simpleMessage("Linija"),
     "logout": MessageLookupByLibrary.simpleMessage("Odjava"),
-    "metricAvg": MessageLookupByLibrary.simpleMessage("Prosjek"),
+    "metrics": MessageLookupByLibrary.simpleMessage("Metrike"),
+    "moveHours": MessageLookupByLibrary.simpleMessage("Sati kretanja"),
     "noData": MessageLookupByLibrary.simpleMessage("Nema podataka"),
+    "overnightHRV": MessageLookupByLibrary.simpleMessage("Noćni HRV"),
     "pullToRefresh": MessageLookupByLibrary.simpleMessage(
       "Povuci za osvježenje",
     ),
     "readiness": MessageLookupByLibrary.simpleMessage("Spremnost"),
+    "readinessScore": MessageLookupByLibrary.simpleMessage(
+      "Rezultat Spremnosti",
+    ),
+    "restingHR": MessageLookupByLibrary.simpleMessage("Otkucaji u mirovanju"),
     "scoreDescriptionActivity": MessageLookupByLibrary.simpleMessage(
       "Vaš rezultat aktivnosti mjeri koliko ste se kretali tijekom dana i koliko je vaša aktivnost bila dosljedna. Gleda korake, aktivne bodove i sate pokreta kako bi obuhvatio i napor i učestalost.\n\nRezultat 80 predstavlja vašu osobnu osnovicu — vašu uobičajenu dnevnu aktivnost tijekom posljednjih 30 dana. Viši rezultati znače da ste premašili uobičajeni tempo ili intenzitet. Niži rezultati pokazuju blaže kretanje ili više odmora nego inače.\n\nKoristite ovaj rezultat kao motivaciju da ostanete aktivni na uravnotežen način.",
     ),
@@ -64,6 +80,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectLanguage": MessageLookupByLibrary.simpleMessage("Odaberi jezik"),
     "selectTheme": MessageLookupByLibrary.simpleMessage("Odaberi temu"),
     "settings": MessageLookupByLibrary.simpleMessage("Postavke"),
+    "sleep": MessageLookupByLibrary.simpleMessage("San"),
+    "steps": MessageLookupByLibrary.simpleMessage("Koraci"),
     "theme": MessageLookupByLibrary.simpleMessage("Tema"),
     "themeModeDark": MessageLookupByLibrary.simpleMessage("Tamna"),
     "themeModeLight": MessageLookupByLibrary.simpleMessage("Svijetla"),
@@ -74,5 +92,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "timeframe1Y": MessageLookupByLibrary.simpleMessage("1G"),
     "timeframe30D": MessageLookupByLibrary.simpleMessage("30D"),
     "timeframe7D": MessageLookupByLibrary.simpleMessage("7D"),
+    "timeframeAvg": m1,
   };
 }

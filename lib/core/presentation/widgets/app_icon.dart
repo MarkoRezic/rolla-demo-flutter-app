@@ -6,7 +6,9 @@ class AppIcon extends StatelessWidget {
   final double size;
   final Color? color;
 
-  const AppIcon(this.asset, {super.key, this.size = 24, this.color});
+  static const double defaultSize = 24;
+
+  const AppIcon(this.asset, {super.key, this.size = defaultSize, this.color});
 
   @override
   Widget build(BuildContext context) {

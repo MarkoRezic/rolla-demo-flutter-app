@@ -30,6 +30,17 @@ enum ScoreType {
     }
   }
 
+  String get scoreInfoTitle {
+    switch (this) {
+      case activity:
+        return tr.activityScore;
+      case readiness:
+        return tr.readinessScore;
+      case health:
+        return tr.healthScore;
+    }
+  }
+
   String get scoreDescription {
     switch (this) {
       case activity:

@@ -45,6 +45,9 @@ class AppLocalizationsHr extends AppLocalizations {
   String get homeTitle => 'Rezultati';
 
   @override
+  String get history => 'Povijest';
+
+  @override
   String get health => 'Zdravlje';
 
   @override
@@ -54,7 +57,34 @@ class AppLocalizationsHr extends AppLocalizations {
   String get readiness => 'Spremnost';
 
   @override
+  String get readinessScore => 'Rezultat Spremnosti';
+
+  @override
   String get activity => 'Aktivnost';
+
+  @override
+  String get activityScore => 'Rezultat Aktivnosti';
+
+  @override
+  String get activePoints => 'Aktivni bodovi';
+
+  @override
+  String get steps => 'Koraci';
+
+  @override
+  String get moveHours => 'Sati kretanja';
+
+  @override
+  String get activeCalories => 'Aktivne kalorije';
+
+  @override
+  String get sleep => 'San';
+
+  @override
+  String get restingHR => 'Otkucaji u mirovanju';
+
+  @override
+  String get overnightHRV => 'Noćni HRV';
 
   @override
   String get noData => 'Nema podataka';
@@ -83,10 +113,25 @@ class AppLocalizationsHr extends AppLocalizations {
   String get timeframe1Y => '1G';
 
   @override
+  String get line => 'Linija';
+
+  @override
   String get insightsTitle => 'Uvidi';
 
   @override
-  String get metricAvg => 'Prosjek';
+  String get metrics => 'Metrike';
+
+  @override
+  String timeframeAvg(String timeframe) {
+    String _temp0 = intl.Intl.selectLogic(timeframe, {
+      'day': '',
+      'week': 'Dnevni Prosjek',
+      'month': 'Dnevni Prosjek',
+      'year': 'Mjesečni Prosjek',
+      'other': '',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get about => 'About';

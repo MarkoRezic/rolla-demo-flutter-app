@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_shadow/flutter_inset_shadow.dart';
+import 'package:rolla_demo_app/core/extensions/date_time/date_time_start_end_day.dart';
 import 'package:rolla_demo_app/core/localization/tr.dart';
+import 'package:rolla_demo_app/core/theme/app_theme.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/bar_chart_timeframe.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/timeframe.dart';
 import 'package:rolla_demo_app/features/scores/presentation/models/data_point.dart';
@@ -20,6 +22,8 @@ class TimeframeDataView extends StatefulWidget {
   final Timeframe selectedTimeFrame;
   final OnDateChange onSelectedDateChange;
   final OnTimeframeChange onSelectedTimeframeChange;
+  final DateTime? minDate;
+  final DateTime? maxDate;
   final List<DataPoint>? dataPoints;
   final bool isLoading;
   final double minY;
@@ -30,6 +34,7 @@ class TimeframeDataView extends StatefulWidget {
   final Color? gridColor;
   final double height;
   final GaugeBuilder? gaugeBuilder;
+  final Widget Function(Timeframe timeframe)? headerWidgetBuilder;
 
   const TimeframeDataView({
     Key? key,
@@ -37,6 +42,8 @@ class TimeframeDataView extends StatefulWidget {
     required this.selectedTimeFrame,
     required this.onSelectedDateChange,
     required this.onSelectedTimeframeChange,
+    this.minDate,
+    this.maxDate,
     this.dataPoints,
     this.isLoading = false,
     this.minY = 0,
@@ -47,6 +54,7 @@ class TimeframeDataView extends StatefulWidget {
     this.gridColor,
     this.height = 200,
     this.gaugeBuilder,
+    this.headerWidgetBuilder,
   }) : super(key: key);
 
   @override
@@ -97,8 +105,10 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
   }
 
   void _onDateChange(DateTime newDate) {
-    setState(() => _selectedDate = newDate);
-    widget.onSelectedDateChange(newDate, _selectedTimeframe);
+    setState(() {
+      _selectedDate = newDate;
+      widget.onSelectedDateChange(newDate, _selectedTimeframe);
+    });
   }
 
   void _shiftLeft() {
@@ -159,6 +169,22 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
     }
   }
 
+  DateTime get _firstDate =>
+      (widget.minDate ?? DateTime(2000)).subtract(Duration(days: 2)).startOfDay;
+  DateTime get _lastDate => (widget.maxDate ?? DateTime.now()).startOfDay;
+
+  void Function()? get _onLeftPressed =>
+      _selectedDate
+          .subtract(const Duration(days: 1))
+          .startOfDay
+          .isBefore(_firstDate)
+      ? null
+      : _shiftLeft;
+  void Function()? get _onRightPressed =>
+      _selectedDate.add(const Duration(days: 1)).startOfDay.isAfter(_lastDate)
+      ? null
+      : _shiftRight;
+
   void _toggleShowMonthlyAverages(bool show) {
     setState(() {
       _showMonthlyAverages = show;
@@ -209,6 +235,13 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
     return _defaultGaugeBuilder(gaugeValue);
   }
 
+  Widget _defaultHeaderWidget(Timeframe timeframe) => const SizedBox.shrink();
+
+  Widget _buildHeaderWidget() {
+    return widget.headerWidgetBuilder?.call(_selectedTimeframe) ??
+        _defaultHeaderWidget(_selectedTimeframe);
+  }
+
   Widget _bodyForData({required int tabIndex, required Widget child}) {
     if (tabIndex != _tabController.index || widget.isLoading) {
       return Expanded(child: _buildShimmerSkeleton());
@@ -228,17 +261,11 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
     return Stack(
       children: [
         Shimmer.fromColors(
-          baseColor: Theme.of(context).scaffoldBackgroundColor,
-          highlightColor: Theme.of(context).brightness == Brightness.light
-              ? Theme.of(context).colorScheme.surfaceContainer
-              : Theme.of(context).colorScheme.surfaceContainer,
+          baseColor: AppTheme.shimmerBase(context),
+          highlightColor: AppTheme.shimmerHighlight(context),
           child: Column(
             children: [
-              Expanded(
-                child: Container(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                ),
-              ),
+              Expanded(child: Container(color: AppTheme.shimmerBase(context))),
             ],
           ),
         ),
@@ -247,7 +274,7 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
             color: Colors.transparent,
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).scaffoldBackgroundColor,
+                color: AppTheme.shimmerBase(context),
                 blurRadius: 20,
                 spreadRadius: 10,
                 inset: true,
@@ -321,10 +348,12 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      _buildHeaderWidget(),
+                      Spacer(),
                       if (timeframe == Timeframe.year)
                         Row(
                           children: [
-                            Text('Line'),
+                            Text(tr.line),
                             SizedBox(width: 10),
                             Switch(
                               value: _showMonthlyAverages,
@@ -336,14 +365,14 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
                       TimeframeDateSelector(
                         selectedDate: _selectedDate,
                         selectedTimeframe: _selectedTimeframe,
-                        onLeftPressed: _shiftLeft,
-                        onRightPressed: _shiftRight,
+                        onLeftPressed: _onLeftPressed,
+                        onRightPressed: _onRightPressed,
                         onDateTap: () async {
                           final picked = await showDatePicker(
                             context: context,
                             initialDate: _selectedDate,
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime.now(),
+                            firstDate: _firstDate,
+                            lastDate: _lastDate,
                           );
                           if (picked != null) _onDateChange(picked);
                         },

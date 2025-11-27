@@ -22,25 +22,37 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(date) => "Last updated: ${date}";
 
+  static String m1(timeframe) =>
+      "${Intl.select(timeframe, {'day': '', 'week': 'Daily Avg.', 'month': 'Daily Avg.', 'year': 'Monthly Avg.', 'other': ''})}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("About"),
+    "activeCalories": MessageLookupByLibrary.simpleMessage("Active calories"),
+    "activePoints": MessageLookupByLibrary.simpleMessage("Active points"),
     "activity": MessageLookupByLibrary.simpleMessage("Activity"),
+    "activityScore": MessageLookupByLibrary.simpleMessage("Activity Score"),
     "appTitle": MessageLookupByLibrary.simpleMessage("Rolla Demo"),
     "error": MessageLookupByLibrary.simpleMessage("Error"),
     "exportPdf": MessageLookupByLibrary.simpleMessage("Export PDF"),
     "health": MessageLookupByLibrary.simpleMessage("Health"),
     "healthScore": MessageLookupByLibrary.simpleMessage("Health Score"),
+    "history": MessageLookupByLibrary.simpleMessage("History"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Scores"),
     "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works?"),
     "insightsTitle": MessageLookupByLibrary.simpleMessage("Insights"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "lastUpdated": m0,
+    "line": MessageLookupByLibrary.simpleMessage("Line"),
     "logout": MessageLookupByLibrary.simpleMessage("Log Out"),
-    "metricAvg": MessageLookupByLibrary.simpleMessage("Avg"),
+    "metrics": MessageLookupByLibrary.simpleMessage("Metrics"),
+    "moveHours": MessageLookupByLibrary.simpleMessage("Move hours"),
     "noData": MessageLookupByLibrary.simpleMessage("No data"),
+    "overnightHRV": MessageLookupByLibrary.simpleMessage("Overnight HRV"),
     "pullToRefresh": MessageLookupByLibrary.simpleMessage("Pull to refresh"),
     "readiness": MessageLookupByLibrary.simpleMessage("Readiness"),
+    "readinessScore": MessageLookupByLibrary.simpleMessage("Readiness Score"),
+    "restingHR": MessageLookupByLibrary.simpleMessage("Resting HR"),
     "scoreDescriptionActivity": MessageLookupByLibrary.simpleMessage(
       "Your Activity Score measures how much you’ve moved throughout the day and how consistent your activity has been. It looks at your steps, active points, and move hours to capture both effort and frequency.\n\nA score of 80 represents your personal baseline, your typical daily activity over the past 30 days. Higher scores mean you’ve gone above your usual pace or intensity. Lower scores show lighter movement or more rest than normal.\n\nUse this score as your motivation to stay active in a balanced way.",
     ),
@@ -62,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectLanguage": MessageLookupByLibrary.simpleMessage("Select language"),
     "selectTheme": MessageLookupByLibrary.simpleMessage("Select theme"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+    "sleep": MessageLookupByLibrary.simpleMessage("Sleep"),
+    "steps": MessageLookupByLibrary.simpleMessage("Steps"),
     "theme": MessageLookupByLibrary.simpleMessage("Theme"),
     "themeModeDark": MessageLookupByLibrary.simpleMessage("Dark"),
     "themeModeLight": MessageLookupByLibrary.simpleMessage("Light"),
@@ -70,5 +84,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "timeframe1Y": MessageLookupByLibrary.simpleMessage("1Y"),
     "timeframe30D": MessageLookupByLibrary.simpleMessage("30D"),
     "timeframe7D": MessageLookupByLibrary.simpleMessage("7D"),
+    "timeframeAvg": m1,
   };
 }

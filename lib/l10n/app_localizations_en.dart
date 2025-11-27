@@ -45,6 +45,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeTitle => 'Scores';
 
   @override
+  String get history => 'History';
+
+  @override
   String get health => 'Health';
 
   @override
@@ -54,7 +57,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get readiness => 'Readiness';
 
   @override
+  String get readinessScore => 'Readiness Score';
+
+  @override
   String get activity => 'Activity';
+
+  @override
+  String get activityScore => 'Activity Score';
+
+  @override
+  String get activePoints => 'Active points';
+
+  @override
+  String get steps => 'Steps';
+
+  @override
+  String get moveHours => 'Move hours';
+
+  @override
+  String get activeCalories => 'Active calories';
+
+  @override
+  String get sleep => 'Sleep';
+
+  @override
+  String get restingHR => 'Resting HR';
+
+  @override
+  String get overnightHRV => 'Overnight HRV';
 
   @override
   String get noData => 'No data';
@@ -83,10 +113,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get timeframe1Y => '1Y';
 
   @override
+  String get line => 'Line';
+
+  @override
   String get insightsTitle => 'Insights';
 
   @override
-  String get metricAvg => 'Avg';
+  String get metrics => 'Metrics';
+
+  @override
+  String timeframeAvg(String timeframe) {
+    String _temp0 = intl.Intl.selectLogic(timeframe, {
+      'day': '',
+      'week': 'Daily Avg.',
+      'month': 'Daily Avg.',
+      'year': 'Monthly Avg.',
+      'other': '',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get about => 'About';

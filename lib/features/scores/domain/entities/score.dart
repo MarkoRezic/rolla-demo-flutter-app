@@ -214,4 +214,35 @@ class Score extends Equatable {
   // Target: 6.0 hours/day of meaningful movement.
   // Reasonable range: 1–4 hours depending on lifestyle.
   static const double moveHoursTarget = 6.0;
+
+  Score operator +(Score other) {
+    return Score(
+      id: 0,
+      date: date,
+      sleepMinutes: sleepMinutes + other.sleepMinutes,
+      restingHeartRateBpm: restingHeartRateBpm + other.restingHeartRateBpm,
+      overnightHeartRateVarianceMs:
+          overnightHeartRateVarianceMs + other.overnightHeartRateVarianceMs,
+      activePoints: activePoints + other.activePoints,
+      steps: steps + other.steps,
+      moveHours: moveHours + other.moveHours,
+      activeCalories: activeCalories + other.activeCalories,
+      activities: [],
+    );
+  }
+
+  Score operator /(double divisor) {
+    return Score(
+      id: id,
+      date: date,
+      sleepMinutes: sleepMinutes / divisor,
+      restingHeartRateBpm: restingHeartRateBpm / divisor,
+      overnightHeartRateVarianceMs: overnightHeartRateVarianceMs / divisor,
+      activePoints: activePoints / divisor,
+      steps: steps / divisor,
+      moveHours: moveHours / divisor,
+      activeCalories: activeCalories / divisor,
+      activities: activities,
+    );
+  }
 }

@@ -170,6 +170,12 @@ abstract class AppLocalizations {
   /// **'Scores'**
   String get homeTitle;
 
+  /// No description provided for @history.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get history;
+
   /// No description provided for @health.
   ///
   /// In en, this message translates to:
@@ -188,11 +194,65 @@ abstract class AppLocalizations {
   /// **'Readiness'**
   String get readiness;
 
+  /// No description provided for @readinessScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Readiness Score'**
+  String get readinessScore;
+
   /// No description provided for @activity.
   ///
   /// In en, this message translates to:
   /// **'Activity'**
   String get activity;
+
+  /// No description provided for @activityScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity Score'**
+  String get activityScore;
+
+  /// No description provided for @activePoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Active points'**
+  String get activePoints;
+
+  /// No description provided for @steps.
+  ///
+  /// In en, this message translates to:
+  /// **'Steps'**
+  String get steps;
+
+  /// No description provided for @moveHours.
+  ///
+  /// In en, this message translates to:
+  /// **'Move hours'**
+  String get moveHours;
+
+  /// No description provided for @activeCalories.
+  ///
+  /// In en, this message translates to:
+  /// **'Active calories'**
+  String get activeCalories;
+
+  /// No description provided for @sleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep'**
+  String get sleep;
+
+  /// No description provided for @restingHR.
+  ///
+  /// In en, this message translates to:
+  /// **'Resting HR'**
+  String get restingHR;
+
+  /// No description provided for @overnightHRV.
+  ///
+  /// In en, this message translates to:
+  /// **'Overnight HRV'**
+  String get overnightHRV;
 
   /// No description provided for @noData.
   ///
@@ -242,17 +302,29 @@ abstract class AppLocalizations {
   /// **'1Y'**
   String get timeframe1Y;
 
+  /// No description provided for @line.
+  ///
+  /// In en, this message translates to:
+  /// **'Line'**
+  String get line;
+
   /// No description provided for @insightsTitle.
   ///
   /// In en, this message translates to:
   /// **'Insights'**
   String get insightsTitle;
 
-  /// No description provided for @metricAvg.
+  /// No description provided for @metrics.
   ///
   /// In en, this message translates to:
-  /// **'Avg'**
-  String get metricAvg;
+  /// **'Metrics'**
+  String get metrics;
+
+  /// No description provided for @timeframeAvg.
+  ///
+  /// In en, this message translates to:
+  /// **'{timeframe, select, day{} week {Daily Avg.} month {Daily Avg.} year {Monthly Avg.} other{}}'**
+  String timeframeAvg(String timeframe);
 
   /// No description provided for @about.
   ///

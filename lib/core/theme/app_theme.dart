@@ -43,4 +43,12 @@ class AppTheme {
   // Color that is commonly used for dividers, grid lines, borders - adapts to theme
   static Color lightGrey(BuildContext context) =>
       Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1);
+
+  static Color shimmerBase(BuildContext context) =>
+      Theme.of(context).scaffoldBackgroundColor;
+
+  static Color shimmerHighlight(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.light
+      ? Theme.of(context).colorScheme.surfaceContainer
+      : Theme.of(context).colorScheme.surfaceContainerHigh;
 }

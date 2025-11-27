@@ -5,16 +5,16 @@ import 'package:rolla_demo_app/features/scores/presentation/enums/timeframe.dart
 class TimeframeDateSelector extends StatelessWidget {
   final DateTime selectedDate;
   final Timeframe selectedTimeframe;
-  final VoidCallback onLeftPressed;
-  final VoidCallback onRightPressed;
+  final VoidCallback? onLeftPressed;
+  final VoidCallback? onRightPressed;
   final VoidCallback onDateTap;
 
   const TimeframeDateSelector({
     Key? key,
     required this.selectedDate,
     required this.selectedTimeframe,
-    required this.onLeftPressed,
-    required this.onRightPressed,
+    this.onLeftPressed,
+    this.onRightPressed,
     required this.onDateTap,
   }) : super(key: key);
 
@@ -68,13 +68,10 @@ class TimeframeDateSelector extends StatelessWidget {
             children: [
               Text(
                 _label(context),
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(fontSize: 14),
               ),
-              if (selectedTimeframe == Timeframe.day)
-                Padding(
-                  padding: const EdgeInsets.only(left: 6),
-                  child: const Icon(Icons.calendar_today, size: 18),
-                ),
             ],
           ),
         ),
