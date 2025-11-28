@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rolla_demo_app/core/localization/tr.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/app_icon.dart';
 import 'package:rolla_demo_app/core/theme/app_theme.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/card_container.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/score_linear_progress_indicator.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/containers/card_container.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visualization/score_linear_progress_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ScoreCard extends StatelessWidget {

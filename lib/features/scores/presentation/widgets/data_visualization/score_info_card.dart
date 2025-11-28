@@ -3,7 +3,7 @@ import 'package:rolla_demo_app/core/assets/app_icon_paths.dart';
 import 'package:rolla_demo_app/core/localization/tr.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/app_icon.dart';
 import 'package:rolla_demo_app/core/theme/app_theme.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/disabled_wrapper.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/containers/disabled_wrapper.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ScoreInfoCard extends StatelessWidget {

@@ -20,13 +20,13 @@ import 'package:rolla_demo_app/features/scores/presentation/models/data_point.da
 import 'package:rolla_demo_app/features/scores/presentation/utils/generate_contextual_insights.dart';
 import 'package:rolla_demo_app/features/scores/presentation/utils/generate_short_contextual_insight.dart';
 import 'package:rolla_demo_app/features/scores/presentation/utils/time_utils.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/concentric_dots_stack_container.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/radial_gauge.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/score_activity_card.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/score_card.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/score_info_card.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/score_insights_view.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/timeframe_data_view.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/containers/concentric_dots_stack_container.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visualization/radial_gauge.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visualization/score_activity_card.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visualization/score_card.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visualization/score_info_card.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visualization/score_insights_view.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visualization/timeframe/timeframe_data_view.dart';
 
 class ScoreDetailPage extends StatefulWidget {
   final ScoreType scoreType;

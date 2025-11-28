@@ -6,9 +6,9 @@ import 'package:rolla_demo_app/core/theme/app_theme.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/bar_chart_timeframe.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/timeframe.dart';
 import 'package:rolla_demo_app/features/scores/presentation/models/data_point.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/timeframe_bar_chart_view.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/timeframe_date_selector.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/timeframe_line_chart_view.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visualization/timeframe/timeframe_bar_chart_view.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visualization/timeframe/timeframe_date_selector.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visualization/timeframe/timeframe_line_chart_view.dart';
 import 'package:shimmer/shimmer.dart';
 
 class TimeframeDataView extends StatefulWidget {

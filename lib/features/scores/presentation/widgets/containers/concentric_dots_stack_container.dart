@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:rolla_demo_app/core/theme/app_theme.dart';
-import 'package:rolla_demo_app/features/scores/presentation/widgets/concentric_dots_background.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/containers/concentric_dots_background.dart';
 
 class ConcentricDotsStackContainer extends StatefulWidget {
   final Duration animationDuration;
