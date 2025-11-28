@@ -4,18 +4,18 @@ import 'package:rolla_demo_app/core/theme/app_colors.dart';
 import 'package:rolla_demo_app/core/theme/app_theme.dart';
 
 class ScoreLinearProgressIndicator extends StatelessWidget {
-  final double value;
-  final double height;
-  final Color Function(double percent)? progressColor;
-  final Color? backgroundColor;
 
   const ScoreLinearProgressIndicator({
-    Key? key,
+    super.key,
     required this.value,
     this.height = defaultHeight,
     this.progressColor,
     this.backgroundColor,
-  }) : super(key: key);
+  });
+  final double value;
+  final double height;
+  final Color Function(double percent)? progressColor;
+  final Color? backgroundColor;
 
   static const double defaultHeight = 8;
 

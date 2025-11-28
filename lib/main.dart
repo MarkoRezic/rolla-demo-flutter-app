@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:nested/nested.dart';
 import 'package:rolla_demo_app/core/presentation/bloc/locale_cubit.dart';
 import 'package:rolla_demo_app/core/presentation/bloc/settings_cubit.dart';
 import 'package:rolla_demo_app/core/presentation/bloc/theme_cubit.dart';
@@ -14,10 +15,10 @@ import 'features/scores/presentation/pages/home_page.dart';
 import 'injection.dart' as di;
 
 Future<void> main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  await SystemChrome.setPreferredOrientations([
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
@@ -26,7 +27,7 @@ Future<void> main() async {
 
   runApp(
     MultiBlocProvider(
-      providers: [
+      providers: <SingleChildWidget>[
         BlocProvider.value(value: di.sl<LocaleCubit>()),
         BlocProvider.value(value: di.sl<ThemeCubit>()),
         BlocProvider.value(value: di.sl<SettingsCubit>()),
@@ -38,21 +39,21 @@ Future<void> main() async {
 }
 
 class RollaApp extends StatefulWidget {
-  const RollaApp({Key? key}) : super(key: key);
+  const RollaApp({super.key});
 
   @override
   State<RollaApp> createState() => _RollaAppState();
 }
 
 class _RollaAppState extends State<RollaApp> {
-  late bool _nameInitialized = di.sl<SettingsCubit>().settings.name.isNotEmpty;
+  late final bool _nameInitialized = di.sl<SettingsCubit>().settings.name.isNotEmpty;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeMode>(
-      builder: (context, themeMode) {
+      builder: (BuildContext context, ThemeMode themeMode) {
         return BlocBuilder<LocaleCubit, Locale>(
-          builder: (context, locale) {
+          builder: (BuildContext context, Locale locale) {
             return MaterialApp(
               title: 'Rolla Demo',
               theme: AppTheme.light,
@@ -60,13 +61,13 @@ class _RollaAppState extends State<RollaApp> {
               themeMode: themeMode,
               locale: locale,
               supportedLocales: LocalizationService.supportedLocales,
-              localizationsDelegates: const [
+              localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
                 LocalizationService.delegate,
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
-              home: _nameInitialized ? HomePage() : InitPage(),
+              home: _nameInitialized ? const HomePage() : const InitPage(),
             );
           },
         );

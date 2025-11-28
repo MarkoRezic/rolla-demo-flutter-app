@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 import 'app_icon.dart';
 
 class AppIconButton extends StatelessWidget {
-  final Widget icon;
-  final VoidCallback onPressed;
-  final double? size;
-  final Color? color;
 
   const AppIconButton({
     super.key,
@@ -32,6 +28,10 @@ class AppIconButton extends StatelessWidget {
       icon: AppIcon(assetPath, size: size, color: color),
     );
   }
+  final Widget icon;
+  final VoidCallback onPressed;
+  final double? size;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {

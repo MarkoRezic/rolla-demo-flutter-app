@@ -3,17 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class ScoreInsightsView extends StatefulWidget {
-  final List<String> items;
-  final Color color;
-  final Duration displayDuration;
-  final Duration transitionDuration;
-  final TextStyle? textStyle;
-  final double borderRadius;
-  final EdgeInsets padding;
-  final BoxConstraints? constraints;
-
   const ScoreInsightsView({
-    Key? key,
+    super.key,
     required this.items,
     required this.color,
     this.displayDuration = const Duration(seconds: 5),
@@ -22,7 +13,15 @@ class ScoreInsightsView extends StatefulWidget {
     this.borderRadius = 12.0,
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
     this.constraints,
-  }) : super(key: key);
+  });
+  final List<String> items;
+  final Color color;
+  final Duration displayDuration;
+  final Duration transitionDuration;
+  final TextStyle? textStyle;
+  final double borderRadius;
+  final EdgeInsets padding;
+  final BoxConstraints? constraints;
 
   @override
   State<ScoreInsightsView> createState() => _ScoreInsightsViewState();
@@ -70,15 +69,15 @@ class _ScoreInsightsViewState extends State<ScoreInsightsView> {
 
     while (mounted && _running) {
       // wait for the display duration
-      final wait = Future.delayed(widget.displayDuration);
+      final Future<dynamic> wait = Future.delayed(widget.displayDuration);
       // allow cancellation
-      await Future.any([wait, _cancelCompleter.future]);
+      await Future.any(<Future<void>>[wait, _cancelCompleter.future]);
       if (!mounted || _cancelCompleter.isCompleted) break;
 
       // fade out
       setState(() => _opacity = 0.0);
-      final fadeOut = Future.delayed(widget.transitionDuration);
-      await Future.any([fadeOut, _cancelCompleter.future]);
+      final Future<dynamic> fadeOut = Future.delayed(widget.transitionDuration);
+      await Future.any(<Future<void>>[fadeOut, _cancelCompleter.future]);
       if (!mounted || _cancelCompleter.isCompleted) break;
 
       // swap index to next
@@ -86,8 +85,8 @@ class _ScoreInsightsViewState extends State<ScoreInsightsView> {
 
       // fade in
       setState(() => _opacity = 1.0);
-      final fadeIn = Future.delayed(widget.transitionDuration);
-      await Future.any([fadeIn, _cancelCompleter.future]);
+      final Future<dynamic> fadeIn = Future.delayed(widget.transitionDuration);
+      await Future.any(<Future<void>>[fadeIn, _cancelCompleter.future]);
       if (!mounted || _cancelCompleter.isCompleted) break;
     }
   }
@@ -102,11 +101,11 @@ class _ScoreInsightsViewState extends State<ScoreInsightsView> {
   @override
   Widget build(BuildContext context) {
     final bool hasContent = widget.items.isNotEmpty;
-    final effectiveTextStyle =
+    final TextStyle? effectiveTextStyle =
         widget.textStyle ?? Theme.of(context).textTheme.bodyLarge;
 
     // Soft shadow using the same color as container, with low opacity.
-    final boxShadow = [
+    final List<BoxShadow> boxShadow = <BoxShadow>[
       BoxShadow(
         color: widget.color.withValues(alpha: 0.8),
         blurRadius: 35,
@@ -127,11 +126,11 @@ class _ScoreInsightsViewState extends State<ScoreInsightsView> {
             gradient: LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
-              colors: [
+              colors: <Color>[
                 widget.color.withValues(alpha: 0.8),
                 widget.color.withValues(alpha: 0.0),
               ],
-              stops: [0.5, 1],
+              stops: const <double>[0.5, 1],
             ),
             borderRadius: BorderRadius.circular(widget.borderRadius),
             boxShadow: boxShadow,

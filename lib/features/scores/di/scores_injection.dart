@@ -16,8 +16,8 @@ Future<void> initScores(GetIt sl) async {
     () => ScoreRepositoryImpl(dataSource: sl<LocalJsonDataSource>()),
   );
   // Use Cases
-  final getScores = GetScores(repository: sl<ScoreRepositoryImpl>());
-  final getEarliestScoreDate = GetEarliestScoreDate(
+  final GetScores getScores = GetScores(repository: sl<ScoreRepositoryImpl>());
+  final GetEarliestScoreDate getEarliestScoreDate = GetEarliestScoreDate(
     repository: sl<ScoreRepositoryImpl>(),
   );
   // Blocs (factories)

@@ -6,6 +6,17 @@ import 'package:rolla_demo_app/features/scores/presentation/extensions/list/list
 import 'package:rolla_demo_app/features/scores/presentation/models/data_point.dart';
 
 class TimeframeLineChartView extends StatelessWidget {
+  const TimeframeLineChartView({
+    super.key,
+    required this.selectedDate,
+    required this.timeframe,
+    required this.dataPoints,
+    this.minY = 0,
+    this.maxY = 100,
+    this.tickMarks = const <double>[0, 25, 50, 75, 100],
+    this.color,
+    this.gridColor,
+  });
   final DateTime selectedDate;
   final Timeframe timeframe;
   final List<DataPoint> dataPoints;
@@ -15,18 +26,6 @@ class TimeframeLineChartView extends StatelessWidget {
   final Color? color;
   final Color? gridColor;
 
-  const TimeframeLineChartView({
-    Key? key,
-    required this.selectedDate,
-    required this.timeframe,
-    required this.dataPoints,
-    this.minY = 0,
-    this.maxY = 100,
-    this.tickMarks = const [0, 25, 50, 75, 100],
-    this.color,
-    this.gridColor,
-  }) : super(key: key);
-
   DateTime _monday(DateTime d) {
     return d.subtract(Duration(days: d.weekday - 1));
   }
@@ -35,44 +34,52 @@ class TimeframeLineChartView extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime? monday;
     late List<DateTime> days;
-    final map = dataPoints.toMapByDateKey;
-    final List<List<FlSpot>> segments = [];
+    final Map<String, DataPoint?> map = dataPoints.toMapByDateKey;
+    final List<List<FlSpot>> segments = <List<FlSpot>>[];
     List<FlSpot>? currentSegment;
 
     switch (timeframe) {
       case Timeframe.day:
         monday = _monday(selectedDate);
-        days = [selectedDate.copyWith()];
+        days = <DateTime>[selectedDate.copyWith()];
         break;
       case Timeframe.week:
         monday = _monday(selectedDate);
-        days = List.generate(7, (i) => monday!.add(Duration(days: i)));
+        days = List<DateTime>.generate(
+          7,
+          (int i) => monday!.add(Duration(days: i)),
+        );
         break;
 
       case Timeframe.month:
-        final start = DateTime(selectedDate.year, selectedDate.month, 1);
-        final end = DateTime(
+        final DateTime start = DateTime(selectedDate.year, selectedDate.month);
+        final DateTime end = DateTime(
           selectedDate.year,
           selectedDate.month + 1,
-          1,
         ).subtract(const Duration(days: 1));
-        final daysCount = end.difference(start).inDays + 1;
-        days = List.generate(daysCount, (i) => start.add(Duration(days: i)));
+        final int daysCount = end.difference(start).inDays + 1;
+        days = List<DateTime>.generate(
+          daysCount,
+          (int i) => start.add(Duration(days: i)),
+        );
         break;
 
       case Timeframe.year:
-        final start = DateTime(selectedDate.year, 1, 1);
-        final end = DateTime(selectedDate.year, 12, 31);
-        final daysCount = end.difference(start).inDays + 1;
-        days = List.generate(daysCount, (i) => start.add(Duration(days: i)));
+        final DateTime start = DateTime(selectedDate.year);
+        final DateTime end = DateTime(selectedDate.year, 12, 31);
+        final int daysCount = end.difference(start).inDays + 1;
+        days = List<DateTime>.generate(
+          daysCount,
+          (int i) => start.add(Duration(days: i)),
+        );
         break;
     }
 
-    for (var i = 0; i < days.length; i++) {
-      final key = DateFormat('yyyy-MM-dd').format(days[i]);
-      final dp = map[key];
+    for (int i = 0; i < days.length; i++) {
+      final String key = DateFormat('yyyy-MM-dd').format(days[i]);
+      final DataPoint? dp = map[key];
       if (dp != null && dp.value != null) {
-        currentSegment ??= [];
+        currentSegment ??= <FlSpot>[];
         currentSegment.add(FlSpot(i.toDouble(), dp.value!.clamp(minY, maxY)));
       } else {
         if (currentSegment != null) {
@@ -83,25 +90,26 @@ class TimeframeLineChartView extends StatelessWidget {
     }
     if (currentSegment != null) segments.add(currentSegment);
 
-    final lineBars = segments
+    final List<LineChartBarData> lineBars = segments
         .map(
-          (seg) => LineChartBarData(
+          (List<FlSpot> seg) => LineChartBarData(
             spots: seg,
             isCurved: true,
             curveSmoothness: 0,
             isStrokeCapRound: true,
             isStrokeJoinRound: true,
             preventCurveOverShooting: true,
-            dotData: FlDotData(show: false),
+            dotData: const FlDotData(show: false),
             color: color,
             barWidth: 1,
           ),
         )
         .toList();
 
-    final _gridColor = gridColor ?? Colors.grey.withValues(alpha: 0.3);
+    final Color gridColorFinal =
+        gridColor ?? Colors.grey.withValues(alpha: 0.3);
 
-    final titlesData = FlTitlesData(
+    final FlTitlesData titlesData = FlTitlesData(
       rightTitles: AxisTitles(
         sideTitles: SideTitles(
           showTitles: true,
@@ -109,7 +117,7 @@ class TimeframeLineChartView extends StatelessWidget {
               ? (tickMarks[1] - tickMarks[0])
               : null,
           reservedSize: 28,
-          getTitlesWidget: (value, meta) {
+          getTitlesWidget: (double value, TitleMeta meta) {
             return Padding(
               padding: const EdgeInsets.only(left: 6),
               child: Text(
@@ -128,37 +136,40 @@ class TimeframeLineChartView extends StatelessWidget {
         sideTitles: SideTitles(
           showTitles: true,
           interval: timeframe == Timeframe.year ? 1 : null,
-          getTitlesWidget: (value, meta) {
+          getTitlesWidget: (double value, TitleMeta meta) {
             late String label;
-            final locale = Localizations.localeOf(context).toString();
+            final String locale = Localizations.localeOf(context).toString();
 
             switch (timeframe) {
               case Timeframe.day:
-                final d = days.first;
+                final DateTime d = days.first;
                 label = DateFormat.yMMMd(locale).format(d);
                 break;
 
               case Timeframe.week:
-                final idx = value.toInt();
+                final int idx = value.toInt();
                 if (idx < 0 || idx >= days.length) return const SizedBox();
-                final d = days[idx];
+                final DateTime d = days[idx];
                 label = DateFormat.E(locale).format(d);
                 break;
 
               case Timeframe.month:
-                final idx = value.toInt();
+                final int idx = value.toInt();
                 if (idx < 0 || idx >= days.length) return const SizedBox();
-                final d = days[idx];
-                final showStep = (days.length <= 10) ? 1 : (days.length ~/ 8);
-                if (showStep == 0 || idx % showStep != 0)
+                final DateTime d = days[idx];
+                final int showStep = (days.length <= 10)
+                    ? 1
+                    : (days.length ~/ 8);
+                if (showStep == 0 || idx % showStep != 0) {
                   return const SizedBox();
+                }
                 label = DateFormat.Md(locale).format(d);
                 break;
 
               case Timeframe.year:
-                final idx = value.toInt();
+                final int idx = value.toInt();
                 if (idx < 0 || idx >= days.length) return const SizedBox();
-                final d = days[idx];
+                final DateTime d = days[idx];
                 // show only mid day of each month
                 if (d.day != 15) return const SizedBox.shrink();
                 label = DateFormat.MMM(locale).format(d);
@@ -178,8 +189,8 @@ class TimeframeLineChartView extends StatelessWidget {
           },
         ),
       ),
-      leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-      topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      leftTitles: const AxisTitles(),
+      topTitles: const AxisTitles(),
     );
 
     return LineChart(
@@ -190,24 +201,18 @@ class TimeframeLineChartView extends StatelessWidget {
         maxY: maxY,
         lineBarsData: lineBars,
         gridData: FlGridData(
-          show: true,
-          drawHorizontalLine: true,
           drawVerticalLine: false,
           horizontalInterval: (tickMarks.length > 1)
               ? (tickMarks[1] - tickMarks[0])
               : null,
-          getDrawingHorizontalLine: (value) {
-            return FlLine(
-              color: _gridColor,
-              strokeWidth: 1,
-              dashArray: null, // solid line
-            );
+          getDrawingHorizontalLine: (double value) {
+            return FlLine(color: gridColorFinal, strokeWidth: 1);
           },
         ),
         extraLinesData: ExtraLinesData(
-          horizontalLines: [
-            HorizontalLine(y: minY, color: _gridColor, strokeWidth: 1),
-            HorizontalLine(y: maxY, color: _gridColor, strokeWidth: 1),
+          horizontalLines: <HorizontalLine>[
+            HorizontalLine(y: minY, color: gridColorFinal, strokeWidth: 1),
+            HorizontalLine(y: maxY, color: gridColorFinal, strokeWidth: 1),
           ],
         ),
         titlesData: titlesData,

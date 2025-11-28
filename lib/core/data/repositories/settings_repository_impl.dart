@@ -8,17 +8,17 @@ import 'package:rolla_demo_app/core/error/failure.dart';
 import 'package:rolla_demo_app/features/scores/domain/extensions/list/list_first_where_or_null.dart';
 
 class SettingsRepositoryImpl implements SettingsRepository {
-  final SharedPrefsDataSource dataSource;
 
   SettingsRepositoryImpl({required this.dataSource});
+  final SharedPrefsDataSource dataSource;
 
   @override
   Future<Either<Failure, Settings>> getSettings() async {
     try {
-      final settings = await dataSource.getAll();
+      final SettingsRecord settings = await dataSource.getAll();
 
       return right(_mapScoreRecordToDomain(settings));
-    } catch (e, st) {
+    } catch (e) {
       return left(Failure(e.toString()));
     }
   }
@@ -33,7 +33,7 @@ class SettingsRepositoryImpl implements SettingsRepository {
       );
 
       return right(settings);
-    } catch (e, st) {
+    } catch (e) {
       return left(Failure(e.toString()));
     }
   }
@@ -45,7 +45,7 @@ class SettingsRepositoryImpl implements SettingsRepository {
       themeMode: r.themeMode == null
           ? null
           : ThemeMode.values.firstWhereOrNull(
-              (mode) => mode.name == r.themeMode,
+              (ThemeMode mode) => mode.name == r.themeMode,
             ),
     );
   }

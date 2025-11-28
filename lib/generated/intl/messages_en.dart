@@ -13,7 +13,7 @@
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-final messages = new MessageLookup();
+final MessageLookup messages = new MessageLookup();
 
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
@@ -21,7 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   static String m0(type) =>
-      "${Intl.select(type, {'cardio': 'Cardio', 'strength_training': 'Strength Training', 'walking': 'Walking', 'running': 'Running', 'cycling': 'Cycling', 'yoga': 'Yoga', 'hiit': 'HIIT', 'swimming': 'Swimming', 'pilates': 'Pilates', 'dance': 'Dance', 'hiking': 'Hiking', 'intervals': 'Intervals', 'other': 'Unknown'})}";
+      "${Intl.select(type, <Object, String>{'cardio': 'Cardio', 'strength_training': 'Strength Training', 'walking': 'Walking', 'running': 'Running', 'cycling': 'Cycling', 'yoga': 'Yoga', 'hiit': 'HIIT', 'swimming': 'Swimming', 'pilates': 'Pilates', 'dance': 'Dance', 'hiking': 'Hiking', 'intervals': 'Intervals', 'other': 'Unknown'})}";
 
   static String m1(metric, period, value, change) =>
       "${metric} is higher than ${period}: ${value} (${change}% ↑).";
@@ -69,11 +69,11 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m16(date) => "Last updated: ${date}";
 
   static String m17(timeframe) =>
-      "${Intl.select(timeframe, {'day': '', 'week': 'Daily Avg.', 'month': 'Daily Avg.', 'year': 'Daily Avg.', 'yearMonthly': 'Monthly Avg.', 'other': ''})}";
+      "${Intl.select(timeframe, <Object, String>{'day': '', 'week': 'Daily Avg.', 'month': 'Daily Avg.', 'year': 'Daily Avg.', 'yearMonthly': 'Monthly Avg.', 'other': ''})}";
 
   static String m18(name) => "Welcome, ${name}";
 
-  final messages = _notInlinedMessages(_notInlinedMessages);
+  final Map<String, Function> messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("About"),
     "activeCalories": MessageLookupByLibrary.simpleMessage("Active calories"),

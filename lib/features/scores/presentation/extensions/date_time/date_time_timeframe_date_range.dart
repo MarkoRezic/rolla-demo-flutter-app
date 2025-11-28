@@ -8,27 +8,27 @@ extension DateTimeTimeframeDateRange on DateTime {
   /// - Both start and end days are included (end is set to 23:59:59.999999).
   DateTimeRange getDateRangeByTimeframe(Timeframe timeframe) {
     // helper: build DateTime preserving timezone
-    DateTime _build(DateTime template, int y, int m, int d) =>
+    DateTime build(DateTime template, int y, int m, int d) =>
         template.isUtc ? DateTime.utc(y, m, d) : DateTime(y, m, d);
 
     switch (timeframe) {
       case Timeframe.day:
-        final start = startOfDay;
-        final end = endOfDay;
+        final DateTime start = startOfDay;
+        final DateTime end = endOfDay;
         return DateTimeRange(start: start, end: end);
 
       case Timeframe.week:
         // calendar week containing `this`. ISO-like: Monday is weekday == 1
-        final monday = this.subtract(Duration(days: this.weekday - 1));
-        final sunday = monday.add(const Duration(days: 6));
+        final DateTime monday = subtract(Duration(days: weekday - 1));
+        final DateTime sunday = monday.add(const Duration(days: 6));
         return DateTimeRange(start: monday.startOfDay, end: sunday.endOfDay);
 
       case Timeframe.month:
         // calendar month containing `this`
-        final firstOfMonth = _build(this, this.year, this.month, 1);
+        final DateTime firstOfMonth = build(this, year, month, 1);
         // first day of next month (DateTime handles month overflow)
-        final firstOfNextMonth = _build(this, this.year, this.month + 1, 1);
-        final lastOfMonth = firstOfNextMonth.subtract(const Duration(days: 1));
+        final DateTime firstOfNextMonth = build(this, year, month + 1, 1);
+        final DateTime lastOfMonth = firstOfNextMonth.subtract(const Duration(days: 1));
         return DateTimeRange(
           start: firstOfMonth.startOfDay,
           end: lastOfMonth.endOfDay,
@@ -36,9 +36,9 @@ extension DateTimeTimeframeDateRange on DateTime {
 
       case Timeframe.year:
         // calendar year containing `this`
-        final firstOfYear = _build(this, this.year, 1, 1);
-        final firstOfNextYear = _build(this, this.year + 1, 1, 1);
-        final lastOfYear = firstOfNextYear.subtract(const Duration(days: 1));
+        final DateTime firstOfYear = build(this, year, 1, 1);
+        final DateTime firstOfNextYear = build(this, year + 1, 1, 1);
+        final DateTime lastOfYear = firstOfNextYear.subtract(const Duration(days: 1));
         return DateTimeRange(
           start: firstOfYear.startOfDay,
           end: lastOfYear.endOfDay,

@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rolla_demo_app/core/theme/app_theme.dart';
 
 class RoundedLinearProgressIndicator extends StatelessWidget {
-  final double value;
-  final double height;
-  final Color? color;
-  final Color? backgroundColor;
 
   const RoundedLinearProgressIndicator({
     super.key,
@@ -14,6 +10,10 @@ class RoundedLinearProgressIndicator extends StatelessWidget {
     this.color,
     this.backgroundColor,
   });
+  final double value;
+  final double height;
+  final Color? color;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {

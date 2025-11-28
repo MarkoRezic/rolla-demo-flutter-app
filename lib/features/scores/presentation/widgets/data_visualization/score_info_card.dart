@@ -7,16 +7,9 @@ import 'package:rolla_demo_app/features/scores/presentation/widgets/containers/d
 import 'package:shimmer/shimmer.dart';
 
 class ScoreInfoCard extends StatelessWidget {
-  final Widget? icon;
-  final String title;
-  final double? value;
-  final double? scoreValue;
-  final String Function(double? value)? displayValue;
-  final Color? backgroundColor;
-  final bool isLoading;
 
   const ScoreInfoCard({
-    Key? key,
+    super.key,
     this.icon,
     required this.title,
     required this.value,
@@ -24,18 +17,24 @@ class ScoreInfoCard extends StatelessWidget {
     this.displayValue,
     this.backgroundColor,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   // Named constructor for shimmer state
-  ScoreInfoCard.loading({Key? key})
+  const ScoreInfoCard.loading({super.key})
     : icon = null,
       title = '',
       value = null,
       scoreValue = null,
       displayValue = null,
       backgroundColor = null,
-      isLoading = true,
-      super(key: key);
+      isLoading = true;
+  final Widget? icon;
+  final String title;
+  final double? value;
+  final double? scoreValue;
+  final String Function(double? value)? displayValue;
+  final Color? backgroundColor;
+  final bool isLoading;
 
   String _defaultDisplayValue(double? v) {
     if (v == null) return tr.noData;
@@ -50,12 +49,12 @@ class ScoreInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final display = _maybeFormatValue(value);
+    final String display = _maybeFormatValue(value);
 
-    final shimmerBaseColor = AppTheme.shimmerBase(context);
-    final shimmerHighlightColor = AppTheme.shimmerHighlight(context);
+    final Color shimmerBaseColor = AppTheme.shimmerBase(context);
+    final Color shimmerHighlightColor = AppTheme.shimmerHighlight(context);
 
-    final titleWidget = isLoading
+    final Widget titleWidget = isLoading
         ? Shimmer.fromColors(
             baseColor: shimmerBaseColor,
             highlightColor: shimmerHighlightColor,
@@ -75,7 +74,7 @@ class ScoreInfoCard extends StatelessWidget {
             ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w400),
           );
 
-    final valueWidget = isLoading
+    final Widget valueWidget = isLoading
         ? Shimmer.fromColors(
             baseColor: shimmerBaseColor,
             highlightColor: shimmerHighlightColor,
@@ -90,7 +89,7 @@ class ScoreInfoCard extends StatelessWidget {
           )
         : Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
+            children: <Widget>[
               Text(
                 display,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -116,7 +115,7 @@ class ScoreInfoCard extends StatelessWidget {
             ],
           );
 
-    final iconWidget = isLoading
+    final Widget? iconWidget = isLoading
         ? Shimmer.fromColors(
             baseColor: shimmerBaseColor,
             highlightColor: shimmerHighlightColor,
@@ -146,8 +145,7 @@ class ScoreInfoCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 16),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 titleWidget,
                 const SizedBox(width: 12),
                 if (iconWidget != null) iconWidget,

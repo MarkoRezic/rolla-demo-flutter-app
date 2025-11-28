@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 @immutable
 class Settings {
-  final String name;
-  final String languageCode;
-  final ThemeMode themeMode;
 
   const Settings({
     required this.name,
     required this.languageCode,
     required this.themeMode,
   });
+  final String name;
+  final String languageCode;
+  final ThemeMode themeMode;
 
   Settings copyWith({
     String? name,
@@ -24,7 +24,7 @@ class Settings {
     );
   }
 
-  static const defaultSettings = Settings(
+  static const Settings defaultSettings = Settings(
     name: '',
     languageCode: 'en',
     themeMode: ThemeMode.system,

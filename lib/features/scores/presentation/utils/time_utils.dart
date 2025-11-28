@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 TimeOfDay timeOfDatFromMinutes(num minutes) {
-  final totalMinutes = minutes.round();
-  final hour = totalMinutes ~/ 60;
-  final minute = totalMinutes % 60;
+  final int totalMinutes = minutes.round();
+  final int hour = totalMinutes ~/ 60;
+  final int minute = totalMinutes % 60;
 
   return TimeOfDay(hour: hour, minute: minute);
 }
@@ -23,13 +23,13 @@ String formatMinutesHMin(num minutes) {
 String formatDuration(Duration d) {
   String twoDigits(int n) => n.toString().padLeft(2, '0');
 
-  final hours = d.inHours;
-  final minutes = d.inMinutes.remainder(60);
-  final seconds = d.inSeconds.remainder(60);
+  final int hours = d.inHours;
+  final int minutes = d.inMinutes.remainder(60);
+  final int seconds = d.inSeconds.remainder(60);
 
   if (hours > 0) {
     return "$hours:${twoDigits(minutes)}:${twoDigits(seconds)}";
   } else {
-    return "${minutes}:${twoDigits(seconds)}";
+    return "$minutes:${twoDigits(seconds)}";
   }
 }

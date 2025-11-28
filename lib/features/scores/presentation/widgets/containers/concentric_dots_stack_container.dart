@@ -5,13 +5,6 @@ import 'package:rolla_demo_app/core/theme/app_theme.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/containers/concentric_dots_background.dart';
 
 class ConcentricDotsStackContainer extends StatefulWidget {
-  final Duration animationDuration;
-  final AlignmentGeometry alignment;
-  final double? dotRadius;
-  final double? ringSpacing;
-  final double? dotSpacing;
-  final Color? baseColor;
-  final List<Widget> children;
 
   const ConcentricDotsStackContainer({
     super.key,
@@ -23,6 +16,13 @@ class ConcentricDotsStackContainer extends StatefulWidget {
     this.baseColor,
     required this.children,
   });
+  final Duration animationDuration;
+  final AlignmentGeometry alignment;
+  final double? dotRadius;
+  final double? ringSpacing;
+  final double? dotSpacing;
+  final Color? baseColor;
+  final List<Widget> children;
 
   @override
   _ConcentricDotsStackContainerState createState() =>
@@ -51,12 +51,12 @@ class _ConcentricDotsStackContainerState
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _ctrl,
-      builder: (context, child) {
+      builder: (BuildContext context, Widget? child) {
         // rotation value in radians (full spin = 2π)
-        final rotation = _ctrl.value * 2 * pi;
+        final double rotation = _ctrl.value * 2 * pi;
         return Stack(
           alignment: widget.alignment,
-          children: [
+          children: <Widget>[
             ConcentricDotsBackground(
               dotRadius: widget.dotRadius ?? 3,
               ringSpacing: widget.ringSpacing ?? 32,

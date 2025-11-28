@@ -13,17 +13,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> initCore(GetIt sl) async {
   // Data sources
-  final SharedPreferences _prefs = await SharedPreferences.getInstance();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
   sl.registerLazySingleton<SharedPrefsDataSource>(
-    () => SharedPrefsDataSource(_prefs),
+    () => SharedPrefsDataSource(prefs),
   );
   // Repositories
   sl.registerLazySingleton<SettingsRepositoryImpl>(
     () => SettingsRepositoryImpl(dataSource: sl<SharedPrefsDataSource>()),
   );
   // Use Cases
-  final getSettings = GetSettings(repository: sl<SettingsRepositoryImpl>());
-  final saveSettings = SaveSettings(repository: sl<SettingsRepositoryImpl>());
+  final GetSettings getSettings = GetSettings(repository: sl<SettingsRepositoryImpl>());
+  final SaveSettings saveSettings = SaveSettings(repository: sl<SettingsRepositoryImpl>());
 
   // Blocs (singletons since these are core)
   sl.registerLazySingleton(
@@ -31,10 +31,10 @@ Future<void> initCore(GetIt sl) async {
   );
 
   await sl<SettingsCubit>().fetchOnce();
-  Settings initialSettings = sl<SettingsCubit>().settings;
+  final Settings initialSettings = sl<SettingsCubit>().settings;
 
-  Locale initialLocale = Locale(initialSettings.languageCode);
-  ThemeMode initialThemeMode = initialSettings.themeMode;
+  final Locale initialLocale = Locale(initialSettings.languageCode);
+  final ThemeMode initialThemeMode = initialSettings.themeMode;
 
   await LocalizationService.instance.load(initialLocale);
 

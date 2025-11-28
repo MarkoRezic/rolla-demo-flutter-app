@@ -9,16 +9,9 @@ import 'package:rolla_demo_app/features/scores/presentation/widgets/containers/c
 import 'package:shimmer/shimmer.dart';
 
 class ScoreActivityCard extends StatelessWidget {
-  final Widget? icon;
-  final String title;
-  final String? category;
-  final Duration? duration;
-  final double? calories;
-  final Color? backgroundColor;
-  final bool isLoading;
 
   const ScoreActivityCard({
-    Key? key,
+    super.key,
     this.icon,
     required this.title,
     this.category,
@@ -26,9 +19,9 @@ class ScoreActivityCard extends StatelessWidget {
     this.calories,
     this.backgroundColor,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
-  ScoreActivityCard.fromActivity({Key? key, ScoreActivity? scoreActivity})
+  ScoreActivityCard.fromActivity({super.key, ScoreActivity? scoreActivity})
     : icon = null,
       title = tr.activityCategory(scoreActivity?.category ?? '???'),
       category = scoreActivity?.category,
@@ -37,19 +30,24 @@ class ScoreActivityCard extends StatelessWidget {
           : Duration(seconds: scoreActivity.durationSeconds.round()),
       calories = scoreActivity?.calories,
       backgroundColor = null,
-      isLoading = false,
-      super(key: key);
+      isLoading = false;
 
   // Named constructor for shimmer state
-  ScoreActivityCard.loading({Key? key})
+  const ScoreActivityCard.loading({super.key})
     : icon = null,
       title = '',
       category = null,
       duration = null,
       calories = null,
       backgroundColor = null,
-      isLoading = true,
-      super(key: key);
+      isLoading = true;
+  final Widget? icon;
+  final String title;
+  final String? category;
+  final Duration? duration;
+  final double? calories;
+  final Color? backgroundColor;
+  final bool isLoading;
 
   Widget _getDefaultIconForActivity(BuildContext context) {
     String iconPath = AppIconPaths.fire;
@@ -87,13 +85,13 @@ class ScoreActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displayValue = _formatDuration();
-    final displayCalories = _formatCalories();
+    final String displayValue = _formatDuration();
+    final String displayCalories = _formatCalories();
 
-    final shimmerBaseColor = AppTheme.shimmerBase(context);
-    final shimmerHighlightColor = AppTheme.shimmerHighlight(context);
+    final Color shimmerBaseColor = AppTheme.shimmerBase(context);
+    final Color shimmerHighlightColor = AppTheme.shimmerHighlight(context);
 
-    final titleWidget = isLoading
+    final Widget titleWidget = isLoading
         ? Shimmer.fromColors(
             baseColor: shimmerBaseColor,
             highlightColor: shimmerHighlightColor,
@@ -113,8 +111,8 @@ class ScoreActivityCard extends StatelessWidget {
             ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w400),
           );
 
-    double iconContainerSize = 48;
-    final iconWidget = isLoading
+    final double iconContainerSize = 48;
+    final Widget iconWidget = isLoading
         ? Shimmer.fromColors(
             baseColor: shimmerBaseColor,
             highlightColor: shimmerHighlightColor,
@@ -127,7 +125,7 @@ class ScoreActivityCard extends StatelessWidget {
         : Container(
             width: iconContainerSize,
             height: iconContainerSize,
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onSurface,
               borderRadius: BorderRadius.circular(16),
@@ -135,7 +133,7 @@ class ScoreActivityCard extends StatelessWidget {
             child: icon ?? _getDefaultIconForActivity(context),
           );
 
-    final valueWidget = isLoading
+    final Widget valueWidget = isLoading
         ? Shimmer.fromColors(
             baseColor: shimmerBaseColor,
             highlightColor: shimmerHighlightColor,
@@ -156,7 +154,7 @@ class ScoreActivityCard extends StatelessWidget {
             ),
           );
 
-    final caloriesWidget = isLoading
+    final Widget caloriesWidget = isLoading
         ? Shimmer.fromColors(
             baseColor: shimmerBaseColor,
             highlightColor: shimmerHighlightColor,
@@ -184,13 +182,13 @@ class ScoreActivityCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             iconWidget,
             const SizedBox(width: 12),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [titleWidget, caloriesWidget],
+              children: <Widget>[titleWidget, caloriesWidget],
             ),
             const SizedBox(width: 12),
             const Spacer(),

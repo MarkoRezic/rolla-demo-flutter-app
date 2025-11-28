@@ -15,19 +15,19 @@ class _InitPageState extends State<InitPage> {
   final TextEditingController _controller = TextEditingController();
 
   Future<void> _goToHomePage() async {
-    final name = _controller.text.trim();
+    final String name = _controller.text.trim();
 
-    SettingsCubit settingsCubit = GetIt.instance<SettingsCubit>();
+    final SettingsCubit settingsCubit = GetIt.instance<SettingsCubit>();
     await settingsCubit.save(settingsCubit.settings.copyWith(name: name));
 
-    Navigator.of(context).push(_fadeRoute(HomePage()));
+    Navigator.of(context).push(_fadeRoute(const HomePage()));
   }
 
   /// Custom fade transition route
   PageRouteBuilder _fadeRoute(Widget page) {
     return PageRouteBuilder(
       transitionDuration: const Duration(milliseconds: 1000),
-      pageBuilder: (context, animation, secondaryAnimation) =>
+      pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) =>
           FadeTransition(opacity: animation, child: page),
     );
   }
@@ -40,15 +40,15 @@ class _InitPageState extends State<InitPage> {
         padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Text(
               tr.welcome,
-              style: TextStyle(fontSize: 36, fontWeight: FontWeight.w400),
+              style: const TextStyle(fontSize: 36, fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 40),
             Text(
               tr.whatIsYourName,
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 20),
             TextField(
@@ -63,7 +63,7 @@ class _InitPageState extends State<InitPage> {
             const SizedBox(height: 10),
             Text(
               tr.youCanLeaveThisEmptyAndChangeLater,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 30),
             ElevatedButton(

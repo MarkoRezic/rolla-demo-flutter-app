@@ -17,7 +17,7 @@ import 'package:rolla_demo_app/features/settings/presentation/pages/settings_pag
 import 'score_detail_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     bloc = GetIt.instance<ScoreBloc>();
-    _loadCurrentDateScore(mockLoadingTime: Duration(milliseconds: 2500));
+    _loadCurrentDateScore(mockLoadingTime: const Duration(milliseconds: 2500));
   }
 
   void _loadCurrentDateScore({Duration? mockLoadingTime}) async {
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       LoadScoresEvent(
         from: startOfCurrentDay(),
         to: endOfCurrentDay(),
-        mockLoadingTime: mockLoadingTime ?? Duration(milliseconds: 1000),
+        mockLoadingTime: mockLoadingTime ?? const Duration(milliseconds: 1000),
       ),
     );
   }
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(tr.homeTitle),
-        actions: [
+        actions: <Widget>[
           AppIconButton.asset(
             AppIconPaths.settings,
             onPressed: () {
@@ -68,45 +68,46 @@ class _HomePageState extends State<HomePage> {
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
           child: Column(
-            children: [
+            children: <Widget>[
               BlocBuilder<SettingsCubit, SettingsState>(
-                builder: (context, state) {
-                  if (state is! SettingsLoaded)
-                    return CircularProgressIndicator();
+                builder: (BuildContext context, SettingsState state) {
+                  if (state is! SettingsLoaded) {
+                    return const CircularProgressIndicator();
+                  }
                   return Column(
-                    children: [
+                    children: <Widget>[
                       Text(
                         tr.welcomeName(state.settings.name),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text(
                         tr.theseAreYourScoresForToday,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
                     ],
                   );
                 },
               ),
               BlocBuilder<ScoreBloc, ScoreState>(
                 bloc: bloc,
-                builder: (context, state) {
+                builder: (BuildContext context, ScoreState state) {
                   if (state is ScoreLoading || state is ScoreInitial) {
                     return Column(
                       children: List.generate(
                         3,
-                        (i) => Padding(
+                        (int i) => Padding(
                           padding: EdgeInsets.only(bottom: i == 2 ? 0 : 20),
-                          child: ScoreCard.loading(),
+                          child: const ScoreCard.loading(),
                         ),
                       ),
                     );
                   } else if (state is ScoreLoaded) {
-                    Score? todayScore = state.scores.firstOrNull;
+                    final Score? todayScore = state.scores.firstOrNull;
 
                     return Column(
-                      children: [
+                      children: <Widget>[
                         ScoreCard(
                           icon: AppIcon(
                             AppIconPaths.heartRate,
@@ -118,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) =>
-                                  ScoreDetailPage(scoreType: ScoreType.health),
+                                  const ScoreDetailPage(scoreType: ScoreType.health),
                             ),
                           ),
                         ),
@@ -133,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                           scoreValue: todayScore?.readinessScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (_) => ScoreDetailPage(
+                              builder: (_) => const ScoreDetailPage(
                                 scoreType: ScoreType.readiness,
                               ),
                             ),
@@ -150,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                           scoreValue: todayScore?.activityScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (_) => ScoreDetailPage(
+                              builder: (_) => const ScoreDetailPage(
                                 scoreType: ScoreType.activity,
                               ),
                             ),

@@ -12,6 +12,29 @@ import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visuali
 import 'package:shimmer/shimmer.dart';
 
 class TimeframeDataView extends StatefulWidget {
+
+  const TimeframeDataView({
+    super.key,
+    required this.selectedDate,
+    required this.selectedTimeFrame,
+    required this.onSelectedDateChange,
+    required this.onSelectedTimeframeChange,
+    this.minDate,
+    this.maxDate,
+    this.dataPoints,
+    this.isLoading = false,
+    this.onShowMonthlyAveragesToggle,
+    this.showMonthlyAverages = false,
+    this.minY = 0,
+    this.maxY = 100,
+    this.tickMarks = const <double>[0, 25, 50, 75, 100],
+    this.color,
+    this.tabBarColor,
+    this.gridColor,
+    this.height = 200,
+    this.gaugeBuilder,
+    this.headerWidgetBuilder,
+  });
   final DateTime selectedDate;
   final Timeframe selectedTimeFrame;
   final void Function(DateTime selectedDate, Timeframe timeframe)
@@ -32,29 +55,6 @@ class TimeframeDataView extends StatefulWidget {
   final double height;
   final Widget Function(BuildContext context, double value)? gaugeBuilder;
   final Widget Function(Timeframe timeframe)? headerWidgetBuilder;
-
-  const TimeframeDataView({
-    Key? key,
-    required this.selectedDate,
-    required this.selectedTimeFrame,
-    required this.onSelectedDateChange,
-    required this.onSelectedTimeframeChange,
-    this.minDate,
-    this.maxDate,
-    this.dataPoints,
-    this.isLoading = false,
-    this.onShowMonthlyAveragesToggle,
-    this.showMonthlyAverages = false,
-    this.minY = 0,
-    this.maxY = 100,
-    this.tickMarks = const [0, 25, 50, 75, 100],
-    this.color,
-    this.tabBarColor,
-    this.gridColor,
-    this.height = 200,
-    this.gaugeBuilder,
-    this.headerWidgetBuilder,
-  }) : super(key: key);
 
   @override
   State<TimeframeDataView> createState() => _TimeframeDataViewState();
@@ -78,7 +78,7 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
     _tabController.index = _timeframeToIndex(_selectedTimeframe);
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) return;
-      final timeframe = Timeframe.values[_tabController.index];
+      final Timeframe timeframe = Timeframe.values[_tabController.index];
       _onTimeframeChange(timeframe);
     });
   }
@@ -168,7 +168,7 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
   }
 
   DateTime get _firstDate =>
-      (widget.minDate ?? DateTime(2000)).subtract(Duration(days: 2)).startOfDay;
+      (widget.minDate ?? DateTime(2000)).subtract(const Duration(days: 2)).startOfDay;
   DateTime get _lastDate => (widget.maxDate ?? DateTime.now()).startOfDay;
 
   void Function()? get _onLeftPressed =>
@@ -190,14 +190,14 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
       child: Center(
         child: Stack(
           alignment: Alignment.center,
-          children: [
+          children: <Widget>[
             CircularProgressIndicator(
               value: (gaugeValue - widget.minY) / (widget.maxY - widget.minY),
               strokeWidth: 16,
             ),
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: <Widget>[
                 Text(
                   gaugeValue.toStringAsFixed(0),
                   style: Theme.of(context).textTheme.titleSmall,
@@ -213,8 +213,8 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
   Widget _buildValueGauge(BuildContext context) {
     double gaugeValue = 0;
     if (widget.dataPoints != null && widget.dataPoints!.isNotEmpty) {
-      final first = widget.dataPoints!.firstWhere(
-        (dp) => dp.value != null,
+      final DataPoint first = widget.dataPoints!.firstWhere(
+        (DataPoint dp) => dp.value != null,
         orElse: () => widget.dataPoints!.first,
       );
       gaugeValue = (first.value) ?? 0;
@@ -246,17 +246,17 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
       );
     }
     // non-null data
-    return Container(height: widget.height, child: child);
+    return SizedBox(height: widget.height, child: child);
   }
 
   Widget _buildShimmerSkeleton() {
     return Stack(
-      children: [
+      children: <Widget>[
         Shimmer.fromColors(
           baseColor: AppTheme.shimmerBase(context),
           highlightColor: AppTheme.shimmerHighlight(context),
           child: Column(
-            children: [
+            children: <Widget>[
               Expanded(child: Container(color: AppTheme.shimmerBase(context))),
             ],
           ),
@@ -264,7 +264,7 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
         Container(
           decoration: BoxDecoration(
             color: Colors.transparent,
-            boxShadow: [
+            boxShadow: <BoxShadow>[
               BoxShadow(
                 color: AppTheme.shimmerBase(context),
                 blurRadius: 20,
@@ -282,16 +282,16 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
+      children: <Widget>[
         // Tab bar
         Container(
           color: widget.tabBarColor ?? Theme.of(context).colorScheme.surface,
           child: TabBar(
             controller: _tabController,
             indicatorSize: TabBarIndicatorSize.tab,
-            overlayColor: WidgetStatePropertyAll(Colors.transparent),
+            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
             tabs: Timeframe.values
-                .map((t) => Tab(text: t.shortLabel(context)))
+                .map((Timeframe t) => Tab(text: t.shortLabel(context)))
                 .toList(),
           ),
         ),
@@ -300,7 +300,7 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
         Expanded(
           child: TabBarView(
             controller: _tabController,
-            children: Timeframe.values.map((timeframe) {
+            children: Timeframe.values.map((Timeframe timeframe) {
               late Widget child;
               switch (_selectedTimeframe) {
                 case Timeframe.day:
@@ -315,7 +315,7 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
                       ? TimeframeLineChartView(
                           selectedDate: _selectedDate,
                           timeframe: timeframe,
-                          dataPoints: widget.dataPoints ?? [],
+                          dataPoints: widget.dataPoints ?? <DataPoint>[],
                           minY: widget.minY,
                           maxY: widget.maxY,
                           tickMarks: widget.tickMarks,
@@ -327,7 +327,7 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
                           barChartTimeframe: BarChartTimeframe.fromTimeframe(
                             timeframe,
                           ),
-                          dataPoints: widget.dataPoints ?? [],
+                          dataPoints: widget.dataPoints ?? <DataPoint>[],
                           minY: widget.minY,
                           maxY: widget.maxY,
                           tickMarks: widget.tickMarks,
@@ -338,19 +338,19 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
               }
 
               return Column(
-                children: [
+                children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: <Widget>[
                       _buildHeaderWidget(timeframe),
-                      Spacer(),
+                      const Spacer(),
                       if (timeframe == Timeframe.year &&
                           widget.onShowMonthlyAveragesToggle != null)
                         Row(
-                          children: [
+                          children: <Widget>[
                             Text(tr.monthly),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Switch(
                               value: widget.showMonthlyAverages,
                               onChanged: widget.onShowMonthlyAveragesToggle,
@@ -364,7 +364,7 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
                         onLeftPressed: _onLeftPressed,
                         onRightPressed: _onRightPressed,
                         onDateTap: () async {
-                          final picked = await showDatePicker(
+                          final DateTime? picked = await showDatePicker(
                             context: context,
                             initialDate: _selectedDate,
                             firstDate: _firstDate,

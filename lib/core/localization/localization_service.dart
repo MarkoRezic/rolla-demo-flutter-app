@@ -7,7 +7,7 @@ class LocalizationService {
   static final LocalizationService instance = LocalizationService._();
 
   static const AppLocalizationDelegate delegate = S.delegate;
-  static const supportedLocales = [Locale('en'), Locale('hr')];
+  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('hr')];
 
   S? _strings;
   Locale? _locale;

@@ -7,13 +7,13 @@ import 'package:rolla_demo_app/features/scores/domain/usecases/get_earliest_scor
 part 'earliest_score_date_state.dart';
 
 class EarliestScoreDateCubit extends Cubit<EarliestScoreDateState> {
+
+  EarliestScoreDateCubit({required this.getEarliestScoreDate})
+    : super(EarliestScoreDateInitial());
   final GetEarliestScoreDate getEarliestScoreDate;
 
   DateTime? _cachedDate;
   bool _hasFetched = false;
-
-  EarliestScoreDateCubit({required this.getEarliestScoreDate})
-    : super(EarliestScoreDateInitial());
 
   /// Fetch the earliest date only once. Subsequent calls return cached state immediately.
   Future<void> fetchOnce({DateTime? from, DateTime? to}) async {
@@ -33,10 +33,10 @@ class EarliestScoreDateCubit extends Cubit<EarliestScoreDateState> {
     );
 
     res.fold(
-      (failure) {
+      (Failure failure) {
         emit(EarliestScoreDateError(failure.message));
       },
-      (date) {
+      (DateTime? date) {
         _cachedDate = date;
         emit(EarliestScoreDateLoaded(date));
       },

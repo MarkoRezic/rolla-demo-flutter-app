@@ -8,9 +8,9 @@ import 'package:rolla_demo_app/features/scores/domain/entities/score_activity.da
 import 'package:rolla_demo_app/features/scores/domain/repositories/score_repository.dart';
 
 class ScoreRepositoryImpl implements ScoreRepository {
-  final LocalJsonDataSource dataSource;
 
   ScoreRepositoryImpl({required this.dataSource});
+  final LocalJsonDataSource dataSource;
 
   @override
   Future<Either<Failure, List<Score>>> getScores({
@@ -18,24 +18,24 @@ class ScoreRepositoryImpl implements ScoreRepository {
     DateTime? to,
   }) async {
     try {
-      final allScores = await dataSource.loadAll();
+      final List<ScoreRecord> allScores = await dataSource.loadAll();
 
-      final filtered = allScores.where((score) {
-        final byFrom =
+      final List<ScoreRecord> filtered = allScores.where((ScoreRecord score) {
+        final bool byFrom =
             from == null ||
             score.date.isAfter(from) ||
             score.date.isAtSameMomentAs(from);
-        final byTo =
+        final bool byTo =
             to == null ||
             score.date.isBefore(to) ||
             score.date.isAtSameMomentAs(to);
         return byFrom && byTo;
       }).toList();
 
-      final domainList = filtered.map(_mapScoreRecordToDomain).toList();
+      final List<Score> domainList = filtered.map(_mapScoreRecordToDomain).toList();
 
       return right(domainList);
-    } catch (e, st) {
+    } catch (e) {
       return left(Failure(e.toString()));
     }
   }
@@ -46,24 +46,24 @@ class ScoreRepositoryImpl implements ScoreRepository {
     DateTime? to,
   }) async {
     try {
-      final result = await getScores(from: from, to: to);
+      final Either<Failure, List<Score>> result = await getScores(from: from, to: to);
 
       switch (result) {
-        case Left(:final value):
+        case Left(:final Failure value):
           return left(value);
 
-        case Right(:final value):
+        case Right(:final List<Score> value):
           if (value.isEmpty) return right(null);
 
-          final earliest = value
-              .map((s) => s.date)
-              .reduce((a, b) => a.isBefore(b) ? a : b);
+          final DateTime earliest = value
+              .map((Score s) => s.date)
+              .reduce((DateTime a, DateTime b) => a.isBefore(b) ? a : b);
 
           return right(earliest);
       }
 
       return right(null);
-    } catch (e, st) {
+    } catch (e) {
       return left(Failure(e.toString()));
     }
   }

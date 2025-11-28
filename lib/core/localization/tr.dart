@@ -9,7 +9,7 @@ import 'localization_service.dart';
 /// If not yet loaded, this will return a fallback instance (the English
 /// generated messages) if possible or throw a helpful error.
 S get tr {
-  final s = LocalizationService.instance.strings;
+  final S? s = LocalizationService.instance.strings;
   if (s != null) return s;
 
   throw StateError(

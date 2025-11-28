@@ -2,7 +2,7 @@ part of 'earliest_score_date_cubit.dart';
 
 abstract class EarliestScoreDateState extends Equatable {
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => <Object?>[];
 }
 
 class EarliestScoreDateInitial extends EarliestScoreDateState {}
@@ -10,17 +10,17 @@ class EarliestScoreDateInitial extends EarliestScoreDateState {}
 class EarliestScoreDateLoading extends EarliestScoreDateState {}
 
 class EarliestScoreDateLoaded extends EarliestScoreDateState {
-  final DateTime? date;
   EarliestScoreDateLoaded(this.date);
+  final DateTime? date;
 
   @override
-  List<Object?> get props => [date];
+  List<Object?> get props => <Object?>[date];
 }
 
 class EarliestScoreDateError extends EarliestScoreDateState {
-  final String message;
   EarliestScoreDateError(this.message);
+  final String message;
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => <Object?>[message];
 }

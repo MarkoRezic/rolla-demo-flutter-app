@@ -13,7 +13,7 @@
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-final messages = new MessageLookup();
+final MessageLookup messages = new MessageLookup();
 
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
@@ -21,7 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'hr';
 
   static String m0(type) =>
-      "${Intl.select(type, {'cardio': 'Kardio', 'strength_training': 'Trening snage', 'walking': 'Hodanje', 'running': 'Trčanje', 'cycling': 'Vožnja biciklom', 'yoga': 'Joga', 'hiit': 'HIIT', 'swimming': 'Plivanje', 'pilates': 'Pilates', 'dance': 'Ples', 'hiking': 'Planinarenje', 'intervals': 'Intervali', 'other': 'Nepoznato'})}";
+      "${Intl.select(type, <Object, String>{'cardio': 'Kardio', 'strength_training': 'Trening snage', 'walking': 'Hodanje', 'running': 'Trčanje', 'cycling': 'Vožnja biciklom', 'yoga': 'Joga', 'hiit': 'HIIT', 'swimming': 'Plivanje', 'pilates': 'Pilates', 'dance': 'Ples', 'hiking': 'Planinarenje', 'intervals': 'Intervali', 'other': 'Nepoznato'})}";
 
   static String m1(metric, period, value, change) =>
       "${metric} je veći nego ${period}: ${value} (${change}% ↑).";
@@ -65,11 +65,11 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m16(date) => "Zadnje ažuriranje: ${date}";
 
   static String m17(timeframe) =>
-      "${Intl.select(timeframe, {'day': '', 'week': 'Dnevni Prosjek', 'month': 'Dnevni Prosjek', 'year': 'Dnevni Prosjek', 'yearMonthly': 'Mjesečni Prosjek', 'other': ''})}";
+      "${Intl.select(timeframe, <Object, String>{'day': '', 'week': 'Dnevni Prosjek', 'month': 'Dnevni Prosjek', 'year': 'Dnevni Prosjek', 'yearMonthly': 'Mjesečni Prosjek', 'other': ''})}";
 
   static String m18(name) => "Dobrodošli, ${name}";
 
-  final messages = _notInlinedMessages(_notInlinedMessages);
+  final Map<String, Function> messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("About"),
     "activeCalories": MessageLookupByLibrary.simpleMessage("Aktivne kalorije"),

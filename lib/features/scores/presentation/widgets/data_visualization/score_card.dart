@@ -7,16 +7,9 @@ import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visuali
 import 'package:shimmer/shimmer.dart';
 
 class ScoreCard extends StatelessWidget {
-  final Widget? icon;
-  final String title;
-  final double? value;
-  final double? scoreValue;
-  final String Function(double? value)? displayValue;
-  final VoidCallback? onTap;
-  final bool isLoading;
 
   const ScoreCard({
-    Key? key,
+    super.key,
     this.icon,
     required this.title,
     required this.value,
@@ -24,18 +17,24 @@ class ScoreCard extends StatelessWidget {
     this.displayValue,
     this.onTap,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   // Named constructor for shimmer state
-  ScoreCard.loading({Key? key})
+  const ScoreCard.loading({super.key})
     : icon = null,
       title = '',
       value = null,
       scoreValue = null,
       displayValue = null,
       onTap = null,
-      isLoading = true,
-      super(key: key);
+      isLoading = true;
+  final Widget? icon;
+  final String title;
+  final double? value;
+  final double? scoreValue;
+  final String Function(double? value)? displayValue;
+  final VoidCallback? onTap;
+  final bool isLoading;
 
   String _defaultDisplayValue(double? v) {
     if (v == null) return tr.noData;
@@ -50,14 +49,14 @@ class ScoreCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final display = _maybeFormatValue(value);
-    final hasProgress = scoreValue != null;
-    final percent = hasProgress ? scoreValue!.clamp(0, 100) / 100 : null;
+    final String display = _maybeFormatValue(value);
+    final bool hasProgress = scoreValue != null;
+    final double? percent = hasProgress ? scoreValue!.clamp(0, 100) / 100 : null;
 
-    final shimmerBaseColor = AppTheme.shimmerBase(context);
-    final shimmerHighlightColor = AppTheme.shimmerHighlight(context);
+    final Color shimmerBaseColor = AppTheme.shimmerBase(context);
+    final Color shimmerHighlightColor = AppTheme.shimmerHighlight(context);
 
-    final titleWidget = isLoading
+    final Widget titleWidget = isLoading
         ? Shimmer.fromColors(
             baseColor: shimmerBaseColor,
             highlightColor: shimmerHighlightColor,
@@ -77,7 +76,7 @@ class ScoreCard extends StatelessWidget {
             ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w400),
           );
 
-    final valueWidget = isLoading
+    final Widget valueWidget = isLoading
         ? Shimmer.fromColors(
             baseColor: shimmerBaseColor,
             highlightColor: shimmerHighlightColor,
@@ -97,7 +96,7 @@ class ScoreCard extends StatelessWidget {
             ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w500),
           );
 
-    final iconWidget = isLoading
+    final Widget? iconWidget = isLoading
         ? Shimmer.fromColors(
             baseColor: shimmerBaseColor,
             highlightColor: shimmerHighlightColor,
@@ -117,12 +116,11 @@ class ScoreCard extends StatelessWidget {
       onTap: onTap,
       child: Stack(
         alignment: Alignment.center,
-        children: [
+        children: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 if (iconWidget != null) iconWidget,
                 if (iconWidget != null) const SizedBox(width: 12),
                 Expanded(child: titleWidget),
@@ -140,7 +138,7 @@ class ScoreCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
-                  children: [
+                  children: <Widget>[
                     Expanded(
                       child: ScoreLinearProgressIndicator(value: percent!),
                     ),

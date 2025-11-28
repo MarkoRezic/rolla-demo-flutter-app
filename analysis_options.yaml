@@ -15,6 +15,7 @@ analyzer:
     - "web/**"
     - "test/**"
     - "generated/**"
+    - "lib/generated/**"
 
 linter:
   rules:
@@ -41,5 +42,4 @@ linter:
     - prefer_const_constructors_in_immutables
     - sort_constructors_first
     - unnecessary_null_in_if_null_operators
-    - use_late_for_private_fields
     - avoid_unused_constructor_parameters

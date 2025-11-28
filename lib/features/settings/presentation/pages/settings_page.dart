@@ -11,10 +11,10 @@ import 'package:rolla_demo_app/features/scores/presentation/pages/init_page.dart
 import 'package:rolla_demo_app/generated/l10n.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({super.key});
 
   // helper: mapping language code -> display name
-  static const Map<String, String> _languageNames = {
+  static const Map<String, String> _languageNames = <String, String>{
     'en': 'English',
     'hr': 'Hrvatski',
   };
@@ -22,19 +22,19 @@ class SettingsPage extends StatelessWidget {
   Future<void> _showNameDialog(BuildContext context) async {
     final SettingsCubit settingsCubit = GetIt.instance<SettingsCubit>();
 
-    final initialSettings = settingsCubit.settings;
-    final initialName = initialSettings.name;
+    final Settings initialSettings = settingsCubit.settings;
+    final String initialName = initialSettings.name;
 
-    final selectedName = await AppTextInputDialog.show(
+    final String? selectedName = await AppTextInputDialog.show(
       context: context,
       title: tr.enterName,
       initialValue: initialName,
       hintText: 'New name',
       maxLength: 40,
       allowEmpty: true,
-      onChanged: (sel) => {},
-      onCancel: () async => {},
-      onAccept: (input) async {
+      onChanged: (String sel) => <dynamic, dynamic>{},
+      onCancel: () async => <dynamic, dynamic>{},
+      onAccept: (String input) async {
         await settingsCubit.save(initialSettings.copyWith(name: input));
       },
     );
@@ -42,20 +42,20 @@ class SettingsPage extends StatelessWidget {
 
   Future<void> _showLanguageDialog(BuildContext context) async {
     final SettingsCubit settingsCubit = GetIt.instance<SettingsCubit>();
-    final supported = S.delegate.supportedLocales;
+    final List<Locale> supported = S.delegate.supportedLocales;
 
-    final initialSettings = settingsCubit.settings;
-    final initialLocale = Locale(initialSettings.languageCode);
+    final Settings initialSettings = settingsCubit.settings;
+    final Locale initialLocale = Locale(initialSettings.languageCode);
 
-    final selectedLocale = await AppSelectDialog.show<Locale>(
+    final Locale? selectedLocale = await AppSelectDialog.show<Locale>(
       context: context,
       title: tr.selectLanguage,
       options: supported,
       initialSelected: initialLocale,
-      optionLabel: (s) => _languageNames[s.languageCode]!,
-      onSelectionChanged: (sel) => {},
-      onCancel: () async => {},
-      onAccept: (sel) async {
+      optionLabel: (Locale s) => _languageNames[s.languageCode]!,
+      onSelectionChanged: (Locale? sel) => <dynamic, dynamic>{},
+      onCancel: () async => <dynamic, dynamic>{},
+      onAccept: (Locale? sel) async {
         await settingsCubit.save(
           initialSettings.copyWith(languageCode: sel?.languageCode),
         );
@@ -65,28 +65,28 @@ class SettingsPage extends StatelessWidget {
 
   Future<void> _showThemeDialog(BuildContext context) async {
     final SettingsCubit settingsCubit = GetIt.instance<SettingsCubit>();
-    final initialSettings = settingsCubit.settings;
-    final initialTheme = initialSettings.themeMode;
+    final Settings initialSettings = settingsCubit.settings;
+    final ThemeMode initialTheme = initialSettings.themeMode;
 
     // helper: mapping theme mode -> display name
-    Map<String, String> _themeNames = {};
-    _themeNames[ThemeMode.system.name] = tr.themeModeSystem;
-    _themeNames[ThemeMode.light.name] = tr.themeModeLight;
-    _themeNames[ThemeMode.dark.name] = tr.themeModeDark;
+    final Map<String, String> themeNames = <String, String>{};
+    themeNames[ThemeMode.system.name] = tr.themeModeSystem;
+    themeNames[ThemeMode.light.name] = tr.themeModeLight;
+    themeNames[ThemeMode.dark.name] = tr.themeModeDark;
 
-    final selectedTheme = await AppSelectDialog.show<ThemeMode>(
+    final ThemeMode? selectedTheme = await AppSelectDialog.show<ThemeMode>(
       context: context,
       title: tr.selectTheme,
       options: ThemeMode.values,
       initialSelected: initialTheme,
-      optionLabel: (s) => _themeNames[s.name]!,
-      onSelectionChanged: (sel) async {
+      optionLabel: (ThemeMode s) => themeNames[s.name]!,
+      onSelectionChanged: (ThemeMode? sel) async {
         await settingsCubit.save(initialSettings.copyWith(themeMode: sel));
       },
       onCancel: () async {
         await settingsCubit.save(initialSettings);
       },
-      onAccept: (sel) async {
+      onAccept: (ThemeMode? sel) async {
         await settingsCubit.save(initialSettings.copyWith(themeMode: sel));
       },
     );
@@ -103,7 +103,7 @@ class SettingsPage extends StatelessWidget {
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
       ),
-      (route) => false,
+      (Route<dynamic> route) => false,
     );
 
     ScaffoldMessenger.of(
@@ -114,16 +114,16 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsCubit, SettingsState>(
-      builder: (context, state) {
-        Settings settings = state is SettingsLoaded
+      builder: (BuildContext context, SettingsState state) {
+        final Settings settings = state is SettingsLoaded
             ? state.settings
             : Settings.defaultSettings;
-        ThemeMode themeMode = settings.themeMode;
-        bool isLight = themeMode == ThemeMode.light;
+        final ThemeMode themeMode = settings.themeMode;
+        final bool isLight = themeMode == ThemeMode.light;
         return Scaffold(
           appBar: AppBar(title: Text(tr.settings)),
           body: ListView(
-            children: [
+            children: <Widget>[
               ListTile(
                 title: Text(tr.userName),
                 subtitle: Text(settings.name ?? '-'),
@@ -157,7 +157,7 @@ class SettingsPage extends StatelessWidget {
                 leading: const Icon(Icons.brightness_6),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: [
+                  children: <Widget>[
                     Icon(isLight ? Icons.light_mode : Icons.dark_mode),
                   ],
                 ),

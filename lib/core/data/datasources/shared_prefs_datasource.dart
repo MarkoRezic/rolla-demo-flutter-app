@@ -3,19 +3,19 @@ import 'package:rolla_demo_app/core/data/models/settings_record.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefsDataSource {
-  static const _kName = 'name';
-  static const _kLanguageCode = 'languageCode';
-  static const _kThemeMode = 'themeMode';
+  SharedPrefsDataSource(this._prefs);
+  static const String _kName = 'name';
+  static const String _kLanguageCode = 'languageCode';
+  static const String _kThemeMode = 'themeMode';
 
   final SharedPreferences _prefs;
-  SharedPrefsDataSource(this._prefs);
 
   Future<SettingsRecord> getAll() async {
-    String name = await getName();
-    String languageCode = await getLanguageCode();
-    String themeMode = await getThemeMode();
+    final String name = getName();
+    final String languageCode = getLanguageCode();
+    final String themeMode = getThemeMode();
 
-    return SettingsRecord.fromJson({
+    return SettingsRecord.fromJson(<String, dynamic>{
       _kName: name,
       _kLanguageCode: languageCode,
       _kThemeMode: themeMode,

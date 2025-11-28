@@ -2,17 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:rolla_demo_app/core/theme/app_theme.dart';
 
 class RadialGauge extends StatefulWidget {
-  final int value;
-  final Color? valueColor;
-  final Color? trackColor;
-  final Color? backgroundColor;
-  final double outerRadius;
-  final double innerRadius;
-  final double trackWidth;
-  final double fontSize;
 
   const RadialGauge({
-    Key? key,
+    super.key,
     required this.value,
     this.valueColor,
     this.trackColor,
@@ -21,7 +13,15 @@ class RadialGauge extends StatefulWidget {
     this.innerRadius = 96,
     this.trackWidth = 6,
     this.fontSize = 32,
-  }) : super(key: key);
+  });
+  final int value;
+  final Color? valueColor;
+  final Color? trackColor;
+  final Color? backgroundColor;
+  final double outerRadius;
+  final double innerRadius;
+  final double trackWidth;
+  final double fontSize;
 
   @override
   State<RadialGauge> createState() => _RadialGaugeState();
@@ -109,7 +109,7 @@ class _RadialGaugeState extends State<RadialGauge>
   Widget build(BuildContext context) {
     final double outer = widget.outerRadius;
     final double inner = widget.innerRadius;
-    final trackWidth = widget.trackWidth;
+    final double trackWidth = widget.trackWidth;
 
     return FadeTransition(
       opacity: _entryOpacity,
@@ -120,8 +120,8 @@ class _RadialGaugeState extends State<RadialGauge>
           width: outer,
           child: AnimatedBuilder(
             animation: _valueAnimation,
-            builder: (context, child) {
-              final animatedValue = (_valueAnimation.value).clamp(0.0, 100.0);
+            builder: (BuildContext context, Widget? child) {
+              final double animatedValue = (_valueAnimation.value).clamp(0.0, 100.0);
               return Container(
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
@@ -129,7 +129,7 @@ class _RadialGaugeState extends State<RadialGauge>
                       widget.backgroundColor ??
                       Theme.of(context).colorScheme.surface,
                   shape: BoxShape.circle,
-                  boxShadow: [
+                  boxShadow: <BoxShadow>[
                     BoxShadow(
                       color: AppTheme.lightGrey(context),
                       spreadRadius: 8,
@@ -140,7 +140,7 @@ class _RadialGaugeState extends State<RadialGauge>
                 ),
                 child: Stack(
                   alignment: Alignment.center,
-                  children: [
+                  children: <Widget>[
                     SizedBox(
                       height: inner,
                       width: inner,

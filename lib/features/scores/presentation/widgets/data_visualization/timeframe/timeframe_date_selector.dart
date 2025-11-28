@@ -3,28 +3,28 @@ import 'package:intl/intl.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/timeframe.dart';
 
 class TimeframeDateSelector extends StatelessWidget {
+
+  const TimeframeDateSelector({
+    super.key,
+    required this.selectedDate,
+    required this.selectedTimeframe,
+    this.onLeftPressed,
+    this.onRightPressed,
+    required this.onDateTap,
+  });
   final DateTime selectedDate;
   final Timeframe selectedTimeframe;
   final VoidCallback? onLeftPressed;
   final VoidCallback? onRightPressed;
   final VoidCallback onDateTap;
 
-  const TimeframeDateSelector({
-    Key? key,
-    required this.selectedDate,
-    required this.selectedTimeframe,
-    this.onLeftPressed,
-    this.onRightPressed,
-    required this.onDateTap,
-  }) : super(key: key);
-
   DateTime _mondayOfWeek(DateTime date) {
-    final dow = date.weekday; // Monday is 1
+    final int dow = date.weekday; // Monday is 1
     return date.subtract(Duration(days: dow - 1));
   }
 
   DateFormat _dateFormat(BuildContext context) {
-    final locale = Localizations.localeOf(context).toString();
+    final String locale = Localizations.localeOf(context).toString();
     switch (selectedTimeframe) {
       case Timeframe.day:
         return DateFormat.MMMd(locale);
@@ -43,8 +43,8 @@ class TimeframeDateSelector extends StatelessWidget {
       case Timeframe.day:
         return dateFormat.format(selectedDate);
       case Timeframe.week:
-        final monday = _mondayOfWeek(selectedDate);
-        final sunday = monday.add(const Duration(days: 6));
+        final DateTime monday = _mondayOfWeek(selectedDate);
+        final DateTime sunday = monday.add(const Duration(days: 6));
         return '${dateFormat.format(monday)} — ${dateFormat.format(sunday)}';
       case Timeframe.month:
         return dateFormat.format(selectedDate);
@@ -57,7 +57,7 @@ class TimeframeDateSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      children: <Widget>[
         IconButton(
           onPressed: onLeftPressed,
           icon: const Icon(Icons.chevron_left),
@@ -65,7 +65,7 @@ class TimeframeDateSelector extends StatelessWidget {
         GestureDetector(
           onTap: onDateTap,
           child: Row(
-            children: [
+            children: <Widget>[
               Text(
                 _label(context),
                 style: Theme.of(

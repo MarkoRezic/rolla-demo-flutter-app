@@ -28,13 +28,13 @@ class S {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
+    final String name = (locale.countryCode?.isEmpty ?? false)
         ? locale.languageCode
         : locale.toString();
-    final localeName = Intl.canonicalizedLocale(name);
+    final String localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      final instance = S();
+      final S instance = S();
       S._current = instance;
 
       return instance;
@@ -42,7 +42,7 @@ class S {
   }
 
   static S of(BuildContext context) {
-    final instance = S.maybeOf(context);
+    final S? instance = S.maybeOf(context);
     assert(
       instance != null,
       'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?',
@@ -56,12 +56,12 @@ class S {
 
   /// `Rolla Demo`
   String get appTitle {
-    return Intl.message('Rolla Demo', name: 'appTitle', desc: '', args: []);
+    return Intl.message('Rolla Demo', name: 'appTitle', desc: '', args: <Object>[]);
   }
 
   /// `Welcome`
   String get welcome {
-    return Intl.message('Welcome', name: 'welcome', desc: '', args: []);
+    return Intl.message('Welcome', name: 'welcome', desc: '', args: <Object>[]);
   }
 
   /// `What is your name?`
@@ -70,13 +70,13 @@ class S {
       'What is your name?',
       name: 'whatIsYourName',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `Your name`
   String get yourName {
-    return Intl.message('Your name', name: 'yourName', desc: '', args: []);
+    return Intl.message('Your name', name: 'yourName', desc: '', args: <Object>[]);
   }
 
   /// `(You can leave this empty and change later)`
@@ -85,18 +85,18 @@ class S {
       '(You can leave this empty and change later)',
       name: 'youCanLeaveThisEmptyAndChangeLater',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `Continue`
   String get continueText {
-    return Intl.message('Continue', name: 'continueText', desc: '', args: []);
+    return Intl.message('Continue', name: 'continueText', desc: '', args: <Object>[]);
   }
 
   /// `Home`
   String get homeTitle {
-    return Intl.message('Home', name: 'homeTitle', desc: '', args: []);
+    return Intl.message('Home', name: 'homeTitle', desc: '', args: <Object>[]);
   }
 
   /// `Welcome, {name}`
@@ -105,7 +105,7 @@ class S {
       'Welcome, $name',
       name: 'welcomeName',
       desc: '',
-      args: [name],
+      args: <Object>[name],
     );
   }
 
@@ -115,7 +115,7 @@ class S {
       'These are your health scores for today:',
       name: 'theseAreYourScoresForToday',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -125,43 +125,43 @@ class S {
       'Tap on a score to view its details',
       name: 'tapOnAScoreToSeeItsDetails',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `Error`
   String get error {
-    return Intl.message('Error', name: 'error', desc: '', args: []);
+    return Intl.message('Error', name: 'error', desc: '', args: <Object>[]);
   }
 
   /// `OK`
   String get ok {
-    return Intl.message('OK', name: 'ok', desc: '', args: []);
+    return Intl.message('OK', name: 'ok', desc: '', args: <Object>[]);
   }
 
   /// `Cancel`
   String get cancel {
-    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: <Object>[]);
   }
 
   /// `Settings`
   String get settings {
-    return Intl.message('Settings', name: 'settings', desc: '', args: []);
+    return Intl.message('Settings', name: 'settings', desc: '', args: <Object>[]);
   }
 
   /// `User Name`
   String get userName {
-    return Intl.message('User Name', name: 'userName', desc: '', args: []);
+    return Intl.message('User Name', name: 'userName', desc: '', args: <Object>[]);
   }
 
   /// `Enter Name`
   String get enterName {
-    return Intl.message('Enter Name', name: 'enterName', desc: '', args: []);
+    return Intl.message('Enter Name', name: 'enterName', desc: '', args: <Object>[]);
   }
 
   /// `Language`
   String get language {
-    return Intl.message('Language', name: 'language', desc: '', args: []);
+    return Intl.message('Language', name: 'language', desc: '', args: <Object>[]);
   }
 
   /// `Select language`
@@ -170,13 +170,13 @@ class S {
       'Select language',
       name: 'selectLanguage',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `Theme`
   String get theme {
-    return Intl.message('Theme', name: 'theme', desc: '', args: []);
+    return Intl.message('Theme', name: 'theme', desc: '', args: <Object>[]);
   }
 
   /// `Select theme`
@@ -185,7 +185,7 @@ class S {
       'Select theme',
       name: 'selectTheme',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -195,23 +195,23 @@ class S {
       'Auto (System)',
       name: 'themeModeSystem',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `Light`
   String get themeModeLight {
-    return Intl.message('Light', name: 'themeModeLight', desc: '', args: []);
+    return Intl.message('Light', name: 'themeModeLight', desc: '', args: <Object>[]);
   }
 
   /// `Dark`
   String get themeModeDark {
-    return Intl.message('Dark', name: 'themeModeDark', desc: '', args: []);
+    return Intl.message('Dark', name: 'themeModeDark', desc: '', args: <Object>[]);
   }
 
   /// `Log Out`
   String get logout {
-    return Intl.message('Log Out', name: 'logout', desc: '', args: []);
+    return Intl.message('Log Out', name: 'logout', desc: '', args: <Object>[]);
   }
 
   /// `You have logged out.`
@@ -220,18 +220,18 @@ class S {
       'You have logged out.',
       name: 'youHaveLoggedOut',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `History`
   String get history {
-    return Intl.message('History', name: 'history', desc: '', args: []);
+    return Intl.message('History', name: 'history', desc: '', args: <Object>[]);
   }
 
   /// `Health`
   String get health {
-    return Intl.message('Health', name: 'health', desc: '', args: []);
+    return Intl.message('Health', name: 'health', desc: '', args: <Object>[]);
   }
 
   /// `Health Score`
@@ -240,13 +240,13 @@ class S {
       'Health Score',
       name: 'healthScore',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `Readiness`
   String get readiness {
-    return Intl.message('Readiness', name: 'readiness', desc: '', args: []);
+    return Intl.message('Readiness', name: 'readiness', desc: '', args: <Object>[]);
   }
 
   /// `Readiness Score`
@@ -255,13 +255,13 @@ class S {
       'Readiness Score',
       name: 'readinessScore',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `Activity`
   String get activity {
-    return Intl.message('Activity', name: 'activity', desc: '', args: []);
+    return Intl.message('Activity', name: 'activity', desc: '', args: <Object>[]);
   }
 
   /// `Activity Score`
@@ -270,7 +270,7 @@ class S {
       'Activity Score',
       name: 'activityScore',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -280,18 +280,18 @@ class S {
       'Active points',
       name: 'activePoints',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `Steps`
   String get steps {
-    return Intl.message('Steps', name: 'steps', desc: '', args: []);
+    return Intl.message('Steps', name: 'steps', desc: '', args: <Object>[]);
   }
 
   /// `Move hours`
   String get moveHours {
-    return Intl.message('Move hours', name: 'moveHours', desc: '', args: []);
+    return Intl.message('Move hours', name: 'moveHours', desc: '', args: <Object>[]);
   }
 
   /// `Active calories`
@@ -300,18 +300,18 @@ class S {
       'Active calories',
       name: 'activeCalories',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `Sleep`
   String get sleep {
-    return Intl.message('Sleep', name: 'sleep', desc: '', args: []);
+    return Intl.message('Sleep', name: 'sleep', desc: '', args: <Object>[]);
   }
 
   /// `Resting HR`
   String get restingHR {
-    return Intl.message('Resting HR', name: 'restingHR', desc: '', args: []);
+    return Intl.message('Resting HR', name: 'restingHR', desc: '', args: <Object>[]);
   }
 
   /// `Overnight HRV`
@@ -320,30 +320,30 @@ class S {
       'Overnight HRV',
       name: 'overnightHRV',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `No data`
   String get noData {
-    return Intl.message('No data', name: 'noData', desc: '', args: []);
+    return Intl.message('No data', name: 'noData', desc: '', args: <Object>[]);
   }
 
   /// `Activities`
   String get activities {
-    return Intl.message('Activities', name: 'activities', desc: '', args: []);
+    return Intl.message('Activities', name: 'activities', desc: '', args: <Object>[]);
   }
 
   /// `Calories`
   String get calories {
-    return Intl.message('Calories', name: 'calories', desc: '', args: []);
+    return Intl.message('Calories', name: 'calories', desc: '', args: <Object>[]);
   }
 
   /// `{type, select, cardio{Cardio} strength_training{Strength Training} walking{Walking} running{Running} cycling{Cycling} yoga{Yoga} hiit{HIIT} swimming{Swimming} pilates{Pilates} dance{Dance} hiking{Hiking} intervals{Intervals} other{Unknown}}`
   String activityCategory(Object type) {
     return Intl.select(
       type,
-      {
+      <Object, String>{
         'cardio': 'Cardio',
         'strength_training': 'Strength Training',
         'walking': 'Walking',
@@ -360,7 +360,7 @@ class S {
       },
       name: 'activityCategory',
       desc: '',
-      args: [type],
+      args: <Object>[type],
     );
   }
 
@@ -370,7 +370,7 @@ class S {
       'No Activities Recorded',
       name: 'noActivitiesRecorded',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -380,7 +380,7 @@ class S {
       'Pull to refresh',
       name: 'pullToRefresh',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -390,55 +390,55 @@ class S {
       'Last updated: $date',
       name: 'lastUpdated',
       desc: '',
-      args: [date],
+      args: <Object>[date],
     );
   }
 
   /// `Export PDF`
   String get exportPdf {
-    return Intl.message('Export PDF', name: 'exportPdf', desc: '', args: []);
+    return Intl.message('Export PDF', name: 'exportPdf', desc: '', args: <Object>[]);
   }
 
   /// `1D`
   String get timeframe1D {
-    return Intl.message('1D', name: 'timeframe1D', desc: '', args: []);
+    return Intl.message('1D', name: 'timeframe1D', desc: '', args: <Object>[]);
   }
 
   /// `7D`
   String get timeframe7D {
-    return Intl.message('7D', name: 'timeframe7D', desc: '', args: []);
+    return Intl.message('7D', name: 'timeframe7D', desc: '', args: <Object>[]);
   }
 
   /// `30D`
   String get timeframe30D {
-    return Intl.message('30D', name: 'timeframe30D', desc: '', args: []);
+    return Intl.message('30D', name: 'timeframe30D', desc: '', args: <Object>[]);
   }
 
   /// `1Y`
   String get timeframe1Y {
-    return Intl.message('1Y', name: 'timeframe1Y', desc: '', args: []);
+    return Intl.message('1Y', name: 'timeframe1Y', desc: '', args: <Object>[]);
   }
 
   /// `Monthly`
   String get monthly {
-    return Intl.message('Monthly', name: 'monthly', desc: '', args: []);
+    return Intl.message('Monthly', name: 'monthly', desc: '', args: <Object>[]);
   }
 
   /// `Insights`
   String get insightsTitle {
-    return Intl.message('Insights', name: 'insightsTitle', desc: '', args: []);
+    return Intl.message('Insights', name: 'insightsTitle', desc: '', args: <Object>[]);
   }
 
   /// `Metrics`
   String get metrics {
-    return Intl.message('Metrics', name: 'metrics', desc: '', args: []);
+    return Intl.message('Metrics', name: 'metrics', desc: '', args: <Object>[]);
   }
 
   /// `{timeframe, select, day{} week {Daily Avg.} month {Daily Avg.} year {Daily Avg.} yearMonthly {Monthly Avg.} other{}}`
   String timeframeAvg(Object timeframe) {
     return Intl.select(
       timeframe,
-      {
+      <Object, String>{
         'day': '',
         'week': 'Daily Avg.',
         'month': 'Daily Avg.',
@@ -448,13 +448,13 @@ class S {
       },
       name: 'timeframeAvg',
       desc: '',
-      args: [timeframe],
+      args: <Object>[timeframe],
     );
   }
 
   /// `About`
   String get about {
-    return Intl.message('About', name: 'about', desc: '', args: []);
+    return Intl.message('About', name: 'about', desc: '', args: <Object>[]);
   }
 
   /// `How It Works?`
@@ -463,7 +463,7 @@ class S {
       'How It Works?',
       name: 'howItWorks',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -473,7 +473,7 @@ class S {
       'Your Activity Score measures how much you’ve moved throughout the day and how consistent your activity has been. It looks at your steps, active points, and move hours to capture both effort and frequency.\n\nA score of 80 represents your personal baseline, your typical daily activity over the past 30 days. Higher scores mean you’ve gone above your usual pace or intensity. Lower scores show lighter movement or more rest than normal.\n\nUse this score as your motivation to stay active in a balanced way.',
       name: 'scoreDescriptionActivity',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -483,7 +483,7 @@ class S {
       'Your Readiness Score shows how well your body has recovered and how prepared you are to perform today. It’s based on your sleep, resting heart rate, and heart rate variability.\n\nA score of 80 is your personal baseline. The point where your body feels balanced and ready for a normal day. Higher scores mean you’re recharged and primed for activity. Lower scores suggest your body needs more rest, better sleep, or lighter movement.\n\nThink of this score as your daily check-in. When your score is high, you should feel more energetic and motivated to be productive that day.',
       name: 'scoreDescriptionReadiness',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -493,7 +493,7 @@ class S {
       'Your Health Score brings rest and activity together into one number, showing how balanced your day is. It\'s the average of your Readiness and Activity scores.\n\nA score of 80 represents your personal baseline. This is the point where your daily metrics align with your 30-day averages. Get above 80 and you\'re performing beyond your usual. Fall below 80 and see which areas of your health need more attention.',
       name: 'scoreDescriptionHealth',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -503,7 +503,7 @@ class S {
       'Your Activity Score measures how much you’ve moved throughout the day and how consistent your activity has been. It looks at your steps, active points, and move hours to capture both effort and frequency.\n\nA score of 80 represents your personal baseline, your typical daily activity over the past 30 days. Higher scores mean you’ve gone above your usual pace or intensity. Lower scores show lighter movement or more rest than normal.\n\nUse this score as your motivation to stay active in a balanced way.',
       name: 'scoreMetricsDescriptionActivity',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -513,7 +513,7 @@ class S {
       'Your Readiness Score shows how well your body has recovered and how prepared you are to perform today. It’s based on your sleep, resting heart rate, and heart rate variability.\n\nA score of 80 is your personal baseline. The point where your body feels balanced and ready for a normal day. Higher scores mean you’re recharged and primed for activity. Lower scores suggest your body needs more rest, better sleep, or lighter movement.\n\nThink of this score as your daily check-in. When your score is high, you should feel more energetic and motivated to be productive that day.',
       name: 'scoreMetricsDescriptionReadiness',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -523,7 +523,7 @@ class S {
       'Your Health Score brings rest and activity together into one number, showing how balanced your day is. It\'s the average of your Readiness and Activity scores.\n\nA score of 80 represents your personal baseline. This is the point where your daily metrics align with your 30-day averages. Get above 80 and you\'re performing beyond your usual. Fall below 80 and see which areas of your health need more attention.',
       name: 'scoreMetricsDescriptionHealth',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -533,7 +533,7 @@ class S {
       'Not enough data to provide insights.',
       name: 'insightInsufficientData',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -548,7 +548,7 @@ class S {
       '$metric is higher than $period: $value ($change% ↑).',
       name: 'insightBetterThanPreviousPeriod',
       desc: '',
-      args: [metric, period, value, change],
+      args: <Object>[metric, period, value, change],
     );
   }
 
@@ -563,7 +563,7 @@ class S {
       '$metric is lower than $period: $value ($change% ↓).',
       name: 'insightWorseThanPreviousPeriod',
       desc: '',
-      args: [metric, period, value, change],
+      args: <Object>[metric, period, value, change],
     );
   }
 
@@ -577,7 +577,7 @@ class S {
       '$metric is about the same as $period: $value.',
       name: 'insightNoChangeSincePreviousPeriod',
       desc: '',
-      args: [metric, period, value],
+      args: <Object>[metric, period, value],
     );
   }
 
@@ -592,7 +592,7 @@ class S {
       '$metric shows a big improvement vs $period: $value (+$change%).',
       name: 'insightBigImprovement',
       desc: '',
-      args: [metric, period, value, change],
+      args: <Object>[metric, period, value, change],
     );
   }
 
@@ -607,7 +607,7 @@ class S {
       '$metric dropped notably vs $period: $value ($change%).',
       name: 'insightBigDrop',
       desc: '',
-      args: [metric, period, value, change],
+      args: <Object>[metric, period, value, change],
     );
   }
 
@@ -617,7 +617,7 @@ class S {
       '$metric shows an upward trend over the selected period.',
       name: 'insightUpwardTrend',
       desc: '',
-      args: [metric],
+      args: <Object>[metric],
     );
   }
 
@@ -627,7 +627,7 @@ class S {
       '$metric shows a downward trend over the selected period.',
       name: 'insightDownwardTrend',
       desc: '',
-      args: [metric],
+      args: <Object>[metric],
     );
   }
 
@@ -637,7 +637,7 @@ class S {
       '$metric has been stable over the selected period.',
       name: 'insightStableTrend',
       desc: '',
-      args: [metric],
+      args: <Object>[metric],
     );
   }
 
@@ -647,7 +647,7 @@ class S {
       '$metric has high variability.',
       name: 'insightHighVariability',
       desc: '',
-      args: [metric],
+      args: <Object>[metric],
     );
   }
 
@@ -657,7 +657,7 @@ class S {
       '$metric shows low variability.',
       name: 'insightLowVariability',
       desc: '',
-      args: [metric],
+      args: <Object>[metric],
     );
   }
 
@@ -667,7 +667,7 @@ class S {
       '$metric is meeting the target: $value.',
       name: 'insightTargetMet',
       desc: '',
-      args: [metric, value],
+      args: <Object>[metric, value],
     );
   }
 
@@ -677,7 +677,7 @@ class S {
       '$metric is below the target: $value.',
       name: 'insightTargetNotMet',
       desc: '',
-      args: [metric, value],
+      args: <Object>[metric, value],
     );
   }
 
@@ -687,7 +687,7 @@ class S {
       'Sleep duration is within the healthy target range: $value.',
       name: 'insightSleepInTarget',
       desc: '',
-      args: [value],
+      args: <Object>[value],
     );
   }
 
@@ -697,7 +697,7 @@ class S {
       'Sleep duration is below the healthy range: $value.',
       name: 'insightSleepTooShort',
       desc: '',
-      args: [value],
+      args: <Object>[value],
     );
   }
 
@@ -707,7 +707,7 @@ class S {
       'Sleep duration is above the healthy range: $value.',
       name: 'insightSleepTooLong',
       desc: '',
-      args: [value],
+      args: <Object>[value],
     );
   }
 
@@ -717,7 +717,7 @@ class S {
       'yesterday',
       name: 'periodYesterday',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -727,7 +727,7 @@ class S {
       'last week',
       name: 'periodLastWeek',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -737,7 +737,7 @@ class S {
       'last month',
       name: 'periodLastMonth',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -747,43 +747,43 @@ class S {
       'last year',
       name: 'periodLastYear',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `—`
   String get plusInfinity {
-    return Intl.message('—', name: 'plusInfinity', desc: '', args: []);
+    return Intl.message('—', name: 'plusInfinity', desc: '', args: <Object>[]);
   }
 
   /// `pts`
   String get valueUnitPts {
-    return Intl.message('pts', name: 'valueUnitPts', desc: '', args: []);
+    return Intl.message('pts', name: 'valueUnitPts', desc: '', args: <Object>[]);
   }
 
   /// `h`
   String get valueUnitH {
-    return Intl.message('h', name: 'valueUnitH', desc: '', args: []);
+    return Intl.message('h', name: 'valueUnitH', desc: '', args: <Object>[]);
   }
 
   /// `bpm`
   String get valueUnitBpm {
-    return Intl.message('bpm', name: 'valueUnitBpm', desc: '', args: []);
+    return Intl.message('bpm', name: 'valueUnitBpm', desc: '', args: <Object>[]);
   }
 
   /// `ms`
   String get valueUnitMs {
-    return Intl.message('ms', name: 'valueUnitMs', desc: '', args: []);
+    return Intl.message('ms', name: 'valueUnitMs', desc: '', args: <Object>[]);
   }
 
   /// `steps`
   String get valueUnitSteps {
-    return Intl.message('steps', name: 'valueUnitSteps', desc: '', args: []);
+    return Intl.message('steps', name: 'valueUnitSteps', desc: '', args: <Object>[]);
   }
 
   /// `kcal`
   String get valueUnitKcal {
-    return Intl.message('kcal', name: 'valueUnitKcal', desc: '', args: []);
+    return Intl.message('kcal', name: 'valueUnitKcal', desc: '', args: <Object>[]);
   }
 
   /// `Well rested`
@@ -792,7 +792,7 @@ class S {
       'Well rested',
       name: 'shortSleepWellRested',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -802,7 +802,7 @@ class S {
       'Fairly rested',
       name: 'shortSleepOkay',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -812,7 +812,7 @@ class S {
       'Short sleep',
       name: 'shortSleepShort',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -822,7 +822,7 @@ class S {
       'Resting OK',
       name: 'shortRestingHrGood',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -832,7 +832,7 @@ class S {
       'Resting normal',
       name: 'shortRestingHrOk',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -842,23 +842,23 @@ class S {
       'High resting HR',
       name: 'shortRestingHrHigh',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `HRV strong`
   String get shortHrvGood {
-    return Intl.message('HRV strong', name: 'shortHrvGood', desc: '', args: []);
+    return Intl.message('HRV strong', name: 'shortHrvGood', desc: '', args: <Object>[]);
   }
 
   /// `HRV okay`
   String get shortHrvOk {
-    return Intl.message('HRV okay', name: 'shortHrvOk', desc: '', args: []);
+    return Intl.message('HRV okay', name: 'shortHrvOk', desc: '', args: <Object>[]);
   }
 
   /// `Low HRV`
   String get shortHrvLow {
-    return Intl.message('Low HRV', name: 'shortHrvLow', desc: '', args: []);
+    return Intl.message('Low HRV', name: 'shortHrvLow', desc: '', args: <Object>[]);
   }
 
   /// `Active strong`
@@ -867,7 +867,7 @@ class S {
       'Active strong',
       name: 'shortActivePointsGood',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -877,7 +877,7 @@ class S {
       'Active ok',
       name: 'shortActivePointsOk',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -887,7 +887,7 @@ class S {
       'Low activity',
       name: 'shortActivePointsLow',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -897,18 +897,18 @@ class S {
       'Great steps',
       name: 'shortStepsGood',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `Steps ok`
   String get shortStepsOk {
-    return Intl.message('Steps ok', name: 'shortStepsOk', desc: '', args: []);
+    return Intl.message('Steps ok', name: 'shortStepsOk', desc: '', args: <Object>[]);
   }
 
   /// `Few steps`
   String get shortStepsLow {
-    return Intl.message('Few steps', name: 'shortStepsLow', desc: '', args: []);
+    return Intl.message('Few steps', name: 'shortStepsLow', desc: '', args: <Object>[]);
   }
 
   /// `Well active`
@@ -917,7 +917,7 @@ class S {
       'Well active',
       name: 'shortMoveHoursGood',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -927,7 +927,7 @@ class S {
       'Some activity',
       name: 'shortMoveHoursOk',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -937,7 +937,7 @@ class S {
       'Low movement',
       name: 'shortMoveHoursLow',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -947,7 +947,7 @@ class S {
       'Ready',
       name: 'shortReadinessGood',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -957,13 +957,13 @@ class S {
       'Mostly ready',
       name: 'shortReadinessOk',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
   /// `Tired`
   String get shortReadinessLow {
-    return Intl.message('Tired', name: 'shortReadinessLow', desc: '', args: []);
+    return Intl.message('Tired', name: 'shortReadinessLow', desc: '', args: <Object>[]);
   }
 
   /// `Active`
@@ -972,7 +972,7 @@ class S {
       'Active',
       name: 'shortActivityGood',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -982,7 +982,7 @@ class S {
       'Moderate',
       name: 'shortActivityOk',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 
@@ -992,7 +992,7 @@ class S {
       'Inactive',
       name: 'shortActivityLow',
       desc: '',
-      args: [],
+      args: <Object>[],
     );
   }
 }
@@ -1015,7 +1015,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   bool shouldReload(AppLocalizationDelegate old) => false;
 
   bool _isSupported(Locale locale) {
-    for (var supportedLocale in supportedLocales) {
+    for (Locale supportedLocale in supportedLocales) {
       if (supportedLocale.languageCode == locale.languageCode) {
         return true;
       }

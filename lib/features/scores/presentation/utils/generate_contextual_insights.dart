@@ -12,14 +12,14 @@ import 'package:rolla_demo_app/features/scores/presentation/enums/timeframe.dart
 //  - getter: function to extract numeric value from Score
 //  - unitKey: translation getter for unit text
 //  - optional targets / ranges for target checks (sleep / hrv / hr / steps / activePoints / moveHours)
-class _Metric {
+class _Metric { // optional
+
+  _Metric(this.label, this.getter, this.unit, {this.target, this.targetRange});
   final String label;
   final double Function(Score) getter;
   final String unit;
   final double? target; // null if not used
-  final RangeValues? targetRange; // optional
-
-  _Metric(this.label, this.getter, this.unit, {this.target, this.targetRange});
+  final RangeValues? targetRange;
 }
 
 /// Returns a list of contextual insights for the currently visible metrics.
@@ -37,20 +37,20 @@ List<String> generateContextualInsights(
 ) {
   // Safety / quick-return
   if (scores.isEmpty && currentDateScore == null) {
-    return [tr.insightInsufficientData];
+    return <String>[tr.insightInsufficientData];
   }
 
   // Helpers: numeric stats
   double mean(List<double> xs) {
     if (xs.isEmpty) return 0.0;
-    return xs.reduce((a, b) => a + b) / xs.length;
+    return xs.reduce((double a, double b) => a + b) / xs.length;
   }
 
   double stdDev(List<double> xs) {
     if (xs.length < 2) return 0.0;
-    final m = mean(xs);
-    final varSum =
-        xs.map((x) => pow(x - m, 2)).reduce((a, b) => a + b) / (xs.length - 1);
+    final double m = mean(xs);
+    final double varSum =
+        xs.map((double x) => pow(x - m, 2)).reduce((num a, num b) => a + b) / (xs.length - 1);
     return sqrt(varSum.toDouble());
   }
 
@@ -72,28 +72,26 @@ List<String> generateContextualInsights(
   DateTimeRange periodRangeForDate(DateTime date, Timeframe tf) {
     switch (tf) {
       case Timeframe.day:
-        final start = DateTime(date.year, date.month, date.day);
-        final end = start
-            .add(Duration(days: 1))
+        final DateTime start = DateTime(date.year, date.month, date.day);
+        final DateTime end = start
+            .add(const Duration(days: 1))
             .subtract(const Duration(milliseconds: 1));
         return DateTimeRange(start: start, end: end);
       case Timeframe.week:
-        final s = startOfWeek(date);
-        final e = s
-            .add(Duration(days: 7))
+        final DateTime s = startOfWeek(date);
+        final DateTime e = s
+            .add(const Duration(days: 7))
             .subtract(const Duration(milliseconds: 1));
         return DateTimeRange(start: s, end: e);
       case Timeframe.month:
-        final s = DateTime(date.year, date.month, 1);
-        final nextMonth = DateTime(date.year, date.month + 1, 1);
-        final e = nextMonth.subtract(const Duration(milliseconds: 1));
+        final DateTime s = DateTime(date.year, date.month);
+        final DateTime nextMonth = DateTime(date.year, date.month + 1);
+        final DateTime e = nextMonth.subtract(const Duration(milliseconds: 1));
         return DateTimeRange(start: s, end: e);
       case Timeframe.year:
-        final s = DateTime(date.year, 1, 1);
-        final e = DateTime(
+        final DateTime s = DateTime(date.year);
+        final DateTime e = DateTime(
           date.year + 1,
-          1,
-          1,
         ).subtract(const Duration(milliseconds: 1));
         return DateTimeRange(start: s, end: e);
     }
@@ -117,72 +115,72 @@ List<String> generateContextualInsights(
   DateTime representativeDate() {
     if (currentDateScore != null) return currentDateScore.date;
     // fallback: use latest score.date available
-    final latest = scores.reduce((a, b) => a.date.isAfter(b.date) ? a : b);
+    final Score latest = scores.reduce((Score a, Score b) => a.date.isAfter(b.date) ? a : b);
     return latest.date;
   }
 
-  DateTime repDate = representativeDate();
-  final currentRange = periodRangeForDate(repDate, timeframe);
-  final prevRange = periodRangeForDate(
+  final DateTime repDate = representativeDate();
+  final DateTimeRange<DateTime> currentRange = periodRangeForDate(repDate, timeframe);
+  final DateTimeRange<DateTime> prevRange = periodRangeForDate(
     shiftDateByPreviousPeriod(repDate, timeframe),
     timeframe,
   );
 
   // Helper: filter scores to a range
-  List<Score> scoresInRange(DateTimeRange r) => scores.where((s) {
-    final sd = DateTime(s.date.year, s.date.month, s.date.day);
+  List<Score> scoresInRange(DateTimeRange r) => scores.where((Score s) {
+    final DateTime sd = DateTime(s.date.year, s.date.month, s.date.day);
     return !sd.isBefore(DateTime(r.start.year, r.start.month, r.start.day)) &&
         !sd.isAfter(DateTime(r.end.year, r.end.month, r.end.day));
   }).toList();
 
-  final List<String> insights = [];
+  final List<String> insights = <String>[];
 
-  final availability = <_Metric>[];
+  final List<_Metric> availability = <_Metric>[];
 
   if (scoreType == ScoreType.activity || scoreType == ScoreType.health) {
-    availability.addAll([
+    availability.addAll(<_Metric>[
       _Metric(
         tr.activePoints,
-        (s) => s.activePoints.toDouble(),
+        (Score s) => s.activePoints.toDouble(),
         tr.valueUnitPts,
         target: Score.activePointsTarget,
       ),
       _Metric(
         tr.steps,
-        (s) => s.steps.toDouble(),
+        (Score s) => s.steps.toDouble(),
         tr.valueUnitSteps,
         target: Score.stepsTarget.toDouble(),
       ),
       _Metric(
         tr.moveHours,
-        (s) => s.moveHours.toDouble(),
+        (Score s) => s.moveHours.toDouble(),
         tr.valueUnitH,
         target: Score.moveHoursTarget,
       ),
       _Metric(
         tr.activeCalories,
-        (s) => s.activeCalories.toDouble(),
+        (Score s) => s.activeCalories.toDouble(),
         tr.valueUnitKcal,
       ),
     ]);
   }
   if (scoreType == ScoreType.readiness || scoreType == ScoreType.health) {
-    availability.addAll([
+    availability.addAll(<_Metric>[
       _Metric(
         tr.sleep,
-        (s) => s.sleepMinutes.toDouble(),
+        (Score s) => s.sleepMinutes.toDouble(),
         tr.valueUnitH,
         targetRange: Score.sleepMinutesTargetRange,
       ),
       _Metric(
         tr.restingHR,
-        (s) => s.restingHeartRateBpm.toDouble(),
+        (Score s) => s.restingHeartRateBpm.toDouble(),
         tr.valueUnitBpm,
         targetRange: Score.restingHeartRateBpmTargetRange,
       ),
       _Metric(
         tr.overnightHRV,
-        (s) => s.overnightHeartRateVarianceMs.toDouble(),
+        (Score s) => s.overnightHeartRateVarianceMs.toDouble(),
         tr.valueUnitMs,
         target: Score.overnightHeartRateVarianceMsTarget,
       ),
@@ -191,13 +189,13 @@ List<String> generateContextualInsights(
 
   // For ScoreType.health we may also want high-level readiness/activity scores
   if (scoreType == ScoreType.health) {
-    availability.addAll([
+    availability.addAll(<_Metric>[
       _Metric(
         tr.readiness,
-        (s) => s.readinessScore.toDouble(),
+        (Score s) => s.readinessScore.toDouble(),
         tr.valueUnitPts,
       ),
-      _Metric(tr.activity, (s) => s.activityScore.toDouble(), tr.valueUnitPts),
+      _Metric(tr.activity, (Score s) => s.activityScore.toDouble(), tr.valueUnitPts),
     ]);
   }
 
@@ -211,7 +209,7 @@ List<String> generateContextualInsights(
     // Some metrics are stored in minutes (sleep) but shown as hours in UI — keep simple:
     if (m.label == tr.sleep) {
       // show hours with 1 decimal, convert minutes -> hours
-      final hours = value / 60.0;
+      final double hours = value / 60.0;
       return '${fmtRounded(hours, decimals: 1)} ${m.unit}';
     } else if (m.unit == tr.valueUnitPts) {
       return '${fmtRounded(value)} ${m.unit}';
@@ -236,7 +234,7 @@ List<String> generateContextualInsights(
       0.15; // 15% of mean => high variability
 
   // Now iterate metrics and produce insights
-  for (final metric in availability) {
+  for (final _Metric metric in availability) {
     // gather values in current and previous period
     final List<Score> curScores = scoresInRange(currentRange);
     final List<Score> prevScores = scoresInRange(prevRange);
@@ -247,8 +245,8 @@ List<String> generateContextualInsights(
       curValue = metric.getter(currentDateScore);
     } else {
       // compute average over current period
-      final curVals = curScores
-          .map((s) => metric.getter(s).toDouble())
+      final List<double> curVals = curScores
+          .map((Score s) => metric.getter(s).toDouble())
           .toList();
       if (curVals.isNotEmpty) {
         curValue = mean(curVals);
@@ -262,7 +260,7 @@ List<String> generateContextualInsights(
     double? prevValue;
     if (timeframe == Timeframe.day) {
       // try to find the score for previous day
-      final prevSingle = prevScores.isNotEmpty
+      final Score? prevSingle = prevScores.isNotEmpty
           ? prevScores.firstWhere((_) => true, orElse: () => Score.zero())
           : null;
       if (prevScores.isNotEmpty) {
@@ -271,16 +269,13 @@ List<String> generateContextualInsights(
         prevValue = null;
       }
     } else {
-      final prevVals = prevScores
-          .map((s) => metric.getter(s).toDouble())
+      final List<double> prevVals = prevScores
+          .map((Score s) => metric.getter(s).toDouble())
           .toList();
       if (prevVals.isNotEmpty) prevValue = mean(prevVals);
     }
 
-    // If we don't have current value, skip
-    if (curValue == null) continue;
-
-    final formattedCurValue = formatMetricValue(metric, curValue);
+    final String formattedCurValue = formatMetricValue(metric, curValue);
 
     // If prevValue exists -> comparison insight
     if (prevValue != null && prevValue.isFinite) {
@@ -327,7 +322,7 @@ List<String> generateContextualInsights(
           ),
         );
       } else {
-        final pctText = (pct * 100).abs().round().toString();
+        final String pctText = (pct * 100).abs().round().toString();
         if (improved) {
           if (bigChange) {
             insights.add(
@@ -373,15 +368,15 @@ List<String> generateContextualInsights(
     }
 
     // Trend analysis across ALL available scores for this metric (if enough samples)
-    final allVals = scores
-        .map((s) => metric.getter(s).toDouble())
-        .where((v) => v.isFinite)
+    final List<double> allVals = scores
+        .map((Score s) => metric.getter(s).toDouble())
+        .where((double v) => v.isFinite)
         .toList();
     if (allVals.length >= 3) {
       // determine simple trend: compare first-third average vs last-third average
-      final n = allVals.length;
-      final firstThird = allVals.sublist(0, max(1, (n / 3).floor()));
-      final lastThird = allVals.sublist(max(1, (2 * n / 3).floor()), n);
+      final int n = allVals.length;
+      final List<double> firstThird = allVals.sublist(0, max(1, (n / 3).floor()));
+      final List<double> lastThird = allVals.sublist(max(1, (2 * n / 3).floor()), n);
       final double firstAvg = mean(firstThird);
       final double lastAvg = mean(lastThird);
       if (firstAvg > 0) {
@@ -403,17 +398,17 @@ List<String> generateContextualInsights(
     // Variability across period
     final List<double> periodVals =
         (timeframe == Timeframe.day && currentDateScore != null)
-        ? (curValue != null ? [curValue] : [])
+        ? (<double>[curValue])
         : curScores
-              .map((s) => metric.getter(s).toDouble())
-              .where((v) => v.isFinite)
+              .map((Score s) => metric.getter(s).toDouble())
+              .where((double v) => v.isFinite)
               .toList();
 
     if (periodVals.length >= 2) {
-      final sd = stdDev(periodVals);
-      final avg = mean(periodVals);
+      final double sd = stdDev(periodVals);
+      final double avg = mean(periodVals);
       if (avg > 0) {
-        final rel = sd / avg;
+        final double rel = sd / avg;
         if (rel >= variabilityThresholdRel) {
           insights.add(tr.insightHighVariability(metric.label));
         } else {
@@ -424,9 +419,9 @@ List<String> generateContextualInsights(
 
     // Target checks (if target or targetRange exists)
     if (metric.targetRange != null) {
-      final rv = curValue;
-      final start = metric.targetRange!.start;
-      final end = metric.targetRange!.end;
+      final double rv = curValue;
+      final double start = metric.targetRange!.start;
+      final double end = metric.targetRange!.end;
       if (rv >= start && rv <= end) {
         // special-case sleep to use a different message
         if (metric.label == tr.sleep) {
@@ -462,8 +457,8 @@ List<String> generateContextualInsights(
         }
       }
     } else if (metric.target != null) {
-      final rv = curValue;
-      final tgt = metric.target!;
+      final double rv = curValue;
+      final double tgt = metric.target!;
       if (rv >= tgt) {
         insights.add(
           tr.insightTargetMet(
@@ -484,7 +479,7 @@ List<String> generateContextualInsights(
   } // end for metrics
 
   if (insights.isEmpty) {
-    return [tr.insightInsufficientData];
+    return <String>[tr.insightInsufficientData];
   }
   return insights;
 }

@@ -14,11 +14,6 @@ import 'package:rolla_demo_app/core/presentation/bloc/theme_cubit.dart';
 part 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
-  final GetSettings _getSettings;
-  final SaveSettings _saveSettings;
-
-  Settings? _cachedSettings;
-  bool _hasFetched = false;
 
   SettingsCubit({
     required GetSettings getSettings,
@@ -26,6 +21,11 @@ class SettingsCubit extends Cubit<SettingsState> {
   }) : _saveSettings = saveSettings,
        _getSettings = getSettings,
        super(SettingsLoaded(Settings.defaultSettings));
+  final GetSettings _getSettings;
+  final SaveSettings _saveSettings;
+
+  Settings? _cachedSettings;
+  bool _hasFetched = false;
 
   Future<void> fetchOnce() async {
     if (_hasFetched) {
@@ -41,10 +41,10 @@ class SettingsCubit extends Cubit<SettingsState> {
     final Either<Failure, Settings> res = await _getSettings();
 
     res.fold(
-      (failure) {
+      (Failure failure) {
         emit(SettingsError(failure.message));
       },
-      (settings) {
+      (Settings settings) {
         _cachedSettings = settings;
         emit(SettingsLoaded(settings));
       },
@@ -57,10 +57,10 @@ class SettingsCubit extends Cubit<SettingsState> {
     );
 
     res.fold(
-      (failure) {
+      (Failure failure) {
         emit(SettingsError(failure.message));
       },
-      (settings) async {
+      (Settings settings) async {
         _hasFetched = true;
         _cachedSettings = settings;
         await GetIt.instance<LocaleCubit>().setLocale(

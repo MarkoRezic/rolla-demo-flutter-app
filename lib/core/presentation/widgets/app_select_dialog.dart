@@ -10,7 +10,7 @@ import 'package:rolla_demo_app/core/localization/tr.dart';
 /// - Options: barrierDismissible (tap outside), closeOnBannerTap (tap title area)
 class AppSelectDialog<T> extends StatefulWidget {
   const AppSelectDialog({
-    Key? key,
+    super.key,
     this.title,
     this.subtitle,
     required this.options,
@@ -24,7 +24,7 @@ class AppSelectDialog<T> extends StatefulWidget {
     this.barrierDismissible = true,
     this.closeOnBannerTap = false,
     this.maxHeight = 360,
-  }) : super(key: key);
+  });
 
   /// Optional title shown in the dialog header
   final String? title;
@@ -85,10 +85,10 @@ class AppSelectDialog<T> extends StatefulWidget {
     onCancelText = onCancelText ?? tr.cancel;
     onAcceptText = onAcceptText ?? tr.ok;
 
-    final result = await showDialog<T?>(
+    final T? result = await showDialog<T?>(
       context: context,
       barrierDismissible: barrierDismissible,
-      builder: (ctx) {
+      builder: (BuildContext ctx) {
         return Dialog(
           insetPadding: const EdgeInsets.symmetric(
             horizontal: 20.0,
@@ -131,7 +131,7 @@ class _AppSelectDialogState<T> extends State<AppSelectDialog<T>> {
 
   void _handleCancel() {
     widget.onCancel?.call();
-    Navigator.of(context).pop(null);
+    Navigator.of(context).pop();
   }
 
   void _handleAccept() {
@@ -141,12 +141,12 @@ class _AppSelectDialogState<T> extends State<AppSelectDialog<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final tileSelectedColor = theme.colorScheme.primary.withOpacity(0.06);
+    final ThemeData theme = Theme.of(context);
+    final Color tileSelectedColor = theme.colorScheme.primary.withOpacity(0.06);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: [
+      children: <Widget>[
         // Header / Banner
         Material(
           color: Colors.transparent,
@@ -157,7 +157,7 @@ class _AppSelectDialogState<T> extends State<AppSelectDialog<T>> {
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: <Widget>[
                   if (widget.title != null)
                     Text(
                       widget.title!,
@@ -191,10 +191,10 @@ class _AppSelectDialogState<T> extends State<AppSelectDialog<T>> {
               padding: const EdgeInsets.symmetric(vertical: 8),
               itemCount: widget.options.length,
               separatorBuilder: (_, __) => const Divider(height: 0),
-              itemBuilder: (context, index) {
-                final option = widget.options[index];
-                final label = widget.optionLabel(option);
-                final isSelected = _selected == option;
+              itemBuilder: (BuildContext context, int index) {
+                final T option = widget.options[index];
+                final String label = widget.optionLabel(option);
+                final bool isSelected = _selected == option;
 
                 // RadioListTile gives us radio + material splash by default.
                 return RadioListTile<T>(
@@ -224,7 +224,7 @@ class _AppSelectDialogState<T> extends State<AppSelectDialog<T>> {
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
+            children: <Widget>[
               TextButton(
                 onPressed: _handleCancel,
                 child: Text(widget.onCancelText),

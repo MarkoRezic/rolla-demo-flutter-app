@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:rolla_demo_app/core/theme/app_colors.dart';
 
 class AppTheme {
-  static final lightColorScheme = ColorScheme.fromSeed(
+  static final ColorScheme lightColorScheme = ColorScheme.fromSeed(
     dynamicSchemeVariant: DynamicSchemeVariant.monochrome,
     seedColor: AppColors.green,
-    brightness: Brightness.light,
     surfaceTint: Colors.transparent,
   );
-  static final light = ThemeData(
+  static final ThemeData light = ThemeData(
     brightness: Brightness.light,
     fontFamily: 'Outfit',
     colorScheme: lightColorScheme,
@@ -21,13 +20,13 @@ class AppTheme {
     useMaterial3: true,
   );
 
-  static final darkColorScheme = ColorScheme.fromSeed(
+  static final ColorScheme darkColorScheme = ColorScheme.fromSeed(
     dynamicSchemeVariant: DynamicSchemeVariant.monochrome,
     seedColor: AppColors.green,
     brightness: Brightness.dark,
     surfaceTint: Colors.transparent,
   );
-  static final dark = ThemeData(
+  static final ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     fontFamily: 'Outfit',
     colorScheme: darkColorScheme,

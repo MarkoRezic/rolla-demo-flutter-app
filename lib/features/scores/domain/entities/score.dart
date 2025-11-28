@@ -4,16 +4,6 @@ import 'package:rolla_demo_app/core/extensions/list/list_of_num_average.dart';
 import 'package:rolla_demo_app/features/scores/domain/entities/score_activity.dart';
 
 class Score extends Equatable {
-  final int id;
-  final DateTime date;
-  final double sleepMinutes;
-  final double restingHeartRateBpm;
-  final double overnightHeartRateVarianceMs;
-  final double activePoints;
-  final double steps;
-  final double moveHours;
-  final double activeCalories;
-  final List<ScoreActivity> activities;
 
   const Score({
     required this.id,
@@ -38,10 +28,20 @@ class Score extends Equatable {
       steps = 0,
       moveHours = 0,
       activeCalories = 0,
-      activities = const [];
+      activities = const <ScoreActivity>[];
+  final int id;
+  final DateTime date;
+  final double sleepMinutes;
+  final double restingHeartRateBpm;
+  final double overnightHeartRateVarianceMs;
+  final double activePoints;
+  final double steps;
+  final double moveHours;
+  final double activeCalories;
+  final List<ScoreActivity> activities;
 
   @override
-  List<Object?> get props => [
+  List<Object?> get props => <Object?>[
     id,
     date,
     sleepMinutes,
@@ -54,16 +54,16 @@ class Score extends Equatable {
     activities,
   ];
 
-  int get readinessScore => [
+  int get readinessScore => <int>[
     sleepScore,
     restingHeartRateScore,
     overnightHeartRateVarianceScore,
   ].average.round();
 
   int get activityScore =>
-      [activePointsScore, stepsScore, moveHoursScore].average.round();
+      <int>[activePointsScore, stepsScore, moveHoursScore].average.round();
 
-  int get healthScore => [readinessScore, activityScore].average.round();
+  int get healthScore => <int>[readinessScore, activityScore].average.round();
 
   int get sleepScore => _scoreFor(
     sleepMinutes,
@@ -239,7 +239,7 @@ class Score extends Equatable {
       steps: steps + other.steps,
       moveHours: moveHours + other.moveHours,
       activeCalories: activeCalories + other.activeCalories,
-      activities: [...activities, ...other.activities],
+      activities: <ScoreActivity>[...activities, ...other.activities],
     );
   }
 

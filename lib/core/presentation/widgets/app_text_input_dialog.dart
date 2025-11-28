@@ -9,7 +9,7 @@ import 'package:rolla_demo_app/core/localization/tr.dart';
 /// - Options: barrierDismissible (tap outside), closeOnBannerTap (tap title area)
 class AppTextInputDialog extends StatefulWidget {
   const AppTextInputDialog({
-    Key? key,
+    super.key,
     this.title,
     this.subtitle,
     this.initialValue,
@@ -26,7 +26,7 @@ class AppTextInputDialog extends StatefulWidget {
     this.onAcceptText = 'OK',
     this.barrierDismissible = true,
     this.closeOnBannerTap = false,
-  }) : super(key: key);
+  });
 
   /// Optional title shown in the dialog header
   final String? title;
@@ -99,10 +99,10 @@ class AppTextInputDialog extends StatefulWidget {
     onCancelText = onCancelText ?? tr.cancel;
     onAcceptText = onAcceptText ?? tr.ok;
 
-    final result = await showDialog<String?>(
+    final String? result = await showDialog<String?>(
       context: context,
       barrierDismissible: barrierDismissible,
-      builder: (ctx) {
+      builder: (BuildContext ctx) {
         return Dialog(
           insetPadding: const EdgeInsets.symmetric(
             horizontal: 20.0,
@@ -161,7 +161,7 @@ class _AppTextInputDialogState extends State<AppTextInputDialog> {
 
   String? _validate(String value) {
     // If a custom validator is provided, use it.
-    final custom = widget.validator?.call(value);
+    final String? custom = widget.validator?.call(value);
     if (custom != null) return custom;
 
     // Default: non-empty required unless allowEmpty == true
@@ -173,9 +173,9 @@ class _AppTextInputDialogState extends State<AppTextInputDialog> {
   }
 
   void _onTextChanged() {
-    final text = _controller.text;
-    final newError = _validate(text);
-    final changed = newError != _errorText;
+    final String text = _controller.text;
+    final String? newError = _validate(text);
+    final bool changed = newError != _errorText;
     if (changed || !_touched) {
       setState(() {
         _errorText = newError;
@@ -190,13 +190,13 @@ class _AppTextInputDialogState extends State<AppTextInputDialog> {
 
   void _handleCancel() {
     widget.onCancel?.call();
-    Navigator.of(context).pop(null);
+    Navigator.of(context).pop();
   }
 
   void _handleAccept() {
-    final value = _controller.text;
+    final String value = _controller.text;
     // Final validation check
-    final err = _validate(value);
+    final String? err = _validate(value);
     if (err != null) {
       setState(() {
         _errorText = err;
@@ -211,11 +211,11 @@ class _AppTextInputDialogState extends State<AppTextInputDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: [
+      children: <Widget>[
         // Header / Banner
         Material(
           color: Colors.transparent,
@@ -225,7 +225,7 @@ class _AppTextInputDialogState extends State<AppTextInputDialog> {
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: <Widget>[
                   if (widget.title != null)
                     Text(
                       widget.title!,
@@ -282,7 +282,7 @@ class _AppTextInputDialogState extends State<AppTextInputDialog> {
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
+            children: <Widget>[
               TextButton(
                 onPressed: _handleCancel,
                 child: Text(widget.onCancelText),

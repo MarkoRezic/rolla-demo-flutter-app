@@ -29,17 +29,17 @@ import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visuali
 import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visualization/timeframe/timeframe_data_view.dart';
 
 class ScoreDetailPage extends StatefulWidget {
-  final ScoreType scoreType;
-  final DateTime? initialSelectedDate;
-  final Timeframe? initialSelectedTimeframe;
-  final bool? initialShowMonthlyAverages;
   const ScoreDetailPage({
-    Key? key,
+    super.key,
     required this.scoreType,
     this.initialSelectedDate,
     this.initialSelectedTimeframe,
     this.initialShowMonthlyAverages,
-  }) : super(key: key);
+  });
+  final ScoreType scoreType;
+  final DateTime? initialSelectedDate;
+  final Timeframe? initialSelectedTimeframe;
+  final bool? initialShowMonthlyAverages;
 
   @override
   State<ScoreDetailPage> createState() => _ScoreDetailPageState();
@@ -63,7 +63,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
   }
 
   void _loadScoresForCurrentTimeframe() {
-    DateTimeRange dateTimeRange = _selectedDate.getDateRangeByTimeframe(
+    final DateTimeRange dateTimeRange = _selectedDate.getDateRangeByTimeframe(
       _selectedTimeframe,
     );
     Duration? mockLoadingTime;
@@ -73,10 +73,10 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
       case Timeframe.week:
         break;
       case Timeframe.month:
-        mockLoadingTime = Duration(milliseconds: 500);
+        mockLoadingTime = const Duration(milliseconds: 500);
         break;
       case Timeframe.year:
-        mockLoadingTime = Duration(milliseconds: 2500);
+        mockLoadingTime = const Duration(milliseconds: 2500);
         break;
     }
     _scoreBloc.add(
@@ -116,9 +116,9 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     required List<Widget> widgets,
     required Widget separator,
   }) {
-    if (widgets.isEmpty) return [];
+    if (widgets.isEmpty) return <Widget>[];
 
-    final List<Widget> result = [];
+    final List<Widget> result = <Widget>[];
 
     for (int i = 0; i < widgets.length; i++) {
       result.add(widgets[i]);
@@ -137,13 +137,13 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
   }
 
   Widget _buildRadialGauge(BuildContext context, double value) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: Row(
-        children: [
+        children: <Widget>[
           Expanded(
             child: ConcentricDotsStackContainer(
-              children: [
+              children: <Widget>[
                 RadialGauge(
                   value: value.round(),
                   valueColor: widget.scoreType.accentColor,
@@ -170,56 +170,59 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
           cardCount = 6;
           break;
       }
-      widgets = List.generate(cardCount, (index) => ScoreInfoCard.loading());
+      widgets = List<Widget>.generate(
+        cardCount,
+        (int index) => const ScoreInfoCard.loading(),
+      );
     } else {
-      double? _toDouble(num? number) => number?.toDouble();
-      int? _round(num? number) => number?.round();
+      double? toDouble(num? number) => number?.toDouble();
+      int? round(num? number) => number?.round();
 
-      final activityCards = [
+      final List<ScoreInfoCard> activityCards = <ScoreInfoCard>[
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.star, color: AppColors.green),
           title: tr.activePoints,
-          value: _toDouble(score?.activePoints),
-          scoreValue: _toDouble(score?.activePointsScore),
-          displayValue: (value) => '${_round(value)} ${tr.valueUnitPts}',
+          value: toDouble(score?.activePoints),
+          scoreValue: toDouble(score?.activePointsScore),
+          displayValue: (double? value) => '${round(value)} ${tr.valueUnitPts}',
         ),
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.steps, color: AppColors.green),
           title: tr.steps,
-          value: _toDouble(score?.steps),
-          scoreValue: _toDouble(score?.stepsScore),
+          value: toDouble(score?.steps),
+          scoreValue: toDouble(score?.stepsScore),
         ),
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.timer, color: AppColors.lightBlue),
           title: tr.moveHours,
-          value: _toDouble(score?.moveHours),
-          scoreValue: _toDouble(score?.moveHoursScore),
-          displayValue: (value) => '${_round(value)} ${tr.valueUnitH}',
+          value: toDouble(score?.moveHours),
+          scoreValue: toDouble(score?.moveHoursScore),
+          displayValue: (double? value) => '${round(value)} ${tr.valueUnitH}',
         ),
       ];
 
-      final readinessCards = [
+      final List<ScoreInfoCard> readinessCards = <ScoreInfoCard>[
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.moon, color: AppColors.purple),
           title: tr.sleep,
-          value: _toDouble(score?.sleepMinutes),
-          scoreValue: _toDouble(score?.sleepScore),
-          displayValue: (value) =>
-              formatMinutesHMin(_round(score?.sleepMinutes) ?? 0),
+          value: toDouble(score?.sleepMinutes),
+          scoreValue: toDouble(score?.sleepScore),
+          displayValue: (double? value) =>
+              formatMinutesHMin(round(score?.sleepMinutes) ?? 0),
         ),
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.heartRate, color: AppColors.lightBlue),
           title: tr.restingHR,
-          value: _toDouble(score?.restingHeartRateBpm),
-          scoreValue: _toDouble(score?.restingHeartRateScore),
-          displayValue: (value) => '${_round(value)} ${tr.valueUnitBpm}',
+          value: toDouble(score?.restingHeartRateBpm),
+          scoreValue: toDouble(score?.restingHeartRateScore),
+          displayValue: (double? value) => '${round(value)} ${tr.valueUnitBpm}',
         ),
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.heartMonitor, color: AppColors.red),
           title: tr.overnightHRV,
-          value: _toDouble(score?.overnightHeartRateVarianceMs),
-          scoreValue: _toDouble(score?.overnightHeartRateVarianceScore),
-          displayValue: (value) => '${_round(value)} ${tr.valueUnitMs}',
+          value: toDouble(score?.overnightHeartRateVarianceMs),
+          scoreValue: toDouble(score?.overnightHeartRateVarianceScore),
+          displayValue: (double? value) => '${round(value)} ${tr.valueUnitMs}',
         ),
       ];
 
@@ -233,7 +236,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
           break;
 
         case ScoreType.health:
-          widgets = [...readinessCards, ...activityCards];
+          widgets = <Widget>[...readinessCards, ...activityCards];
           break;
       }
     }
@@ -260,12 +263,11 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
       onTap: () => _showScoreInfoBottomSheet(context, scoreState, score),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           const SizedBox(height: 8),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: <Widget>[
               Text(
                 widget.scoreType.scoreInfoTitle,
                 style: Theme.of(context).textTheme.titleLarge,
@@ -300,7 +302,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
   ) {
     final double sheetHeight = 0.85;
     double gaugeValue = 0;
-    Score nonNullScore = score ?? Score.zero();
+    final Score nonNullScore = score ?? Score.zero();
 
     switch (widget.scoreType) {
       case ScoreType.activity:
@@ -327,15 +329,15 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
           minChildSize: sheetHeight,
           maxChildSize: sheetHeight,
           initialChildSize: sheetHeight,
-          builder: (_, controller) {
+          builder: (_, ScrollController controller) {
             return Container(
               padding: const EdgeInsets.all(16),
               child: ListView(
                 controller: controller,
-                padding: EdgeInsets.only(bottom: 100),
-                children: [
+                padding: const EdgeInsets.only(bottom: 100),
+                children: <Widget>[
                   Row(
-                    children: [
+                    children: <Widget>[
                       Expanded(
                         child: Text(
                           widget.scoreType.scoreInfoTitle,
@@ -344,7 +346,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                       ),
                       IconButton(
                         onPressed: Navigator.of(context).pop,
-                        icon: Icon(Icons.close),
+                        icon: const Icon(Icons.close),
                         color: Theme.of(
                           context,
                         ).colorScheme.onSurface.withValues(alpha: 0.6),
@@ -395,83 +397,91 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
           cardCount = 2;
           break;
       }
-      widgets = List.generate(cardCount, (index) => ScoreCard.loading());
+      widgets = List<Widget>.generate(
+        cardCount,
+        (int index) => const ScoreCard.loading(),
+      );
     } else {
-      List<Score> scores = scoreState.scores;
-      Score? averageScore = scores.averageScore;
-      double? _toDouble(num? number) => number?.toDouble();
-      int? _round(num? number) => number?.round();
+      final List<Score> scores = scoreState.scores;
+      final Score? averageScore = scores.averageScore;
+      double? toDouble(num? number) => number?.toDouble();
+      int? round(num? number) => number?.round();
 
       switch (widget.scoreType) {
         case ScoreType.activity:
-          widgets = [
+          widgets = <Widget>[
             ScoreCard(
               icon: AppIcon(AppIconPaths.star, color: AppColors.green),
               title: tr.activePoints,
-              value: _toDouble(averageScore?.activePoints),
-              scoreValue: _toDouble(averageScore?.activePointsScore),
-              displayValue: (value) => '${_round(value)} ${tr.valueUnitPts}',
+              value: toDouble(averageScore?.activePoints),
+              scoreValue: toDouble(averageScore?.activePointsScore),
+              displayValue: (double? value) =>
+                  '${round(value)} ${tr.valueUnitPts}',
             ),
             ScoreCard(
               icon: AppIcon(AppIconPaths.steps, color: AppColors.green),
               title: tr.steps,
-              value: _toDouble(averageScore?.steps),
-              scoreValue: _toDouble(averageScore?.stepsScore),
+              value: toDouble(averageScore?.steps),
+              scoreValue: toDouble(averageScore?.stepsScore),
             ),
             ScoreCard(
               icon: AppIcon(AppIconPaths.timer, color: AppColors.lightBlue),
               title: tr.moveHours,
-              value: _toDouble(averageScore?.moveHours),
-              scoreValue: _toDouble(averageScore?.moveHoursScore),
-              displayValue: (value) => '${_round(value)} ${tr.valueUnitH}',
+              value: toDouble(averageScore?.moveHours),
+              scoreValue: toDouble(averageScore?.moveHoursScore),
+              displayValue: (double? value) =>
+                  '${round(value)} ${tr.valueUnitH}',
             ),
             ScoreCard(
               icon: AppIcon(AppIconPaths.fire, color: AppColors.orange),
               title: tr.activeCalories,
-              value: _toDouble(averageScore?.activeCalories),
-              displayValue: (value) => '${_round(value)} ${tr.valueUnitKcal}',
+              value: toDouble(averageScore?.activeCalories),
+              displayValue: (double? value) =>
+                  '${round(value)} ${tr.valueUnitKcal}',
             ),
           ];
           break;
         case ScoreType.readiness:
-          widgets = [
+          widgets = <Widget>[
             ScoreCard(
               icon: AppIcon(AppIconPaths.moon, color: AppColors.purple),
               title: tr.sleep,
-              value: _toDouble(averageScore?.sleepMinutes),
-              scoreValue: _toDouble(averageScore?.sleepScore),
+              value: toDouble(averageScore?.sleepMinutes),
+              scoreValue: toDouble(averageScore?.sleepScore),
               displayValue: averageScore?.sleepMinutes == null
                   ? null
-                  : (value) =>
-                        formatMinutesHM(_round(averageScore!.sleepMinutes)!),
+                  : (double? value) =>
+                        formatMinutesHM(round(averageScore!.sleepMinutes)!),
             ),
             ScoreCard(
               icon: AppIcon(AppIconPaths.heartRate, color: AppColors.lightBlue),
               title: tr.restingHR,
-              value: _toDouble(averageScore?.restingHeartRateBpm),
-              scoreValue: _toDouble(averageScore?.restingHeartRateScore),
-              displayValue: (value) => '${_round(value)} ${tr.valueUnitBpm}',
+              value: toDouble(averageScore?.restingHeartRateBpm),
+              scoreValue: toDouble(averageScore?.restingHeartRateScore),
+              displayValue: (double? value) =>
+                  '${round(value)} ${tr.valueUnitBpm}',
             ),
             ScoreCard(
               icon: AppIcon(AppIconPaths.heartMonitor, color: AppColors.red),
               title: tr.overnightHRV,
-              value: _toDouble(averageScore?.overnightHeartRateVarianceMs),
-              scoreValue: _toDouble(
+              value: toDouble(averageScore?.overnightHeartRateVarianceMs),
+              scoreValue: toDouble(
                 averageScore?.overnightHeartRateVarianceScore,
               ),
-              displayValue: (value) => '${_round(value)} ${tr.valueUnitMs}',
+              displayValue: (double? value) =>
+                  '${round(value)} ${tr.valueUnitMs}',
             ),
           ];
           break;
         case ScoreType.health:
-          widgets = [
+          widgets = <Widget>[
             ScoreCard(
               icon: AppIcon(AppIconPaths.moon, color: AppColors.purple),
               title: tr.readiness,
-              value: _toDouble(averageScore?.readinessScore),
-              scoreValue: _toDouble(averageScore?.readinessScore),
+              value: toDouble(averageScore?.readinessScore),
+              scoreValue: toDouble(averageScore?.readinessScore),
               onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
+                MaterialPageRoute<void>(
                   builder: (_) => ScoreDetailPage(
                     scoreType: ScoreType.readiness,
                     initialSelectedDate: _selectedDate,
@@ -484,10 +494,10 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
             ScoreCard(
               icon: AppIcon(AppIconPaths.fire, color: AppColors.green),
               title: tr.activity,
-              value: _toDouble(averageScore?.activityScore),
-              scoreValue: _toDouble(averageScore?.activityScore),
+              value: toDouble(averageScore?.activityScore),
+              scoreValue: toDouble(averageScore?.activityScore),
               onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
+                MaterialPageRoute<void>(
                   builder: (_) => ScoreDetailPage(
                     scoreType: ScoreType.activity,
                     initialSelectedDate: _selectedDate,
@@ -502,7 +512,10 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
       }
     }
 
-    return _separatedWidgets(widgets: widgets, separator: SizedBox(height: 10));
+    return _separatedWidgets(
+      widgets: widgets,
+      separator: const SizedBox(height: 10),
+    );
   }
 
   List<Widget> _buildActivitiesWidgets(
@@ -512,17 +525,17 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     late List<Widget> widgets;
 
     if (scoreState is! ScoreLoaded) {
-      widgets = [ScoreActivityCard.loading()];
+      widgets = <Widget>[const ScoreActivityCard.loading()];
     } else {
-      List<Score> scores = scoreState.scores;
-      List<ScoreActivity>? activities = scores.sumScore?.activities;
+      final List<Score> scores = scoreState.scores;
+      final List<ScoreActivity>? activities = scores.sumScore?.activities;
 
       if (activities == null) {
-        widgets = [
+        widgets = <Widget>[
           Text(tr.noData, style: Theme.of(context).textTheme.bodyMedium),
         ];
       } else if (activities.isEmpty) {
-        widgets = [
+        widgets = <Widget>[
           Text(
             tr.noActivitiesRecorded,
             style: Theme.of(context).textTheme.bodyMedium,
@@ -531,18 +544,21 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
       } else {
         widgets = activities
             .map(
-              (activity) =>
+              (ScoreActivity activity) =>
                   ScoreActivityCard.fromActivity(scoreActivity: activity),
             )
             .toList();
       }
     }
 
-    return [
+    return <Widget>[
       const SizedBox(height: 20),
       Text(tr.activities, style: Theme.of(context).textTheme.titleLarge),
       const SizedBox(height: 12),
-      ..._separatedWidgets(widgets: widgets, separator: SizedBox(height: 10)),
+      ..._separatedWidgets(
+        widgets: widgets,
+        separator: const SizedBox(height: 10),
+      ),
       const SizedBox(height: 20),
     ];
   }
@@ -556,11 +572,11 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
+            colors: <Color>[
               Theme.of(context).scaffoldBackgroundColor,
               _scaffoldFadeColor(context),
             ],
-            stops: [0.5, 0.7],
+            stops: const <double>[0.5, 0.7],
           ),
         ),
         child: RefreshIndicator(
@@ -569,11 +585,11 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16).copyWith(bottom: 100),
             child: Column(
-              children: [
+              children: <Widget>[
                 const SizedBox(height: 12),
                 BlocBuilder<ScoreBloc, ScoreState>(
                   bloc: _scoreBloc,
-                  builder: (context, scoreState) {
+                  builder: (BuildContext context, ScoreState scoreState) {
                     if (scoreState is ScoreInitial) {
                       return const SizedBox(
                         height: 200,
@@ -584,31 +600,31 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                       List<Score>? scores;
                       List<DataPoint>? dataPoints;
                       Score? selectedDateScore;
-                      bool isLoading = scoreState is ScoreLoading;
+                      final bool isLoading = scoreState is ScoreLoading;
 
                       if (scoreState is ScoreLoaded) {
                         scores = scoreState.scores;
                         dataPoints = scores
                             .map(
-                              (score) =>
+                              (Score score) =>
                                   score.toDataPointByType(widget.scoreType),
                             )
                             .toList();
                         selectedDateScore = scores.firstWhereOrNull(
-                          (score) => score.date.isSameDateAs(_selectedDate),
+                          (Score score) =>
+                              score.date.isSameDateAs(_selectedDate),
                         );
                       }
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
+                        children: <Widget>[
+                          SizedBox(
                             height: 380,
                             child: Stack(
-                              children: [
+                              children: <Widget>[
                                 Row(
-                                  children: [
+                                  children: <Widget>[
                                     Expanded(
                                       child:
                                           BlocBuilder<
@@ -616,39 +632,45 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                                             EarliestScoreDateState
                                           >(
                                             bloc: _earliestScoreDateCubit,
-                                            builder: (context, earliestDateState) {
-                                              return TimeframeDataView(
-                                                selectedDate: _selectedDate,
-                                                selectedTimeFrame:
-                                                    _selectedTimeframe,
-                                                onSelectedDateChange:
-                                                    _onSelectedDateChange,
-                                                onSelectedTimeframeChange:
-                                                    _onSelectedTimeframeChange,
-                                                minDate:
-                                                    earliestDateState
-                                                        is EarliestScoreDateLoaded
-                                                    ? earliestDateState.date
-                                                    : null,
-                                                dataPoints: dataPoints,
-                                                isLoading: isLoading,
-                                                color: widget
-                                                    .scoreType
-                                                    .accentColor,
-                                                showMonthlyAverages:
-                                                    _showMonthlyAverages,
-                                                onShowMonthlyAveragesToggle:
-                                                    _onShowMonthlyAveragesToggle,
-                                                gaugeBuilder: _buildRadialGauge,
-                                                headerWidgetBuilder:
-                                                    (timeframe) =>
-                                                        _headerWidgetBuilder(
-                                                          timeframe,
-                                                          scoreState,
-                                                          selectedDateScore,
-                                                        ),
-                                              );
-                                            },
+                                            builder:
+                                                (
+                                                  BuildContext context,
+                                                  EarliestScoreDateState
+                                                  earliestDateState,
+                                                ) {
+                                                  return TimeframeDataView(
+                                                    selectedDate: _selectedDate,
+                                                    selectedTimeFrame:
+                                                        _selectedTimeframe,
+                                                    onSelectedDateChange:
+                                                        _onSelectedDateChange,
+                                                    onSelectedTimeframeChange:
+                                                        _onSelectedTimeframeChange,
+                                                    minDate:
+                                                        earliestDateState
+                                                            is EarliestScoreDateLoaded
+                                                        ? earliestDateState.date
+                                                        : null,
+                                                    dataPoints: dataPoints,
+                                                    isLoading: isLoading,
+                                                    color: widget
+                                                        .scoreType
+                                                        .accentColor,
+                                                    showMonthlyAverages:
+                                                        _showMonthlyAverages,
+                                                    onShowMonthlyAveragesToggle:
+                                                        _onShowMonthlyAveragesToggle,
+                                                    gaugeBuilder:
+                                                        _buildRadialGauge,
+                                                    headerWidgetBuilder:
+                                                        (Timeframe timeframe) =>
+                                                            _headerWidgetBuilder(
+                                                              timeframe,
+                                                              scoreState,
+                                                              selectedDateScore,
+                                                            ),
+                                                  );
+                                                },
                                           ),
                                     ),
                                   ],
@@ -668,7 +690,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                                         selectedDateScore,
                                       ),
                                       color: _scaffoldFadeColor(context),
-                                      constraints: BoxConstraints(
+                                      constraints: const BoxConstraints(
                                         minHeight: 90,
                                         maxHeight: 90,
                                       ),
@@ -680,7 +702,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                           const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
+                            children: <Widget>[
                               Text(
                                 tr.metrics,
                                 style: Theme.of(context).textTheme.titleLarge,

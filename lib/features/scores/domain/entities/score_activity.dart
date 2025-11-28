@@ -1,10 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class ScoreActivity extends Equatable {
-  final int id;
-  final String category;
-  final double durationSeconds;
-  final double calories;
 
   const ScoreActivity({
     required this.id,
@@ -12,7 +8,11 @@ class ScoreActivity extends Equatable {
     required this.durationSeconds,
     required this.calories,
   });
+  final int id;
+  final String category;
+  final double durationSeconds;
+  final double calories;
 
   @override
-  List<Object?> get props => [id, category, durationSeconds, calories];
+  List<Object?> get props => <Object?>[id, category, durationSeconds, calories];
 }

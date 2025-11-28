@@ -3,12 +3,11 @@ import 'package:rolla_demo_app/core/theme/app_theme.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/containers/disabled_wrapper.dart';
 
 class CardContainer extends StatelessWidget {
+
+  const CardContainer({super.key, this.child, this.onTap, this.disabled = false});
   final Widget? child;
   final VoidCallback? onTap;
   final bool disabled;
-
-  const CardContainer({Key? key, this.child, this.onTap, this.disabled = false})
-    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class CardContainer extends StatelessWidget {
               color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(16),
               border: Border.fromBorderSide(
-                BorderSide(width: 1, color: AppTheme.lightGrey(context)),
+                BorderSide(color: AppTheme.lightGrey(context)),
               ),
             ),
             child: child,

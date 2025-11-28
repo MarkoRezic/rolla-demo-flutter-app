@@ -1,31 +1,31 @@
 class AppIconPaths {
-  static const base = 'assets/icons';
-  static const extension = 'svg';
+  static const String base = 'assets/icons';
+  static const String extension = 'svg';
 
-  static getPath(String name) {
-    return '${base}/${name}.${extension}';
+  static String getPath(String name) {
+    return '$base/$name.$extension';
   }
 
-  static final fire = getPath('fire');
-  static final heartMonitor = getPath('heart_monitor');
-  static final heartRate = getPath('heart_rate');
-  static final moon = getPath('moon');
-  static final settings = getPath('settings');
-  static final star = getPath('star');
-  static final steps = getPath('steps');
-  static final timer = getPath('timer');
+  static final String fire = getPath('fire');
+  static final String heartMonitor = getPath('heart_monitor');
+  static final String heartRate = getPath('heart_rate');
+  static final String moon = getPath('moon');
+  static final String settings = getPath('settings');
+  static final String star = getPath('star');
+  static final String steps = getPath('steps');
+  static final String timer = getPath('timer');
 
   // Activities
-  static final cardio = getPath('cardio');
-  static final cycling = getPath('cycling');
-  static final dance = getPath('dance');
-  static final hiit = getPath('hiit');
-  static final hiking = getPath('hiking');
-  static final intervals = getPath('intervals');
-  static final pilates = getPath('pilates');
-  static final running = getPath('running');
-  static final strength_training = getPath('strength_training');
-  static final swimming = getPath('swimming');
-  static final walking = getPath('walking');
-  static final yoga = getPath('yoga');
+  static final String cardio = getPath('cardio');
+  static final String cycling = getPath('cycling');
+  static final String dance = getPath('dance');
+  static final String hiit = getPath('hiit');
+  static final String hiking = getPath('hiking');
+  static final String intervals = getPath('intervals');
+  static final String pilates = getPath('pilates');
+  static final String running = getPath('running');
+  static final String strength_training = getPath('strength_training');
+  static final String swimming = getPath('swimming');
+  static final String walking = getPath('walking');
+  static final String yoga = getPath('yoga');
 }

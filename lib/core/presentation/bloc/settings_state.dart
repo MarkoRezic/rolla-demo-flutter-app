@@ -2,7 +2,7 @@ part of 'settings_cubit.dart';
 
 abstract class SettingsState extends Equatable {
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => <Object?>[];
 }
 
 class SettingsInitial extends SettingsState {}
@@ -10,17 +10,17 @@ class SettingsInitial extends SettingsState {}
 class SettingsLoading extends SettingsState {}
 
 class SettingsLoaded extends SettingsState {
-  final Settings settings;
   SettingsLoaded(this.settings);
+  final Settings settings;
 
   @override
-  List<Object?> get props => [settings];
+  List<Object?> get props => <Object?>[settings];
 }
 
 class SettingsError extends SettingsState {
-  final String message;
   SettingsError(this.message);
+  final String message;
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => <Object?>[message];
 }

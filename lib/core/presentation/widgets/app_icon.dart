@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AppIcon extends StatelessWidget {
+
+  const AppIcon(this.asset, {super.key, this.size = defaultSize, this.color});
   final String asset;
   final double size;
   final Color? color;
 
   static const double defaultSize = 24;
-
-  const AppIcon(this.asset, {super.key, this.size = defaultSize, this.color});
 
   @override
   Widget build(BuildContext context) {
