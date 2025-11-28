@@ -159,23 +159,44 @@ Regarding testing I wanted to run this on more devices to see how the UI behaves
 Widget/Unit tests and a PDF export of the score results were also something I wanted to add but scrapped the idea in the end.
 
 # Screenshots
-![Init Screen](./screenshots/001_init_page.jpeg)
-![Home Screen](./screenshots/002_home_page.jpeg)
-![Settings Screen](./screenshots/003_settings.jpeg)
-![Settings Screen](./screenshots/004_settings.jpeg)
-![Settings Screen](./screenshots/005_settings.jpeg)
-![Health Screen](./screenshots/006_health.jpeg)
-![Health Screen](./screenshots/007_health.jpeg)
-![Health Screen](./screenshots/008_health.jpeg)
-![Health Screen](./screenshots/009_health.jpeg)
-![Health Screen](./screenshots/010_health.jpeg)
-![Health Screen](./screenshots/011_health.jpeg)
-![Health Screen](./screenshots/012_health.jpeg)
-![Health Screen](./screenshots/013_health.jpeg)
-![Health Screen](./screenshots/014_health.jpeg)
-![Readiness Screen](./screenshots/015_readiness.jpeg)
-![Activity Screen](./screenshots/016_activity.jpeg)
-![Activities Screen](./screenshots/017_activities.jpeg)
-![Init Screen](./screenshots/018_init.jpeg)
-![Health Screen](./screenshots/019_health.jpeg)
-![Health Screen](./screenshots/020_health.jpeg)
+
+<p float="left">
+  <img src="./screenshots/001_init_page.jpeg" width="30%"/>
+  <img src="./screenshots/002_home_page.jpeg" width="30%"/>
+  <img src="./screenshots/003_settings.jpeg" width="30%"/>
+</p>
+
+<p float="left">
+  <img src="./screenshots/004_settings.jpeg" width="30%"/>
+  <img src="./screenshots/005_settings.jpeg" width="30%"/>
+  <img src="./screenshots/006_health.jpeg" width="30%"/>
+</p>
+
+<p float="left">
+  <img src="./screenshots/007_health.jpeg" width="30%"/>
+  <img src="./screenshots/008_health.jpeg" width="30%"/>
+  <img src="./screenshots/009_health.jpeg" width="30%"/>
+</p>
+
+<p float="left">
+  <img src="./screenshots/010_health.jpeg" width="30%"/>
+  <img src="./screenshots/011_health.jpeg" width="30%"/>
+  <img src="./screenshots/012_health.jpeg" width="30%"/>
+</p>
+
+<p float="left">
+  <img src="./screenshots/013_health.jpeg" width="30%"/>
+  <img src="./screenshots/014_health.jpeg" width="30%"/>
+  <img src="./screenshots/015_readiness.jpeg" width="30%"/>
+</p>
+
+<p float="left">
+  <img src="./screenshots/016_activity.jpeg" width="30%"/>
+  <img src="./screenshots/017_activities.jpeg" width="30%"/>
+  <img src="./screenshots/018_init.jpeg" width="30%"/>
+</p>
+
+<p float="left">
+  <img src="./screenshots/019_health.jpeg" width="30%"/>
+  <img src="./screenshots/020_health.jpeg" width="30%"/>
+</p>
