@@ -118,6 +118,7 @@ The app has a full-feature language and theme support which are very extensible.
 ---
 
 The Scores JSON was generated using a js script and then imported as the final asset - not that some scores were deliberately removed to show error or missing data handling in the app.
+Any loading times visible in the app are actually mocked - this was intentionally made to be able to show off loading states / skeleton loaders etc.
 
 ---
 
