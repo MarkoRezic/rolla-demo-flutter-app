@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:rolla_demo_app/core/presentation/bloc/locale_cubit.dart';
 import 'package:rolla_demo_app/core/presentation/bloc/settings_cubit.dart';
 import 'package:rolla_demo_app/core/presentation/bloc/theme_cubit.dart';
@@ -13,7 +14,8 @@ import 'features/scores/presentation/pages/home_page.dart';
 import 'injection.dart' as di;
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -34,6 +36,7 @@ Future<void> main() async {
       child: const RollaApp(),
     ),
   );
+  FlutterNativeSplash.remove();
 }
 
 class RollaApp extends StatefulWidget {
