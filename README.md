@@ -2,7 +2,8 @@
 
 
 # Setup & Run
-Make sure to follow all of the setup steps below before debugging or building the app, to build the apk once ready run:
+Make sure to follow all of the setup steps below before debugging or building the app, to run/build the apk once ready run:
+`fvm flutter run --<mode>`
 `fvm flutter build apk --release`
 
 The built app should be available under: `build\app\outputs\flutter-apk\app-release.apk`.
