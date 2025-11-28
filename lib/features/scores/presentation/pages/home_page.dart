@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
+import 'package:get_it/get_it.dart';
 import 'package:rolla_demo_app/core/assets/app_icon_paths.dart';
-import 'package:rolla_demo_app/core/di/scores_injection.dart' as di;
 import 'package:rolla_demo_app/core/localization/tr.dart';
+import 'package:rolla_demo_app/core/presentation/bloc/settings_cubit.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/app_icon.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/app_icon_button.dart';
 import 'package:rolla_demo_app/core/theme/app_colors.dart';
@@ -29,22 +29,26 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    bloc = di.sl<ScoreBloc>();
-    _loadCurrentDateScore();
+    bloc = GetIt.instance<ScoreBloc>();
+    _loadCurrentDateScore(mockLoadingTime: Duration(milliseconds: 2500));
   }
 
-  void _loadCurrentDateScore() async {
-    bloc.add(LoadScoresEvent(from: startOfCurrentDay(), to: endOfCurrentDay()));
+  void _loadCurrentDateScore({Duration? mockLoadingTime}) async {
+    bloc.add(
+      LoadScoresEvent(
+        from: startOfCurrentDay(),
+        to: endOfCurrentDay(),
+        mockLoadingTime: mockLoadingTime ?? Duration(milliseconds: 1000),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final nowStr = DateFormat.yMd(
-      Localizations.localeOf(context).toLanguageTag(),
-    ).format(DateTime.now());
     return Scaffold(
       appBar: AppBar(
-        title: Text('Scores'),
+        automaticallyImplyLeading: false,
+        title: Text(tr.homeTitle),
         actions: [
           AppIconButton.asset(
             AppIconPaths.settings,
@@ -62,9 +66,29 @@ class _HomePageState extends State<HomePage> {
         },
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
           child: Column(
             children: [
+              BlocBuilder<SettingsCubit, SettingsState>(
+                builder: (context, state) {
+                  if (state is! SettingsLoaded)
+                    return CircularProgressIndicator();
+                  return Column(
+                    children: [
+                      Text(
+                        tr.welcomeName(state.settings.name),
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        tr.theseAreYourScoresForToday,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      SizedBox(height: 40),
+                    ],
+                  );
+                },
+              ),
               BlocBuilder<ScoreBloc, ScoreState>(
                 bloc: bloc,
                 builder: (context, state) {
@@ -72,12 +96,9 @@ class _HomePageState extends State<HomePage> {
                     return Column(
                       children: List.generate(
                         3,
-                        (i) => const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: SizedBox(
-                            height: 72,
-                            child: Center(child: CircularProgressIndicator()),
-                          ),
+                        (i) => Padding(
+                          padding: EdgeInsets.only(bottom: i == 2 ? 0 : 20),
+                          child: ScoreCard.loading(),
                         ),
                       ),
                     );
@@ -88,21 +109,20 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         ScoreCard(
                           icon: AppIcon(
-                            AppIconPaths.fire,
-                            color: AppColors.green,
+                            AppIconPaths.heartRate,
+                            color: AppColors.lightBlue,
                           ),
-                          title: tr.activity,
-                          value: todayScore?.activityScore.toDouble(),
-                          scoreValue: todayScore?.activityScore.toDouble(),
+                          title: tr.health,
+                          value: todayScore?.healthScore.toDouble(),
+                          scoreValue: todayScore?.healthScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (_) => ScoreDetailPage(
-                                scoreType: ScoreType.activity,
-                              ),
+                              builder: (_) =>
+                                  ScoreDetailPage(scoreType: ScoreType.health),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 20),
                         ScoreCard(
                           icon: AppIcon(
                             AppIconPaths.moon,
@@ -119,19 +139,20 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 20),
                         ScoreCard(
                           icon: AppIcon(
-                            AppIconPaths.heartRate,
-                            color: AppColors.lightBlue,
+                            AppIconPaths.fire,
+                            color: AppColors.green,
                           ),
-                          title: tr.health,
-                          value: todayScore?.healthScore.toDouble(),
-                          scoreValue: todayScore?.healthScore.toDouble(),
+                          title: tr.activity,
+                          value: todayScore?.activityScore.toDouble(),
+                          scoreValue: todayScore?.activityScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (_) =>
-                                  ScoreDetailPage(scoreType: ScoreType.health),
+                              builder: (_) => ScoreDetailPage(
+                                scoreType: ScoreType.activity,
+                              ),
                             ),
                           ),
                         ),
@@ -144,10 +165,10 @@ class _HomePageState extends State<HomePage> {
                   }
                 },
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 36),
               Text(
-                'Updated: $nowStr',
-                style: Theme.of(context).textTheme.bodySmall,
+                tr.tapOnAScoreToSeeItsDetails,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
           ),

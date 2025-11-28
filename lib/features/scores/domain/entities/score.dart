@@ -239,7 +239,7 @@ class Score extends Equatable {
       steps: steps + other.steps,
       moveHours: moveHours + other.moveHours,
       activeCalories: activeCalories + other.activeCalories,
-      activities: [],
+      activities: [...activities, ...other.activities],
     );
   }
 

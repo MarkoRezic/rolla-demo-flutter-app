@@ -18,9 +18,8 @@ class ScoreRepositoryImpl implements ScoreRepository {
     DateTime? to,
   }) async {
     try {
-      final allScores = await dataSource.loadAll(); // returns List<ScoreRecord>
+      final allScores = await dataSource.loadAll();
 
-      // Filtering in the repository is fine — it keeps presentation/domain free of data models.
       final filtered = allScores.where((score) {
         final byFrom =
             from == null ||
@@ -33,12 +32,38 @@ class ScoreRepositoryImpl implements ScoreRepository {
         return byFrom && byTo;
       }).toList();
 
-      // Map ScoreRecord -> domain Score
       final domainList = filtered.map(_mapScoreRecordToDomain).toList();
 
       return right(domainList);
     } catch (e, st) {
-      // optionally log e/st
+      return left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, DateTime?>> getEarliestScoreDate({
+    DateTime? from,
+    DateTime? to,
+  }) async {
+    try {
+      final result = await getScores(from: from, to: to);
+
+      switch (result) {
+        case Left(:final value):
+          return left(value);
+
+        case Right(:final value):
+          if (value.isEmpty) return right(null);
+
+          final earliest = value
+              .map((s) => s.date)
+              .reduce((a, b) => a.isBefore(b) ? a : b);
+
+          return right(earliest);
+      }
+
+      return right(null);
+    } catch (e, st) {
       return left(Failure(e.toString()));
     }
   }

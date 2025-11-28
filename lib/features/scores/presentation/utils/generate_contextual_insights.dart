@@ -415,12 +415,7 @@ List<String> generateContextualInsights(
       if (avg > 0) {
         final rel = sd / avg;
         if (rel >= variabilityThresholdRel) {
-          insights.add(
-            tr.insightHighVariability(
-              metric.label,
-              fmtRounded(sd, decimals: 1),
-            ),
-          );
+          insights.add(tr.insightHighVariability(metric.label));
         } else {
           insights.add(tr.insightLowVariability(metric.label));
         }

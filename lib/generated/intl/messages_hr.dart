@@ -20,91 +20,105 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'hr';
 
-  static String m0(metric, period, value, change) =>
-      "${metric} je veći nego ${period}: ${value} (${change}% ↑).";
+  static String m0(type) =>
+      "${Intl.select(type, {'cardio': 'Kardio', 'strength_training': 'Trening snage', 'walking': 'Hodanje', 'running': 'Trčanje', 'cycling': 'Vožnja biciklom', 'yoga': 'Joga', 'hiit': 'HIIT', 'swimming': 'Plivanje', 'pilates': 'Pilates', 'dance': 'Ples', 'hiking': 'Planinarenje', 'intervals': 'Intervali', 'other': 'Nepoznato'})}";
 
   static String m1(metric, period, value, change) =>
-      "${metric} je značajno pao u odnosu na ${period}: ${value} (${change}%).";
+      "${metric} je veći nego ${period}: ${value} (${change}% ↑).";
 
   static String m2(metric, period, value, change) =>
+      "${metric} je značajno pao u odnosu na ${period}: ${value} (${change}%).";
+
+  static String m3(metric, period, value, change) =>
       "${metric} pokazuje značajno poboljšanje u odnosu na ${period}: ${value} (+${change}%).";
 
-  static String m3(metric) =>
+  static String m4(metric) =>
       "${metric} pokazuje silazni trend u odabranom razdoblju.";
 
-  static String m4(metric, sd) => "${metric} mnogo varira.";
+  static String m5(metric) => "${metric} mnogo varira.";
 
-  static String m5(metric) => "${metric} je jako konzistentan.";
+  static String m6(metric) => "${metric} je jako konzistentan.";
 
-  static String m6(metric, period, value) =>
+  static String m7(metric, period, value) =>
       "${metric} je otprilike isti kao ${period}: ${value}.";
 
-  static String m7(value) => "Trajanje sna je u zdravom rasponu: ${value}.";
+  static String m8(value) => "Trajanje sna je u zdravom rasponu: ${value}.";
 
-  static String m8(value) => "Trajanje sna je iznad zdravog raspona: ${value}.";
+  static String m9(value) => "Trajanje sna je iznad zdravog raspona: ${value}.";
 
-  static String m9(value) => "Trajanje sna je ispod zdravog raspona: ${value}.";
+  static String m10(value) =>
+      "Trajanje sna je ispod zdravog raspona: ${value}.";
 
-  static String m10(metric) =>
+  static String m11(metric) =>
       "${metric} je konzistentan u odabranom razdoblju.";
 
-  static String m11(metric, value) => "${metric} dostiže cilj: ${value}.";
+  static String m12(metric, value) => "${metric} dostiže cilj: ${value}.";
 
-  static String m12(metric, value) => "${metric} ne dostiže cilj: ${value}.";
+  static String m13(metric, value) => "${metric} ne dostiže cilj: ${value}.";
 
-  static String m13(metric) =>
+  static String m14(metric) =>
       "${metric} pokazuje uzlazni trend u odabranom razdoblju.";
 
-  static String m14(metric, period, value, change) =>
+  static String m15(metric, period, value, change) =>
       "${metric} je manji nego ${period}: ${value} (${change}% ↓).";
 
-  static String m15(date) => "Zadnje ažuriranje: ${date}";
+  static String m16(date) => "Zadnje ažuriranje: ${date}";
 
-  static String m16(timeframe) =>
+  static String m17(timeframe) =>
       "${Intl.select(timeframe, {'day': '', 'week': 'Dnevni Prosjek', 'month': 'Dnevni Prosjek', 'year': 'Dnevni Prosjek', 'yearMonthly': 'Mjesečni Prosjek', 'other': ''})}";
+
+  static String m18(name) => "Dobrodošli, ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("About"),
     "activeCalories": MessageLookupByLibrary.simpleMessage("Aktivne kalorije"),
     "activePoints": MessageLookupByLibrary.simpleMessage("Aktivni bodovi"),
+    "activities": MessageLookupByLibrary.simpleMessage("Aktivnosti"),
     "activity": MessageLookupByLibrary.simpleMessage("Aktivnost"),
+    "activityCategory": m0,
     "activityScore": MessageLookupByLibrary.simpleMessage(
       "Rezultat Aktivnosti",
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("Rolla Demo"),
+    "calories": MessageLookupByLibrary.simpleMessage("Kalorije"),
+    "continueText": MessageLookupByLibrary.simpleMessage("Nastavi"),
+    "enterName": MessageLookupByLibrary.simpleMessage("Unesi Ime"),
     "error": MessageLookupByLibrary.simpleMessage("Greška"),
     "exportPdf": MessageLookupByLibrary.simpleMessage("Izvezi u PDF"),
     "health": MessageLookupByLibrary.simpleMessage("Zdravlje"),
     "healthScore": MessageLookupByLibrary.simpleMessage("Rezultat Zdravlja"),
     "history": MessageLookupByLibrary.simpleMessage("Povijest"),
-    "homeTitle": MessageLookupByLibrary.simpleMessage("Rezultati"),
+    "homeTitle": MessageLookupByLibrary.simpleMessage("Početna"),
     "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works?"),
-    "insightBetterThanPreviousPeriod": m0,
-    "insightBigDrop": m1,
-    "insightBigImprovement": m2,
-    "insightDownwardTrend": m3,
-    "insightHighVariability": m4,
+    "insightBetterThanPreviousPeriod": m1,
+    "insightBigDrop": m2,
+    "insightBigImprovement": m3,
+    "insightDownwardTrend": m4,
+    "insightHighVariability": m5,
     "insightInsufficientData": MessageLookupByLibrary.simpleMessage(
       "Nema dovoljno podataka za davanje uvida.",
     ),
-    "insightLowVariability": m5,
-    "insightNoChangeSincePreviousPeriod": m6,
-    "insightSleepInTarget": m7,
-    "insightSleepTooLong": m8,
-    "insightSleepTooShort": m9,
-    "insightStableTrend": m10,
-    "insightTargetMet": m11,
-    "insightTargetNotMet": m12,
-    "insightUpwardTrend": m13,
-    "insightWorseThanPreviousPeriod": m14,
+    "insightLowVariability": m6,
+    "insightNoChangeSincePreviousPeriod": m7,
+    "insightSleepInTarget": m8,
+    "insightSleepTooLong": m9,
+    "insightSleepTooShort": m10,
+    "insightStableTrend": m11,
+    "insightTargetMet": m12,
+    "insightTargetNotMet": m13,
+    "insightUpwardTrend": m14,
+    "insightWorseThanPreviousPeriod": m15,
     "insightsTitle": MessageLookupByLibrary.simpleMessage("Uvidi"),
     "language": MessageLookupByLibrary.simpleMessage("Jezik"),
-    "lastUpdated": m15,
+    "lastUpdated": m16,
     "logout": MessageLookupByLibrary.simpleMessage("Odjava"),
     "metrics": MessageLookupByLibrary.simpleMessage("Metrike"),
     "monthly": MessageLookupByLibrary.simpleMessage("Mjesečni"),
     "moveHours": MessageLookupByLibrary.simpleMessage("Sati kretanja"),
+    "noActivitiesRecorded": MessageLookupByLibrary.simpleMessage(
+      "Nema Zabilježenih Aktivnosti",
+    ),
     "noData": MessageLookupByLibrary.simpleMessage("Nema podataka"),
     "overnightHRV": MessageLookupByLibrary.simpleMessage("Noćni HRV"),
     "periodLastMonth": MessageLookupByLibrary.simpleMessage("prošli mjesec"),
@@ -143,22 +157,37 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Postavke"),
     "sleep": MessageLookupByLibrary.simpleMessage("Spavanje"),
     "steps": MessageLookupByLibrary.simpleMessage("Koraci"),
+    "tapOnAScoreToSeeItsDetails": MessageLookupByLibrary.simpleMessage(
+      "Pritisnite na rezultat da biste vidjeli detalje",
+    ),
     "theme": MessageLookupByLibrary.simpleMessage("Tema"),
     "themeModeDark": MessageLookupByLibrary.simpleMessage("Tamna"),
     "themeModeLight": MessageLookupByLibrary.simpleMessage("Svijetla"),
     "themeModeSystem": MessageLookupByLibrary.simpleMessage(
       "Automatski (Sistem)",
     ),
+    "theseAreYourScoresForToday": MessageLookupByLibrary.simpleMessage(
+      "Ovo su vaši rezultati za danas:",
+    ),
     "timeframe1D": MessageLookupByLibrary.simpleMessage("1D"),
     "timeframe1Y": MessageLookupByLibrary.simpleMessage("1G"),
     "timeframe30D": MessageLookupByLibrary.simpleMessage("30D"),
     "timeframe7D": MessageLookupByLibrary.simpleMessage("7D"),
-    "timeframeAvg": m16,
+    "timeframeAvg": m17,
+    "userName": MessageLookupByLibrary.simpleMessage("Korisničko Ime"),
     "valueUnitBpm": MessageLookupByLibrary.simpleMessage("bpm"),
     "valueUnitH": MessageLookupByLibrary.simpleMessage("h"),
     "valueUnitKcal": MessageLookupByLibrary.simpleMessage("kcal"),
     "valueUnitMs": MessageLookupByLibrary.simpleMessage("ms"),
     "valueUnitPts": MessageLookupByLibrary.simpleMessage("bod"),
     "valueUnitSteps": MessageLookupByLibrary.simpleMessage("koraka"),
+    "welcome": MessageLookupByLibrary.simpleMessage("Dobrodošli"),
+    "welcomeName": m18,
+    "whatIsYourName": MessageLookupByLibrary.simpleMessage("Kako se zovete?"),
+    "youCanLeaveThisEmptyAndChangeLater": MessageLookupByLibrary.simpleMessage(
+      "(Možete ovo ostaviti prazno i promijeniti kasnije)",
+    ),
+    "youHaveLoggedOut": MessageLookupByLibrary.simpleMessage("Odjavljeni ste."),
+    "yourName": MessageLookupByLibrary.simpleMessage("Vaše ime"),
   };
 }

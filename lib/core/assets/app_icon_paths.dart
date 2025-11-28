@@ -14,4 +14,18 @@ class AppIconPaths {
   static final star = getPath('star');
   static final steps = getPath('steps');
   static final timer = getPath('timer');
+
+  // Activities
+  static final cardio = getPath('cardio');
+  static final cycling = getPath('cycling');
+  static final dance = getPath('dance');
+  static final hiit = getPath('hiit');
+  static final hiking = getPath('hiking');
+  static final intervals = getPath('intervals');
+  static final pilates = getPath('pilates');
+  static final running = getPath('running');
+  static final strength_training = getPath('strength_training');
+  static final swimming = getPath('swimming');
+  static final walking = getPath('walking');
+  static final yoga = getPath('yoga');
 }

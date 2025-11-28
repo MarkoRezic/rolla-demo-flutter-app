@@ -3,8 +3,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/app_icon.dart';
-import 'package:rolla_demo_app/core/theme/app_colors.dart';
 import 'package:rolla_demo_app/core/theme/app_theme.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/card_container.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/score_linear_progress_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -44,17 +44,6 @@ class ScoreCard extends StatelessWidget {
     return v.toStringAsFixed(0);
   }
 
-  Color _colorForPercent(BuildContext context, double percent) {
-    // thresholds: 0-50% neutral, 51-79% blue, 80+% green
-    if (percent <= 0.5) {
-      return AppColors.grey; // neutral
-    } else if (percent <= 0.79) {
-      return AppColors.blue; // blue
-    } else {
-      return AppColors.green; // green
-    }
-  }
-
   String _maybeFormatValue(double? v) =>
       displayValue != null ? displayValue!(v) : _defaultDisplayValue(v);
 
@@ -63,9 +52,6 @@ class ScoreCard extends StatelessWidget {
     final display = _maybeFormatValue(value);
     final hasProgress = scoreValue != null;
     final percent = hasProgress ? scoreValue!.clamp(0, 100) / 100 : null;
-    final progressColor = hasProgress
-        ? _colorForPercent(context, percent!)
-        : Colors.transparent;
 
     final shimmerBaseColor = AppTheme.shimmerBase(context);
     final shimmerHighlightColor = AppTheme.shimmerHighlight(context);
@@ -125,61 +111,43 @@ class ScoreCard extends StatelessWidget {
           )
         : icon;
 
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: onTap,
-        child: Container(
-          clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.fromBorderSide(
-              BorderSide(width: 1, color: AppTheme.lightGrey(context)),
+    return CardContainer(
+      disabled: value == null,
+      onTap: onTap,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (iconWidget != null) iconWidget,
+                if (iconWidget != null) const SizedBox(width: 12),
+                Expanded(child: titleWidget),
+                const SizedBox(width: 12),
+                valueWidget,
+              ],
             ),
           ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 16,
-                ),
+
+          if (hasProgress)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: -ScoreLinearProgressIndicator.defaultHeight / 2,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    if (iconWidget != null) iconWidget,
-                    if (iconWidget != null) const SizedBox(width: 12),
-                    Expanded(child: titleWidget),
-                    const SizedBox(width: 12),
-                    valueWidget,
+                    Expanded(
+                      child: ScoreLinearProgressIndicator(value: percent!),
+                    ),
                   ],
                 ),
               ),
-
-              if (hasProgress)
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: -ScoreCardLinearProgressIndicator.height / 2,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ScoreCardLinearProgressIndicator(
-                            value: percent!,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        ),
+            ),
+        ],
       ),
     );
   }

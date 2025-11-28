@@ -12,10 +12,47 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Rolla Demo';
 
   @override
+  String get welcome => 'Welcome';
+
+  @override
+  String get whatIsYourName => 'What is your name?';
+
+  @override
+  String get yourName => 'Your name';
+
+  @override
+  String get youCanLeaveThisEmptyAndChangeLater =>
+      '(You can leave this empty and change later)';
+
+  @override
+  String get continueText => 'Continue';
+
+  @override
+  String get homeTitle => 'Home';
+
+  @override
+  String welcomeName(Object name) {
+    return 'Welcome, $name';
+  }
+
+  @override
+  String get theseAreYourScoresForToday =>
+      'These are your health scores for today:';
+
+  @override
+  String get tapOnAScoreToSeeItsDetails => 'Tap on a score to view its details';
+
+  @override
   String get error => 'Error';
 
   @override
   String get settings => 'Settings';
+
+  @override
+  String get userName => 'User Name';
+
+  @override
+  String get enterName => 'Enter Name';
 
   @override
   String get language => 'Language';
@@ -42,7 +79,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logout => 'Log Out';
 
   @override
-  String get homeTitle => 'Scores';
+  String get youHaveLoggedOut => 'You have logged out.';
 
   @override
   String get history => 'History';
@@ -88,6 +125,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noData => 'No data';
+
+  @override
+  String get activities => 'Activities';
+
+  @override
+  String get calories => 'Calories';
+
+  @override
+  String activityCategory(String type) {
+    String _temp0 = intl.Intl.selectLogic(type, {
+      'cardio': 'Cardio',
+      'strength_training': 'Strength Training',
+      'walking': 'Walking',
+      'running': 'Running',
+      'cycling': 'Cycling',
+      'yoga': 'Yoga',
+      'hiit': 'HIIT',
+      'swimming': 'Swimming',
+      'pilates': 'Pilates',
+      'dance': 'Dance',
+      'hiking': 'Hiking',
+      'intervals': 'Intervals',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get noActivitiesRecorded => 'No Activities Recorded';
 
   @override
   String get pullToRefresh => 'Pull to refresh';
@@ -232,8 +298,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String insightHighVariability(Object metric, Object sd) {
-    return '$metric has high variability (SD $sd).';
+  String insightHighVariability(Object metric) {
+    return '$metric has high variability.';
   }
 
   @override

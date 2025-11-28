@@ -7,4 +7,9 @@ abstract class ScoreRepository {
     DateTime? from,
     DateTime? to,
   });
+
+  Future<Either<Failure, DateTime?>> getEarliestScoreDate({
+    DateTime? from,
+    DateTime? to,
+  });
 }

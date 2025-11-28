@@ -19,3 +19,17 @@ String formatMinutesHMin(num minutes) {
 
   return '${timeOfDay.hour} h ${timeOfDay.minute} min';
 }
+
+String formatDuration(Duration d) {
+  String twoDigits(int n) => n.toString().padLeft(2, '0');
+
+  final hours = d.inHours;
+  final minutes = d.inMinutes.remainder(60);
+  final seconds = d.inSeconds.remainder(60);
+
+  if (hours > 0) {
+    return "$hours:${twoDigits(minutes)}:${twoDigits(seconds)}";
+  } else {
+    return "${minutes}:${twoDigits(seconds)}";
+  }
+}

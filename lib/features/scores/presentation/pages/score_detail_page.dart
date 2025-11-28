@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:rolla_demo_app/core/assets/app_icon_paths.dart';
-import 'package:rolla_demo_app/core/di/scores_injection.dart' as di;
 import 'package:rolla_demo_app/core/localization/tr.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/app_icon.dart';
 import 'package:rolla_demo_app/core/theme/app_colors.dart';
 import 'package:rolla_demo_app/features/scores/domain/entities/score.dart';
+import 'package:rolla_demo_app/features/scores/domain/entities/score_activity.dart';
+import 'package:rolla_demo_app/features/scores/domain/extensions/list/list_first_where_or_null.dart';
 import 'package:rolla_demo_app/features/scores/domain/extensions/list/list_of_scores_average_metrics.dart';
+import 'package:rolla_demo_app/features/scores/presentation/bloc/earliest_score_date_cubit.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/score_type.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/timeframe.dart';
 import 'package:rolla_demo_app/features/scores/presentation/extensions/date_time/date_time_same_date_as.dart';
@@ -16,6 +19,7 @@ import 'package:rolla_demo_app/features/scores/presentation/models/data_point.da
 import 'package:rolla_demo_app/features/scores/presentation/utils/generate_contextual_insights.dart';
 import 'package:rolla_demo_app/features/scores/presentation/utils/time_utils.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/radial_gauge.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/score_activity_card.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/score_card.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/score_info_card.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/score_insights_view.dart';
@@ -26,23 +30,36 @@ import '../widgets/concentric_dots_stack_container.dart';
 
 class ScoreDetailPage extends StatefulWidget {
   final ScoreType scoreType;
-  const ScoreDetailPage({Key? key, required this.scoreType}) : super(key: key);
+  final DateTime? initialSelectedDate;
+  final Timeframe? initialSelectedTimeframe;
+  final bool? initialShowMonthlyAverages;
+  const ScoreDetailPage({
+    Key? key,
+    required this.scoreType,
+    this.initialSelectedDate,
+    this.initialSelectedTimeframe,
+    this.initialShowMonthlyAverages,
+  }) : super(key: key);
 
   @override
   State<ScoreDetailPage> createState() => _ScoreDetailPageState();
 }
 
 class _ScoreDetailPageState extends State<ScoreDetailPage> {
-  late ScoreBloc _bloc;
-  DateTime _selectedDate = DateTime.now();
-  Timeframe _selectedTimeframe = Timeframe.day;
-  bool _showMonthlyAverages = false;
+  late ScoreBloc _scoreBloc;
+  late EarliestScoreDateCubit _earliestScoreDateCubit;
+  late DateTime _selectedDate = widget.initialSelectedDate ?? DateTime.now();
+  late Timeframe _selectedTimeframe =
+      widget.initialSelectedTimeframe ?? Timeframe.day;
+  late bool _showMonthlyAverages = widget.initialShowMonthlyAverages ?? false;
 
   @override
   void initState() {
     super.initState();
-    _bloc = di.sl<ScoreBloc>();
+    _scoreBloc = GetIt.instance<ScoreBloc>();
+    _earliestScoreDateCubit = GetIt.instance<EarliestScoreDateCubit>();
     _loadScoresForCurrentTimeframe();
+    _fetchEarliestScoreDate();
   }
 
   void _loadScoresForCurrentTimeframe() {
@@ -62,13 +79,17 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
         mockLoadingTime = Duration(milliseconds: 2500);
         break;
     }
-    _bloc.add(
+    _scoreBloc.add(
       LoadScoresEvent(
         from: dateTimeRange.start,
         to: dateTimeRange.end,
         mockLoadingTime: mockLoadingTime,
       ),
     );
+  }
+
+  void _fetchEarliestScoreDate() {
+    _earliestScoreDateCubit.fetchOnce();
   }
 
   Color _scaffoldFadeColor(BuildContext context) {
@@ -89,13 +110,6 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
       _selectedTimeframe = timeframe;
     });
     _loadScoresForCurrentTimeframe();
-  }
-
-  DateTime? _getMinDate(List<DataPoint>? dataPoints) {
-    if (dataPoints == null || dataPoints.isEmpty) return null;
-    List<DataPoint> sortedDataPoints = [...dataPoints];
-    sortedDataPoints.sort((a, b) => a.date.isBefore(b.date) ? -1 : 1);
-    return sortedDataPoints.first.date;
   }
 
   List<Widget> _separatedWidgets({
@@ -167,7 +181,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
           title: tr.activePoints,
           value: _toDouble(score.activePoints),
           scoreValue: _toDouble(score.activePointsScore),
-          displayValue: (value) => '${_round(value)} pts',
+          displayValue: (value) => '${_round(value)} ${tr.valueUnitPts}',
         ),
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.steps, color: AppColors.green),
@@ -180,7 +194,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
           title: tr.moveHours,
           value: _toDouble(score.moveHours),
           scoreValue: _toDouble(score.moveHoursScore),
-          displayValue: (value) => '${_round(value)} h',
+          displayValue: (value) => '${_round(value)} ${tr.valueUnitH}',
         ),
       ];
 
@@ -198,14 +212,14 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
           title: tr.restingHR,
           value: _toDouble(score.restingHeartRateBpm),
           scoreValue: _toDouble(score.restingHeartRateScore),
-          displayValue: (value) => '${_round(value)} bpm',
+          displayValue: (value) => '${_round(value)} ${tr.valueUnitBpm}',
         ),
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.heartMonitor, color: AppColors.red),
           title: tr.overnightHRV,
           value: _toDouble(score.overnightHeartRateVarianceMs),
           scoreValue: _toDouble(score.overnightHeartRateVarianceScore),
-          displayValue: (value) => '${_round(value)} ms',
+          displayValue: (value) => '${_round(value)} ${tr.valueUnitMs}',
         ),
       ];
 
@@ -262,7 +276,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
   }
 
   void _showScoreInfoBottomSheet(BuildContext context, Score? score) {
-    final double sheetHeight = 0.9;
+    final double sheetHeight = 0.85;
     double gaugeValue = 0;
     Score nonNullScore = score ?? Score.zero();
 
@@ -363,8 +377,8 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     } else {
       List<Score> scores = scoreState.scores;
       Score? averageScore = scores.averageScore;
-      double _toDouble(num? number) => number?.toDouble() ?? 0;
-      int _round(num? number) => number?.round() ?? 0;
+      double? _toDouble(num? number) => number?.toDouble();
+      int? _round(num? number) => number?.round();
 
       switch (widget.scoreType) {
         case ScoreType.activity:
@@ -374,7 +388,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
               title: tr.activePoints,
               value: _toDouble(averageScore?.activePoints),
               scoreValue: _toDouble(averageScore?.activePointsScore),
-              displayValue: (value) => '${_round(value)} pts',
+              displayValue: (value) => '${_round(value)} ${tr.valueUnitPts}',
             ),
             ScoreCard(
               icon: AppIcon(AppIconPaths.steps, color: AppColors.green),
@@ -387,13 +401,13 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
               title: tr.moveHours,
               value: _toDouble(averageScore?.moveHours),
               scoreValue: _toDouble(averageScore?.moveHoursScore),
-              displayValue: (value) => '${_round(value)} h',
+              displayValue: (value) => '${_round(value)} ${tr.valueUnitH}',
             ),
             ScoreCard(
               icon: AppIcon(AppIconPaths.fire, color: AppColors.orange),
               title: tr.activeCalories,
               value: _toDouble(averageScore?.activeCalories),
-              displayValue: (value) => '${_round(value)} kcal',
+              displayValue: (value) => '${_round(value)} ${tr.valueUnitKcal}',
             ),
           ];
           break;
@@ -404,15 +418,17 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
               title: tr.sleep,
               value: _toDouble(averageScore?.sleepMinutes),
               scoreValue: _toDouble(averageScore?.sleepScore),
-              displayValue: (value) =>
-                  formatMinutesHM(_round(averageScore?.sleepMinutes)),
+              displayValue: averageScore?.sleepMinutes == null
+                  ? null
+                  : (value) =>
+                        formatMinutesHM(_round(averageScore!.sleepMinutes)!),
             ),
             ScoreCard(
               icon: AppIcon(AppIconPaths.heartRate, color: AppColors.lightBlue),
               title: tr.restingHR,
               value: _toDouble(averageScore?.restingHeartRateBpm),
               scoreValue: _toDouble(averageScore?.restingHeartRateScore),
-              displayValue: (value) => '${_round(value)} bpm',
+              displayValue: (value) => '${_round(value)} ${tr.valueUnitBpm}',
             ),
             ScoreCard(
               icon: AppIcon(AppIconPaths.heartMonitor, color: AppColors.red),
@@ -421,7 +437,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
               scoreValue: _toDouble(
                 averageScore?.overnightHeartRateVarianceScore,
               ),
-              displayValue: (value) => '${_round(value)} ms',
+              displayValue: (value) => '${_round(value)} ${tr.valueUnitMs}',
             ),
           ];
           break;
@@ -432,12 +448,32 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
               title: tr.readiness,
               value: _toDouble(averageScore?.readinessScore),
               scoreValue: _toDouble(averageScore?.readinessScore),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => ScoreDetailPage(
+                    scoreType: ScoreType.readiness,
+                    initialSelectedDate: _selectedDate,
+                    initialSelectedTimeframe: _selectedTimeframe,
+                    initialShowMonthlyAverages: _showMonthlyAverages,
+                  ),
+                ),
+              ),
             ),
             ScoreCard(
               icon: AppIcon(AppIconPaths.fire, color: AppColors.green),
               title: tr.activity,
               value: _toDouble(averageScore?.activityScore),
               scoreValue: _toDouble(averageScore?.activityScore),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => ScoreDetailPage(
+                    scoreType: ScoreType.activity,
+                    initialSelectedDate: _selectedDate,
+                    initialSelectedTimeframe: _selectedTimeframe,
+                    initialShowMonthlyAverages: _showMonthlyAverages,
+                  ),
+                ),
+              ),
             ),
           ];
           break;
@@ -445,6 +481,48 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     }
 
     return _separatedWidgets(widgets: widgets, separator: SizedBox(height: 10));
+  }
+
+  List<Widget> _buildActivitiesWidgets(
+    BuildContext context,
+    ScoreState scoreState,
+  ) {
+    late List<Widget> widgets;
+
+    if (scoreState is! ScoreLoaded) {
+      widgets = [ScoreActivityCard.loading()];
+    } else {
+      List<Score> scores = scoreState.scores;
+      List<ScoreActivity>? activities = scores.sumScore?.activities;
+
+      if (activities == null) {
+        widgets = [
+          Text(tr.noData, style: Theme.of(context).textTheme.bodyMedium),
+        ];
+      } else if (activities.isEmpty) {
+        widgets = [
+          Text(
+            tr.noActivitiesRecorded,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ];
+      } else {
+        widgets = activities
+            .map(
+              (activity) =>
+                  ScoreActivityCard.fromActivity(scoreActivity: activity),
+            )
+            .toList();
+      }
+    }
+
+    return [
+      const SizedBox(height: 20),
+      Text(tr.activities, style: Theme.of(context).textTheme.titleLarge),
+      const SizedBox(height: 12),
+      ..._separatedWidgets(widgets: widgets, separator: SizedBox(height: 10)),
+      const SizedBox(height: 20),
+    ];
   }
 
   @override
@@ -467,12 +545,12 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
           onRefresh: () async => _loadScoresForCurrentTimeframe(),
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16).copyWith(bottom: 100),
             child: Column(
               children: [
                 const SizedBox(height: 12),
                 BlocBuilder<ScoreBloc, ScoreState>(
-                  bloc: _bloc,
+                  bloc: _scoreBloc,
                   builder: (context, state) {
                     if (state is ScoreInitial) {
                       return const SizedBox(
@@ -493,7 +571,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                                   score.toDataPointByType(widget.scoreType),
                             )
                             .toList();
-                        selectedDateScore = scores.firstWhere(
+                        selectedDateScore = scores.firstWhereOrNull(
                           (score) => score.date.isSameDateAs(_selectedDate),
                         );
                       }
@@ -507,26 +585,41 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                             child: Row(
                               children: [
                                 Expanded(
-                                  child: TimeframeDataView(
-                                    selectedDate: _selectedDate,
-                                    selectedTimeFrame: _selectedTimeframe,
-                                    onSelectedDateChange: _onSelectedDateChange,
-                                    onSelectedTimeframeChange:
-                                        _onSelectedTimeframeChange,
-                                    minDate: _getMinDate(dataPoints),
-                                    dataPoints: dataPoints,
-                                    isLoading: isLoading,
-                                    color: widget.scoreType.accentColor,
-                                    showMonthlyAverages: _showMonthlyAverages,
-                                    onShowMonthlyAveragesToggle:
-                                        _onShowMonthlyAveragesToggle,
-                                    gaugeBuilder: _buildRadialGauge,
-                                    headerWidgetBuilder: (timeframe) =>
-                                        _headerWidgetBuilder(
-                                          timeframe,
-                                          selectedDateScore,
-                                        ),
-                                  ),
+                                  child:
+                                      BlocBuilder<
+                                        EarliestScoreDateCubit,
+                                        EarliestScoreDateState
+                                      >(
+                                        bloc: _earliestScoreDateCubit,
+                                        builder: (context, state) {
+                                          return TimeframeDataView(
+                                            selectedDate: _selectedDate,
+                                            selectedTimeFrame:
+                                                _selectedTimeframe,
+                                            onSelectedDateChange:
+                                                _onSelectedDateChange,
+                                            onSelectedTimeframeChange:
+                                                _onSelectedTimeframeChange,
+                                            minDate:
+                                                state is EarliestScoreDateLoaded
+                                                ? state.date
+                                                : null,
+                                            dataPoints: dataPoints,
+                                            isLoading: isLoading,
+                                            color: widget.scoreType.accentColor,
+                                            showMonthlyAverages:
+                                                _showMonthlyAverages,
+                                            onShowMonthlyAveragesToggle:
+                                                _onShowMonthlyAveragesToggle,
+                                            gaugeBuilder: _buildRadialGauge,
+                                            headerWidgetBuilder: (timeframe) =>
+                                                _headerWidgetBuilder(
+                                                  timeframe,
+                                                  selectedDateScore,
+                                                ),
+                                          );
+                                        },
+                                      ),
                                 ),
                               ],
                             ),
@@ -562,6 +655,8 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                           const SizedBox(height: 10),
                           ..._buildMetricWidgets(state),
                           const SizedBox(height: 10),
+                          if (widget.scoreType == ScoreType.activity)
+                            ..._buildActivitiesWidgets(context, state),
                           Text(
                             tr.about,
                             style: Theme.of(context).textTheme.titleLarge,

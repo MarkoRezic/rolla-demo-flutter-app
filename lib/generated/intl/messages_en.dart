@@ -20,94 +20,107 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(metric, period, value, change) =>
-      "${metric} is higher than ${period}: ${value} (${change}% ↑).";
+  static String m0(type) =>
+      "${Intl.select(type, {'cardio': 'Cardio', 'strength_training': 'Strength Training', 'walking': 'Walking', 'running': 'Running', 'cycling': 'Cycling', 'yoga': 'Yoga', 'hiit': 'HIIT', 'swimming': 'Swimming', 'pilates': 'Pilates', 'dance': 'Dance', 'hiking': 'Hiking', 'intervals': 'Intervals', 'other': 'Unknown'})}";
 
   static String m1(metric, period, value, change) =>
-      "${metric} dropped notably vs ${period}: ${value} (${change}%).";
+      "${metric} is higher than ${period}: ${value} (${change}% ↑).";
 
   static String m2(metric, period, value, change) =>
+      "${metric} dropped notably vs ${period}: ${value} (${change}%).";
+
+  static String m3(metric, period, value, change) =>
       "${metric} shows a big improvement vs ${period}: ${value} (+${change}%).";
 
-  static String m3(metric) =>
+  static String m4(metric) =>
       "${metric} shows a downward trend over the selected period.";
 
-  static String m4(metric, sd) => "${metric} has high variability (SD ${sd}).";
+  static String m5(metric) => "${metric} has high variability.";
 
-  static String m5(metric) => "${metric} shows low variability.";
+  static String m6(metric) => "${metric} shows low variability.";
 
-  static String m6(metric, period, value) =>
+  static String m7(metric, period, value) =>
       "${metric} is about the same as ${period}: ${value}.";
 
-  static String m7(value) =>
+  static String m8(value) =>
       "Sleep duration is within the healthy target range: ${value}.";
 
-  static String m8(value) =>
+  static String m9(value) =>
       "Sleep duration is above the healthy range: ${value}.";
 
-  static String m9(value) =>
+  static String m10(value) =>
       "Sleep duration is below the healthy range: ${value}.";
 
-  static String m10(metric) =>
+  static String m11(metric) =>
       "${metric} has been stable over the selected period.";
 
-  static String m11(metric, value) =>
+  static String m12(metric, value) =>
       "${metric} is meeting the target: ${value}.";
 
-  static String m12(metric, value) =>
+  static String m13(metric, value) =>
       "${metric} is below the target: ${value}.";
 
-  static String m13(metric) =>
+  static String m14(metric) =>
       "${metric} shows an upward trend over the selected period.";
 
-  static String m14(metric, period, value, change) =>
+  static String m15(metric, period, value, change) =>
       "${metric} is lower than ${period}: ${value} (${change}% ↓).";
 
-  static String m15(date) => "Last updated: ${date}";
+  static String m16(date) => "Last updated: ${date}";
 
-  static String m16(timeframe) =>
+  static String m17(timeframe) =>
       "${Intl.select(timeframe, {'day': '', 'week': 'Daily Avg.', 'month': 'Daily Avg.', 'year': 'Daily Avg.', 'yearMonthly': 'Monthly Avg.', 'other': ''})}";
+
+  static String m18(name) => "Welcome, ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("About"),
     "activeCalories": MessageLookupByLibrary.simpleMessage("Active calories"),
     "activePoints": MessageLookupByLibrary.simpleMessage("Active points"),
+    "activities": MessageLookupByLibrary.simpleMessage("Activities"),
     "activity": MessageLookupByLibrary.simpleMessage("Activity"),
+    "activityCategory": m0,
     "activityScore": MessageLookupByLibrary.simpleMessage("Activity Score"),
     "appTitle": MessageLookupByLibrary.simpleMessage("Rolla Demo"),
+    "calories": MessageLookupByLibrary.simpleMessage("Calories"),
+    "continueText": MessageLookupByLibrary.simpleMessage("Continue"),
+    "enterName": MessageLookupByLibrary.simpleMessage("Enter Name"),
     "error": MessageLookupByLibrary.simpleMessage("Error"),
     "exportPdf": MessageLookupByLibrary.simpleMessage("Export PDF"),
     "health": MessageLookupByLibrary.simpleMessage("Health"),
     "healthScore": MessageLookupByLibrary.simpleMessage("Health Score"),
     "history": MessageLookupByLibrary.simpleMessage("History"),
-    "homeTitle": MessageLookupByLibrary.simpleMessage("Scores"),
+    "homeTitle": MessageLookupByLibrary.simpleMessage("Home"),
     "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works?"),
-    "insightBetterThanPreviousPeriod": m0,
-    "insightBigDrop": m1,
-    "insightBigImprovement": m2,
-    "insightDownwardTrend": m3,
-    "insightHighVariability": m4,
+    "insightBetterThanPreviousPeriod": m1,
+    "insightBigDrop": m2,
+    "insightBigImprovement": m3,
+    "insightDownwardTrend": m4,
+    "insightHighVariability": m5,
     "insightInsufficientData": MessageLookupByLibrary.simpleMessage(
       "Not enough data to provide insights.",
     ),
-    "insightLowVariability": m5,
-    "insightNoChangeSincePreviousPeriod": m6,
-    "insightSleepInTarget": m7,
-    "insightSleepTooLong": m8,
-    "insightSleepTooShort": m9,
-    "insightStableTrend": m10,
-    "insightTargetMet": m11,
-    "insightTargetNotMet": m12,
-    "insightUpwardTrend": m13,
-    "insightWorseThanPreviousPeriod": m14,
+    "insightLowVariability": m6,
+    "insightNoChangeSincePreviousPeriod": m7,
+    "insightSleepInTarget": m8,
+    "insightSleepTooLong": m9,
+    "insightSleepTooShort": m10,
+    "insightStableTrend": m11,
+    "insightTargetMet": m12,
+    "insightTargetNotMet": m13,
+    "insightUpwardTrend": m14,
+    "insightWorseThanPreviousPeriod": m15,
     "insightsTitle": MessageLookupByLibrary.simpleMessage("Insights"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
-    "lastUpdated": m15,
+    "lastUpdated": m16,
     "logout": MessageLookupByLibrary.simpleMessage("Log Out"),
     "metrics": MessageLookupByLibrary.simpleMessage("Metrics"),
     "monthly": MessageLookupByLibrary.simpleMessage("Monthly"),
     "moveHours": MessageLookupByLibrary.simpleMessage("Move hours"),
+    "noActivitiesRecorded": MessageLookupByLibrary.simpleMessage(
+      "No Activities Recorded",
+    ),
     "noData": MessageLookupByLibrary.simpleMessage("No data"),
     "overnightHRV": MessageLookupByLibrary.simpleMessage("Overnight HRV"),
     "periodLastMonth": MessageLookupByLibrary.simpleMessage("last month"),
@@ -142,20 +155,39 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "sleep": MessageLookupByLibrary.simpleMessage("Sleep"),
     "steps": MessageLookupByLibrary.simpleMessage("Steps"),
+    "tapOnAScoreToSeeItsDetails": MessageLookupByLibrary.simpleMessage(
+      "Tap on a score to view its details",
+    ),
     "theme": MessageLookupByLibrary.simpleMessage("Theme"),
     "themeModeDark": MessageLookupByLibrary.simpleMessage("Dark"),
     "themeModeLight": MessageLookupByLibrary.simpleMessage("Light"),
     "themeModeSystem": MessageLookupByLibrary.simpleMessage("Auto (System)"),
+    "theseAreYourScoresForToday": MessageLookupByLibrary.simpleMessage(
+      "These are your health scores for today:",
+    ),
     "timeframe1D": MessageLookupByLibrary.simpleMessage("1D"),
     "timeframe1Y": MessageLookupByLibrary.simpleMessage("1Y"),
     "timeframe30D": MessageLookupByLibrary.simpleMessage("30D"),
     "timeframe7D": MessageLookupByLibrary.simpleMessage("7D"),
-    "timeframeAvg": m16,
+    "timeframeAvg": m17,
+    "userName": MessageLookupByLibrary.simpleMessage("User Name"),
     "valueUnitBpm": MessageLookupByLibrary.simpleMessage("bpm"),
     "valueUnitH": MessageLookupByLibrary.simpleMessage("h"),
     "valueUnitKcal": MessageLookupByLibrary.simpleMessage("kcal"),
     "valueUnitMs": MessageLookupByLibrary.simpleMessage("ms"),
     "valueUnitPts": MessageLookupByLibrary.simpleMessage("pts"),
     "valueUnitSteps": MessageLookupByLibrary.simpleMessage("steps"),
+    "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+    "welcomeName": m18,
+    "whatIsYourName": MessageLookupByLibrary.simpleMessage(
+      "What is your name?",
+    ),
+    "youCanLeaveThisEmptyAndChangeLater": MessageLookupByLibrary.simpleMessage(
+      "(You can leave this empty and change later)",
+    ),
+    "youHaveLoggedOut": MessageLookupByLibrary.simpleMessage(
+      "You have logged out.",
+    ),
+    "yourName": MessageLookupByLibrary.simpleMessage("Your name"),
   };
 }

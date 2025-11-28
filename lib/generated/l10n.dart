@@ -59,6 +59,76 @@ class S {
     return Intl.message('Rolla Demo', name: 'appTitle', desc: '', args: []);
   }
 
+  /// `Welcome`
+  String get welcome {
+    return Intl.message('Welcome', name: 'welcome', desc: '', args: []);
+  }
+
+  /// `What is your name?`
+  String get whatIsYourName {
+    return Intl.message(
+      'What is your name?',
+      name: 'whatIsYourName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your name`
+  String get yourName {
+    return Intl.message('Your name', name: 'yourName', desc: '', args: []);
+  }
+
+  /// `(You can leave this empty and change later)`
+  String get youCanLeaveThisEmptyAndChangeLater {
+    return Intl.message(
+      '(You can leave this empty and change later)',
+      name: 'youCanLeaveThisEmptyAndChangeLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get continueText {
+    return Intl.message('Continue', name: 'continueText', desc: '', args: []);
+  }
+
+  /// `Home`
+  String get homeTitle {
+    return Intl.message('Home', name: 'homeTitle', desc: '', args: []);
+  }
+
+  /// `Welcome, {name}`
+  String welcomeName(Object name) {
+    return Intl.message(
+      'Welcome, $name',
+      name: 'welcomeName',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `These are your health scores for today:`
+  String get theseAreYourScoresForToday {
+    return Intl.message(
+      'These are your health scores for today:',
+      name: 'theseAreYourScoresForToday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap on a score to view its details`
+  String get tapOnAScoreToSeeItsDetails {
+    return Intl.message(
+      'Tap on a score to view its details',
+      name: 'tapOnAScoreToSeeItsDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Error`
   String get error {
     return Intl.message('Error', name: 'error', desc: '', args: []);
@@ -67,6 +137,16 @@ class S {
   /// `Settings`
   String get settings {
     return Intl.message('Settings', name: 'settings', desc: '', args: []);
+  }
+
+  /// `User Name`
+  String get userName {
+    return Intl.message('User Name', name: 'userName', desc: '', args: []);
+  }
+
+  /// `Enter Name`
+  String get enterName {
+    return Intl.message('Enter Name', name: 'enterName', desc: '', args: []);
   }
 
   /// `Language`
@@ -124,9 +204,14 @@ class S {
     return Intl.message('Log Out', name: 'logout', desc: '', args: []);
   }
 
-  /// `Scores`
-  String get homeTitle {
-    return Intl.message('Scores', name: 'homeTitle', desc: '', args: []);
+  /// `You have logged out.`
+  String get youHaveLoggedOut {
+    return Intl.message(
+      'You have logged out.',
+      name: 'youHaveLoggedOut',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `History`
@@ -232,6 +317,51 @@ class S {
   /// `No data`
   String get noData {
     return Intl.message('No data', name: 'noData', desc: '', args: []);
+  }
+
+  /// `Activities`
+  String get activities {
+    return Intl.message('Activities', name: 'activities', desc: '', args: []);
+  }
+
+  /// `Calories`
+  String get calories {
+    return Intl.message('Calories', name: 'calories', desc: '', args: []);
+  }
+
+  /// `{type, select, cardio{Cardio} strength_training{Strength Training} walking{Walking} running{Running} cycling{Cycling} yoga{Yoga} hiit{HIIT} swimming{Swimming} pilates{Pilates} dance{Dance} hiking{Hiking} intervals{Intervals} other{Unknown}}`
+  String activityCategory(Object type) {
+    return Intl.select(
+      type,
+      {
+        'cardio': 'Cardio',
+        'strength_training': 'Strength Training',
+        'walking': 'Walking',
+        'running': 'Running',
+        'cycling': 'Cycling',
+        'yoga': 'Yoga',
+        'hiit': 'HIIT',
+        'swimming': 'Swimming',
+        'pilates': 'Pilates',
+        'dance': 'Dance',
+        'hiking': 'Hiking',
+        'intervals': 'Intervals',
+        'other': 'Unknown',
+      },
+      name: 'activityCategory',
+      desc: '',
+      args: [type],
+    );
+  }
+
+  /// `No Activities Recorded`
+  String get noActivitiesRecorded {
+    return Intl.message(
+      'No Activities Recorded',
+      name: 'noActivitiesRecorded',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Pull to refresh`
@@ -501,13 +631,13 @@ class S {
     );
   }
 
-  /// `{metric} has high variability (SD {sd}).`
-  String insightHighVariability(Object metric, Object sd) {
+  /// `{metric} has high variability.`
+  String insightHighVariability(Object metric) {
     return Intl.message(
-      '$metric has high variability (SD $sd).',
+      '$metric has high variability.',
       name: 'insightHighVariability',
       desc: '',
-      args: [metric, sd],
+      args: [metric],
     );
   }
 

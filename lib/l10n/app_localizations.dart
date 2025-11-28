@@ -104,6 +104,60 @@ abstract class AppLocalizations {
   /// **'Rolla Demo'**
   String get appTitle;
 
+  /// No description provided for @welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get welcome;
+
+  /// No description provided for @whatIsYourName.
+  ///
+  /// In en, this message translates to:
+  /// **'What is your name?'**
+  String get whatIsYourName;
+
+  /// No description provided for @yourName.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get yourName;
+
+  /// No description provided for @youCanLeaveThisEmptyAndChangeLater.
+  ///
+  /// In en, this message translates to:
+  /// **'(You can leave this empty and change later)'**
+  String get youCanLeaveThisEmptyAndChangeLater;
+
+  /// No description provided for @continueText.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueText;
+
+  /// No description provided for @homeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get homeTitle;
+
+  /// No description provided for @welcomeName.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome, {name}'**
+  String welcomeName(Object name);
+
+  /// No description provided for @theseAreYourScoresForToday.
+  ///
+  /// In en, this message translates to:
+  /// **'These are your health scores for today:'**
+  String get theseAreYourScoresForToday;
+
+  /// No description provided for @tapOnAScoreToSeeItsDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap on a score to view its details'**
+  String get tapOnAScoreToSeeItsDetails;
+
   /// No description provided for @error.
   ///
   /// In en, this message translates to:
@@ -115,6 +169,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get settings;
+
+  /// No description provided for @userName.
+  ///
+  /// In en, this message translates to:
+  /// **'User Name'**
+  String get userName;
+
+  /// No description provided for @enterName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Name'**
+  String get enterName;
 
   /// No description provided for @language.
   ///
@@ -164,11 +230,11 @@ abstract class AppLocalizations {
   /// **'Log Out'**
   String get logout;
 
-  /// No description provided for @homeTitle.
+  /// No description provided for @youHaveLoggedOut.
   ///
   /// In en, this message translates to:
-  /// **'Scores'**
-  String get homeTitle;
+  /// **'You have logged out.'**
+  String get youHaveLoggedOut;
 
   /// No description provided for @history.
   ///
@@ -259,6 +325,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No data'**
   String get noData;
+
+  /// No description provided for @activities.
+  ///
+  /// In en, this message translates to:
+  /// **'Activities'**
+  String get activities;
+
+  /// No description provided for @calories.
+  ///
+  /// In en, this message translates to:
+  /// **'Calories'**
+  String get calories;
+
+  /// No description provided for @activityCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'{type, select, cardio{Cardio} strength_training{Strength Training} walking{Walking} running{Running} cycling{Cycling} yoga{Yoga} hiit{HIIT} swimming{Swimming} pilates{Pilates} dance{Dance} hiking{Hiking} intervals{Intervals} other{Unknown}}'**
+  String activityCategory(String type);
+
+  /// No description provided for @noActivitiesRecorded.
+  ///
+  /// In en, this message translates to:
+  /// **'No Activities Recorded'**
+  String get noActivitiesRecorded;
 
   /// No description provided for @pullToRefresh.
   ///
@@ -455,8 +545,8 @@ abstract class AppLocalizations {
   /// No description provided for @insightHighVariability.
   ///
   /// In en, this message translates to:
-  /// **'{metric} has high variability (SD {sd}).'**
-  String insightHighVariability(Object metric, Object sd);
+  /// **'{metric} has high variability.'**
+  String insightHighVariability(Object metric);
 
   /// No description provided for @insightLowVariability.
   ///

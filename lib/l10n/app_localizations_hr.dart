@@ -12,10 +12,47 @@ class AppLocalizationsHr extends AppLocalizations {
   String get appTitle => 'Rolla Demo';
 
   @override
+  String get welcome => 'Dobrodošli';
+
+  @override
+  String get whatIsYourName => 'Kako se zovete?';
+
+  @override
+  String get yourName => 'Vaše ime';
+
+  @override
+  String get youCanLeaveThisEmptyAndChangeLater =>
+      '(Možete ovo ostaviti prazno i promijeniti kasnije)';
+
+  @override
+  String get continueText => 'Nastavi';
+
+  @override
+  String get homeTitle => 'Početna';
+
+  @override
+  String welcomeName(Object name) {
+    return 'Dobrodošli, $name';
+  }
+
+  @override
+  String get theseAreYourScoresForToday => 'Ovo su vaši rezultati za danas:';
+
+  @override
+  String get tapOnAScoreToSeeItsDetails =>
+      'Pritisnite na rezultat da biste vidjeli detalje';
+
+  @override
   String get error => 'Greška';
 
   @override
   String get settings => 'Postavke';
+
+  @override
+  String get userName => 'Korisničko Ime';
+
+  @override
+  String get enterName => 'Unesi Ime';
 
   @override
   String get language => 'Jezik';
@@ -42,7 +79,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get logout => 'Odjava';
 
   @override
-  String get homeTitle => 'Rezultati';
+  String get youHaveLoggedOut => 'Odjavljeni ste.';
 
   @override
   String get history => 'Povijest';
@@ -88,6 +125,35 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get noData => 'Nema podataka';
+
+  @override
+  String get activities => 'Aktivnosti';
+
+  @override
+  String get calories => 'Kalorije';
+
+  @override
+  String activityCategory(String type) {
+    String _temp0 = intl.Intl.selectLogic(type, {
+      'cardio': 'Kardio',
+      'strength_training': 'Trening snage',
+      'walking': 'Hodanje',
+      'running': 'Trčanje',
+      'cycling': 'Vožnja biciklom',
+      'yoga': 'Joga',
+      'hiit': 'HIIT',
+      'swimming': 'Plivanje',
+      'pilates': 'Pilates',
+      'dance': 'Ples',
+      'hiking': 'Planinarenje',
+      'intervals': 'Intervali',
+      'other': 'Nepoznato',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get noActivitiesRecorded => 'Nema Zabilježenih Aktivnosti';
 
   @override
   String get pullToRefresh => 'Povuci za osvježenje';
@@ -233,7 +299,7 @@ class AppLocalizationsHr extends AppLocalizations {
   }
 
   @override
-  String insightHighVariability(Object metric, Object sd) {
+  String insightHighVariability(Object metric) {
     return '$metric mnogo varira.';
   }
 
