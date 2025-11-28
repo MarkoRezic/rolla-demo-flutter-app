@@ -150,3 +150,8 @@ Notes for some of the widgets (that might not be obvious from the provided video
 - Settings are persisted across app restarts - and only the initial launch shows the "Enter your name" screen
 - System theme properly matches the light/dark mode of the device
 - Contextual insights could have had more meaningful texts - but the focus was on still keeping everything multi-language friendly
+
+---
+
+Regarding testing I wanted to run this on more devices to see how the UI behaves - but I didnt have much time left so I decided to continue working on the features.
+Widget/Unit tests and a PDF export of the score results were also something I wanted to add but scrapped the idea in the end.
