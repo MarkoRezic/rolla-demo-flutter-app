@@ -1,6 +1,3 @@
-// Reference image (uploaded by user): /mnt/data/rolla score card.PNG
-// ScoreCard widget implementation
-
 import 'package:flutter/material.dart';
 import 'package:rolla_demo_app/core/theme/app_theme.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/disabled_wrapper.dart';

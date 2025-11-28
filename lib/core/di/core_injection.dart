@@ -24,6 +24,7 @@ Future<void> initCore(GetIt sl) async {
   // Use Cases
   final getSettings = GetSettings(repository: sl<SettingsRepositoryImpl>());
   final saveSettings = SaveSettings(repository: sl<SettingsRepositoryImpl>());
+
   // Blocs (singletons since these are core)
   sl.registerLazySingleton(
     () => SettingsCubit(getSettings: getSettings, saveSettings: saveSettings),

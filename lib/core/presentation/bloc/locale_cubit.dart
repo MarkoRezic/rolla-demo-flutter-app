@@ -10,6 +10,6 @@ class LocaleCubit extends Cubit<Locale> {
   Future<void> setLocale(Locale locale) async {
     // load localization resources (updates LocalizationService.instance.strings)
     await LocalizationService.instance.load(locale);
-    emit(locale); // MaterialApp (or listeners) will rebuild
+    emit(locale); // listeners will rebuild
   }
 }

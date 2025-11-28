@@ -18,6 +18,7 @@ class DisabledWrapper extends StatelessWidget {
       child: Opacity(
         opacity: 0.7,
         child: ColorFiltered(
+          // Grayscale filter matrix
           colorFilter: const ColorFilter.matrix(<double>[
             0.2126,
             0.7152,

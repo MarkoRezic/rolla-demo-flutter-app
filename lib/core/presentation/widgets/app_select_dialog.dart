@@ -1,5 +1,5 @@
-// lib/widgets/app_select_dialog.dart
 import 'package:flutter/material.dart';
+import 'package:rolla_demo_app/core/localization/tr.dart';
 
 /// Reusable selection dialog.
 /// - Generic over T (option type)
@@ -76,12 +76,15 @@ class AppSelectDialog<T> extends StatefulWidget {
     VoidCallback? onCancel,
     void Function(T?)? onAccept,
     void Function(T?)? onSelectionChanged,
-    String onCancelText = 'Cancel',
-    String onAcceptText = 'OK',
+    String? onCancelText,
+    String? onAcceptText,
     bool barrierDismissible = true,
     bool closeOnBannerTap = false,
     double maxHeight = 360,
   }) async {
+    onCancelText = onCancelText ?? tr.cancel;
+    onAcceptText = onAcceptText ?? tr.ok;
+
     final result = await showDialog<T?>(
       context: context,
       barrierDismissible: barrierDismissible,
@@ -100,8 +103,8 @@ class AppSelectDialog<T> extends StatefulWidget {
             onCancel: onCancel,
             onAccept: onAccept,
             onSelectionChanged: onSelectionChanged,
-            onCancelText: onCancelText,
-            onAcceptText: onAcceptText,
+            onCancelText: onCancelText!,
+            onAcceptText: onAcceptText!,
             barrierDismissible: barrierDismissible,
             closeOnBannerTap: closeOnBannerTap,
             maxHeight: maxHeight,

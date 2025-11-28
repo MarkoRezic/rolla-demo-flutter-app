@@ -1,6 +1,3 @@
-// Reference image (uploaded by user): /mnt/data/rolla score card.PNG
-// ScoreCard widget implementation
-
 import 'package:flutter/material.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/rounded_linear_progress_indicator.dart';
 import 'package:rolla_demo_app/core/theme/app_colors.dart';

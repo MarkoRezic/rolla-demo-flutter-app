@@ -107,7 +107,11 @@ class _ScoreInsightsViewState extends State<ScoreInsightsView> {
 
     // Soft shadow using the same color as container, with low opacity.
     final boxShadow = [
-      BoxShadow(color: widget.color, blurRadius: 35, spreadRadius: 12),
+      BoxShadow(
+        color: widget.color.withValues(alpha: 0.8),
+        blurRadius: 35,
+        spreadRadius: 6,
+      ),
     ];
 
     return AnimatedOpacity(
@@ -120,6 +124,15 @@ class _ScoreInsightsViewState extends State<ScoreInsightsView> {
           padding: widget.padding,
           decoration: BoxDecoration(
             color: widget.color,
+            gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [
+                widget.color.withValues(alpha: 0.8),
+                widget.color.withValues(alpha: 0.0),
+              ],
+              stops: [0.5, 1],
+            ),
             borderRadius: BorderRadius.circular(widget.borderRadius),
             boxShadow: boxShadow,
           ),

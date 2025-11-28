@@ -8,7 +8,6 @@ class AppIconButton extends StatelessWidget {
   final double? size;
   final Color? color;
 
-  /// Main constructor: takes ANY widget as icon
   const AppIconButton({
     super.key,
     required this.icon,
@@ -18,9 +17,6 @@ class AppIconButton extends StatelessWidget {
   });
 
   /// Convenience constructor for internal icon assets
-  ///
-  /// Example:
-  /// AppIconButton.asset(AppIcons.fire, onPressed: () {})
   factory AppIconButton.asset(
     String assetPath, {
     Key? key,

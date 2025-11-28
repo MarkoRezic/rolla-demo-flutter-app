@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-
-import '../models/score_record.dart';
+import 'package:rolla_demo_app/features/scores/data/models/score_record.dart';
 
 class LocalJsonDataSource {
   final String assetPath;

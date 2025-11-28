@@ -134,6 +134,16 @@ class S {
     return Intl.message('Error', name: 'error', desc: '', args: []);
   }
 
+  /// `OK`
+  String get ok {
+    return Intl.message('OK', name: 'ok', desc: '', args: []);
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
+
   /// `Settings`
   String get settings {
     return Intl.message('Settings', name: 'settings', desc: '', args: []);
@@ -774,6 +784,216 @@ class S {
   /// `kcal`
   String get valueUnitKcal {
     return Intl.message('kcal', name: 'valueUnitKcal', desc: '', args: []);
+  }
+
+  /// `Well rested`
+  String get shortSleepWellRested {
+    return Intl.message(
+      'Well rested',
+      name: 'shortSleepWellRested',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fairly rested`
+  String get shortSleepOkay {
+    return Intl.message(
+      'Fairly rested',
+      name: 'shortSleepOkay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Short sleep`
+  String get shortSleepShort {
+    return Intl.message(
+      'Short sleep',
+      name: 'shortSleepShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resting OK`
+  String get shortRestingHrGood {
+    return Intl.message(
+      'Resting OK',
+      name: 'shortRestingHrGood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resting normal`
+  String get shortRestingHrOk {
+    return Intl.message(
+      'Resting normal',
+      name: 'shortRestingHrOk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `High resting HR`
+  String get shortRestingHrHigh {
+    return Intl.message(
+      'High resting HR',
+      name: 'shortRestingHrHigh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HRV strong`
+  String get shortHrvGood {
+    return Intl.message('HRV strong', name: 'shortHrvGood', desc: '', args: []);
+  }
+
+  /// `HRV okay`
+  String get shortHrvOk {
+    return Intl.message('HRV okay', name: 'shortHrvOk', desc: '', args: []);
+  }
+
+  /// `Low HRV`
+  String get shortHrvLow {
+    return Intl.message('Low HRV', name: 'shortHrvLow', desc: '', args: []);
+  }
+
+  /// `Active strong`
+  String get shortActivePointsGood {
+    return Intl.message(
+      'Active strong',
+      name: 'shortActivePointsGood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active ok`
+  String get shortActivePointsOk {
+    return Intl.message(
+      'Active ok',
+      name: 'shortActivePointsOk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Low activity`
+  String get shortActivePointsLow {
+    return Intl.message(
+      'Low activity',
+      name: 'shortActivePointsLow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Great steps`
+  String get shortStepsGood {
+    return Intl.message(
+      'Great steps',
+      name: 'shortStepsGood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Steps ok`
+  String get shortStepsOk {
+    return Intl.message('Steps ok', name: 'shortStepsOk', desc: '', args: []);
+  }
+
+  /// `Few steps`
+  String get shortStepsLow {
+    return Intl.message('Few steps', name: 'shortStepsLow', desc: '', args: []);
+  }
+
+  /// `Well active`
+  String get shortMoveHoursGood {
+    return Intl.message(
+      'Well active',
+      name: 'shortMoveHoursGood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Some activity`
+  String get shortMoveHoursOk {
+    return Intl.message(
+      'Some activity',
+      name: 'shortMoveHoursOk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Low movement`
+  String get shortMoveHoursLow {
+    return Intl.message(
+      'Low movement',
+      name: 'shortMoveHoursLow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ready`
+  String get shortReadinessGood {
+    return Intl.message(
+      'Ready',
+      name: 'shortReadinessGood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mostly ready`
+  String get shortReadinessOk {
+    return Intl.message(
+      'Mostly ready',
+      name: 'shortReadinessOk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tired`
+  String get shortReadinessLow {
+    return Intl.message('Tired', name: 'shortReadinessLow', desc: '', args: []);
+  }
+
+  /// `Active`
+  String get shortActivityGood {
+    return Intl.message(
+      'Active',
+      name: 'shortActivityGood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Moderate`
+  String get shortActivityOk {
+    return Intl.message(
+      'Moderate',
+      name: 'shortActivityOk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inactive`
+  String get shortActivityLow {
+    return Intl.message(
+      'Inactive',
+      name: 'shortActivityLow',
+      desc: '',
+      args: [],
+    );
   }
 }
 

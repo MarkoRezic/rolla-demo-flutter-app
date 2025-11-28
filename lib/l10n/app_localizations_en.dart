@@ -46,6 +46,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get error => 'Error';
 
   @override
+  String get ok => 'OK';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
   String get settings => 'Settings';
 
   @override
@@ -364,4 +370,76 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get valueUnitKcal => 'kcal';
+
+  @override
+  String get shortSleepWellRested => 'Well rested';
+
+  @override
+  String get shortSleepOkay => 'Fairly rested';
+
+  @override
+  String get shortSleepShort => 'Short sleep';
+
+  @override
+  String get shortRestingHrGood => 'Resting OK';
+
+  @override
+  String get shortRestingHrOk => 'Resting normal';
+
+  @override
+  String get shortRestingHrHigh => 'High resting HR';
+
+  @override
+  String get shortHrvGood => 'HRV strong';
+
+  @override
+  String get shortHrvOk => 'HRV okay';
+
+  @override
+  String get shortHrvLow => 'Low HRV';
+
+  @override
+  String get shortActivePointsGood => 'Active strong';
+
+  @override
+  String get shortActivePointsOk => 'Active ok';
+
+  @override
+  String get shortActivePointsLow => 'Low activity';
+
+  @override
+  String get shortStepsGood => 'Great steps';
+
+  @override
+  String get shortStepsOk => 'Steps ok';
+
+  @override
+  String get shortStepsLow => 'Few steps';
+
+  @override
+  String get shortMoveHoursGood => 'Well active';
+
+  @override
+  String get shortMoveHoursOk => 'Some activity';
+
+  @override
+  String get shortMoveHoursLow => 'Low movement';
+
+  @override
+  String get shortReadinessGood => 'Ready';
+
+  @override
+  String get shortReadinessOk => 'Mostly ready';
+
+  @override
+  String get shortReadinessLow => 'Tired';
+
+  @override
+  String get shortActivityGood => 'Active';
+
+  @override
+  String get shortActivityOk => 'Moderate';
+
+  @override
+  String get shortActivityLow => 'Inactive';
 }

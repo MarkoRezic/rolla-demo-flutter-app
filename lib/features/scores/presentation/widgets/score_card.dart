@@ -1,7 +1,5 @@
-// Reference image (uploaded by user): /mnt/data/rolla score card.PNG
-// ScoreCard widget implementation
-
 import 'package:flutter/material.dart';
+import 'package:rolla_demo_app/core/localization/tr.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/app_icon.dart';
 import 'package:rolla_demo_app/core/theme/app_theme.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/card_container.dart';
@@ -40,12 +38,15 @@ class ScoreCard extends StatelessWidget {
       super(key: key);
 
   String _defaultDisplayValue(double? v) {
-    if (v == null) return 'No data';
+    if (v == null) return tr.noData;
     return v.toStringAsFixed(0);
   }
 
-  String _maybeFormatValue(double? v) =>
-      displayValue != null ? displayValue!(v) : _defaultDisplayValue(v);
+  String _maybeFormatValue(double? v) => v == null
+      ? tr.noData
+      : displayValue != null
+      ? displayValue!(v)
+      : _defaultDisplayValue(v);
 
   @override
   Widget build(BuildContext context) {

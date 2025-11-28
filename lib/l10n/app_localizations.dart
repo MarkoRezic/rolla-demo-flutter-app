@@ -164,6 +164,18 @@ abstract class AppLocalizations {
   /// **'Error'**
   String get error;
 
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
   /// No description provided for @settings.
   ///
   /// In en, this message translates to:
@@ -649,6 +661,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'kcal'**
   String get valueUnitKcal;
+
+  /// No description provided for @shortSleepWellRested.
+  ///
+  /// In en, this message translates to:
+  /// **'Well rested'**
+  String get shortSleepWellRested;
+
+  /// No description provided for @shortSleepOkay.
+  ///
+  /// In en, this message translates to:
+  /// **'Fairly rested'**
+  String get shortSleepOkay;
+
+  /// No description provided for @shortSleepShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Short sleep'**
+  String get shortSleepShort;
+
+  /// No description provided for @shortRestingHrGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Resting OK'**
+  String get shortRestingHrGood;
+
+  /// No description provided for @shortRestingHrOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Resting normal'**
+  String get shortRestingHrOk;
+
+  /// No description provided for @shortRestingHrHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High resting HR'**
+  String get shortRestingHrHigh;
+
+  /// No description provided for @shortHrvGood.
+  ///
+  /// In en, this message translates to:
+  /// **'HRV strong'**
+  String get shortHrvGood;
+
+  /// No description provided for @shortHrvOk.
+  ///
+  /// In en, this message translates to:
+  /// **'HRV okay'**
+  String get shortHrvOk;
+
+  /// No description provided for @shortHrvLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low HRV'**
+  String get shortHrvLow;
+
+  /// No description provided for @shortActivePointsGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Active strong'**
+  String get shortActivePointsGood;
+
+  /// No description provided for @shortActivePointsOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Active ok'**
+  String get shortActivePointsOk;
+
+  /// No description provided for @shortActivePointsLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low activity'**
+  String get shortActivePointsLow;
+
+  /// No description provided for @shortStepsGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Great steps'**
+  String get shortStepsGood;
+
+  /// No description provided for @shortStepsOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Steps ok'**
+  String get shortStepsOk;
+
+  /// No description provided for @shortStepsLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Few steps'**
+  String get shortStepsLow;
+
+  /// No description provided for @shortMoveHoursGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Well active'**
+  String get shortMoveHoursGood;
+
+  /// No description provided for @shortMoveHoursOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Some activity'**
+  String get shortMoveHoursOk;
+
+  /// No description provided for @shortMoveHoursLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low movement'**
+  String get shortMoveHoursLow;
+
+  /// No description provided for @shortReadinessGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready'**
+  String get shortReadinessGood;
+
+  /// No description provided for @shortReadinessOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Mostly ready'**
+  String get shortReadinessOk;
+
+  /// No description provided for @shortReadinessLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Tired'**
+  String get shortReadinessLow;
+
+  /// No description provided for @shortActivityGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get shortActivityGood;
+
+  /// No description provided for @shortActivityOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate'**
+  String get shortActivityOk;
+
+  /// No description provided for @shortActivityLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get shortActivityLow;
 }
 
 class _AppLocalizationsDelegate

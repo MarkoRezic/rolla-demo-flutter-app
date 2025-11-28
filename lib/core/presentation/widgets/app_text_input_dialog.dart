@@ -1,5 +1,5 @@
-// lib/widgets/app_text_input_dialog.dart
 import 'package:flutter/material.dart';
+import 'package:rolla_demo_app/core/localization/tr.dart';
 
 /// Reusable text input dialog.
 /// - Single text field (single-line by default)
@@ -91,11 +91,14 @@ class AppTextInputDialog extends StatefulWidget {
     VoidCallback? onCancel,
     void Function(String value)? onAccept,
     void Function(String value)? onChanged,
-    String onCancelText = 'Cancel',
-    String onAcceptText = 'OK',
+    String? onCancelText,
+    String? onAcceptText,
     bool barrierDismissible = true,
     bool closeOnBannerTap = false,
   }) async {
+    onCancelText = onCancelText ?? tr.cancel;
+    onAcceptText = onAcceptText ?? tr.ok;
+
     final result = await showDialog<String?>(
       context: context,
       barrierDismissible: barrierDismissible,
@@ -118,8 +121,8 @@ class AppTextInputDialog extends StatefulWidget {
             onCancel: onCancel,
             onAccept: onAccept,
             onChanged: onChanged,
-            onCancelText: onCancelText,
-            onAcceptText: onAcceptText,
+            onCancelText: onCancelText!,
+            onAcceptText: onAcceptText!,
             barrierDismissible: barrierDismissible,
             closeOnBannerTap: closeOnBannerTap,
           ),

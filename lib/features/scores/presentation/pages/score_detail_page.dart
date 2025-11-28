@@ -10,6 +10,7 @@ import 'package:rolla_demo_app/features/scores/domain/entities/score_activity.da
 import 'package:rolla_demo_app/features/scores/domain/extensions/list/list_first_where_or_null.dart';
 import 'package:rolla_demo_app/features/scores/domain/extensions/list/list_of_scores_average_metrics.dart';
 import 'package:rolla_demo_app/features/scores/presentation/bloc/earliest_score_date_cubit.dart';
+import 'package:rolla_demo_app/features/scores/presentation/bloc/score_bloc.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/score_type.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/timeframe.dart';
 import 'package:rolla_demo_app/features/scores/presentation/extensions/date_time/date_time_same_date_as.dart';
@@ -17,16 +18,15 @@ import 'package:rolla_demo_app/features/scores/presentation/extensions/date_time
 import 'package:rolla_demo_app/features/scores/presentation/extensions/score/score_to_data_point_by_type.dart';
 import 'package:rolla_demo_app/features/scores/presentation/models/data_point.dart';
 import 'package:rolla_demo_app/features/scores/presentation/utils/generate_contextual_insights.dart';
+import 'package:rolla_demo_app/features/scores/presentation/utils/generate_short_contextual_insight.dart';
 import 'package:rolla_demo_app/features/scores/presentation/utils/time_utils.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/concentric_dots_stack_container.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/radial_gauge.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/score_activity_card.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/score_card.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/score_info_card.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/score_insights_view.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/timeframe_data_view.dart';
-
-import '../bloc/score_bloc.dart';
-import '../widgets/concentric_dots_stack_container.dart';
 
 class ScoreDetailPage extends StatefulWidget {
   final ScoreType scoreType;
@@ -156,10 +156,10 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     );
   }
 
-  List<Widget> _buildInfoMetricWidgets(Score? score) {
+  List<Widget> _buildInfoMetricWidgets(ScoreState scoreState, Score? score) {
     late List<Widget> widgets;
 
-    if (score == null) {
+    if (scoreState is ScoreLoading) {
       int cardCount = 0;
       switch (widget.scoreType) {
         case ScoreType.activity:
@@ -172,28 +172,28 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
       }
       widgets = List.generate(cardCount, (index) => ScoreInfoCard.loading());
     } else {
-      double _toDouble(num? number) => number?.toDouble() ?? 0;
-      int _round(num? number) => number?.round() ?? 0;
+      double? _toDouble(num? number) => number?.toDouble();
+      int? _round(num? number) => number?.round();
 
       final activityCards = [
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.star, color: AppColors.green),
           title: tr.activePoints,
-          value: _toDouble(score.activePoints),
-          scoreValue: _toDouble(score.activePointsScore),
+          value: _toDouble(score?.activePoints),
+          scoreValue: _toDouble(score?.activePointsScore),
           displayValue: (value) => '${_round(value)} ${tr.valueUnitPts}',
         ),
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.steps, color: AppColors.green),
           title: tr.steps,
-          value: _toDouble(score.steps),
-          scoreValue: _toDouble(score.stepsScore),
+          value: _toDouble(score?.steps),
+          scoreValue: _toDouble(score?.stepsScore),
         ),
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.timer, color: AppColors.lightBlue),
           title: tr.moveHours,
-          value: _toDouble(score.moveHours),
-          scoreValue: _toDouble(score.moveHoursScore),
+          value: _toDouble(score?.moveHours),
+          scoreValue: _toDouble(score?.moveHoursScore),
           displayValue: (value) => '${_round(value)} ${tr.valueUnitH}',
         ),
       ];
@@ -202,23 +202,23 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.moon, color: AppColors.purple),
           title: tr.sleep,
-          value: _toDouble(score.sleepMinutes),
-          scoreValue: _toDouble(score.sleepScore),
+          value: _toDouble(score?.sleepMinutes),
+          scoreValue: _toDouble(score?.sleepScore),
           displayValue: (value) =>
-              formatMinutesHMin(_round(score.sleepMinutes)),
+              formatMinutesHMin(_round(score?.sleepMinutes) ?? 0),
         ),
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.heartRate, color: AppColors.lightBlue),
           title: tr.restingHR,
-          value: _toDouble(score.restingHeartRateBpm),
-          scoreValue: _toDouble(score.restingHeartRateScore),
+          value: _toDouble(score?.restingHeartRateBpm),
+          scoreValue: _toDouble(score?.restingHeartRateScore),
           displayValue: (value) => '${_round(value)} ${tr.valueUnitBpm}',
         ),
         ScoreInfoCard(
           icon: AppIcon(AppIconPaths.heartMonitor, color: AppColors.red),
           title: tr.overnightHRV,
-          value: _toDouble(score.overnightHeartRateVarianceMs),
-          scoreValue: _toDouble(score.overnightHeartRateVarianceScore),
+          value: _toDouble(score?.overnightHeartRateVarianceMs),
+          scoreValue: _toDouble(score?.overnightHeartRateVarianceScore),
           displayValue: (value) => '${_round(value)} ${tr.valueUnitMs}',
         ),
       ];
@@ -248,34 +248,56 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     );
   }
 
-  Widget _headerWidgetBuilder(Timeframe timeframe, Score? score) {
+  Widget _headerWidgetBuilder(
+    Timeframe timeframe,
+    ScoreState scoreState,
+    Score? score,
+  ) {
     if (timeframe != Timeframe.day) {
       return Text(tr.history, style: Theme.of(context).textTheme.titleLarge);
     }
     return GestureDetector(
-      onTap: () => _showScoreInfoBottomSheet(context, score),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+      onTap: () => _showScoreInfoBottomSheet(context, scoreState, score),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.scoreType.scoreInfoTitle,
-            style: Theme.of(context).textTheme.titleLarge,
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                widget.scoreType.scoreInfoTitle,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(width: 10),
+              Icon(
+                Icons.help,
+                size: 20,
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface.withValues(alpha: 0.6),
+              ),
+            ],
           ),
-          const SizedBox(width: 10),
-          Icon(
-            Icons.help,
-            size: 20,
-            color: Theme.of(
-              context,
-            ).colorScheme.onSurface.withValues(alpha: 0.6),
+          const SizedBox(height: 8),
+          Text(
+            generateShortContextualInsight(
+              currentDateScore: score,
+              scoreType: widget.scoreType,
+            ),
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ],
       ),
     );
   }
 
-  void _showScoreInfoBottomSheet(BuildContext context, Score? score) {
+  void _showScoreInfoBottomSheet(
+    BuildContext context,
+    ScoreState scoreState,
+    Score? score,
+  ) {
     final double sheetHeight = 0.85;
     double gaugeValue = 0;
     Score nonNullScore = score ?? Score.zero();
@@ -337,7 +359,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 12),
-                  ..._buildInfoMetricWidgets(score),
+                  ..._buildInfoMetricWidgets(scoreState, score),
                   const SizedBox(height: 20),
                   Text(
                     tr.howItWorks,
@@ -551,20 +573,21 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                 const SizedBox(height: 12),
                 BlocBuilder<ScoreBloc, ScoreState>(
                   bloc: _scoreBloc,
-                  builder: (context, state) {
-                    if (state is ScoreInitial) {
+                  builder: (context, scoreState) {
+                    if (scoreState is ScoreInitial) {
                       return const SizedBox(
                         height: 200,
                         child: Center(child: CircularProgressIndicator()),
                       );
-                    } else if (state is ScoreLoading || state is ScoreLoaded) {
+                    } else if (scoreState is ScoreLoading ||
+                        scoreState is ScoreLoaded) {
                       List<Score>? scores;
                       List<DataPoint>? dataPoints;
                       Score? selectedDateScore;
-                      bool isLoading = state is ScoreLoading;
+                      bool isLoading = scoreState is ScoreLoading;
 
-                      if (state is ScoreLoaded) {
-                        scores = state.scores;
+                      if (scoreState is ScoreLoaded) {
+                        scores = scoreState.scores;
                         dataPoints = scores
                             .map(
                               (score) =>
@@ -581,60 +604,79 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
-                            height: 360,
-                            child: Row(
+                            height: 380,
+                            child: Stack(
                               children: [
-                                Expanded(
-                                  child:
-                                      BlocBuilder<
-                                        EarliestScoreDateCubit,
-                                        EarliestScoreDateState
-                                      >(
-                                        bloc: _earliestScoreDateCubit,
-                                        builder: (context, state) {
-                                          return TimeframeDataView(
-                                            selectedDate: _selectedDate,
-                                            selectedTimeFrame:
-                                                _selectedTimeframe,
-                                            onSelectedDateChange:
-                                                _onSelectedDateChange,
-                                            onSelectedTimeframeChange:
-                                                _onSelectedTimeframeChange,
-                                            minDate:
-                                                state is EarliestScoreDateLoaded
-                                                ? state.date
-                                                : null,
-                                            dataPoints: dataPoints,
-                                            isLoading: isLoading,
-                                            color: widget.scoreType.accentColor,
-                                            showMonthlyAverages:
-                                                _showMonthlyAverages,
-                                            onShowMonthlyAveragesToggle:
-                                                _onShowMonthlyAveragesToggle,
-                                            gaugeBuilder: _buildRadialGauge,
-                                            headerWidgetBuilder: (timeframe) =>
-                                                _headerWidgetBuilder(
-                                                  timeframe,
-                                                  selectedDateScore,
-                                                ),
-                                          );
-                                        },
-                                      ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child:
+                                          BlocBuilder<
+                                            EarliestScoreDateCubit,
+                                            EarliestScoreDateState
+                                          >(
+                                            bloc: _earliestScoreDateCubit,
+                                            builder: (context, earliestDateState) {
+                                              return TimeframeDataView(
+                                                selectedDate: _selectedDate,
+                                                selectedTimeFrame:
+                                                    _selectedTimeframe,
+                                                onSelectedDateChange:
+                                                    _onSelectedDateChange,
+                                                onSelectedTimeframeChange:
+                                                    _onSelectedTimeframeChange,
+                                                minDate:
+                                                    earliestDateState
+                                                        is EarliestScoreDateLoaded
+                                                    ? earliestDateState.date
+                                                    : null,
+                                                dataPoints: dataPoints,
+                                                isLoading: isLoading,
+                                                color: widget
+                                                    .scoreType
+                                                    .accentColor,
+                                                showMonthlyAverages:
+                                                    _showMonthlyAverages,
+                                                onShowMonthlyAveragesToggle:
+                                                    _onShowMonthlyAveragesToggle,
+                                                gaugeBuilder: _buildRadialGauge,
+                                                headerWidgetBuilder:
+                                                    (timeframe) =>
+                                                        _headerWidgetBuilder(
+                                                          timeframe,
+                                                          scoreState,
+                                                          selectedDateScore,
+                                                        ),
+                                              );
+                                            },
+                                          ),
+                                    ),
+                                  ],
                                 ),
+
+                                if (scoreState is ScoreLoaded &&
+                                    _selectedTimeframe == Timeframe.day)
+                                  Positioned(
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
+                                    child: ScoreInsightsView(
+                                      items: generateContextualInsights(
+                                        _selectedTimeframe,
+                                        scores!,
+                                        widget.scoreType,
+                                        selectedDateScore,
+                                      ),
+                                      color: _scaffoldFadeColor(context),
+                                      constraints: BoxConstraints(
+                                        minHeight: 90,
+                                        maxHeight: 90,
+                                      ),
+                                    ),
+                                  ),
                               ],
                             ),
                           ),
-                          if (state is ScoreLoaded)
-                            ScoreInsightsView(
-                              items: generateContextualInsights(
-                                _selectedTimeframe,
-                                scores!,
-                                widget.scoreType,
-                                selectedDateScore,
-                              ),
-                              color: _scaffoldFadeColor(context),
-                              constraints: BoxConstraints(minHeight: 90),
-                            ),
                           const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -653,10 +695,11 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                             ],
                           ),
                           const SizedBox(height: 10),
-                          ..._buildMetricWidgets(state),
+                          ..._buildMetricWidgets(scoreState),
                           const SizedBox(height: 10),
                           if (widget.scoreType == ScoreType.activity)
-                            ..._buildActivitiesWidgets(context, state),
+                            ..._buildActivitiesWidgets(context, scoreState),
+                          const SizedBox(height: 10),
                           Text(
                             tr.about,
                             style: Theme.of(context).textTheme.titleLarge,
@@ -668,9 +711,9 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
                           ),
                         ],
                       );
-                    } else if (state is ScoreError) {
+                    } else if (scoreState is ScoreError) {
                       return Center(
-                        child: Text('${tr.error}: ${state.message}'),
+                        child: Text('${tr.error}: ${scoreState.message}'),
                       );
                     } else {
                       return const SizedBox.shrink();

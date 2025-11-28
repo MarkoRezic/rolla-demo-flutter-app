@@ -46,6 +46,12 @@ class AppLocalizationsHr extends AppLocalizations {
   String get error => 'Greška';
 
   @override
+  String get ok => 'OK';
+
+  @override
+  String get cancel => 'Otkaži';
+
+  @override
   String get settings => 'Postavke';
 
   @override
@@ -365,4 +371,76 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get valueUnitKcal => 'kcal';
+
+  @override
+  String get shortSleepWellRested => 'Dobro odmoren';
+
+  @override
+  String get shortSleepOkay => 'Djelomično odmoren';
+
+  @override
+  String get shortSleepShort => 'Premalo sna';
+
+  @override
+  String get shortRestingHrGood => 'Puls u redu';
+
+  @override
+  String get shortRestingHrOk => 'Puls normalan';
+
+  @override
+  String get shortRestingHrHigh => 'Visok puls';
+
+  @override
+  String get shortHrvGood => 'Dobra HRV';
+
+  @override
+  String get shortHrvOk => 'HRV ok';
+
+  @override
+  String get shortHrvLow => 'Niska HRV';
+
+  @override
+  String get shortActivePointsGood => 'Aktivan';
+
+  @override
+  String get shortActivePointsOk => 'Djelomično aktivan';
+
+  @override
+  String get shortActivePointsLow => 'Niska aktivnost';
+
+  @override
+  String get shortStepsGood => 'Dobar broj koraka';
+
+  @override
+  String get shortStepsOk => 'Koraci ok';
+
+  @override
+  String get shortStepsLow => 'Malo koraka';
+
+  @override
+  String get shortMoveHoursGood => 'Dovoljno pokreta';
+
+  @override
+  String get shortMoveHoursOk => 'Djelomično pokret';
+
+  @override
+  String get shortMoveHoursLow => 'Malo kretanja';
+
+  @override
+  String get shortReadinessGood => 'Spreman';
+
+  @override
+  String get shortReadinessOk => 'Uglavnom spreman';
+
+  @override
+  String get shortReadinessLow => 'Umoran';
+
+  @override
+  String get shortActivityGood => 'Aktivan';
+
+  @override
+  String get shortActivityOk => 'Umjereno aktivan';
+
+  @override
+  String get shortActivityLow => 'Neaktivan';
 }

@@ -341,6 +341,7 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildHeaderWidget(timeframe),
                       Spacer(),

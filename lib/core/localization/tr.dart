@@ -1,4 +1,5 @@
-import '../../generated/l10n.dart';
+import 'package:rolla_demo_app/generated/l10n.dart';
+
 import 'localization_service.dart';
 
 /// Global accessor for localized strings.

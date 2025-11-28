@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 @immutable
 class Settings {
   final String name;
-  final String languageCode; // 'en', 'hr', ...
+  final String languageCode;
   final ThemeMode themeMode;
 
   const Settings({

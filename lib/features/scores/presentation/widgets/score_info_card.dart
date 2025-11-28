@@ -1,10 +1,9 @@
-// Reference image (uploaded by user): /mnt/data/rolla score card.PNG
-// ScoreCard widget implementation
-
 import 'package:flutter/material.dart';
 import 'package:rolla_demo_app/core/assets/app_icon_paths.dart';
+import 'package:rolla_demo_app/core/localization/tr.dart';
 import 'package:rolla_demo_app/core/presentation/widgets/app_icon.dart';
 import 'package:rolla_demo_app/core/theme/app_theme.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/disabled_wrapper.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ScoreInfoCard extends StatelessWidget {
@@ -39,12 +38,15 @@ class ScoreInfoCard extends StatelessWidget {
       super(key: key);
 
   String _defaultDisplayValue(double? v) {
-    if (v == null) return 'No data';
+    if (v == null) return tr.noData;
     return v.toStringAsFixed(0);
   }
 
-  String _maybeFormatValue(double? v) =>
-      displayValue != null ? displayValue!(v) : _defaultDisplayValue(v);
+  String _maybeFormatValue(double? v) => v == null
+      ? tr.noData
+      : displayValue != null
+      ? displayValue!(v)
+      : _defaultDisplayValue(v);
 
   @override
   Widget build(BuildContext context) {
@@ -129,28 +131,31 @@ class ScoreInfoCard extends StatelessWidget {
           )
         : icon;
 
-    return Material(
-      color: Colors.transparent,
-      child: Container(
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          color:
-              backgroundColor ??
-              Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.02),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              titleWidget,
-              const SizedBox(width: 12),
-              if (iconWidget != null) iconWidget,
-              if (iconWidget != null) const SizedBox(width: 12),
-              const Spacer(),
-              valueWidget,
-            ],
+    return DisabledWrapper(
+      disabled: value == null,
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+            color:
+                backgroundColor ??
+                Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.02),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                titleWidget,
+                const SizedBox(width: 12),
+                if (iconWidget != null) iconWidget,
+                if (iconWidget != null) const SizedBox(width: 12),
+                const Spacer(),
+                valueWidget,
+              ],
+            ),
           ),
         ),
       ),

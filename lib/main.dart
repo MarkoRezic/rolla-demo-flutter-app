@@ -22,16 +22,14 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  await di.initDependencies(); // register dependencies
+  await di.initDependencies();
 
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider.value(value: di.sl<LocaleCubit>()),
         BlocProvider.value(value: di.sl<ThemeCubit>()),
-        BlocProvider.value(
-          value: di.sl<SettingsCubit>(),
-        ), // if you use settings in many places
+        BlocProvider.value(value: di.sl<SettingsCubit>()),
       ],
       child: const RollaApp(),
     ),

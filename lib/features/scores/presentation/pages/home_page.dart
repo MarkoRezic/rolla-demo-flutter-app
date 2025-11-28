@@ -9,11 +9,11 @@ import 'package:rolla_demo_app/core/presentation/widgets/app_icon_button.dart';
 import 'package:rolla_demo_app/core/theme/app_colors.dart';
 import 'package:rolla_demo_app/core/utils/date_time_utils.dart';
 import 'package:rolla_demo_app/features/scores/domain/entities/score.dart';
+import 'package:rolla_demo_app/features/scores/presentation/bloc/score_bloc.dart';
 import 'package:rolla_demo_app/features/scores/presentation/enums/score_type.dart';
+import 'package:rolla_demo_app/features/scores/presentation/widgets/score_card.dart';
 import 'package:rolla_demo_app/features/settings/presentation/pages/settings_page.dart';
 
-import '../bloc/score_bloc.dart';
-import '../widgets/score_card.dart';
 import 'score_detail_page.dart';
 
 class HomePage extends StatefulWidget {

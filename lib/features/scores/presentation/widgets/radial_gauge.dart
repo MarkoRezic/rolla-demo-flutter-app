@@ -45,7 +45,7 @@ class _RadialGaugeState extends State<RadialGauge>
   void initState() {
     super.initState();
 
-    // Clamp incoming value into 0..100 just in case
+    // Clamp incoming value into 0..100
     _previousValue = 0;
 
     // Entry animation
