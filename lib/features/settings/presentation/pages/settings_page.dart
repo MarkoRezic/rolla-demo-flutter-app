@@ -124,7 +124,15 @@ class SettingsPage extends StatelessWidget {
         final ThemeMode themeMode = settings.themeMode;
         final bool isLight = themeMode == ThemeMode.light;
         return Scaffold(
-          appBar: AppBar(title: Text(tr.settings)),
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: Navigator.of(context).pop,
+              icon: const Icon(Icons.chevron_left),
+              iconSize: 42,
+            ),
+            centerTitle: true,
+            title: Text(tr.settings),
+          ),
           body: ListView(
             children: <Widget>[
               ListTile(

@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        centerTitle: false,
         title: Text(tr.homeTitle),
         actions: <Widget>[
           AppIconButton.asset(

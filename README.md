@@ -1,4 +1,5 @@
-# rolla_demo_app
+# Rolla Demo Flutter App
+NOTE: Screenshots are at end of README
 
 
 # Setup & Run
@@ -156,3 +157,25 @@ Notes for some of the widgets (that might not be obvious from the provided video
 
 Regarding testing I wanted to run this on more devices to see how the UI behaves - but I didnt have much time left so I decided to continue working on the features.
 Widget/Unit tests and a PDF export of the score results were also something I wanted to add but scrapped the idea in the end.
+
+# Screenshots
+![Init Screen](./screenshots/001_init_page.jpeg)
+![Home Screen](./screenshots/002_home_page.jpeg)
+![Settings Screen](./screenshots/003_settings.jpeg)
+![Settings Screen](./screenshots/004_settings.jpeg)
+![Settings Screen](./screenshots/005_settings.jpeg)
+![Health Screen](./screenshots/006_health.jpeg)
+![Health Screen](./screenshots/007_health.jpeg)
+![Health Screen](./screenshots/008_health.jpeg)
+![Health Screen](./screenshots/009_health.jpeg)
+![Health Screen](./screenshots/010_health.jpeg)
+![Health Screen](./screenshots/011_health.jpeg)
+![Health Screen](./screenshots/012_health.jpeg)
+![Health Screen](./screenshots/013_health.jpeg)
+![Health Screen](./screenshots/014_health.jpeg)
+![Readiness Screen](./screenshots/015_readiness.jpeg)
+![Activity Screen](./screenshots/016_activity.jpeg)
+![Activities Screen](./screenshots/017_activities.jpeg)
+![Init Screen](./screenshots/018_init.jpeg)
+![Health Screen](./screenshots/019_health.jpeg)
+![Health Screen](./screenshots/020_health.jpeg)

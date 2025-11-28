@@ -257,14 +257,17 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     Score? score,
   ) {
     if (timeframe != Timeframe.day) {
-      return Text(tr.history, style: Theme.of(context).textTheme.titleLarge);
+      return Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: Text(tr.history, style: Theme.of(context).textTheme.titleLarge),
+      );
     }
     return GestureDetector(
       onTap: () => _showScoreInfoBottomSheet(context, scoreState, score),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -566,7 +569,15 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.scoreType.scoreTitle)),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: Navigator.of(context).pop,
+          icon: const Icon(Icons.chevron_left),
+          iconSize: 42,
+        ),
+        centerTitle: true,
+        title: Text(widget.scoreType.scoreTitle),
+      ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
