@@ -24,7 +24,7 @@ class AppIconPaths {
   static final String intervals = getPath('intervals');
   static final String pilates = getPath('pilates');
   static final String running = getPath('running');
-  static final String strength_training = getPath('strength_training');
+  static final String strengthTraining = getPath('strength_training');
   static final String swimming = getPath('swimming');
   static final String walking = getPath('walking');
   static final String yoga = getPath('yoga');

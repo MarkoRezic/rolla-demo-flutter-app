@@ -142,7 +142,9 @@ class _AppSelectDialogState<T> extends State<AppSelectDialog<T>> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final Color tileSelectedColor = theme.colorScheme.primary.withOpacity(0.06);
+    final Color tileSelectedColor = theme.colorScheme.primary.withValues(
+      alpha: 0.06,
+    );
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -186,35 +188,36 @@ class _AppSelectDialogState<T> extends State<AppSelectDialog<T>> {
         Flexible(
           child: ConstrainedBox(
             constraints: BoxConstraints(maxHeight: widget.maxHeight),
-            child: ListView.separated(
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              itemCount: widget.options.length,
-              separatorBuilder: (_, __) => const Divider(height: 0),
-              itemBuilder: (BuildContext context, int index) {
-                final T option = widget.options[index];
-                final String label = widget.optionLabel(option);
-                final bool isSelected = _selected == option;
-
-                // RadioListTile gives us radio + material splash by default.
-                return RadioListTile<T>(
-                  value: option,
-                  groupValue: _selected,
-                  onChanged: (v) {
-                    setState(() {
-                      _selected = v;
-                    });
-                    // notify selection change
-                    widget.onSelectionChanged?.call(_selected);
-                  },
-                  title: Text(label),
-                  // When the tile is selected, apply a low-opacity primary color as background
-                  selected: isSelected,
-                  selectedTileColor: tileSelectedColor,
-                  controlAffinity: ListTileControlAffinity.trailing,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-                );
+            child: RadioGroup<T>(
+              groupValue: _selected,
+              onChanged: (T? v) {
+                setState(() {
+                  _selected = v;
+                });
+                widget.onSelectionChanged?.call(_selected);
               },
+              child: ListView.separated(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                itemCount: widget.options.length,
+                separatorBuilder: (_, _) => const Divider(height: 0),
+                itemBuilder: (BuildContext context, int index) {
+                  final T option = widget.options[index];
+                  final String label = widget.optionLabel(option);
+                  final bool isSelected = _selected == option;
+
+                  return RadioListTile<T>(
+                    value: option,
+                    title: Text(label),
+                    selected: isSelected,
+                    selectedTileColor: tileSelectedColor,
+                    controlAffinity: ListTileControlAffinity.trailing,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),

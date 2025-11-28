@@ -12,7 +12,6 @@ import 'package:rolla_demo_app/features/scores/presentation/widgets/data_visuali
 import 'package:shimmer/shimmer.dart';
 
 class TimeframeDataView extends StatefulWidget {
-
   const TimeframeDataView({
     super.key,
     required this.selectedDate,
@@ -44,7 +43,7 @@ class TimeframeDataView extends StatefulWidget {
   final DateTime? maxDate;
   final List<DataPoint>? dataPoints;
   final bool isLoading;
-  final void Function(bool show)? onShowMonthlyAveragesToggle;
+  final void Function({bool show})? onShowMonthlyAveragesToggle;
   final bool showMonthlyAverages; // only relevant for 1Y
   final double minY;
   final double maxY;
@@ -167,8 +166,9 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
     }
   }
 
-  DateTime get _firstDate =>
-      (widget.minDate ?? DateTime(2000)).subtract(const Duration(days: 2)).startOfDay;
+  DateTime get _firstDate => (widget.minDate ?? DateTime(2000))
+      .subtract(const Duration(days: 2))
+      .startOfDay;
   DateTime get _lastDate => (widget.maxDate ?? DateTime.now()).startOfDay;
 
   void Function()? get _onLeftPressed =>
@@ -289,7 +289,9 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
           child: TabBar(
             controller: _tabController,
             indicatorSize: TabBarIndicatorSize.tab,
-            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+            overlayColor: const WidgetStatePropertyAll<Color?>(
+              Colors.transparent,
+            ),
             tabs: Timeframe.values
                 .map((Timeframe t) => Tab(text: t.shortLabel(context)))
                 .toList(),
@@ -353,7 +355,9 @@ class _TimeframeDataViewState extends State<TimeframeDataView>
                             const SizedBox(width: 10),
                             Switch(
                               value: widget.showMonthlyAverages,
-                              onChanged: widget.onShowMonthlyAveragesToggle,
+                              onChanged: (bool show) => widget
+                                  .onShowMonthlyAveragesToggle
+                                  ?.call(show: show),
                               activeTrackColor: widget.color,
                             ),
                           ],

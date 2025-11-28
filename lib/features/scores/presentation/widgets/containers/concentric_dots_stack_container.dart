@@ -5,7 +5,6 @@ import 'package:rolla_demo_app/core/theme/app_theme.dart';
 import 'package:rolla_demo_app/features/scores/presentation/widgets/containers/concentric_dots_background.dart';
 
 class ConcentricDotsStackContainer extends StatefulWidget {
-
   const ConcentricDotsStackContainer({
     super.key,
     this.animationDuration = const Duration(seconds: 60),
@@ -25,7 +24,7 @@ class ConcentricDotsStackContainer extends StatefulWidget {
   final List<Widget> children;
 
   @override
-  _ConcentricDotsStackContainerState createState() =>
+  State<ConcentricDotsStackContainer> createState() =>
       _ConcentricDotsStackContainerState();
 }
 

@@ -20,15 +20,21 @@ class _InitPageState extends State<InitPage> {
     final SettingsCubit settingsCubit = GetIt.instance<SettingsCubit>();
     await settingsCubit.save(settingsCubit.settings.copyWith(name: name));
 
-    Navigator.of(context).push(_fadeRoute(const HomePage()));
+    if (mounted) {
+      Navigator.of(context).push(_fadeRoute(const HomePage()));
+    }
   }
 
   /// Custom fade transition route
-  PageRouteBuilder _fadeRoute(Widget page) {
-    return PageRouteBuilder(
+  PageRouteBuilder<void> _fadeRoute(Widget page) {
+    return PageRouteBuilder<void>(
       transitionDuration: const Duration(milliseconds: 1000),
-      pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) =>
-          FadeTransition(opacity: animation, child: page),
+      pageBuilder:
+          (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) => FadeTransition(opacity: animation, child: page),
     );
   }
 

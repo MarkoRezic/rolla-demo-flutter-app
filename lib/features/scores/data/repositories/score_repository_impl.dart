@@ -8,7 +8,6 @@ import 'package:rolla_demo_app/features/scores/domain/entities/score_activity.da
 import 'package:rolla_demo_app/features/scores/domain/repositories/score_repository.dart';
 
 class ScoreRepositoryImpl implements ScoreRepository {
-
   ScoreRepositoryImpl({required this.dataSource});
   final LocalJsonDataSource dataSource;
 
@@ -32,7 +31,9 @@ class ScoreRepositoryImpl implements ScoreRepository {
         return byFrom && byTo;
       }).toList();
 
-      final List<Score> domainList = filtered.map(_mapScoreRecordToDomain).toList();
+      final List<Score> domainList = filtered
+          .map(_mapScoreRecordToDomain)
+          .toList();
 
       return right(domainList);
     } catch (e) {
@@ -46,13 +47,16 @@ class ScoreRepositoryImpl implements ScoreRepository {
     DateTime? to,
   }) async {
     try {
-      final Either<Failure, List<Score>> result = await getScores(from: from, to: to);
+      final Either<Failure, List<Score>> result = await getScores(
+        from: from,
+        to: to,
+      );
 
       switch (result) {
-        case Left(:final Failure value):
+        case Left<Failure, List<Score>>(:final Failure value):
           return left(value);
 
-        case Right(:final List<Score> value):
+        case Right<Failure, List<Score>>(:final List<Score> value):
           if (value.isEmpty) return right(null);
 
           final DateTime earliest = value

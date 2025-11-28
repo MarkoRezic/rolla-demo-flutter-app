@@ -69,14 +69,16 @@ class _ScoreInsightsViewState extends State<ScoreInsightsView> {
 
     while (mounted && _running) {
       // wait for the display duration
-      final Future<dynamic> wait = Future.delayed(widget.displayDuration);
+      final Future<dynamic> wait = Future<void>.delayed(widget.displayDuration);
       // allow cancellation
       await Future.any(<Future<void>>[wait, _cancelCompleter.future]);
       if (!mounted || _cancelCompleter.isCompleted) break;
 
       // fade out
       setState(() => _opacity = 0.0);
-      final Future<dynamic> fadeOut = Future.delayed(widget.transitionDuration);
+      final Future<dynamic> fadeOut = Future<void>.delayed(
+        widget.transitionDuration,
+      );
       await Future.any(<Future<void>>[fadeOut, _cancelCompleter.future]);
       if (!mounted || _cancelCompleter.isCompleted) break;
 
@@ -85,7 +87,9 @@ class _ScoreInsightsViewState extends State<ScoreInsightsView> {
 
       // fade in
       setState(() => _opacity = 1.0);
-      final Future<dynamic> fadeIn = Future.delayed(widget.transitionDuration);
+      final Future<dynamic> fadeIn = Future<void>.delayed(
+        widget.transitionDuration,
+      );
       await Future.any(<Future<void>>[fadeIn, _cancelCompleter.future]);
       if (!mounted || _cancelCompleter.isCompleted) break;
     }

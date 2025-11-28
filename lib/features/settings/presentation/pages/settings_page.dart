@@ -25,7 +25,7 @@ class SettingsPage extends StatelessWidget {
     final Settings initialSettings = settingsCubit.settings;
     final String initialName = initialSettings.name;
 
-    final String? selectedName = await AppTextInputDialog.show(
+    await AppTextInputDialog.show(
       context: context,
       title: tr.enterName,
       initialValue: initialName,
@@ -47,7 +47,7 @@ class SettingsPage extends StatelessWidget {
     final Settings initialSettings = settingsCubit.settings;
     final Locale initialLocale = Locale(initialSettings.languageCode);
 
-    final Locale? selectedLocale = await AppSelectDialog.show<Locale>(
+    await AppSelectDialog.show<Locale>(
       context: context,
       title: tr.selectLanguage,
       options: supported,
@@ -74,7 +74,7 @@ class SettingsPage extends StatelessWidget {
     themeNames[ThemeMode.light.name] = tr.themeModeLight;
     themeNames[ThemeMode.dark.name] = tr.themeModeDark;
 
-    final ThemeMode? selectedTheme = await AppSelectDialog.show<ThemeMode>(
+    await AppSelectDialog.show<ThemeMode>(
       context: context,
       title: tr.selectTheme,
       options: ThemeMode.values,
@@ -94,21 +94,24 @@ class SettingsPage extends StatelessWidget {
 
   Future<void> _logout(BuildContext context) async {
     final SettingsCubit settingsCubit = GetIt.instance<SettingsCubit>();
+
+    // Capture NavigatorState and ScaffoldMessengerState before the async work:
+    final NavigatorState navigator = Navigator.of(context);
+    final ScaffoldMessengerState messenger = ScaffoldMessenger.of(context);
+
     await settingsCubit.save(settingsCubit.settings.copyWith(name: ''));
 
-    // Push InitPage and clear everything else
-    Navigator.of(context).pushAndRemoveUntil(
-      PageRouteBuilder(
-        pageBuilder: (_, __, ___) => const InitPage(),
+    // Use the captured objects (not the BuildContext).
+    navigator.pushAndRemoveUntil(
+      PageRouteBuilder<void>(
+        pageBuilder: (_, _, _) => const InitPage(),
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
       ),
       (Route<dynamic> route) => false,
     );
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(tr.youHaveLoggedOut)));
+    messenger.showSnackBar(SnackBar(content: Text(tr.youHaveLoggedOut)));
   }
 
   @override
@@ -126,7 +129,7 @@ class SettingsPage extends StatelessWidget {
             children: <Widget>[
               ListTile(
                 title: Text(tr.userName),
-                subtitle: Text(settings.name ?? '-'),
+                subtitle: Text(settings.name),
                 leading: const Icon(Icons.person),
                 onTap: () => _showNameDialog(context),
               ),

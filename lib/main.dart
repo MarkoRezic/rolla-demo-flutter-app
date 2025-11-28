@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:nested/nested.dart';
 import 'package:rolla_demo_app/core/presentation/bloc/locale_cubit.dart';
 import 'package:rolla_demo_app/core/presentation/bloc/settings_cubit.dart';
 import 'package:rolla_demo_app/core/presentation/bloc/theme_cubit.dart';
@@ -15,7 +14,8 @@ import 'features/scores/presentation/pages/home_page.dart';
 import 'injection.dart' as di;
 
 Future<void> main() async {
-  final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  final WidgetsBinding widgetsBinding =
+      WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
@@ -27,10 +27,10 @@ Future<void> main() async {
 
   runApp(
     MultiBlocProvider(
-      providers: <SingleChildWidget>[
-        BlocProvider.value(value: di.sl<LocaleCubit>()),
-        BlocProvider.value(value: di.sl<ThemeCubit>()),
-        BlocProvider.value(value: di.sl<SettingsCubit>()),
+      providers: <BlocProvider<dynamic>>[
+        BlocProvider<LocaleCubit>.value(value: di.sl<LocaleCubit>()),
+        BlocProvider<ThemeCubit>.value(value: di.sl<ThemeCubit>()),
+        BlocProvider<SettingsCubit>.value(value: di.sl<SettingsCubit>()),
       ],
       child: const RollaApp(),
     ),
@@ -46,7 +46,11 @@ class RollaApp extends StatefulWidget {
 }
 
 class _RollaAppState extends State<RollaApp> {
-  late final bool _nameInitialized = di.sl<SettingsCubit>().settings.name.isNotEmpty;
+  late final bool _nameInitialized = di
+      .sl<SettingsCubit>()
+      .settings
+      .name
+      .isNotEmpty;
 
   @override
   Widget build(BuildContext context) {

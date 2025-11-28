@@ -53,9 +53,9 @@ class _HomePageState extends State<HomePage> {
           AppIconButton.asset(
             AppIconPaths.settings,
             onPressed: () {
-              Navigator.of(
-                context,
-              ).push(MaterialPageRoute(builder: (_) => const SettingsPage()));
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const SettingsPage()),
+              );
             },
           ),
         ],
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                 builder: (BuildContext context, ScoreState state) {
                   if (state is ScoreLoading || state is ScoreInitial) {
                     return Column(
-                      children: List.generate(
+                      children: List<Widget>.generate(
                         3,
                         (int i) => Padding(
                           padding: EdgeInsets.only(bottom: i == 2 ? 0 : 20),
@@ -117,9 +117,10 @@ class _HomePageState extends State<HomePage> {
                           value: todayScore?.healthScore.toDouble(),
                           scoreValue: todayScore?.healthScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  const ScoreDetailPage(scoreType: ScoreType.health),
+                            MaterialPageRoute<void>(
+                              builder: (_) => const ScoreDetailPage(
+                                scoreType: ScoreType.health,
+                              ),
                             ),
                           ),
                         ),
@@ -133,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                           value: todayScore?.readinessScore.toDouble(),
                           scoreValue: todayScore?.readinessScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
+                            MaterialPageRoute<void>(
                               builder: (_) => const ScoreDetailPage(
                                 scoreType: ScoreType.readiness,
                               ),
@@ -150,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                           value: todayScore?.activityScore.toDouble(),
                           scoreValue: todayScore?.activityScore.toDouble(),
                           onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
+                            MaterialPageRoute<void>(
                               builder: (_) => const ScoreDetailPage(
                                 scoreType: ScoreType.activity,
                               ),

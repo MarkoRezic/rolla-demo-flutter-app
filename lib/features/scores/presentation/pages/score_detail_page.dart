@@ -130,7 +130,7 @@ class _ScoreDetailPageState extends State<ScoreDetailPage> {
     return result;
   }
 
-  void _onShowMonthlyAveragesToggle(bool show) {
+  void _onShowMonthlyAveragesToggle({bool show = false}) {
     setState(() {
       _showMonthlyAverages = show;
     });

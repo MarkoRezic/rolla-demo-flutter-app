@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rolla_demo_app/core/error/failure.dart';
 import 'package:rolla_demo_app/features/scores/domain/entities/score.dart';
 import 'package:rolla_demo_app/features/scores/domain/usecases/get_scores.dart';
@@ -8,7 +8,6 @@ part 'score_event.dart';
 part 'score_state.dart';
 
 class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
-
   ScoreBloc({required this.getScores}) : super(ScoreInitial()) {
     on<LoadScoresEvent>(_onLoadScores);
   }
@@ -19,11 +18,14 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
     Emitter<ScoreState> emit,
   ) async {
     emit(ScoreLoading());
-    final Either<Failure, List<Score>> res = await getScores.call(from: event.from, to: event.to);
+    final Either<Failure, List<Score>> res = await getScores.call(
+      from: event.from,
+      to: event.to,
+    );
 
     if (event.mockLoadingTime != null) {
       // Simulate loading time
-      await Future.delayed(event.mockLoadingTime!);
+      await Future<void>.delayed(event.mockLoadingTime!);
     }
     res.fold(
       (Failure failure) => emit(ScoreError(failure.message)),

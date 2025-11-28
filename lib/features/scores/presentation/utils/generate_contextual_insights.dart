@@ -12,7 +12,8 @@ import 'package:rolla_demo_app/features/scores/presentation/enums/timeframe.dart
 //  - getter: function to extract numeric value from Score
 //  - unitKey: translation getter for unit text
 //  - optional targets / ranges for target checks (sleep / hrv / hr / steps / activePoints / moveHours)
-class _Metric { // optional
+class _Metric {
+  // optional
 
   _Metric(this.label, this.getter, this.unit, {this.target, this.targetRange});
   final String label;
@@ -50,7 +51,8 @@ List<String> generateContextualInsights(
     if (xs.length < 2) return 0.0;
     final double m = mean(xs);
     final double varSum =
-        xs.map((double x) => pow(x - m, 2)).reduce((num a, num b) => a + b) / (xs.length - 1);
+        xs.map((double x) => pow(x - m, 2)).reduce((num a, num b) => a + b) /
+        (xs.length - 1);
     return sqrt(varSum.toDouble());
   }
 
@@ -115,12 +117,17 @@ List<String> generateContextualInsights(
   DateTime representativeDate() {
     if (currentDateScore != null) return currentDateScore.date;
     // fallback: use latest score.date available
-    final Score latest = scores.reduce((Score a, Score b) => a.date.isAfter(b.date) ? a : b);
+    final Score latest = scores.reduce(
+      (Score a, Score b) => a.date.isAfter(b.date) ? a : b,
+    );
     return latest.date;
   }
 
   final DateTime repDate = representativeDate();
-  final DateTimeRange<DateTime> currentRange = periodRangeForDate(repDate, timeframe);
+  final DateTimeRange<DateTime> currentRange = periodRangeForDate(
+    repDate,
+    timeframe,
+  );
   final DateTimeRange<DateTime> prevRange = periodRangeForDate(
     shiftDateByPreviousPeriod(repDate, timeframe),
     timeframe,
@@ -195,7 +202,11 @@ List<String> generateContextualInsights(
         (Score s) => s.readinessScore.toDouble(),
         tr.valueUnitPts,
       ),
-      _Metric(tr.activity, (Score s) => s.activityScore.toDouble(), tr.valueUnitPts),
+      _Metric(
+        tr.activity,
+        (Score s) => s.activityScore.toDouble(),
+        tr.valueUnitPts,
+      ),
     ]);
   }
 
@@ -259,10 +270,6 @@ List<String> generateContextualInsights(
     // previous period value (single or average)
     double? prevValue;
     if (timeframe == Timeframe.day) {
-      // try to find the score for previous day
-      final Score? prevSingle = prevScores.isNotEmpty
-          ? prevScores.firstWhere((_) => true, orElse: () => Score.zero())
-          : null;
       if (prevScores.isNotEmpty) {
         prevValue = metric.getter(prevScores.first);
       } else {
@@ -375,8 +382,14 @@ List<String> generateContextualInsights(
     if (allVals.length >= 3) {
       // determine simple trend: compare first-third average vs last-third average
       final int n = allVals.length;
-      final List<double> firstThird = allVals.sublist(0, max(1, (n / 3).floor()));
-      final List<double> lastThird = allVals.sublist(max(1, (2 * n / 3).floor()), n);
+      final List<double> firstThird = allVals.sublist(
+        0,
+        max(1, (n / 3).floor()),
+      );
+      final List<double> lastThird = allVals.sublist(
+        max(1, (2 * n / 3).floor()),
+        n,
+      );
       final double firstAvg = mean(firstThird);
       final double lastAvg = mean(lastThird);
       if (firstAvg > 0) {
@@ -467,7 +480,6 @@ List<String> generateContextualInsights(
           ),
         );
       } else {
-        final double shortByPct = percentChange(rv, tgt);
         insights.add(
           tr.insightTargetNotMet(
             metric.label,

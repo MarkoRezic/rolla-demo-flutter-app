@@ -1,13 +1,12 @@
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rolla_demo_app/core/error/failure.dart';
 import 'package:rolla_demo_app/features/scores/domain/usecases/get_earliest_score_date.dart';
 
 part 'earliest_score_date_state.dart';
 
 class EarliestScoreDateCubit extends Cubit<EarliestScoreDateState> {
-
   EarliestScoreDateCubit({required this.getEarliestScoreDate})
     : super(EarliestScoreDateInitial());
   final GetEarliestScoreDate getEarliestScoreDate;

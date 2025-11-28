@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rolla_demo_app/core/domain/entitites/settings.dart';
 import 'package:rolla_demo_app/core/domain/usecases/get_settings.dart';
@@ -14,7 +14,6 @@ import 'package:rolla_demo_app/core/presentation/bloc/theme_cubit.dart';
 part 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
-
   SettingsCubit({
     required GetSettings getSettings,
     required SaveSettings saveSettings,
